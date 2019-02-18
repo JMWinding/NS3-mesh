@@ -77,7 +77,7 @@ private:
   NodeContainer apNodes;
   std::vector<NodeContainer> clNodes;
 
-  /// devices used in the example
+  /// devices used i0n the example
   NetDeviceContainer meshDevices;
   std::vector<NetDeviceContainer> apDevices;
   std::vector<NetDeviceContainer> clDevices;
@@ -93,6 +93,8 @@ private:
   std::vector<ApplicationContainer> clientApp;
 
 private:
+  void CreateVariables ();
+
   /// Create the nodes
   void CreateNodes ();
   void CreateApNodes ();
@@ -127,7 +129,7 @@ int main (int argc, char **argv)
 AodvExample::AodvExample () :
   apNum (10),
   clNum (1),
-  apStep (100),
+  apStep (50),
   clStep (10),
   totalTime (100),
   pcap (false),
@@ -161,6 +163,7 @@ void
 AodvExample::Run ()
 {
 //  Config::SetDefault ("ns3::WifiRemoteStationManager::RtsCtsThreshold", UintegerValue (1)); // enable rts cts all the time.
+  CreateVariables ();
   CreateNodes ();
   CreateDevices ();
   InstallInternetStack ();
@@ -179,24 +182,41 @@ AodvExample::Report (std::ostream &)
 }
 
 void
+AodvExample::CreateVariables ()
+{
+  for (uint32_t i = 0; i < apNum; ++i)
+  {
+    clNodes.push_back (NodeContainer ());
+    apDevices.push_back (NetDeviceContainer ());
+    clDevices.push_back (NetDeviceContainer ());
+    apInterfaces.push_back (Ipv4InterfaceContainer ());
+    clInterfaces.push_back (Ipv4InterfaceContainer ());
+    clientApp.push_back (ApplicationContainer ());
+  }
+  std::cout << "CreateVariables () DONE !!!\n";
+}
+
+void
 AodvExample::CreateNodes ()
 {
   CreateApNodes ();
   CreateClNodes ();
+  std::cout << "CreateNodes () DONE !!!\n";
 }
 
 void
 AodvExample::CreateApNodes ()
 {
+
   std::cout << "Creating " << (unsigned)apNum << " APs " << apStep << " m apart.\n";
   apNodes.Create (apNum);
-  // Name nodes
   for (uint32_t i = 0; i < apNum; ++i)
     {
       std::ostringstream os;
       os << "ap-" << i;
       Names::Add (os.str (), apNodes.Get (i));
     }
+
   // Create static grid
   MobilityHelper mobility;
   mobility.SetPositionAllocator ("ns3::GridPositionAllocator",
@@ -208,32 +228,35 @@ AodvExample::CreateApNodes ()
                                  "LayoutType", StringValue ("RowFirst"));
   mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
   mobility.Install (apNodes);
+  std::cout << "CreateApNodes () DONE !!!\n";
 }
 
 void
 AodvExample::CreateClNodes ()
 {
-  std::cout << "Creating" << (unsigned)clNum << " CLs " << clStep << " m apart for each AP.\n";
+
+  std::cout << "Creating " << (unsigned)clNum << " CLs " << clStep << " m apart for each AP.\n";
   clNodes.reserve (apNum);
   for (uint32_t i = 0; i < apNum; ++i)
     {
-      clNodes.at (i).Create (clNum);
+      clNodes[i].Create (clNum);
+
       for (uint32_t j = 0; j < clNum; ++j)
         {
           std::ostringstream os;
           os << "cl-" << i << "-" << j;
-          Names::Add (os.str(), clNodes.at (i).Get (j));
+          Names::Add (os.str(), clNodes[i].Get (j));
         }
+
       MobilityHelper mobility;
-      mobility.SetPositionAllocator ("ns3::GridPositionAllocator",
-                                     "MinX", DoubleValue (0.0),
-                                     "MinY", DoubleValue (clStep),
-                                     "DeltaX", DoubleValue (apStep),
-                                     "DeltaY", DoubleValue (0),
-                                     "GridWidth", UintegerValue (clNum),
-                                     "LayoutType", StringValue ("RowFirst"));
-      mobility.Install (clNodes.at (i));
+      mobility.SetPositionAllocator ("ns3::RandomDiscPositionAllocator",
+                                     "X", DoubleValue (apStep * i),
+                                     "Y", DoubleValue (0),
+									 "Rho", StringValue ("ns3::UniformRandomVariable[Min=0|Max=30]"));
+      mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+      mobility.Install (clNodes[i]);
     }
+  std::cout << "CreateClNodes () DONE !!!\n";
 }
 
 void
@@ -241,6 +264,7 @@ AodvExample::CreateDevices ()
 {
   CreateMeshDevices ();
   CreateWifiDevices ();
+  std::cout << "CreateDevices () DONE !!!\n";
 }
 
 void
@@ -254,8 +278,7 @@ AodvExample::CreateMeshDevices ()
   WifiHelper wifi;
   //80211n_2_4GHZ, 80211n_5GHZ, 80211ac, 80211ax_2_4GHZ, 80211ax_5GHZ
   wifi.SetStandard (WIFI_PHY_STANDARD_80211n_5GHZ);
-  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-                                "DataMode", StringValue ("OfdmRate6Mbps"),
+  wifi.SetRemoteStationManager ("ns3::MinstrelHtWifiManager",
                                 "RtsCtsThreshold", UintegerValue (0));
   meshDevices = wifi.Install (wifiPhy, wifiMac, apNodes); 
 
@@ -263,6 +286,7 @@ AodvExample::CreateMeshDevices ()
     {
       wifiPhy.EnablePcapAll (std::string ("aodv"));
     }
+  std::cout << "CreateMeshDevices () DONE !!!\n";
 }
 
 void
@@ -275,8 +299,7 @@ AodvExample::CreateWifiDevices ()
   WifiHelper wifi;
   //80211n_2_4GHZ, 80211n_5GHZ, 80211ac, 80211ax_2_4GHZ, 80211ax_5GHZ
   wifi.SetStandard (WIFI_PHY_STANDARD_80211n_2_4GHZ);
-  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-                                "DataMode", StringValue ("OfdmRate6Mbps"),
+  wifi.SetRemoteStationManager ("ns3::MinstrelHtWifiManager",
                                 "RtsCtsThreshold", UintegerValue (0));
 
   apDevices.reserve (apNum);
@@ -290,17 +313,18 @@ AodvExample::CreateWifiDevices ()
       wifiMac.SetType ("ns3::ApWifiMac",
                        "EnableBeaconJitter", BooleanValue (false),
                        "Ssid", SsidValue (ssid));
-      apDevices.at (i) = wifi.Install (wifiPhy, wifiMac, apNodes.Get (i)); 
+      apDevices[i] = wifi.Install (wifiPhy, wifiMac, apNodes.Get (i));
       // client
       wifiMac.SetType ("ns3::StaWifiMac",
                        "Ssid", SsidValue (ssid));
-      clDevices.at (i) = wifi.Install (wifiPhy, wifiMac, clNodes.at (i));
+      clDevices[i] = wifi.Install (wifiPhy, wifiMac, clNodes[i]);
     }
 
   if (pcap)
     {
       wifiPhy.EnablePcapAll (std::string ("aodv"));
     }
+  std::cout << "CreateWifiDevices () DONE !!!\n";
 }
 
 void
@@ -308,6 +332,7 @@ AodvExample::InstallInternetStack ()
 {
   InstallMeshInternetStack ();
   InstallWifiInternetStack ();
+  std::cout << "InstallInternetStack () DONE !!!\n";
 }
 
 void
@@ -327,6 +352,7 @@ AodvExample::InstallMeshInternetStack ()
       Ptr<OutputStreamWrapper> routingStream = Create<OutputStreamWrapper> ("./output-aodv/aodv.routes", std::ios::out);
       aodv.PrintRoutingTableAllAt (Seconds (8), routingStream);
     }
+  std::cout << "InstallMeshInternetStack () DONE !!!\n";
 }
 
 void
@@ -345,8 +371,8 @@ AodvExample::InstallWifiInternetStack ()
       std::ostringstream os;
       os << "192.168." << 1+i << ".0";
       address.SetBase (os.str ().c_str (), "255.255.255.0");
-      apInterfaces.at (i) = address.Assign (apDevices.at (i));
-      clInterfaces.at (i) = address.Assign (clDevices.at (i));
+      apInterfaces[i] = address.Assign (apDevices[i]);
+      clInterfaces[i] = address.Assign (clDevices[i]);
     }
 
   if (printRoutes)
@@ -354,6 +380,7 @@ AodvExample::InstallWifiInternetStack ()
       Ptr<OutputStreamWrapper> routingStream = Create<OutputStreamWrapper> ("./output-aodv/aodv.routes", std::ios::out);
       aodv.PrintRoutingTableAllAt (Seconds (8), routingStream);
     }
+  std::cout << "InstallWifiInternetStack () DONE !!!\n";
 }
 
 void
@@ -375,9 +402,9 @@ AodvExample::InstallApplications ()
       clientApp.reserve (apNum);
       for (uint32_t i = 0; i < apNum; ++i)
         {
-          clientApp.at (i) = client.Install (clNodes.at (i));
-          clientApp.at (i).Start (Seconds (1.0));
-          clientApp.at (i).Stop (Seconds (totalTime + 0.1));
+          clientApp[i] = client.Install (clNodes[i]);
+          clientApp[i].Start (Seconds (1.0));
+          clientApp[i].Stop (Seconds (totalTime + 0.1));
         }
     }
   else
@@ -400,10 +427,11 @@ AodvExample::InstallApplications ()
       clientApp.reserve (apNum);
       for (uint32_t i = 0; i < apNum; ++i)
         {
-          clientApp.at (i) = client.Install (clNodes.at (i));
-          clientApp.at (i).Start (Seconds (1.0));
-          clientApp.at (i).Stop (Seconds (totalTime + 0.1));
+          clientApp[i] = client.Install (clNodes[i]);
+          clientApp[i].Start (Seconds (1.0));
+          clientApp[i].Stop (Seconds (totalTime + 0.1));
         }
     }
+  std::cout << "InstallApplications () DONE !!!\n";
 }
 
