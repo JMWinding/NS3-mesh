@@ -193,7 +193,9 @@ AodvExample::CreateDevices ()
   WifiHelper wifi;
   //80211n_2_4GHZ, 80211n_5GHZ, 80211ac, 80211ax_2_4GHZ, 80211ax_5GHZ
   wifi.SetStandard (WIFI_PHY_STANDARD_80211n_5GHZ);
-  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager", "DataMode", StringValue ("OfdmRate6Mbps"), "RtsCtsThreshold", UintegerValue (0));
+  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
+		  	  	  	  	  	  	"DataMode", StringValue ("OfdmRate6Mbps"),
+								"RtsCtsThreshold", UintegerValue (0));
   devices = wifi.Install (wifiPhy, wifiMac, nodes); 
 
   if (pcap)
