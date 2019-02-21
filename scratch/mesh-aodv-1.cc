@@ -31,6 +31,7 @@
 #include "ns3/internet-module.h"
 #include "ns3/mobility-module.h"
 #include "ns3/network-module.h"
+#include "ns3/netanim-module.h"
 #include "ns3/olsr-module.h"
 #include "ns3/point-to-point-module.h"
 #include "ns3/wifi-module.h"
@@ -230,6 +231,8 @@ AodvExample::Run ()
   std::cout << std::endl;
 
   Simulator::Schedule (Seconds (1.0), &CalculateThroughput, monitorInterval);
+  AnimationInterface anim ("./output-netanim/mesh-aodv-2.xml");
+  // anim.SetMaxPktsPerTraceFile (50000);
 
   Simulator::Stop (Seconds (totalTime));
   Simulator::Run ();
@@ -358,6 +361,7 @@ AodvExample::CreateMeshDevices ()
   //80211n_2_4GHZ, 80211n_5GHZ, 80211ac, 80211ax_2_4GHZ, 80211ax_5GHZ
   wifi.SetStandard (WIFI_PHY_STANDARD_80211n_5GHZ);
   wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
+                                "ControlMode", StringValue ("HtMcs7"),
 	  	  	  	                "DataMode", StringValue ("HtMcs7"),
                                 "RtsCtsThreshold", UintegerValue (0));
   meshDevices = wifi.Install (wifiPhy, wifiMac, apNodes); 
