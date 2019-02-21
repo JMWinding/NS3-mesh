@@ -497,7 +497,7 @@ AodvExample::InstallMeshInternetStack ()
   if (printRoutes)
     {
       Ptr<OutputStreamWrapper> routingStream = Create<OutputStreamWrapper> ("./output-aodv/aodv.routes", std::ios::out);
-      aodv.PrintRoutingTableAllAt (Seconds (0), routingStream);
+      aodv.PrintRoutingTableAllAt (Seconds (totalTime-0.01), routingStream);
     }
 
   std::cout << "InstallMeshInternetStack () DONE !!!\n";
@@ -508,7 +508,10 @@ AodvExample::InstallWifiInternetStack ()
 {
   for (uint32_t i = 0; i < apNum; ++i)
 	{
+	  OlsrHelper olsr;
+	  AodvHelper aodv;
 	  InternetStackHelper stack;
+	  stack.SetRoutingHelper (aodv);
 	  stack.Install (clNodes[i]);
 
 	  std::ostringstream os;
@@ -518,8 +521,16 @@ AodvExample::InstallWifiInternetStack ()
 	  apInterfaces[i] = address.Assign (apDevices[i]);
 	  clInterfaces[i] = address.Assign (clDevices[i]);
 
-	  // TODO
+	  /*
 	  // set routing table
+	  for (uint32_t j = 0; j < clNum; ++j)
+	    {
+		  Ipv4StaticRoutingHelper helper;
+		  Ptr<Ipv4> ipv4 = clNodes[i].Get (j)->GetObject<Ipv4> ();
+		  Ptr<Ipv4StaticRouting> Ipv4stat = helper.GetStaticRouting (ipv4);
+		  Ipv4stat->SetDefaultRoute (apInterfaces[i].GetAddress (0), 0, 1);
+	    }
+	  */
 	}
 
   std::cout << "InstallWifiInternetStack () DONE !!!\n";
@@ -545,7 +556,7 @@ AodvExample::InstallApplications ()
 
               OnOffHelper client ("ns3::UdpSocketFactory", Address ());
               client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
-              client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
+              client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0.1]"));
               client.SetAttribute ("PacketSize", UintegerValue (1472));
               client.SetAttribute ("DataRate", StringValue ("1Mbps"));
               client.SetAttribute ("MaxBytes", UintegerValue (0));
