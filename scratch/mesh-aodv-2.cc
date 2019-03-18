@@ -128,6 +128,7 @@ private:
   double clStep;
 
   /// Simulation time, seconds
+  double startTime;
   double totalTime;
   /// Write per-device PCAP traces if true
   bool pcap;
@@ -152,6 +153,7 @@ private:
   /// application
   uint32_t gateway;
   bool udp;
+  std::string datarate;
   std::vector<ApplicationContainer> serverApp;
   std::vector<ApplicationContainer> clientApp;
 
@@ -206,11 +208,13 @@ AodvExample::AodvExample () :
   clNum (1),
   apStep (50),
   clStep (10),
+  startTime (1),
   totalTime (100),
   pcap (false),
   printRoutes (true),
   gateway (0),
   udp (true),
+  datarate ("1Mbps"),
   monitorInterval (0.5),
   anim (false),
   aptx (false)
@@ -231,12 +235,14 @@ AodvExample::Configure (int argc, char **argv)
   cmd.AddValue ("gridSize", "Size of AP grid.", gridSize);
   cmd.AddValue ("apNum", "Number of AP nodes.", apNum);
   cmd.AddValue ("clNum", "Number of CL nodes for each Service Set.", clNum);
+  cmd.AddValue ("startTime", "Application start time, s.", startTime);
   cmd.AddValue ("totalTime", "Simulation time, s.", totalTime);
   cmd.AddValue ("monitorInterval", "Monitor interval, s.", monitorInterval);
   cmd.AddValue ("apStep", "AP grid step, m", apStep);
   cmd.AddValue ("clStep", "CL grid step, m", clStep);
   cmd.AddValue ("gateway", "Mount PacketSink on which AP.", gateway);
   cmd.AddValue ("udp", "UDP or TCP", udp);
+  cmd.AddValue ("datarate", "tested application datarate", datarate);
   cmd.AddValue ("monitorInterval", "Time between throughput updates.", monitorInterval);
   cmd.AddValue ("anim", "Output netanim .xml file or not.", anim);
   cmd.AddValue ("aptx", "Mount OnOffApplication on AP or not, for test.", aptx);
@@ -261,7 +267,7 @@ AodvExample::Run ()
   std::cout << "Starting simulation for " << totalTime << " s ...\n";
 
   PrintThroughputTitle (apNum, clNum, aptx);
-  Simulator::Schedule (Seconds (1.0), &CalculateThroughput, monitorInterval);
+  Simulator::Schedule (Seconds (startTime), &CalculateThroughput, monitorInterval);
 
   AnimationInterface netanim ("./output-netanim/mesh-aodv-2.xml");
   // netanim.SetMaxPktsPerTraceFile (50000);
@@ -413,6 +419,8 @@ AodvExample::CreateMeshDevices ()
   wifiPhy.Set ("Antennas", UintegerValue (4));
   wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (1));
   wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (1));
+  wifiPhy.Set ("TxGain", DoubleValue (25.0));
+  wifiPhy.Set ("RxGain", DoubleValue (95.0));
   wifiPhy.Set ("TxPowerStart", DoubleValue (30.0));
   wifiPhy.Set ("TxPowerEnd", DoubleValue (30.0));
   wifiPhy.Set ("TxPowerLevels", UintegerValue (1));
@@ -484,7 +492,6 @@ AodvExample::InstallInternetStack ()
 void
 AodvExample::InstallMeshInternetStack ()
 {
-  OlsrHelper olsr;
   AodvHelper aodv;
   InternetStackHelper stack;
   stack.SetRoutingHelper (aodv); // has effect on the next Install ()
@@ -497,7 +504,7 @@ AodvExample::InstallMeshInternetStack ()
   if (printRoutes)
     {
       Ptr<OutputStreamWrapper> routingStream = Create<OutputStreamWrapper> ("./output-aodv/aodv.routes", std::ios::out);
-      aodv.PrintRoutingTableAllAt (Seconds (totalTime-0.01), routingStream);
+      aodv.PrintRoutingTableAllAt (Seconds (3.0), routingStream);
     }
 
   std::cout << "InstallMeshInternetStack () DONE !!!\n";
@@ -515,7 +522,7 @@ AodvExample::InstallWifiInternetStack ()
 	  stack.Install (clNodes[i]);
 
 	  std::ostringstream os;
-	  os << "10.1." << 10+i << ".0";
+	  os << "10.1." << 11+i << ".0";
 	  Ipv4AddressHelper address;
 	  address.SetBase (os.str ().c_str (), "255.255.255.0");
 	  apInterfaces[i] = address.Assign (apDevices[i]);
@@ -556,14 +563,14 @@ AodvExample::InstallApplications ()
 
               OnOffHelper client ("ns3::UdpSocketFactory", Address ());
               client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
-              client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0.1]"));
+              client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
               client.SetAttribute ("PacketSize", UintegerValue (1472));
-              client.SetAttribute ("DataRate", StringValue ("1Mbps"));
+              client.SetAttribute ("DataRate", StringValue (datarate));
               client.SetAttribute ("MaxBytes", UintegerValue (0));
               AddressValue remoteAddress (InetSocketAddress (apInterfaces[gateway].GetAddress (0), port)); //
               client.SetAttribute ("Remote", remoteAddress);
               clientApp[i*clNum+j] = client.Install (clNodes[i].Get (j));
-              clientApp[i*clNum+j].Start (Seconds (1.0));
+              clientApp[i*clNum+j].Start (Seconds (startTime));
               clientApp[i*clNum+j].Stop (Seconds (totalTime + 0.1));
             }
 
@@ -586,12 +593,12 @@ AodvExample::InstallApplications ()
 			  client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
 			  client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
 			  client.SetAttribute ("PacketSize", UintegerValue (1472));
-			  client.SetAttribute ("DataRate", StringValue ("2Mbps"));
+			  client.SetAttribute ("DataRate", StringValue (datarate));
 			  client.SetAttribute ("MaxBytes", UintegerValue (0));
 			  AddressValue remoteAddress (InetSocketAddress (apInterfaces[gateway].GetAddress (0), port)); //
 			  client.SetAttribute ("Remote", remoteAddress);
 			  clientApp[apNum*clNum+i] = client.Install (apNodes.Get (i));
-			  clientApp[apNum*clNum+i].Start (Seconds (1.0));
+			  clientApp[apNum*clNum+i].Start (Seconds (startTime));
 			  clientApp[apNum*clNum+i].Stop (Seconds (totalTime + 0.1));
             }
         }
@@ -615,12 +622,12 @@ AodvExample::InstallApplications ()
               client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
               client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
               client.SetAttribute ("PacketSize", UintegerValue (1448));
-              client.SetAttribute ("DataRate", StringValue ("1Mbps"));
+              client.SetAttribute ("DataRate", StringValue (datarate));
               client.SetAttribute ("MaxBytes", UintegerValue (0));
               AddressValue remoteAddress (InetSocketAddress (apInterfaces[gateway].GetAddress (0), port)); //
               client.SetAttribute ("Remote", remoteAddress);
               clientApp[i*clNum+j] = client.Install (clNodes[i].Get (j));
-              clientApp[i*clNum+j].Start (Seconds (1.0));
+              clientApp[i*clNum+j].Start (Seconds (startTime));
               clientApp[i*clNum+j].Stop (Seconds (totalTime + 0.1));
             }
 
@@ -643,12 +650,12 @@ AodvExample::InstallApplications ()
 			  client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
 			  client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
 			  client.SetAttribute ("PacketSize", UintegerValue (1448));
-			  client.SetAttribute ("DataRate", StringValue ("2Mbps"));
+			  client.SetAttribute ("DataRate", StringValue (datarate));
 			  client.SetAttribute ("MaxBytes", UintegerValue (0));
 			  AddressValue remoteAddress (InetSocketAddress (apInterfaces[gateway].GetAddress (0), port)); //
 			  client.SetAttribute ("Remote", remoteAddress);
 			  clientApp[apNum*clNum+i] = client.Install (apNodes.Get (i));
-			  clientApp[apNum*clNum+i].Start (Seconds (1.0));
+			  clientApp[apNum*clNum+i].Start (Seconds (startTime));
 			  clientApp[apNum*clNum+i].Stop (Seconds (totalTime + 0.1));
           }
         }
