@@ -148,14 +148,11 @@ private:
   std::vector<ApplicationContainer> serverApp;
   std::vector<ApplicationContainer> clientApp;
 
-  /// throughput monitor
+  ///
   double monitorInterval;
-
-  /// netanim
   bool anim;
-
-  /// test-only operations
   bool aptx;
+  std::string dirout;
 
 private:
   void CreateVariables ();
@@ -209,7 +206,8 @@ AodvExample::AodvExample () :
   datarate ("1Mbps"),
   monitorInterval (0.5),
   anim (false),
-  aptx (false)
+  aptx (false),
+  dirout ("./")
 {
 }
 
@@ -238,6 +236,7 @@ AodvExample::Configure (int argc, char **argv)
   cmd.AddValue ("monitorInterval", "Time between throughput updates.", monitorInterval);
   cmd.AddValue ("anim", "Output netanim .xml file or not.", anim);
   cmd.AddValue ("aptx", "Mount OnOffApplication on AP or not, for test.", aptx);
+  cmd.AddValue ("dirout", "Output directory", dirout);
 
   cmd.Parse (argc, argv);
 
@@ -262,9 +261,9 @@ AodvExample::Run ()
 
   std::cout << "Starting simulation for " << totalTime << " s ...\n";
 
-  AnimationInterface netanim ("./output-aodv/aodv.anim."+std::to_string (uint32_t (apStep))+"."+std::to_string (clNum)+"."+std::to_string (rndSeed)+".xml");
+  AnimationInterface netanim (dirout+"aodv.anim."+std::to_string (uint32_t (apStep))+"."+std::to_string (rndSeed)+".xml");
   if (printRoutes)
-    netanim.EnableIpv4RouteTracking ("./output-aodv/aodv.route."+std::to_string (uint32_t (apStep))+"."+std::to_string (clNum)+"."+std::to_string (rndSeed)+".xml", Seconds (startTime), Seconds (totalTime), Seconds (5));
+    netanim.EnableIpv4RouteTracking (dirout+"aodv.route."+std::to_string (uint32_t (apStep))+"."+std::to_string (rndSeed)+".xml", Seconds (startTime), Seconds (totalTime), Seconds (5));
   if (!anim)
     netanim.SetStopTime (Seconds (0.0));
 
