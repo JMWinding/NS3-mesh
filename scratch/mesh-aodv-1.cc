@@ -18,6 +18,9 @@
  * This is an example script for AODV manet routing protocol. 
  *
  * Authors: Pavel Boyko <boyko@iitp.ru>
+ *
+ * Mofidy: Jiaming Wang
+ * Date: 03/21/2019
  */
 
 #include <iostream>
