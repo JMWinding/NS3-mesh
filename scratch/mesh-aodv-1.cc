@@ -35,6 +35,8 @@
 #include "ns3/olsr-module.h"
 #include "ns3/point-to-point-module.h"
 #include "ns3/wifi-module.h"
+#include "ns3/mesh-module.h"
+#include "ns3/v4ping-helper.h"
 
 using namespace ns3;
 
@@ -57,14 +59,10 @@ CalculateThroughput (double monitorInterval)
   std::cout << Simulator::Now ().GetSeconds ();
   for (uint32_t i = 0; i < packetSink.size (); ++i)
     {
-	  if (packetSink[i] == NULL)
-	    {
-		  throughput[i] = -1;
-	    }
-	  else
-	    {
-          throughput[i] = CalculateSingleStreamThroughput (packetSink[i], lastTotalRx[i], monitorInterval);
-	    }
+      if (packetSink[i] == NULL)
+        throughput[i] = -1;
+      else
+        throughput[i] = CalculateSingleStreamThroughput (packetSink[i], lastTotalRx[i], monitorInterval);
       std::cout << '\t' << throughput[i];
     }
   std::cout << std::endl;
@@ -77,19 +75,11 @@ PrintThroughputTitle (uint32_t apNum, uint32_t clNum, bool aptx)
   std::cout << "-------------------------------------------------\n";
   std::cout << "Time[s]";
   for (uint32_t i = 0; i < apNum; ++i)
-	{
-	  for (uint32_t j = 0; j < clNum; ++j)
-		{
-		  std::cout << '\t' << "cl-" << i << '-' << j;
-		}
-	}
+    for (uint32_t j = 0; j < clNum; ++j)
+      std::cout << '\t' << "cl-" << i << '-' << j;
   if (aptx)
-	{
-	  for (uint32_t i = 0; i < apNum; ++i)
-		{
-		  std::cout << '\t' << "ap-" << i;
-		}
-	}
+    for (uint32_t i = 0; i < apNum; ++i)
+      std::cout << '\t' << "ap-" << i;
   std::cout << std::endl;
 }
 
@@ -116,6 +106,7 @@ public:
 private:
 
   // parameters
+  uint32_t rndSeed;
   /// Layout
   uint32_t gridSize;
 
@@ -128,6 +119,7 @@ private:
   double clStep;
 
   /// Simulation time, seconds
+  double startTime;
   double totalTime;
   /// Write per-device PCAP traces if true
   bool pcap;
@@ -151,7 +143,8 @@ private:
 
   /// application
   uint32_t gateway;
-  bool udp;
+  std::string app;
+  std::string datarate;
   std::vector<ApplicationContainer> serverApp;
   std::vector<ApplicationContainer> clientApp;
 
@@ -201,16 +194,19 @@ int main (int argc, char **argv)
 
 //-----------------------------------------------------------------------------
 AodvExample::AodvExample () :
+  rndSeed (1),
   gridSize (3),
-  apNum (9),
+  apNum (0),
   clNum (1),
   apStep (50),
-  clStep (10),
+  clStep (0),
+  startTime (1),
   totalTime (100),
   pcap (false),
   printRoutes (true),
   gateway (0),
-  udp (true),
+  app ("udp"),
+  datarate ("1Mbps"),
   monitorInterval (0.5),
   anim (false),
   aptx (false)
@@ -223,27 +219,34 @@ AodvExample::Configure (int argc, char **argv)
   // Enable AODV logs by default. Comment this if too noisy
   // LogComponentEnable("AodvRoutingProtocol", LOG_LEVEL_ALL);
 
-  SeedManager::SetSeed (12345);
   CommandLine cmd;
 
+  cmd.AddValue ("rndSeed", "Random Seed", rndSeed);
   cmd.AddValue ("pcap", "Write PCAP traces.", pcap);
   cmd.AddValue ("printRoutes", "Print routing table dumps.", printRoutes);
   cmd.AddValue ("gridSize", "Size of AP grid.", gridSize);
   cmd.AddValue ("apNum", "Number of AP nodes.", apNum);
   cmd.AddValue ("clNum", "Number of CL nodes for each Service Set.", clNum);
+  cmd.AddValue ("startTime", "Application start time, s.", startTime);
   cmd.AddValue ("totalTime", "Simulation time, s.", totalTime);
   cmd.AddValue ("monitorInterval", "Monitor interval, s.", monitorInterval);
   cmd.AddValue ("apStep", "AP grid step, m", apStep);
   cmd.AddValue ("clStep", "CL grid step, m", clStep);
   cmd.AddValue ("gateway", "Mount PacketSink on which AP.", gateway);
-  cmd.AddValue ("udp", "UDP or TCP", udp);
+  cmd.AddValue ("app", "ping or UDP or TCP", app);
+  cmd.AddValue ("datarate", "tested application datarate", datarate);
   cmd.AddValue ("monitorInterval", "Time between throughput updates.", monitorInterval);
   cmd.AddValue ("anim", "Output netanim .xml file or not.", anim);
   cmd.AddValue ("aptx", "Mount OnOffApplication on AP or not, for test.", aptx);
 
   cmd.Parse (argc, argv);
 
-  apNum = gridSize*gridSize;
+  SeedManager::SetSeed (rndSeed);
+
+  if (apNum == 0)
+    apNum = gridSize*gridSize;
+  if (clStep == 0)
+    clStep = apStep*0.7;
   return true;
 }
 
@@ -256,19 +259,14 @@ AodvExample::Run ()
   CreateDevices ();
   InstallInternetStack ();
   InstallApplications ();
-  Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
 
   std::cout << "Starting simulation for " << totalTime << " s ...\n";
 
-  PrintThroughputTitle (apNum, clNum, aptx);
-  Simulator::Schedule (Seconds (1.0), &CalculateThroughput, monitorInterval);
-
-  AnimationInterface netanim ("./output-netanim/mesh-aodv-2.xml");
-  // netanim.SetMaxPktsPerTraceFile (50000);
+  AnimationInterface netanim ("./output-aodv/aodv.anim."+std::to_string (uint32_t (apStep))+"."+std::to_string (clNum)+"."+std::to_string (rndSeed)+".xml");
+  if (printRoutes)
+    netanim.EnableIpv4RouteTracking ("./output-aodv/aodv.route."+std::to_string (uint32_t (apStep))+"."+std::to_string (clNum)+"."+std::to_string (rndSeed)+".xml", Seconds (startTime), Seconds (totalTime), Seconds (5));
   if (!anim)
-    {
-	  netanim.SetStopTime (Seconds (0));
-    }
+    netanim.SetStopTime (Seconds (0.0));
 
   Simulator::Stop (Seconds (totalTime));
   Simulator::Run ();
@@ -285,13 +283,9 @@ AodvExample::CreateVariables ()
 {
   uint32_t txNum;
   if (aptx)
-    {
 	  txNum = apNum*clNum+apNum;
-    }
   else
-    {
 	  txNum = apNum*clNum;
-    }
 
   clNodes.reserve (apNum);
   apDevices.reserve (apNum);
@@ -314,11 +308,11 @@ AodvExample::CreateVariables ()
     }
   for (uint32_t i = 0; i < txNum; ++i)
     {
-	  serverApp.push_back (ApplicationContainer ());
-	  clientApp.push_back (ApplicationContainer ());
-	  lastTotalRx.push_back (0);
-	  throughput.push_back (0);
-	  packetSink.push_back (NULL);
+      serverApp.push_back (ApplicationContainer ());
+      clientApp.push_back (ApplicationContainer ());
+      lastTotalRx.push_back (0);
+      throughput.push_back (0);
+      packetSink.push_back (NULL);
     }
 
   std::cout << "CreateVariables () DONE !!!\n";
@@ -384,7 +378,7 @@ AodvExample::CreateClNodes ()
       mobility.SetPositionAllocator ("ns3::RandomDiscPositionAllocator",
                                      "X", DoubleValue (center.x),
                                      "Y", DoubleValue (center.y),
-									 "Rho", StringValue (randomRho.str ()));
+				     "Rho", StringValue (randomRho.str ()));
       mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
       mobility.Install (clNodes[i]);
     }
@@ -404,8 +398,10 @@ AodvExample::CreateDevices ()
 void
 AodvExample::CreateMeshDevices ()
 {
-  WifiMacHelper wifiMac;
-  wifiMac.SetType ("ns3::AdhocWifiMac");
+  MeshHelper mesh = MeshHelper::Default ();
+  mesh.SetStackInstaller ("ns3::Dot11sStack");
+  mesh.SetMacType ("RandomStart", TimeValue (Seconds (0.0)));
+
   YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
   wifiPhy.SetChannel (wifiChannel.Create ());
@@ -413,6 +409,8 @@ AodvExample::CreateMeshDevices ()
   wifiPhy.Set ("Antennas", UintegerValue (4));
   wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (1));
   wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (1));
+  wifiPhy.Set ("TxGain", DoubleValue (10.0));
+  wifiPhy.Set ("RxGain", DoubleValue (10.0));
   wifiPhy.Set ("TxPowerStart", DoubleValue (30.0));
   wifiPhy.Set ("TxPowerEnd", DoubleValue (30.0));
   wifiPhy.Set ("TxPowerLevels", UintegerValue (1));
@@ -420,15 +418,14 @@ AodvExample::CreateMeshDevices ()
   //80211n_2_4GHZ, 80211n_5GHZ, 80211ac, 80211ax_2_4GHZ, 80211ax_5GHZ
   wifi.SetStandard (WIFI_PHY_STANDARD_80211n_5GHZ);
   wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-                                "ControlMode", StringValue ("HtMcs7"),
-	  	  	  	                "DataMode", StringValue ("HtMcs7"),
+                                "ControlMode", StringValue ("HtMcs1"),
+	  	  	  	"DataMode", StringValue ("HtMcs9"),
                                 "RtsCtsThreshold", UintegerValue (0));
-  meshDevices = wifi.Install (wifiPhy, wifiMac, apNodes); 
+
+  meshDevices = mesh.Install (wifiPhy, apNodes);
 
   if (pcap)
-    {
-      wifiPhy.EnablePcapAll (std::string ("aodv"));
-    }
+    wifiPhy.EnablePcapAll (std::string ("aodv"));
 
   std::cout << "CreateMeshDevices () DONE !!!\n";
 }
@@ -441,11 +438,11 @@ AodvExample::CreateWifiDevices ()
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
   wifiPhy.SetChannel (wifiChannel.Create ());
   WifiHelper wifi;
-  //80211n_2_4GHZ, 80211n_5GHZ, 80211ac, 80211ax_2_4GHZ, 80211ax_5GHZ
+  // 80211n_2_4GHZ, 80211n_5GHZ, 80211ac, 80211ax_2_4GHZ, 80211ax_5GHZ
   wifi.SetStandard (WIFI_PHY_STANDARD_80211n_2_4GHZ);
   wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-		  	  	  	  	  	 	"ControlMode", StringValue ("HtMcs7"),
-		  	  	  	  	  	 	"DataMode", StringValue ("HtMcs7"),
+		  	  	"ControlMode", StringValue ("HtMcs1"),
+		  	  	"DataMode", StringValue ("HtMcs7"),
                                 "RtsCtsThreshold", UintegerValue (0));
 
   for (uint32_t i = 0; i < apNum; ++i)
@@ -465,9 +462,7 @@ AodvExample::CreateWifiDevices ()
     }
 
   if (pcap)
-    {
-      wifiPhy.EnablePcapAll (std::string ("aodv"));
-    }
+    wifiPhy.EnablePcapAll (std::string ("aodv"));
 
   std::cout << "CreateWifiDevices () DONE !!!\n";
 }
@@ -486,6 +481,7 @@ AodvExample::InstallMeshInternetStack ()
 {
   OlsrHelper olsr;
   AodvHelper aodv;
+
   InternetStackHelper stack;
   stack.SetRoutingHelper (aodv); // has effect on the next Install ()
   stack.Install (apNodes);
@@ -494,11 +490,13 @@ AodvExample::InstallMeshInternetStack ()
   address.SetBase ("10.1.1.0", "255.255.255.0");
   meshInterfaces = address.Assign (meshDevices);
 
+  /*
   if (printRoutes)
     {
-      Ptr<OutputStreamWrapper> routingStream = Create<OutputStreamWrapper> ("./output-aodv/aodv.routes", std::ios::out);
-      aodv.PrintRoutingTableAllAt (Seconds (totalTime-0.01), routingStream);
+      Ptr<OutputStreamWrapper> routingStream = Create<OutputStreamWrapper> ("./output-aodv/aodv.routes."+std::to_string (uint32_t (apStep))+"."+std::to_string (clNum)+"."+std::to_string (rndSeed), std::ios::out);
+      aodv.PrintRoutingTableAllAt (Seconds (totalTime - 0.01), routingStream);
     }
+  */
 
   std::cout << "InstallMeshInternetStack () DONE !!!\n";
 }
@@ -510,27 +508,28 @@ AodvExample::InstallWifiInternetStack ()
 	{
 	  OlsrHelper olsr;
 	  AodvHelper aodv;
+
 	  InternetStackHelper stack;
 	  stack.SetRoutingHelper (aodv);
 	  stack.Install (clNodes[i]);
 
 	  std::ostringstream os;
-	  os << "10.1." << 10+i << ".0";
+	  os << "10.1." << 11+i << ".0";
 	  Ipv4AddressHelper address;
 	  address.SetBase (os.str ().c_str (), "255.255.255.0");
 	  apInterfaces[i] = address.Assign (apDevices[i]);
 	  clInterfaces[i] = address.Assign (clDevices[i]);
 
-	  /*
+          /*
 	  // set routing table
 	  for (uint32_t j = 0; j < clNum; ++j)
 	    {
 		  Ipv4StaticRoutingHelper helper;
 		  Ptr<Ipv4> ipv4 = clNodes[i].Get (j)->GetObject<Ipv4> ();
 		  Ptr<Ipv4StaticRouting> Ipv4stat = helper.GetStaticRouting (ipv4);
-		  Ipv4stat->SetDefaultRoute (apInterfaces[i].GetAddress (0), 0, 1);
+		  Ipv4stat->SetDefaultRoute (apInterfaces[i].GetAddress (0), 1, 0);
 	    }
-	  */
+          */
 	}
 
   std::cout << "InstallWifiInternetStack () DONE !!!\n";
@@ -539,7 +538,7 @@ AodvExample::InstallWifiInternetStack ()
 void
 AodvExample::InstallApplications ()
 {
-  if (udp)
+  if (app == std::string("udp"))
     {
       // UDP flow
       for (uint32_t i = 0; i < apNum; ++i)
@@ -552,51 +551,53 @@ AodvExample::InstallApplications ()
               serverApp[i*clNum+j] = server.Install (apNodes.Get (gateway)); //
               serverApp[i*clNum+j].Start (Seconds (1.0));
               serverApp[i*clNum+j].Stop (Seconds (totalTime + 0.1));
-         	  packetSink[i*clNum+j] = StaticCast<PacketSink> (serverApp[i*clNum+j].Get (0));
+              packetSink[i*clNum+j] = StaticCast<PacketSink> (serverApp[i*clNum+j].Get (0));
 
               OnOffHelper client ("ns3::UdpSocketFactory", Address ());
               client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
-              client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0.1]"));
+              client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
               client.SetAttribute ("PacketSize", UintegerValue (1472));
-              client.SetAttribute ("DataRate", StringValue ("1Mbps"));
+              client.SetAttribute ("DataRate", StringValue (datarate));
               client.SetAttribute ("MaxBytes", UintegerValue (0));
               AddressValue remoteAddress (InetSocketAddress (apInterfaces[gateway].GetAddress (0), port)); //
               client.SetAttribute ("Remote", remoteAddress);
               clientApp[i*clNum+j] = client.Install (clNodes[i].Get (j));
-              clientApp[i*clNum+j].Start (Seconds (1.0));
+              clientApp[i*clNum+j].Start (Seconds (startTime));
               clientApp[i*clNum+j].Stop (Seconds (totalTime + 0.1));
             }
 
           if (i == gateway)
-            {
-        	  continue;
-            }
+            continue;
 
           if (aptx)
             {
-			  uint16_t port = i+40000;
-			  Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
-			  PacketSinkHelper server ("ns3::UdpSocketFactory", localAddress);
-			  serverApp[apNum*clNum+i] = server.Install (apNodes.Get (gateway)); //
-			  serverApp[apNum*clNum+i].Start (Seconds (1.0));
-			  serverApp[apNum*clNum+i].Stop (Seconds (totalTime + 0.1));
-			  packetSink[apNum*clNum+i] = StaticCast<PacketSink> (serverApp[apNum*clNum+i].Get (0));
+              uint16_t port = i+40000;
+              Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
+              PacketSinkHelper server ("ns3::UdpSocketFactory", localAddress);
+              serverApp[apNum*clNum+i] = server.Install (apNodes.Get (gateway)); //
+              serverApp[apNum*clNum+i].Start (Seconds (1.0));
+              serverApp[apNum*clNum+i].Stop (Seconds (totalTime + 0.1));
+              packetSink[apNum*clNum+i] = StaticCast<PacketSink> (serverApp[apNum*clNum+i].Get (0));
 
-			  OnOffHelper client ("ns3::UdpSocketFactory", Address ());
-			  client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
-			  client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
-			  client.SetAttribute ("PacketSize", UintegerValue (1472));
-			  client.SetAttribute ("DataRate", StringValue ("2Mbps"));
-			  client.SetAttribute ("MaxBytes", UintegerValue (0));
-			  AddressValue remoteAddress (InetSocketAddress (apInterfaces[gateway].GetAddress (0), port)); //
-			  client.SetAttribute ("Remote", remoteAddress);
-			  clientApp[apNum*clNum+i] = client.Install (apNodes.Get (i));
-			  clientApp[apNum*clNum+i].Start (Seconds (1.0));
-			  clientApp[apNum*clNum+i].Stop (Seconds (totalTime + 0.1));
+              OnOffHelper client ("ns3::UdpSocketFactory", Address ());
+              client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
+              client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
+              client.SetAttribute ("PacketSize", UintegerValue (1472));
+              client.SetAttribute ("DataRate", StringValue (datarate));
+              client.SetAttribute ("MaxBytes", UintegerValue (0));
+              AddressValue remoteAddress (InetSocketAddress (apInterfaces[gateway].GetAddress (0), port)); //
+              client.SetAttribute ("Remote", remoteAddress);
+              clientApp[apNum*clNum+i] = client.Install (apNodes.Get (i));
+              clientApp[apNum*clNum+i].Start (Seconds (startTime));
+              clientApp[apNum*clNum+i].Stop (Seconds (totalTime + 0.1));
             }
         }
+
+      Simulator::Schedule (Seconds (startTime), &PrintThroughputTitle, apNum, clNum, aptx);
+      Simulator::Schedule (Seconds (startTime), &CalculateThroughput, monitorInterval);
     }
-  else
+
+  if (app == std::string("tcp"))
     {
       // TCP flow
       for (uint32_t i = 0; i < apNum; ++i)
@@ -609,49 +610,60 @@ AodvExample::InstallApplications ()
               serverApp[i*clNum+j] = server.Install (apNodes.Get (gateway)); //
               serverApp[i*clNum+j].Start (Seconds (1.0));
               serverApp[i*clNum+j].Stop (Seconds (totalTime + 0.1));
-         	  packetSink[i*clNum+j] = StaticCast<PacketSink> (serverApp[i*clNum+j].Get (0));
+              packetSink[i*clNum+j] = StaticCast<PacketSink> (serverApp[i*clNum+j].Get (0));
 
               OnOffHelper client ("ns3::TcpSocketFactory", Address ());
               client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
               client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
               client.SetAttribute ("PacketSize", UintegerValue (1448));
-              client.SetAttribute ("DataRate", StringValue ("1Mbps"));
+              client.SetAttribute ("DataRate", StringValue (datarate));
               client.SetAttribute ("MaxBytes", UintegerValue (0));
               AddressValue remoteAddress (InetSocketAddress (apInterfaces[gateway].GetAddress (0), port)); //
               client.SetAttribute ("Remote", remoteAddress);
               clientApp[i*clNum+j] = client.Install (clNodes[i].Get (j));
-              clientApp[i*clNum+j].Start (Seconds (1.0));
+              clientApp[i*clNum+j].Start (Seconds (startTime));
               clientApp[i*clNum+j].Stop (Seconds (totalTime + 0.1));
             }
 
-          if (i == gateway) //
-            {
-        	  continue;
-            }
+          if (i == gateway)
+            continue;
 
           if (aptx)
-          {
-			  uint16_t port = i+40000;
-			  Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
-			  PacketSinkHelper server ("ns3::TcpSocketFactory", localAddress);
-			  serverApp[apNum*clNum+i] = server.Install (apNodes.Get (gateway)); //
-			  serverApp[apNum*clNum+i].Start (Seconds (1.0));
-			  serverApp[apNum*clNum+i].Stop (Seconds (totalTime + 0.1));
-			  packetSink[apNum*clNum+i] = StaticCast<PacketSink> (serverApp[apNum*clNum+i].Get (0));
+            {
+              uint16_t port = i+40000;
+              Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
+              PacketSinkHelper server ("ns3::TcpSocketFactory", localAddress);
+              serverApp[apNum*clNum+i] = server.Install (apNodes.Get (gateway)); //
+              serverApp[apNum*clNum+i].Start (Seconds (1.0));
+              serverApp[apNum*clNum+i].Stop (Seconds (totalTime + 0.1));
+              packetSink[apNum*clNum+i] = StaticCast<PacketSink> (serverApp[apNum*clNum+i].Get (0));
 
-			  OnOffHelper client ("ns3::TcpSocketFactory", Address ());
-			  client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
-			  client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
-			  client.SetAttribute ("PacketSize", UintegerValue (1448));
-			  client.SetAttribute ("DataRate", StringValue ("2Mbps"));
-			  client.SetAttribute ("MaxBytes", UintegerValue (0));
-			  AddressValue remoteAddress (InetSocketAddress (apInterfaces[gateway].GetAddress (0), port)); //
-			  client.SetAttribute ("Remote", remoteAddress);
-			  clientApp[apNum*clNum+i] = client.Install (apNodes.Get (i));
-			  clientApp[apNum*clNum+i].Start (Seconds (1.0));
-			  clientApp[apNum*clNum+i].Stop (Seconds (totalTime + 0.1));
-          }
+              OnOffHelper client ("ns3::TcpSocketFactory", Address ());
+              client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
+              client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
+              client.SetAttribute ("PacketSize", UintegerValue (1448));
+              client.SetAttribute ("DataRate", StringValue (datarate));
+              client.SetAttribute ("MaxBytes", UintegerValue (0));
+              AddressValue remoteAddress (InetSocketAddress (apInterfaces[gateway].GetAddress (0), port)); //
+              client.SetAttribute ("Remote", remoteAddress);
+              clientApp[apNum*clNum+i] = client.Install (apNodes.Get (i));
+              clientApp[apNum*clNum+i].Start (Seconds (startTime));
+              clientApp[apNum*clNum+i].Stop (Seconds (totalTime + 0.1));
+            }
         }
+
+      Simulator::Schedule (Seconds (startTime), &PrintThroughputTitle, apNum, clNum, aptx);
+      Simulator::Schedule (Seconds (startTime), &CalculateThroughput, monitorInterval);
+    }
+
+  if (app == std::string("ping"))
+    {
+      V4PingHelper ping (apInterfaces[0].GetAddress (0));
+      ping.SetAttribute ("Verbose", BooleanValue (true));
+
+      ApplicationContainer p = ping.Install (apNodes.Get (apNum-1));
+      p.Start (Seconds (0));
+      p.Stop (Seconds (totalTime) - Seconds (0.001));
     }
 
   std::cout << "InstallApplications () DONE !!!\n";
