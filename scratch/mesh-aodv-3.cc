@@ -120,6 +120,7 @@ private:
 
   /// Simulation time, seconds
   double startTime;
+  double monitorTime;
   double totalTime;
   /// Write per-device PCAP traces if true
   bool pcap;
@@ -201,6 +202,7 @@ AodvExample::AodvExample () :
   apStep (50),
   clStep (0),
   startTime (1),
+  monitorTime (1),
   totalTime (100),
   pcap (false),
   printRoutes (true),
@@ -228,6 +230,7 @@ AodvExample::Configure (int argc, char **argv)
   cmd.AddValue ("apNum", "Number of AP nodes.", apNum);
   cmd.AddValue ("clNum", "Number of CL nodes for each Service Set.", clNum);
   cmd.AddValue ("startTime", "Application start time, s.", startTime);
+  cmd.AddValue ("monitorTime", "Monitor start time, s.", monitorTime);
   cmd.AddValue ("totalTime", "Simulation time, s.", totalTime);
   cmd.AddValue ("monitorInterval", "Monitor interval, s.", monitorInterval);
   cmd.AddValue ("apStep", "AP grid step, m", apStep);
@@ -493,7 +496,7 @@ AodvExample::InstallMeshInternetStack ()
 
   if (printRoutes)
     {
-      Ptr<OutputStreamWrapper> routingStream = Create<OutputStreamWrapper> ("./output-aodv/aodv.routes."+std::to_string (uint32_t (apStep))+"."+std::to_string (clNum)+"."+std::to_string (rndSeed), std::ios::out);
+      Ptr<OutputStreamWrapper> routingStream = Create<OutputStreamWrapper> ("./output-aodv/aodv.routes."+std::to_string (apNum)+"."+std::to_string (uint32_t (apStep))+"."+std::to_string (rndSeed), std::ios::out);
       aodv.PrintRoutingTableAllAt (Seconds (totalTime - 0.01), routingStream);
     }
 
@@ -580,9 +583,6 @@ AodvExample::InstallApplications ()
               clientApp[apNum*clNum+i].Stop (Seconds (totalTime + 0.1));
             }
         }
-
-      PrintThroughputTitle (apNum, clNum, aptx);
-      Simulator::Schedule (Seconds (startTime), &CalculateThroughput, monitorInterval);
     }
 
   if (app == std::string("tcp"))
@@ -639,9 +639,6 @@ AodvExample::InstallApplications ()
               clientApp[apNum*clNum+i].Stop (Seconds (totalTime + 0.1));
             }
         }
-
-      PrintThroughputTitle (apNum, clNum, aptx);
-      Simulator::Schedule (Seconds (startTime), &CalculateThroughput, monitorInterval);
     }
 
   if (app == std::string("ping"))
@@ -655,4 +652,6 @@ AodvExample::InstallApplications ()
     }
 
   std::cout << "InstallApplications () DONE !!!\n";
+  Simulator::Schedule (Seconds (monitorTime), &PrintThroughputTitle, apNum, clNum, aptx);
+  Simulator::Schedule (Seconds (monitorTime), &CalculateThroughput, monitorInterval);
 }
