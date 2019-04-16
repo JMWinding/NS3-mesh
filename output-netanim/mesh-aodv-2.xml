@@ -1,29 +1,20 @@
 <anim ver="netanim-3.108" filetype="animation" >
 <node id="0" sysId="0" locX="0" locY="0" />
-<node id="1" sysId="0" locX="100" locY="0" />
-<node id="2" sysId="0" locX="200" locY="0" />
-<node id="3" sysId="0" locX="300" locY="0" />
-<node id="4" sysId="0" locX="400" locY="0" />
-<node id="5" sysId="0" locX="0" locY="100" />
-<node id="6" sysId="0" locX="100" locY="100" />
-<node id="7" sysId="0" locX="200" locY="100" />
-<node id="8" sysId="0" locX="300" locY="100" />
-<node id="9" sysId="0" locX="400" locY="100" />
-<node id="10" sysId="0" locX="0" locY="200" />
-<node id="11" sysId="0" locX="100" locY="200" />
-<node id="12" sysId="0" locX="200" locY="200" />
-<node id="13" sysId="0" locX="300" locY="200" />
-<node id="14" sysId="0" locX="400" locY="200" />
-<node id="15" sysId="0" locX="0" locY="300" />
-<node id="16" sysId="0" locX="100" locY="300" />
-<node id="17" sysId="0" locX="200" locY="300" />
-<node id="18" sysId="0" locX="300" locY="300" />
-<node id="19" sysId="0" locX="400" locY="300" />
-<node id="20" sysId="0" locX="0" locY="400" />
-<node id="21" sysId="0" locX="100" locY="400" />
-<node id="22" sysId="0" locX="200" locY="400" />
-<node id="23" sysId="0" locX="300" locY="400" />
-<node id="24" sysId="0" locX="400" locY="400" />
+<node id="1" sysId="0" locX="60" locY="0" />
+<node id="2" sysId="0" locX="120" locY="0" />
+<node id="3" sysId="0" locX="180" locY="0" />
+<node id="4" sysId="0" locX="0" locY="60" />
+<node id="5" sysId="0" locX="60" locY="60" />
+<node id="6" sysId="0" locX="120" locY="60" />
+<node id="7" sysId="0" locX="180" locY="60" />
+<node id="8" sysId="0" locX="0" locY="120" />
+<node id="9" sysId="0" locX="60" locY="120" />
+<node id="10" sysId="0" locX="120" locY="120" />
+<node id="11" sysId="0" locX="180" locY="120" />
+<node id="12" sysId="0" locX="0" locY="180" />
+<node id="13" sysId="0" locX="60" locY="180" />
+<node id="14" sysId="0" locX="120" locY="180" />
+<node id="15" sysId="0" locX="180" locY="180" />
 <nu p="c" t="0" id="0" r="255" g="0" b="0" />
 <nu p="c" t="0" id="1" r="255" g="0" b="0" />
 <nu p="c" t="0" id="2" r="255" g="0" b="0" />
@@ -40,90 +31,54 @@
 <nu p="c" t="0" id="13" r="255" g="0" b="0" />
 <nu p="c" t="0" id="14" r="255" g="0" b="0" />
 <nu p="c" t="0" id="15" r="255" g="0" b="0" />
-<nu p="c" t="0" id="16" r="255" g="0" b="0" />
-<nu p="c" t="0" id="17" r="255" g="0" b="0" />
-<nu p="c" t="0" id="18" r="255" g="0" b="0" />
-<nu p="c" t="0" id="19" r="255" g="0" b="0" />
-<nu p="c" t="0" id="20" r="255" g="0" b="0" />
-<nu p="c" t="0" id="21" r="255" g="0" b="0" />
-<nu p="c" t="0" id="22" r="255" g="0" b="0" />
-<nu p="c" t="0" id="23" r="255" g="0" b="0" />
-<nu p="c" t="0" id="24" r="255" g="0" b="0" />
 <nonp2plinkproperties id="0" ipAddress="10.1.1.1~00:00:00:00:00:01" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="0" ipAddress="10.1.11.1~00:00:00:00:00:1a" channelType="ns3::YansWifiChannel" />
+<nonp2plinkproperties id="0" ipAddress="10.1.11.1~00:00:00:00:00:11" channelType="ns3::YansWifiChannel" />
 <nonp2plinkproperties id="0" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
 <nonp2plinkproperties id="1" ipAddress="10.1.1.2~00:00:00:00:00:02" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="1" ipAddress="10.1.12.1~00:00:00:00:00:1b" channelType="ns3::YansWifiChannel" />
+<nonp2plinkproperties id="1" ipAddress="10.1.12.1~00:00:00:00:00:12" channelType="ns3::YansWifiChannel" />
 <nonp2plinkproperties id="1" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
 <nonp2plinkproperties id="2" ipAddress="10.1.1.3~00:00:00:00:00:03" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="2" ipAddress="10.1.13.1~00:00:00:00:00:1c" channelType="ns3::YansWifiChannel" />
+<nonp2plinkproperties id="2" ipAddress="10.1.13.1~00:00:00:00:00:13" channelType="ns3::YansWifiChannel" />
 <nonp2plinkproperties id="2" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
 <nonp2plinkproperties id="3" ipAddress="10.1.1.4~00:00:00:00:00:04" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="3" ipAddress="10.1.14.1~00:00:00:00:00:1d" channelType="ns3::YansWifiChannel" />
+<nonp2plinkproperties id="3" ipAddress="10.1.14.1~00:00:00:00:00:14" channelType="ns3::YansWifiChannel" />
 <nonp2plinkproperties id="3" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
 <nonp2plinkproperties id="4" ipAddress="10.1.1.5~00:00:00:00:00:05" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="4" ipAddress="10.1.15.1~00:00:00:00:00:1e" channelType="ns3::YansWifiChannel" />
+<nonp2plinkproperties id="4" ipAddress="10.1.15.1~00:00:00:00:00:15" channelType="ns3::YansWifiChannel" />
 <nonp2plinkproperties id="4" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
 <nonp2plinkproperties id="5" ipAddress="10.1.1.6~00:00:00:00:00:06" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="5" ipAddress="10.1.16.1~00:00:00:00:00:1f" channelType="ns3::YansWifiChannel" />
+<nonp2plinkproperties id="5" ipAddress="10.1.16.1~00:00:00:00:00:16" channelType="ns3::YansWifiChannel" />
 <nonp2plinkproperties id="5" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
 <nonp2plinkproperties id="6" ipAddress="10.1.1.7~00:00:00:00:00:07" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="6" ipAddress="10.1.17.1~00:00:00:00:00:20" channelType="ns3::YansWifiChannel" />
+<nonp2plinkproperties id="6" ipAddress="10.1.17.1~00:00:00:00:00:17" channelType="ns3::YansWifiChannel" />
 <nonp2plinkproperties id="6" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
 <nonp2plinkproperties id="7" ipAddress="10.1.1.8~00:00:00:00:00:08" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="7" ipAddress="10.1.18.1~00:00:00:00:00:21" channelType="ns3::YansWifiChannel" />
+<nonp2plinkproperties id="7" ipAddress="10.1.18.1~00:00:00:00:00:18" channelType="ns3::YansWifiChannel" />
 <nonp2plinkproperties id="7" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
 <nonp2plinkproperties id="8" ipAddress="10.1.1.9~00:00:00:00:00:09" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="8" ipAddress="10.1.19.1~00:00:00:00:00:22" channelType="ns3::YansWifiChannel" />
+<nonp2plinkproperties id="8" ipAddress="10.1.19.1~00:00:00:00:00:19" channelType="ns3::YansWifiChannel" />
 <nonp2plinkproperties id="8" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
 <nonp2plinkproperties id="9" ipAddress="10.1.1.10~00:00:00:00:00:0a" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="9" ipAddress="10.1.20.1~00:00:00:00:00:23" channelType="ns3::YansWifiChannel" />
+<nonp2plinkproperties id="9" ipAddress="10.1.20.1~00:00:00:00:00:1a" channelType="ns3::YansWifiChannel" />
 <nonp2plinkproperties id="9" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
 <nonp2plinkproperties id="10" ipAddress="10.1.1.11~00:00:00:00:00:0b" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="10" ipAddress="10.1.21.1~00:00:00:00:00:24" channelType="ns3::YansWifiChannel" />
+<nonp2plinkproperties id="10" ipAddress="10.1.21.1~00:00:00:00:00:1b" channelType="ns3::YansWifiChannel" />
 <nonp2plinkproperties id="10" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
 <nonp2plinkproperties id="11" ipAddress="10.1.1.12~00:00:00:00:00:0c" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="11" ipAddress="10.1.22.1~00:00:00:00:00:25" channelType="ns3::YansWifiChannel" />
+<nonp2plinkproperties id="11" ipAddress="10.1.22.1~00:00:00:00:00:1c" channelType="ns3::YansWifiChannel" />
 <nonp2plinkproperties id="11" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
 <nonp2plinkproperties id="12" ipAddress="10.1.1.13~00:00:00:00:00:0d" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="12" ipAddress="10.1.23.1~00:00:00:00:00:26" channelType="ns3::YansWifiChannel" />
+<nonp2plinkproperties id="12" ipAddress="10.1.23.1~00:00:00:00:00:1d" channelType="ns3::YansWifiChannel" />
 <nonp2plinkproperties id="12" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
 <nonp2plinkproperties id="13" ipAddress="10.1.1.14~00:00:00:00:00:0e" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="13" ipAddress="10.1.24.1~00:00:00:00:00:27" channelType="ns3::YansWifiChannel" />
+<nonp2plinkproperties id="13" ipAddress="10.1.24.1~00:00:00:00:00:1e" channelType="ns3::YansWifiChannel" />
 <nonp2plinkproperties id="13" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
 <nonp2plinkproperties id="14" ipAddress="10.1.1.15~00:00:00:00:00:0f" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="14" ipAddress="10.1.25.1~00:00:00:00:00:28" channelType="ns3::YansWifiChannel" />
+<nonp2plinkproperties id="14" ipAddress="10.1.25.1~00:00:00:00:00:1f" channelType="ns3::YansWifiChannel" />
 <nonp2plinkproperties id="14" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
 <nonp2plinkproperties id="15" ipAddress="10.1.1.16~00:00:00:00:00:10" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="15" ipAddress="10.1.26.1~00:00:00:00:00:29" channelType="ns3::YansWifiChannel" />
+<nonp2plinkproperties id="15" ipAddress="10.1.26.1~00:00:00:00:00:20" channelType="ns3::YansWifiChannel" />
 <nonp2plinkproperties id="15" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
-<nonp2plinkproperties id="16" ipAddress="10.1.1.17~00:00:00:00:00:11" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="16" ipAddress="10.1.27.1~00:00:00:00:00:2a" channelType="ns3::YansWifiChannel" />
-<nonp2plinkproperties id="16" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
-<nonp2plinkproperties id="17" ipAddress="10.1.1.18~00:00:00:00:00:12" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="17" ipAddress="10.1.28.1~00:00:00:00:00:2b" channelType="ns3::YansWifiChannel" />
-<nonp2plinkproperties id="17" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
-<nonp2plinkproperties id="18" ipAddress="10.1.1.19~00:00:00:00:00:13" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="18" ipAddress="10.1.29.1~00:00:00:00:00:2c" channelType="ns3::YansWifiChannel" />
-<nonp2plinkproperties id="18" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
-<nonp2plinkproperties id="19" ipAddress="10.1.1.20~00:00:00:00:00:14" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="19" ipAddress="10.1.30.1~00:00:00:00:00:2d" channelType="ns3::YansWifiChannel" />
-<nonp2plinkproperties id="19" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
-<nonp2plinkproperties id="20" ipAddress="10.1.1.21~00:00:00:00:00:15" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="20" ipAddress="10.1.31.1~00:00:00:00:00:2e" channelType="ns3::YansWifiChannel" />
-<nonp2plinkproperties id="20" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
-<nonp2plinkproperties id="21" ipAddress="10.1.1.22~00:00:00:00:00:16" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="21" ipAddress="10.1.32.1~00:00:00:00:00:2f" channelType="ns3::YansWifiChannel" />
-<nonp2plinkproperties id="21" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
-<nonp2plinkproperties id="22" ipAddress="10.1.1.23~00:00:00:00:00:17" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="22" ipAddress="10.1.33.1~00:00:00:00:00:30" channelType="ns3::YansWifiChannel" />
-<nonp2plinkproperties id="22" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
-<nonp2plinkproperties id="23" ipAddress="10.1.1.24~00:00:00:00:00:18" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="23" ipAddress="10.1.34.1~00:00:00:00:00:31" channelType="ns3::YansWifiChannel" />
-<nonp2plinkproperties id="23" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
-<nonp2plinkproperties id="24" ipAddress="10.1.1.25~00:00:00:00:00:19" channelType="ns3::BridgeChannel" />
-<nonp2plinkproperties id="24" ipAddress="10.1.35.1~00:00:00:00:00:32" channelType="ns3::YansWifiChannel" />
-<nonp2plinkproperties id="24" ipAddress="127.0.0.1~00:00:00:00:00:00" channelType="Unknown channel" />
 <ip n="0" >
 <address >10.1.1.1</address>
 
@@ -504,222 +459,6 @@
 <address >10.1.1.16</address>
 
 <address >10.1.26.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="16" >
-<address >10.1.1.17</address>
-
-<address >10.1.27.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="16" >
-<address >10.1.1.17</address>
-
-<address >10.1.27.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="16" >
-<address >10.1.1.17</address>
-
-<address >10.1.27.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="17" >
-<address >10.1.1.18</address>
-
-<address >10.1.28.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="17" >
-<address >10.1.1.18</address>
-
-<address >10.1.28.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="17" >
-<address >10.1.1.18</address>
-
-<address >10.1.28.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="18" >
-<address >10.1.1.19</address>
-
-<address >10.1.29.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="18" >
-<address >10.1.1.19</address>
-
-<address >10.1.29.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="18" >
-<address >10.1.1.19</address>
-
-<address >10.1.29.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="19" >
-<address >10.1.1.20</address>
-
-<address >10.1.30.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="19" >
-<address >10.1.1.20</address>
-
-<address >10.1.30.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="19" >
-<address >10.1.1.20</address>
-
-<address >10.1.30.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="20" >
-<address >10.1.1.21</address>
-
-<address >10.1.31.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="20" >
-<address >10.1.1.21</address>
-
-<address >10.1.31.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="20" >
-<address >10.1.1.21</address>
-
-<address >10.1.31.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="21" >
-<address >10.1.1.22</address>
-
-<address >10.1.32.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="21" >
-<address >10.1.1.22</address>
-
-<address >10.1.32.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="21" >
-<address >10.1.1.22</address>
-
-<address >10.1.32.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="22" >
-<address >10.1.1.23</address>
-
-<address >10.1.33.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="22" >
-<address >10.1.1.23</address>
-
-<address >10.1.33.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="22" >
-<address >10.1.1.23</address>
-
-<address >10.1.33.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="23" >
-<address >10.1.1.24</address>
-
-<address >10.1.34.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="23" >
-<address >10.1.1.24</address>
-
-<address >10.1.34.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="23" >
-<address >10.1.1.24</address>
-
-<address >10.1.34.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="24" >
-<address >10.1.1.25</address>
-
-<address >10.1.35.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="24" >
-<address >10.1.1.25</address>
-
-<address >10.1.35.1</address>
-
-<address >127.0.0.1</address>
-
-</ip>
-<ip n="24" >
-<address >10.1.1.25</address>
-
-<address >10.1.35.1</address>
 
 <address >127.0.0.1</address>
 
@@ -788,42 +527,6 @@
 <address >::1</address>
 
 </ipv6>
-<ipv6 n="16" >
-<address >::1</address>
-
-</ipv6>
-<ipv6 n="17" >
-<address >::1</address>
-
-</ipv6>
-<ipv6 n="18" >
-<address >::1</address>
-
-</ipv6>
-<ipv6 n="19" >
-<address >::1</address>
-
-</ipv6>
-<ipv6 n="20" >
-<address >::1</address>
-
-</ipv6>
-<ipv6 n="21" >
-<address >::1</address>
-
-</ipv6>
-<ipv6 n="22" >
-<address >::1</address>
-
-</ipv6>
-<ipv6 n="23" >
-<address >::1</address>
-
-</ipv6>
-<ipv6 n="24" >
-<address >::1</address>
-
-</ipv6>
 <nu p="s" t="0" id="0" w="1" h="1" />
 <nu p="s" t="0" id="1" w="1" h="1" />
 <nu p="s" t="0" id="2" w="1" h="1" />
@@ -840,4 +543,5 @@
 <nu p="s" t="0" id="13" w="1" h="1" />
 <nu p="s" t="0" id="14" w="1" h="1" />
 <nu p="s" t="0" id="15" w="1" h="1" />
-<nu p="s" t="0" id="16" w="1" h="1" />
+<ncs ncId="0" n="RemainingEnergy" t="DOUBLE" />
+</anim>
