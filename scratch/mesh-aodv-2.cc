@@ -1,6 +1,6 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 /*
- * Using packetSink counting throughput
+ * Using flow monitor counting throughput of each application
  */
 
 #include <iostream>
@@ -25,47 +25,33 @@
 
 using namespace ns3;
 
-/// throughput monitor
-std::vector<uint64_t> lastTotalRx;
-std::vector<double> throughput;
-std::vector<Ptr<PacketSink>> packetSink;
-
-double
-CalculateSingleStreamThroughput (Ptr<PacketSink> sink, uint64_t &lastTotalRx, double monitorInterval)
-{
-  double thr = (sink->GetTotalRx () - lastTotalRx) * (double) 8/1e6/monitorInterval;
-  lastTotalRx = sink->GetTotalRx ();
-  return thr;
-}
-
 void
-CalculateThroughput (double monitorInterval)
+PrintThroughputLine (Ptr<FlowMonitor> monitor, Ptr<Ipv4FlowClassifier> classifier, double monitorInterval, Ipv4Address sourceAddress, uint16_t sourcePort, bool title)
 {
-  std::cout << Simulator::Now ().GetSeconds ();
-  for (uint32_t i = 0; i < packetSink.size (); ++i)
+  // Print per flow statistics
+  monitor->CheckForLostPackets ();
+  FlowMonitor::FlowStatsContainer stats = monitor->GetFlowStats ();
+
+  if (title)
     {
-      if (packetSink[i] == NULL)
-        throughput[i] = -1;
-      else
-        throughput[i] = CalculateSingleStreamThroughput (packetSink[i], lastTotalRx[i], monitorInterval);
-      std::cout << '\t' << throughput[i];
+      std::cout << "-------------------------------------------\n";
+      std::cout << "AP0 -> APm -> CL0-0 -> CL0-n -> CLm-0 -> CLm-n\n";
     }
-  std::cout << std::endl;
-  Simulator::Schedule (Seconds (monitorInterval), &CalculateThroughput, monitorInterval);
-}
 
-void
-PrintThroughputTitle (uint32_t apNum, uint32_t clNum, bool aptx)
-{
-  std::cout << "-------------------------------------------------\n";
-  std::cout << "Time[s]";
-  for (uint32_t i = 0; i < apNum; ++i)
-    for (uint32_t j = 0; j < clNum; ++j)
-      std::cout << '\t' << "cl-" << i << '-' << j;
-  if (aptx)
-    for (uint32_t i = 0; i < apNum; ++i)
-      std::cout << '\t' << "ap-" << i;
-  std::cout << std::endl;
+  std::cout << Simulator::Now ().GetSeconds ();
+  for (std::map<FlowId, FlowMonitor::FlowStats>::const_iterator i = stats.begin (); i != stats.end (); ++i)
+    {
+      if (i->first > 0)
+        {
+          Ipv4FlowClassifier::FiveTuple t = classifier->FindFlow (i->first);
+          if (!t.destinationAddress.IsEqual(sourceAddress) || (t.destinationPort != sourcePort))
+            continue;
+          std::cout << '\t' << i->second.rxBytes;
+        }
+    }
+  std::cout << '\n';
+
+  Simulator::Schedule (Seconds (monitorInterval), &PrintThroughputLine, monitor, classifier, monitorInterval, sourceAddress, sourcePort, false);
 }
 
 /// class
@@ -105,7 +91,6 @@ private:
 
   /// Simulation time, seconds
   double startTime;
-  double monitorTime;
   double totalTime;
   /// Write per-device PCAP traces if true
   bool pcap;
@@ -136,8 +121,8 @@ private:
 
   /// throughput monitor
   double monitorInterval;
-
-  /// netanim
+  Ptr<FlowMonitor> monitor;
+  Ptr<Ipv4FlowClassifier> classifier;
   bool anim;
 
   /// test-only operations
@@ -187,7 +172,6 @@ AodvExample::AodvExample () :
   apStep (50),
   clStep (0),
   startTime (1),
-  monitorTime (1),
   totalTime (100),
   pcap (false),
   printRoutes (true),
@@ -215,7 +199,6 @@ AodvExample::Configure (int argc, char **argv)
   cmd.AddValue ("apNum", "Number of AP nodes.", apNum);
   cmd.AddValue ("clNum", "Number of CL nodes for each Service Set.", clNum);
   cmd.AddValue ("startTime", "Application start time, s.", startTime);
-  cmd.AddValue ("monitorTime", "Monitor start time, s.", monitorTime);
   cmd.AddValue ("totalTime", "Simulation time, s.", totalTime);
   cmd.AddValue ("monitorInterval", "Monitor interval, s.", monitorInterval);
   cmd.AddValue ("apStep", "AP grid step, m", apStep);
@@ -234,14 +217,13 @@ AodvExample::Configure (int argc, char **argv)
   if (apNum == 0)
     apNum = gridSize*gridSize;
   if (clStep == 0)
-    clStep = apStep*0.7;
+    clStep = apStep*0.5;
   return true;
 }
 
 void
 AodvExample::Run ()
 {
-//  Config::SetDefault ("ns3::WifiRemoteStationManager::RtsCtsThreshold", UintegerValue (1)); // enable rts cts all the time.
   CreateVariables ();
   CreateNodes ();
   CreateDevices ();
@@ -254,42 +236,16 @@ AodvExample::Run ()
   AnimationInterface netanim ("./output-netanim/mesh-aodv-2.xml");
   // netanim.SetMaxPktsPerTraceFile (50000);
   if (!anim)
-	  netanim.SetStopTime (Seconds (0));
+    netanim.SetStopTime (Seconds (0));
 
-  //Install FlowMonitor on all nodes
+  // Install FlowMonitor on all nodes
   FlowMonitorHelper flowmon;
   Ptr<FlowMonitor> monitor = flowmon.InstallAll ();
+  Ptr<Ipv4FlowClassifier> classifier = DynamicCast<Ipv4FlowClassifier> (flowmon.GetClassifier ());
+  Simulator::Schedule (Seconds (startTime+monitorInterval), &PrintThroughputLine, monitor, classifier, monitorInterval, apInterfaces[gateway].GetAddress (0), 50000, true);
 
   Simulator::Stop (Seconds (totalTime));
   Simulator::Run ();
-
-   //Print per flow statistics
-  monitor->CheckForLostPackets ();
-  Ptr<Ipv4FlowClassifier> classifier = DynamicCast<Ipv4FlowClassifier> (flowmon.GetClassifier ());
-  FlowMonitor::FlowStatsContainer stats = monitor->GetFlowStats ();
-  for (std::map<FlowId, FlowMonitor::FlowStats>::const_iterator i = stats.begin (); i != stats.end (); ++i)
-    {
-      // first 2 FlowIds are for ECHO apps, we don't want to display them
-      //
-      // Duration for throughput measurement is 9.0 seconds, since
-      //   StartTime of the OnOffApplication is at about "second 1"
-      // and
-      //   Simulator::Stops at "second 10".
-      if (i->first > 0)
-        {
-          Ipv4FlowClassifier::FiveTuple t = classifier->FindFlow (i->first);
-          if (!t.destinationAddress.IsEqual(apInterfaces[gateway].GetAddress (0)) || (t.destinationPort != 50000))
-            continue;
-          std::cout << "Flow " << i->first << " (" << t.sourceAddress << "/" << t.sourcePort << " -> " << t.destinationAddress  << "/" << t.destinationPort << ")\n";
-          std::cout << "  Tx Packets: " << i->second.txPackets << "\n";
-          std::cout << "  Tx Bytes:   " << i->second.txBytes << "\n";
-          std::cout << "  TxOffered:  " << i->second.txBytes * 8.0 / (totalTime-startTime) / 1024 / 1024  << " Mbps\n";
-          std::cout << "  Rx Packets: " << i->second.rxPackets << "\n";
-          std::cout << "  Rx Bytes:   " << i->second.rxBytes << "\n";
-          std::cout << "  Throughput: " << i->second.rxBytes * 8.0 / (totalTime-startTime) / 1024 / 1024  << " Mbps\n";
-        }
-    }
-
   Simulator::Destroy ();
 }
 
@@ -303,9 +259,9 @@ AodvExample::CreateVariables ()
 {
   uint32_t txNum;
   if (aptx)
-	  txNum = apNum*clNum+apNum;
+    txNum = apNum*clNum+apNum;
   else
-	  txNum = apNum*clNum;
+    txNum = apNum*clNum;
 
   clNodes.reserve (apNum);
   apDevices.reserve (apNum);
@@ -313,9 +269,6 @@ AodvExample::CreateVariables ()
   apInterfaces.reserve (apNum);
   clInterfaces.reserve (apNum);
   clientApp.reserve (txNum);
-  lastTotalRx.reserve (txNum);
-  throughput.reserve (txNum);
-  packetSink.reserve (txNum);
 
   for (uint32_t i = 0; i < apNum; ++i)
     {
@@ -328,9 +281,6 @@ AodvExample::CreateVariables ()
   for (uint32_t i = 0; i < txNum; ++i)
     {
       clientApp.push_back (ApplicationContainer ());
-      lastTotalRx.push_back (0);
-      throughput.push_back (0);
-      packetSink.push_back (NULL);
     }
 
   std::cout << "CreateVariables () DONE !!!\n";
@@ -396,7 +346,7 @@ AodvExample::CreateClNodes ()
       mobility.SetPositionAllocator ("ns3::RandomDiscPositionAllocator",
                                      "X", DoubleValue (center.x),
                                      "Y", DoubleValue (center.y),
-				     "Rho", StringValue (randomRho.str ()));
+             "Rho", StringValue (randomRho.str ()));
       mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
       mobility.Install (clNodes[i]);
     }
@@ -435,10 +385,11 @@ AodvExample::CreateMeshDevices ()
   WifiHelper wifi;
   //80211n_2_4GHZ, 80211n_5GHZ, 80211ac, 80211ax_2_4GHZ, 80211ax_5GHZ
   wifi.SetStandard (WIFI_PHY_STANDARD_80211n_5GHZ);
-  wifi.SetRemoteStationManager ("ns3::MinstrelHtWifiManager");
+  wifi.SetRemoteStationManager ("ns3::MinstrelHtWifiManager",
+                                "RtsCtsThreshold", UintegerValue (5000));
 //  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
 //                                "ControlMode", StringValue ("HtMcs9"),
-//	  	  	  	                  "DataMode", StringValue ("HtMcs9"),
+//                                "DataMode", StringValue ("HtMcs9"),
 //                                "RtsCtsThreshold", UintegerValue (0));
 
   meshDevices = mesh.Install (wifiPhy, apNodes);
@@ -461,8 +412,8 @@ AodvExample::CreateWifiDevices ()
   wifi.SetStandard (WIFI_PHY_STANDARD_80211n_2_4GHZ);
   wifi.SetRemoteStationManager ("ns3::MinstrelHtWifiManager");
 //  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-//		  	  	                    "ControlMode", StringValue ("HtMcs7"),
-//		  	  	                    "DataMode", StringValue ("HtMcs7"),
+//                                "ControlMode", StringValue ("HtMcs7"),
+//                                "DataMode", StringValue ("HtMcs7"),
 //                                "RtsCtsThreshold", UintegerValue (0));
 
   for (uint32_t i = 0; i < apNum; ++i)
@@ -524,21 +475,21 @@ void
 AodvExample::InstallWifiInternetStack ()
 {
   for (uint32_t i = 0; i < apNum; ++i)
-	{
-	  OlsrHelper olsr;
-	  AodvHelper aodv;
+  {
+    OlsrHelper olsr;
+    AodvHelper aodv;
 
-	  InternetStackHelper stack;
-	  stack.SetRoutingHelper (aodv);
-	  stack.Install (clNodes[i]);
+    InternetStackHelper stack;
+    stack.SetRoutingHelper (aodv);
+    stack.Install (clNodes[i]);
 
-	  std::ostringstream os;
-	  os << "10.1." << 11+i << ".0";
-	  Ipv4AddressHelper address;
-	  address.SetBase (os.str ().c_str (), "255.255.255.0");
-	  apInterfaces[i] = address.Assign (apDevices[i]);
-	  clInterfaces[i] = address.Assign (clDevices[i]);
-	}
+    std::ostringstream os;
+    os << "10.1." << 11+i << ".0";
+    Ipv4AddressHelper address;
+    address.SetBase (os.str ().c_str (), "255.255.255.0");
+    apInterfaces[i] = address.Assign (apDevices[i]);
+    clInterfaces[i] = address.Assign (clDevices[i]);
+  }
 
   std::cout << "InstallWifiInternetStack () DONE !!!\n";
 }
@@ -549,6 +500,7 @@ AodvExample::InstallApplications ()
   if (app == std::string("udp"))
     {
       // UDP flow
+
       uint16_t port = 50000;
       Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
       PacketSinkHelper server ("ns3::UdpSocketFactory", localAddress);
@@ -652,6 +604,4 @@ AodvExample::InstallApplications ()
     }
 
   std::cout << "InstallApplications () DONE !!!\n";
-//  Simulator::Schedule (Seconds (monitorTime), &PrintThroughputTitle, apNum, clNum, aptx);
-//  Simulator::Schedule (Seconds (monitorTime), &CalculateThroughput, monitorInterval);
 }
