@@ -17,14 +17,14 @@
 //  *    *    *   ...  *
 //  |    |    |        |
 // n-0  n-1  n-2  ...  n-nWifi
-//                                                   
+//
 
 using namespace ns3;
 
 NS_LOG_COMPONENT_DEFINE ("OnOffScriptExample");
 
 
-int 
+int
 main (int argc, char *argv[])
 {
   uint32_t nWifi = 3; //default Sta Num
@@ -168,8 +168,8 @@ main (int argc, char *argv[])
         }
     }
 
-  
+
   Simulator::Destroy ();
-  
+
   return 0;
 }

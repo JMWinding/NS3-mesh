@@ -170,12 +170,12 @@ AodvExample::AodvExample () :
   apNum (0),
   clNum (1),
   apStep (50),
-  clStep (0),
+  clStep (20),
   startTime (1),
   totalTime (100),
   pcap (false),
   printRoutes (true),
-  gateway (0),
+  gateway (99999),
   app ("udp"),
   datarate ("1Mbps"),
   monitorInterval (0.5),
@@ -216,8 +216,8 @@ AodvExample::Configure (int argc, char **argv)
 
   if (apNum == 0)
     apNum = gridSize*gridSize;
-  if (clStep == 0)
-    clStep = apStep*0.5;
+  if (gateway > apNum)
+    gateway = uint32_t (apNum/2);
   return true;
 }
 
@@ -374,11 +374,11 @@ AodvExample::CreateMeshDevices ()
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
   wifiPhy.SetChannel (wifiChannel.Create ());
   wifiPhy.Set ("ChannelWidth", UintegerValue (40));
-  wifiPhy.Set ("Antennas", UintegerValue (4));
-  wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (1));
-  wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (1));
-  wifiPhy.Set ("TxGain", DoubleValue (10.0));
-  wifiPhy.Set ("RxGain", DoubleValue (10.0));
+//  wifiPhy.Set ("Antennas", UintegerValue (4));
+//  wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (1));
+//  wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (1));
+//  wifiPhy.Set ("TxGain", DoubleValue (10.0));
+//  wifiPhy.Set ("RxGain", DoubleValue (10.0));
   wifiPhy.Set ("TxPowerStart", DoubleValue (30.0));
   wifiPhy.Set ("TxPowerEnd", DoubleValue (30.0));
   wifiPhy.Set ("TxPowerLevels", UintegerValue (1));
