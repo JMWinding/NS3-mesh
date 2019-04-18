@@ -174,7 +174,7 @@ AodvExample::AodvExample () :
   startTime (1),
   totalTime (100),
   pcap (false),
-  printRoutes (true),
+  printRoutes (false),
   gateway (99999),
   app ("udp"),
   datarate ("1Mbps"),
@@ -373,7 +373,7 @@ AodvExample::CreateMeshDevices ()
   YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
   wifiPhy.SetChannel (wifiChannel.Create ());
-  wifiPhy.Set ("ChannelWidth", UintegerValue (40));
+  wifiPhy.Set ("ChannelWidth", UintegerValue (160));
 //  wifiPhy.Set ("Antennas", UintegerValue (4));
 //  wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (1));
 //  wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (1));
@@ -385,12 +385,10 @@ AodvExample::CreateMeshDevices ()
   WifiHelper wifi;
   //80211n_2_4GHZ, 80211n_5GHZ, 80211ac, 80211ax_2_4GHZ, 80211ax_5GHZ
   wifi.SetStandard (WIFI_PHY_STANDARD_80211n_5GHZ);
-  wifi.SetRemoteStationManager ("ns3::MinstrelHtWifiManager",
-                                "RtsCtsThreshold", UintegerValue (5000));
-//  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-//                                "ControlMode", StringValue ("HtMcs9"),
-//                                "DataMode", StringValue ("HtMcs9"),
-//                                "RtsCtsThreshold", UintegerValue (0));
+  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
+                                "ControlMode", StringValue ("HtMcs7"),
+                                "DataMode", StringValue ("HtMcs7"),
+                                "RtsCtsThreshold", UintegerValue (99999));
 
   meshDevices = mesh.Install (wifiPhy, apNodes);
 
@@ -410,11 +408,10 @@ AodvExample::CreateWifiDevices ()
   WifiHelper wifi;
   //80211n_2_4GHZ, 80211n_5GHZ, 80211ac, 80211ax_2_4GHZ, 80211ax_5GHZ
   wifi.SetStandard (WIFI_PHY_STANDARD_80211n_2_4GHZ);
-  wifi.SetRemoteStationManager ("ns3::MinstrelHtWifiManager");
-//  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-//                                "ControlMode", StringValue ("HtMcs7"),
-//                                "DataMode", StringValue ("HtMcs7"),
-//                                "RtsCtsThreshold", UintegerValue (0));
+  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
+                                "ControlMode", StringValue ("HtMcs7"),
+                                "DataMode", StringValue ("HtMcs7"),
+                                "RtsCtsThreshold", UintegerValue (99999));
 
   for (uint32_t i = 0; i < apNum; ++i)
     {
@@ -603,5 +600,6 @@ AodvExample::InstallApplications ()
       p.Stop (Seconds (totalTime) - Seconds (0.001));
     }
 
+  std::cout << "Install gateway on node " << gateway << std::endl;
   std::cout << "InstallApplications () DONE !!!\n";
 }
