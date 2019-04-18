@@ -603,5 +603,6 @@ AodvExample::InstallApplications ()
       p.Stop (Seconds (totalTime) - Seconds (0.001));
     }
 
+  std::cout << "Pick " << gateway << "as gateway !!!\n";
   std::cout << "InstallApplications () DONE !!!\n";
 }

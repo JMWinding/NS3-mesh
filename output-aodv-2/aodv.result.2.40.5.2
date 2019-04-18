@@ -1,0 +1,28 @@
+Waf: Entering directory `/home/synrg-sc1/Desktop/Jiaming/ns-3.29-mesh/build'
+Waf: Leaving directory `/home/synrg-sc1/Desktop/Jiaming/ns-3.29-mesh/build'
+Build commands will be stored in build/compile_commands.json
+'build' finished successfully (4.073s)
+CreateVariables () DONE !!!
+Creating 4 APs 40.00 m apart.
+CreateApNodes () DONE !!!
+Creating 5 CLs 20.00 m apart for each AP.
+CreateClNodes () DONE !!!
+CreateNodes () DONE !!!
+CreateMeshDevices () DONE !!!
+CreateWifiDevices () DONE !!!
+CreateDevices () DONE !!!
+InstallMeshInternetStack () DONE !!!
+InstallWifiInternetStack () DONE !!!
+InstallInternetStack () DONE !!!
+InstallApplications () DONE !!!
+Starting simulation for 60.00 s ...
+-------------------------------------------
+AP0 -> APm -> CL0-0 -> CL0-n -> CLm-0 -> CLm-n
+1.50	138000	217500	126000	145500	204000	9000	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+2.00	462000	235500	126000	145500	318000	289500	0	0	0	18000	114000	150000	0	93000	0	0	123000	0	40500	0
+2.50	648000	235500	126000	295500	360000	457500	0	0	0	18000	529500	532500	0	159000	0	0	508500	0	118500	0
+3.00	747000	655500	126000	367500	360000	669000	0	0	0	48000	571500	631500	0	159000	24000	0	607500	0	118500	0
+3.50	747000	1000500	126000	367500	360000	1018500	33000	85500	0	48000	571500	853500	0	562500	66000	0	829500	147000	118500	39000
+msg="Max retries reached and m_longRetry not cleared properly. longRetry= 9", file=../src/wifi/model/minstrel-ht-wifi-manager.cc, line=766
+terminate called without an active exception
+Command ['/home/synrg-sc1/Desktop/Jiaming/ns-3.29-mesh/build/scratch/mesh-aodv-2', '--rndSeed=5', '--gridSize=2', '--clNum=5', '--apStep=40', '--totalTime=60', '--startTime=1', '--monitorInterval=0.5', '--printRoutes=false', '--aptx=false', '--datarate=5Mbps'] terminated with signal SIGIOT. Run it under a debugger to get more information (./waf --run <program> --command-template="gdb --args %s <args>").
