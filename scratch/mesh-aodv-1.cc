@@ -234,7 +234,6 @@ AodvExample::Configure (int argc, char **argv)
 void
 AodvExample::Run ()
 {
-//  Config::SetDefault ("ns3::WifiRemoteStationManager::RtsCtsThreshold", UintegerValue (1)); // enable rts cts all the time.
   CreateVariables ();
   CreateNodes ();
   CreateDevices ();
@@ -247,11 +246,10 @@ AodvExample::Run ()
   AnimationInterface netanim ("./my-simulations/temp-anim.xml");
   // netanim.SetMaxPktsPerTraceFile (50000);
   if (!anim)
-	  netanim.SetStopTime (Seconds (0));
+    netanim.SetStopTime (Seconds (0));
 
   Simulator::Stop (Seconds (totalTime));
   Simulator::Run ();
-
   Simulator::Destroy ();
 }
 
@@ -265,9 +263,9 @@ AodvExample::CreateVariables ()
 {
   uint32_t txNum;
   if (aptx)
-	  txNum = apNum*clNum+apNum;
+    txNum = apNum*clNum+apNum;
   else
-	  txNum = apNum*clNum;
+    txNum = apNum*clNum;
 
   clNodes.reserve (apNum);
   apDevices.reserve (apNum);
@@ -340,7 +338,6 @@ AodvExample::CreateApNodes ()
 void
 AodvExample::CreateClNodes ()
 {
-
   std::cout << "Creating " << (unsigned)clNum << " CLs " << clStep << " m away from each AP.\n";
   for (uint32_t i = 0; i < apNum; ++i)
     {
@@ -360,7 +357,7 @@ AodvExample::CreateClNodes ()
       mobility.SetPositionAllocator ("ns3::RandomDiscPositionAllocator",
                                      "X", DoubleValue (center.x),
                                      "Y", DoubleValue (center.y),
-				     "Rho", StringValue (randomRho.str ()));
+                                     "Rho", StringValue (randomRho.str ()));
       mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
       mobility.Install (clNodes[i]);
     }
@@ -393,12 +390,12 @@ AodvExample::CreateMeshDevices ()
   wifiPhy.Set ("TxPowerEnd", DoubleValue (30.0));
   wifiPhy.Set ("TxPowerLevels", UintegerValue (1));
   WifiHelper wifi;
-  //80211n_2_4GHZ, 80211n_5GHZ, 80211ac, 80211ax_2_4GHZ, 80211ax_5GHZ
+  // 80211n_2_4GHZ, 80211n_5GHZ, 80211ac, 80211ax_2_4GHZ, 80211ax_5GHZ
   wifi.SetStandard (WIFI_PHY_STANDARD_80211n_5GHZ);
   wifi.SetRemoteStationManager ("ns3::IdealWifiManager");
 //  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
 //                                "ControlMode", StringValue ("VhtMcs9"),
-//	  	  	  	                  "DataMode", StringValue ("VhtMcs9"),
+//                                "DataMode", StringValue ("VhtMcs9"),
 //                                "RtsCtsThreshold", UintegerValue (0));
 
   meshDevices = mesh.Install (wifiPhy, apNodes);
@@ -418,12 +415,12 @@ AodvExample::CreateWifiDevices ()
   wifiPhy.SetChannel (wifiChannel.Create ());
   wifiPhy.Set ("ChannelWidth", UintegerValue (20));
   WifiHelper wifi;
-  //80211n_2_4GHZ, 80211n_5GHZ, 80211ac, 80211ax_2_4GHZ, 80211ax_5GHZ
+  // 80211n_2_4GHZ, 80211n_5GHZ, 80211ac, 80211ax_2_4GHZ, 80211ax_5GHZ
   wifi.SetStandard (WIFI_PHY_STANDARD_80211n_2_4GHZ);
   wifi.SetRemoteStationManager ("ns3::IdealWifiManager");
 //  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-//		  	  	                    "ControlMode", StringValue ("HtMcs7"),
-//		  	  	                    "DataMode", StringValue ("HtMcs7"),
+//                                "ControlMode", StringValue ("HtMcs7"),
+//                                "DataMode", StringValue ("HtMcs7"),
 //                                "RtsCtsThreshold", UintegerValue (0));
 
   for (uint32_t i = 0; i < apNum; ++i)
@@ -484,20 +481,20 @@ void
 AodvExample::InstallWifiInternetStack ()
 {
   for (uint32_t i = 0; i < apNum; ++i)
-	{
-	  AodvHelper aodv;
+    {
+      AodvHelper aodv;
 
-	  InternetStackHelper stack;
-	  stack.SetRoutingHelper (aodv);
-	  stack.Install (clNodes[i]);
+      InternetStackHelper stack;
+      stack.SetRoutingHelper (aodv);
+      stack.Install (clNodes[i]);
 
-	  std::ostringstream os;
-	  os << "10.1." << 11+i << ".0";
-	  Ipv4AddressHelper address;
-	  address.SetBase (os.str ().c_str (), "255.255.255.0");
-	  apInterfaces[i] = address.Assign (apDevices[i]);
-	  clInterfaces[i] = address.Assign (clDevices[i]);
-	}
+      std::ostringstream os;
+      os << "10.1." << 11+i << ".0";
+      Ipv4AddressHelper address;
+      address.SetBase (os.str ().c_str (), "255.255.255.0");
+      apInterfaces[i] = address.Assign (apDevices[i]);
+      clInterfaces[i] = address.Assign (clDevices[i]);
+    }
 
   std::cout << "InstallWifiInternetStack () DONE !!!\n";
 }
@@ -565,9 +562,9 @@ AodvExample::InstallApplications ()
   if (app == std::string("tcp"))
     {
       // TCP flow
+
       for (uint32_t i = 0; i < apNum; ++i)
         {
-
           for (uint32_t j = 0; j < clNum; ++j)
             {
               uint16_t port = 50000+i*100+j;
