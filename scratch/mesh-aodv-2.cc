@@ -26,17 +26,18 @@
 using namespace ns3;
 
 void
-PrintThroughputLine (Ptr<FlowMonitor> monitor, Ptr<Ipv4FlowClassifier> classifier, double monitorInterval, Ipv4Address sourceAddress, uint16_t sourcePort, bool title)
+PrintThroughputTitle ()
+{
+  std::cout << "-------------------------------------------\n";
+  std::cout << "AP0 -> APm -> CL0-0 -> CL0-n -> CLm-0 -> CLm-n\n";
+}
+
+void
+PrintThroughputLine (Ptr<FlowMonitor> monitor, Ptr<Ipv4FlowClassifier> classifier, double monitorInterval, Ipv4Address sourceAddress, uint16_t sourcePort)
 {
   // Print per flow statistics
   monitor->CheckForLostPackets ();
   FlowMonitor::FlowStatsContainer stats = monitor->GetFlowStats ();
-
-  if (title)
-    {
-      std::cout << "-------------------------------------------\n";
-      std::cout << "AP0 -> APm -> CL0-0 -> CL0-n -> CLm-0 -> CLm-n\n";
-    }
 
   std::cout << Simulator::Now ().GetSeconds ();
   for (std::map<FlowId, FlowMonitor::FlowStats>::const_iterator i = stats.begin (); i != stats.end (); ++i)
@@ -51,7 +52,7 @@ PrintThroughputLine (Ptr<FlowMonitor> monitor, Ptr<Ipv4FlowClassifier> classifie
     }
   std::cout << '\n';
 
-  Simulator::Schedule (Seconds (monitorInterval), &PrintThroughputLine, monitor, classifier, monitorInterval, sourceAddress, sourcePort, false);
+  Simulator::Schedule (Seconds (monitorInterval), &PrintThroughputLine, monitor, classifier, monitorInterval, sourceAddress, sourcePort);
 }
 
 /// class
@@ -238,7 +239,8 @@ AodvExample::Run ()
   FlowMonitorHelper flowmon;
   Ptr<FlowMonitor> monitor = flowmon.InstallAll ();
   Ptr<Ipv4FlowClassifier> classifier = DynamicCast<Ipv4FlowClassifier> (flowmon.GetClassifier ());
-  Simulator::Schedule (Seconds (startTime+monitorInterval), &PrintThroughputLine, monitor, classifier, monitorInterval, apInterfaces[gateway].GetAddress (0), 50000, true);
+  Simulator::Schedule (Seconds (startTime), &PrintThroughputTitle);
+  Simulator::Schedule (Seconds (startTime+monitorInterval), &PrintThroughputLine, monitor, classifier, monitorInterval, apInterfaces[gateway].GetAddress (0), 50000);
 
   Simulator::Stop (Seconds (totalTime));
   Simulator::Run ();
@@ -277,6 +279,12 @@ AodvExample::CreateVariables ()
   for (uint32_t i = 0; i < txNum; ++i)
     {
       clientApp.push_back (ApplicationContainer ());
+    }
+
+  if (aptx && (clNum > 0))
+    {
+      std::cout << "Concurrent AP and CL application does not make sense !!!\n";
+      std::exit (0);
     }
 
   std::cout << "CreateVariables () DONE !!!\n";

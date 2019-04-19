@@ -295,6 +295,12 @@ AodvExample::CreateVariables ()
       packetSink.push_back (NULL);
     }
 
+  if (aptx && (clNum > 0))
+    {
+      std::cout << "Concurrent AP and CL application does not make sense !!!\n";
+      std::exit (0);
+    }
+
   std::cout << "CreateVariables () DONE !!!\n";
 }
 
