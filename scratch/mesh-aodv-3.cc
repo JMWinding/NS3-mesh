@@ -212,7 +212,7 @@ AodvExample::AodvExample () :
   aptx (false),
   locationFile (""),
   gateways (1),
-  scale (1)
+  scale (100)
 {
 }
 
@@ -370,7 +370,7 @@ AodvExample::CreateApNodes ()
         }
       Ptr<ListPositionAllocator> positionAlloc = CreateObject<ListPositionAllocator> ();
       for (uint32_t i = 0; i < apNum; i++)
-        positionAlloc->Add (Vector (locations[i][0] * scale, locations[i][1] * scale, locations[i][2]));
+        positionAlloc->Add (Vector (locations[i][0] * scale/100, locations[i][1] * scale/100, locations[i][2]));
       mobility.SetPositionAllocator (positionAlloc);
     }
   mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
