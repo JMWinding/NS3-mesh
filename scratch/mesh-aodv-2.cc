@@ -233,10 +233,12 @@ AodvExample::Run ()
 
   std::cout << "Starting simulation for " << totalTime << " s ...\n";
 
-  AnimationInterface netanim ("./output-netanim/mesh-aodv-2.xml");
-  // netanim.SetMaxPktsPerTraceFile (50000);
-  if (!anim)
-    netanim.SetStopTime (Seconds (0));
+  if (anim)
+    {
+      AnimationInterface netanim ("./output-netanim/mesh-aodv-2.xml");
+      // netanim.SetMaxPktsPerTraceFile (50000);
+      netanim.SetStopTime (Seconds (0));
+    }
 
   // Install FlowMonitor on all nodes
   FlowMonitorHelper flowmon;
