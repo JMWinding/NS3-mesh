@@ -1,6 +1,7 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 /*
- * StaticCast of packetSink
+ * Multiple gateways
+ * Specified locations
  */
 
 #include <iostream>
@@ -11,6 +12,7 @@
 #include "ns3/aodv-module.h"
 #include "ns3/applications-module.h"
 #include "ns3/core-module.h"
+#include "ns3/csma-module.h"
 #include "ns3/internet-module.h"
 #include "ns3/mobility-module.h"
 #include "ns3/network-module.h"
@@ -127,7 +129,6 @@ private:
   std::vector<Ipv4InterfaceContainer> clInterfaces;
 
   /// application
-  uint32_t gateway;
   std::string app;
   std::string datarate;
   std::vector<ApplicationContainer> serverApp;
@@ -141,6 +142,16 @@ private:
 
   /// test-only operations
   bool aptx;
+
+  /// specified real implementation
+  std::string locationFile;
+  std::vector<std::vector<double>> locations;
+  uint32_t gateways;
+  double scale;
+  NodeContainer csmaNodes;
+  NetDeviceContainer csmaDevices;
+  Ipv4InterfaceContainer csmaInterfaces;
+  
 
 private:
   void CreateVariables ();
@@ -162,6 +173,11 @@ private:
 
   /// Create the simulation applications
   void InstallApplications ();
+
+  /// Connect gateways
+  void CreateCsmaDevices ();
+  void InstallCsmaInternetStack ();
+  void ReadLocations ();
 };
 
 int main (int argc, char **argv)
@@ -189,12 +205,14 @@ AodvExample::AodvExample () :
   totalTime (20),
   pcap (false),
   printRoutes (false),
-  gateway (0),
   app ("udp"),
   datarate ("1Mbps"),
   monitorInterval (1.0),
   anim (false),
-  aptx (false)
+  aptx (false),
+  locationFile (""),
+  gateways (1),
+  scale (1)
 {
 }
 
@@ -217,12 +235,14 @@ AodvExample::Configure (int argc, char **argv)
   cmd.AddValue ("monitorInterval", "Monitor interval, s.", monitorInterval);
   cmd.AddValue ("apStep", "AP grid step, m", apStep);
   cmd.AddValue ("clStep", "CL grid step, m", clStep);
-  cmd.AddValue ("gateway", "Mount PacketSink on which AP.", gateway);
   cmd.AddValue ("app", "ping or UDP or TCP", app);
   cmd.AddValue ("datarate", "tested application datarate", datarate);
   cmd.AddValue ("monitorInterval", "Time between throughput updates.", monitorInterval);
   cmd.AddValue ("anim", "Output netanim .xml file or not.", anim);
   cmd.AddValue ("aptx", "Mount OnOffApplication on AP or not, for test.", aptx);
+  cmd.AddValue ("locationFile", "Location file name.", locationFile);
+  cmd.AddValue ("gateways", "Number of gateway AP.", gateways);
+  cmd.AddValue ("scale", "Ratio between experiment and simulation.", scale);
 
   cmd.Parse (argc, argv);
 
@@ -285,6 +305,7 @@ AodvExample::CreateVariables ()
       clDevices.push_back (NetDeviceContainer ());
       apInterfaces.push_back (Ipv4InterfaceContainer ());
       clInterfaces.push_back (Ipv4InterfaceContainer ());
+      locations.push_back (std::vector<double> (3, 0));
     }
   for (uint32_t i = 0; i < txNum; ++i)
     {
@@ -300,6 +321,8 @@ AodvExample::CreateVariables ()
       std::cout << "Concurrent AP and CL application does not make sense !!!\n";
       std::exit (0);
     }
+
+  ReadLocations ();
 
   std::cout << "CreateVariables () DONE !!!\n";
 }
@@ -328,13 +351,28 @@ AodvExample::CreateApNodes ()
 
   // Create static grid
   MobilityHelper mobility;
-  mobility.SetPositionAllocator ("ns3::GridPositionAllocator",
-                                 "MinX", DoubleValue (0.0),
-                                 "MinY", DoubleValue (0.0),
-                                 "DeltaX", DoubleValue (apStep),
-                                 "DeltaY", DoubleValue (apStep),
-                                 "GridWidth", UintegerValue (gridSize),
-                                 "LayoutType", StringValue ("RowFirst"));
+  if (locationFile.empty ())
+    {
+      mobility.SetPositionAllocator ("ns3::GridPositionAllocator",
+                                     "MinX", DoubleValue (0.0),
+                                     "MinY", DoubleValue (0.0),
+                                     "DeltaX", DoubleValue (apStep),
+                                     "DeltaY", DoubleValue (apStep),
+                                     "GridWidth", UintegerValue (gridSize),
+                                     "LayoutType", StringValue ("RowFirst"));
+    }
+  else
+    {
+      if (locations.size () < apNum)
+        {
+          std::cout << "Number of locations is not enough !!!\n";
+          std::exit (0);
+        }
+      Ptr<ListPositionAllocator> positionAlloc = CreateObject<ListPositionAllocator> ();
+      for (uint32_t i = 0; i < apNum; i++)
+        positionAlloc->Add (Vector (locations[i][0] * scale, locations[i][1] * scale, locations[i][2]));
+      mobility.SetPositionAllocator (positionAlloc);
+    }
   mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
   mobility.Install (apNodes);
 
@@ -376,6 +414,7 @@ AodvExample::CreateDevices ()
 {
   CreateMeshDevices ();
   CreateWifiDevices ();
+  CreateCsmaDevices ();
 
   std::cout << "CreateDevices () DONE !!!\n";
 }
@@ -410,6 +449,21 @@ AodvExample::CreateMeshDevices ()
     wifiPhy.EnablePcapAll (std::string ("aodv"));
 
   std::cout << "CreateMeshDevices () DONE !!!\n";
+}
+
+void
+AodvExample::CreateCsmaDevices ()
+{
+  csmaNodes.Create (1);
+  for (uint32_t i = 0; i < gateways; ++i)
+    csmaNodes.Add (apNodes.Get (i));
+
+  CsmaHelper csma;
+  csma.SetChannelAttribute ("DataRate", StringValue ("9999Mbps"));
+  csma.SetChannelAttribute ("Delay", TimeValue (NanoSeconds (6560)));
+  csmaDevices = csma.Install (csmaNodes);
+
+  std::cout << "CreateCsmaDevices () DONE !!!\n";
 }
 
 void
@@ -456,6 +510,7 @@ AodvExample::InstallInternetStack ()
 {
   InstallMeshInternetStack ();
   InstallWifiInternetStack ();
+  InstallCsmaInternetStack ();
 
   std::cout << "InstallInternetStack () DONE !!!\n";
 }
@@ -464,7 +519,6 @@ void
 AodvExample::InstallMeshInternetStack ()
 {
   AodvHelper aodv;
-  aodv.Set ("TtlStart", UintegerValue (1));
 
   InternetStackHelper stack;
   stack.SetRoutingHelper (aodv); // has effect on the next Install ()
@@ -481,6 +535,22 @@ AodvExample::InstallMeshInternetStack ()
     }
 
   std::cout << "InstallMeshInternetStack () DONE !!!\n";
+}
+
+void
+AodvExample::InstallCsmaInternetStack ()
+{
+  AodvHelper aodv;
+
+  InternetStackHelper stack;
+  stack.SetRoutingHelper (aodv); // has effect on the next Install ()
+  stack.Install (csmaNodes.Get (0));
+
+  Ipv4AddressHelper address;
+  address.SetBase ("10.2.1.0", "255.255.255.0");
+  csmaInterfaces = address.Assign (csmaDevices);
+
+  std::cout << "InstallCsmaInternetStack () DONE !!!\n";
 }
 
 void
@@ -519,7 +589,7 @@ AodvExample::InstallApplications ()
               uint16_t port = 50000+i*100+j;
               Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
               PacketSinkHelper server ("ns3::UdpSocketFactory", localAddress);
-              serverApp[i*clNum+j] = server.Install (apNodes.Get (gateway)); //
+              serverApp[i*clNum+j] = server.Install (csmaNodes.Get (0)); //
               serverApp[i*clNum+j].Start (Seconds (1.0));
               serverApp[i*clNum+j].Stop (Seconds (totalTime + 0.1));
               packetSink[i*clNum+j] = StaticCast<PacketSink> (serverApp[i*clNum+j].Get (0));
@@ -530,22 +600,19 @@ AodvExample::InstallApplications ()
               client.SetAttribute ("PacketSize", UintegerValue (1472));
               client.SetAttribute ("DataRate", StringValue (datarate));
               client.SetAttribute ("MaxBytes", UintegerValue (0));
-              AddressValue remoteAddress (InetSocketAddress (apInterfaces[gateway].GetAddress (0), port)); //
+              AddressValue remoteAddress (InetSocketAddress (csmaInterfaces.GetAddress (0), port)); //
               client.SetAttribute ("Remote", remoteAddress);
               clientApp[i*clNum+j] = client.Install (clNodes[i].Get (j));
               clientApp[i*clNum+j].Start (Seconds (startTime));
               clientApp[i*clNum+j].Stop (Seconds (totalTime + 0.1));
             }
 
-          if (i == gateway)
-            continue;
-
           if (aptx)
             {
               uint16_t port = 40000+i*100;
               Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
               PacketSinkHelper server ("ns3::UdpSocketFactory", localAddress);
-              serverApp[apNum*clNum+i] = server.Install (apNodes.Get (gateway)); //
+              serverApp[apNum*clNum+i] = server.Install (csmaNodes.Get (0)); //
               serverApp[apNum*clNum+i].Start (Seconds (1.0));
               serverApp[apNum*clNum+i].Stop (Seconds (totalTime + 0.1));
               packetSink[apNum*clNum+i] = StaticCast<PacketSink> (serverApp[apNum*clNum+i].Get (0));
@@ -556,7 +623,7 @@ AodvExample::InstallApplications ()
               client.SetAttribute ("PacketSize", UintegerValue (1472));
               client.SetAttribute ("DataRate", StringValue (datarate));
               client.SetAttribute ("MaxBytes", UintegerValue (0));
-              AddressValue remoteAddress (InetSocketAddress (apInterfaces[gateway].GetAddress (0), port)); //
+              AddressValue remoteAddress (InetSocketAddress (csmaInterfaces.GetAddress (0), port)); //
               client.SetAttribute ("Remote", remoteAddress);
               clientApp[apNum*clNum+i] = client.Install (apNodes.Get (i));
               clientApp[apNum*clNum+i].Start (Seconds (startTime));
@@ -576,7 +643,7 @@ AodvExample::InstallApplications ()
               uint16_t port = 50000+i*100+j;
               Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
               PacketSinkHelper server ("ns3::TcpSocketFactory", localAddress);
-              serverApp[i*clNum+j] = server.Install (apNodes.Get (gateway)); //
+              serverApp[i*clNum+j] = server.Install (csmaNodes.Get (0)); //
               serverApp[i*clNum+j].Start (Seconds (1.0));
               serverApp[i*clNum+j].Stop (Seconds (totalTime + 0.1));
               packetSink[i*clNum+j] = StaticCast<PacketSink> (serverApp[i*clNum+j].Get (0));
@@ -587,22 +654,19 @@ AodvExample::InstallApplications ()
               client.SetAttribute ("PacketSize", UintegerValue (1448));
               client.SetAttribute ("DataRate", StringValue (datarate));
               client.SetAttribute ("MaxBytes", UintegerValue (0));
-              AddressValue remoteAddress (InetSocketAddress (apInterfaces[gateway].GetAddress (0), port)); //
+              AddressValue remoteAddress (InetSocketAddress (csmaInterfaces.GetAddress (0), port)); //
               client.SetAttribute ("Remote", remoteAddress);
               clientApp[i*clNum+j] = client.Install (clNodes[i].Get (j));
               clientApp[i*clNum+j].Start (Seconds (startTime));
               clientApp[i*clNum+j].Stop (Seconds (totalTime + 0.1));
             }
 
-          if (i == gateway)
-            continue;
-
           if (aptx)
             {
               uint16_t port = 40000+i*100;
               Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
               PacketSinkHelper server ("ns3::UdpSocketFactory", localAddress);
-              serverApp[apNum*clNum+i] = server.Install (apNodes.Get (gateway)); //
+              serverApp[apNum*clNum+i] = server.Install (csmaNodes.Get (0)); //
               serverApp[apNum*clNum+i].Start (Seconds (1.0));
               serverApp[apNum*clNum+i].Stop (Seconds (totalTime + 0.1));
               packetSink[apNum*clNum+i] = StaticCast<PacketSink> (serverApp[apNum*clNum+i].Get (0));
@@ -613,7 +677,7 @@ AodvExample::InstallApplications ()
               client.SetAttribute ("PacketSize", UintegerValue (1448));
               client.SetAttribute ("DataRate", StringValue (datarate));
               client.SetAttribute ("MaxBytes", UintegerValue (0));
-              AddressValue remoteAddress (InetSocketAddress (apInterfaces[gateway].GetAddress (0), port)); //
+              AddressValue remoteAddress (InetSocketAddress (csmaInterfaces.GetAddress (0), port)); //
               client.SetAttribute ("Remote", remoteAddress);
               clientApp[apNum*clNum+i] = client.Install (apNodes.Get (i));
               clientApp[apNum*clNum+i].Start (Seconds (startTime));
@@ -622,9 +686,24 @@ AodvExample::InstallApplications ()
         }
     }
 
-  std::cout << "Gateway is connect to AP " << gateway << std::endl;
+  std::cout << "Gateway is connect to AP 0\n";
   std::cout << "InstallApplications () DONE !!!\n";
 
   Simulator::Schedule (Seconds (startTime), &PrintThroughputTitle, apNum, clNum, aptx);
   Simulator::Schedule (Seconds (startTime+monitorInterval), &CalculateThroughput, monitorInterval);
+}
+
+void
+AodvExample::ReadLocations ()
+{
+  if (locationFile.empty ())
+    return;
+
+  std::ifstream fin (locationFile);
+  if (fin.is_open ())
+    {
+      for (uint32_t i = 0; i < apNum; ++i)
+        fin >> locations[i][0] >> locations[i][1] >> locations[i][2];
+      fin.close ();
+    }
 }
