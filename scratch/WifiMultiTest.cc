@@ -53,10 +53,10 @@ PrintThroughput (ApplicationContainer sinkApplications)
   for (uint32_t index = 0; index < sinkApplications.GetN (); ++index)
     {
       uint64_t totalPacketsThrough = DynamicCast<PacketSink> (sinkApplications.Get (index))->GetTotalRx ();
-      std::cout << '\t' << totalPacketsThrough;
+      std::cout << '\t' << totalPacketsThrough*8/1024/1024;
     }
   std::cout << std::endl;
-  Simulator::Schedule (Seconds (0.5), &PrintThroughput, sinkApplications);
+  Simulator::Schedule (Seconds (1), &PrintThroughput, sinkApplications);
 }
 
 int main (int argc, char *argv[])
@@ -150,7 +150,7 @@ int main (int argc, char *argv[])
 
   // Setting applications
   ApplicationContainer sourceApplications, sinkApplications;
-  // std::vector<uint8_t> tosValues = {0x70, 0x28, 0xb8, 0xc0}; //AC_BE, AC_BK, AC_VI, AC_VO
+//   std::vector<uint8_t> tosValues = {0x70, 0x28, 0xb8, 0xc0}; //AC_BE, AC_BK, AC_VI, AC_VO
   std::vector<uint8_t> tosValues = {0x70}; //AC_BE, AC_BK, AC_VI, AC_VO
   uint32_t portNumber = 9;
   for (uint32_t index = 0; index < nWifi; ++index)
@@ -164,7 +164,7 @@ int main (int argc, char *argv[])
           OnOffHelper onOffHelper ("ns3::UdpSocketFactory", sinkSocket);
           onOffHelper.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
           onOffHelper.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
-          onOffHelper.SetAttribute ("DataRate", DataRateValue (50000000 / nWifi));
+          onOffHelper.SetAttribute ("DataRate", DataRateValue (100 * 1000000 / nWifi));
           onOffHelper.SetAttribute ("PacketSize", UintegerValue (1472)); //bytes
           sourceApplications.Add (onOffHelper.Install (wifiStaNodes.Get (index)));
           PacketSinkHelper packetSinkHelper ("ns3::UdpSocketFactory", sinkSocket);
@@ -179,7 +179,7 @@ int main (int argc, char *argv[])
 
   Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
 
-  Simulator::Schedule (Seconds (1.5), &PrintThroughput, sinkApplications);
+  Simulator::Schedule (Seconds (2.0), &PrintThroughput, sinkApplications);
 
   Simulator::Stop (Seconds (simulationTime + 1));
   Simulator::Run ();

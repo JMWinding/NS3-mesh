@@ -1,7 +1,6 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 /*
- * Multiple gateways
- * Specified locations
+ * Mesh install does not follow 5GHz
  */
 
 #include <iostream>
@@ -71,7 +70,7 @@ PrintThroughputTitle (uint32_t apNum, uint32_t clNum, bool aptx)
 }
 
 /// class
-class AodvExample 
+class AodvExample
 {
 public:
   AodvExample ();
@@ -151,7 +150,7 @@ private:
   NodeContainer csmaNodes;
   NetDeviceContainer csmaDevices;
   Ipv4InterfaceContainer csmaInterfaces;
-  
+
 
 private:
   void CreateVariables ();
@@ -275,7 +274,7 @@ AodvExample::Run ()
 
 void
 AodvExample::Report (std::ostream &)
-{ 
+{
 }
 
 void
