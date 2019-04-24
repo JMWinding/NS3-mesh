@@ -2,20 +2,20 @@
 
 temp=0
 
-for ((rr=1; rr<=20; rr=rr+1))
+for ((rr=10001; rr<=10020; rr=rr+1))
 do
-  for ((aa=40; aa<=60; aa=aa+5))
+  for ((aa=11; aa<=25; aa=aa+2))
   do
     for ((dd=1; dd<=10; dd=dd+1))
     do
-      for ((an=3; an<=9; an=an+1))
+      for ((gg=1; gg<=3; gg=gg+1))
       do
-        if [ ${an} = 8 ] && [ ${aa} = 40 ] && [ ${rr} = 8 ] && [ ${dd} = 1 ]; then
+        if [ ${aa} = 11 ] && [ ${dd} = 1 ] && [ ${gg} = 1 ] && [ ${rr} = 10001 ]; then
           temp=1
         fi
-        if [ ${temp} = 1]; then
-          echo ${an} ${aa} ${rr} ${dd}
-          ./waf --command-template="%s --rndSeed=${rr} --gridSize=3 --apNum=${an} --gateway=0 --clNum=0 --apStep=${aa} --clStep=20 --totalTime=60 --startTime=1 --monitorInterval=1 --printRoutes=false --aptx=true --datarate=${dd}Mbps" --run=mesh-aodv-2 &> my-simulations/1/aodv.result.${an}.${aa}.${rr}.${dd}
+        if [ ${temp} = 1 ]; then
+          echo mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt
+          ./waf --run "mesh-loc-1 --apNum=${aa} --clNum=0 --aptx=true --rndSeed=${rr} -totalTime=30 --locationFile=my-simulations/1_location_and_throughput/input/location_400_0_${aa}_${dd}.txt --gateways=${gg} --scale=0.8" &> my-simulations/1_location_and_throughput/output/mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt
         fi
       done
     done

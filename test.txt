@@ -1,0 +1,125 @@
+Waf: Entering directory `/home/jiaming/eclipse-workspace/ns-3.29-mesh/build'
+[2570/2619] Compiling scratch/mesh-aodv-4.cc
+[2581/2619] Linking build/scratch/mesh-aodv-4
+Waf: Leaving directory `/home/jiaming/eclipse-workspace/ns-3.29-mesh/build'
+Build commands will be stored in build/compile_commands.json
+'build' finished successfully (7.389s)
++0.000000000s -1 ConstantRateWifiManager:ConstantRateWifiManager(0x564a97028ab0)
++0.000000000s -1 ConstantRateWifiManager:ConstantRateWifiManager(0x564a97028bf0)
++0.000000000s -1 ConstantRateWifiManager:ConstantRateWifiManager(0x564a970283b0)
++0.000000000s -1 ConstantRateWifiManager:ConstantRateWifiManager(0x564a97027290)
++0.000030000s 0 ConstantRateWifiManager:DoCreateStation(0x564a970283b0)
++0.000030000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.000030000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.000030000s 1 ConstantRateWifiManager:DoCreateStation(0x564a97027290)
++0.000030000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.000030000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.102400000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.102400000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.102400000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.102400000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.134423293s 0 ConstantRateWifiManager:DoCreateStation(0x564a97028ab0)
++0.134423293s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a970830a0, 1)
++0.134423293s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a970830a0, 1)
++0.134527426s 1 ConstantRateWifiManager:DoCreateStation(0x564a97028bf0)
++0.134527426s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
++0.134579426s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
++0.134579426s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
++0.134687559s 0 ConstantRateWifiManager:DoCreateStation(0x564a97028ab0)
++0.134687559s 0 ConstantRateWifiManager:DoReportRxOk(0x564a97028ab0, 0x564a96f8b9a0, 836.852, OfdmRate6Mbps)
++0.134687559s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
++0.134747692s 1 ConstantRateWifiManager:DoReportRxOk(0x564a97028bf0, 0x564a96f8c320, 836.852, OfdmRate6Mbps)
++0.134747692s 1 ConstantRateWifiManager:DoReportDataOk(0x564a97028bf0, 0x564a96f8c320, 836.852, OfdmRate6Mbps, 836.852)
++0.134781559s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
++0.134781559s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
++0.134885692s 1 ConstantRateWifiManager:DoReportRxOk(0x564a97028bf0, 0x564a96f8c320, 836.852, OfdmRate6Mbps)
++0.134945825s 0 ConstantRateWifiManager:DoReportRxOk(0x564a97028ab0, 0x564a96f8b9a0, 836.852, OfdmRate6Mbps)
++0.134945825s 0 ConstantRateWifiManager:DoReportDataOk(0x564a97028ab0, 0x564a96f8b9a0, 836.852, OfdmRate6Mbps, 836.852)
++0.134945825s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
++0.134997825s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
++0.134997825s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
++0.135105958s 1 ConstantRateWifiManager:DoReportRxOk(0x564a97028bf0, 0x564a96f8c320, 836.852, OfdmRate6Mbps)
++0.135105958s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
++0.135166091s 0 ConstantRateWifiManager:DoReportRxOk(0x564a97028ab0, 0x564a96f8b9a0, 836.852, OfdmRate6Mbps)
++0.135166091s 0 ConstantRateWifiManager:DoReportDataOk(0x564a97028ab0, 0x564a96f8b9a0, 836.852, OfdmRate6Mbps, 836.852)
++0.135217958s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
++0.135217958s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
++0.135322091s 0 ConstantRateWifiManager:DoReportRxOk(0x564a97028ab0, 0x564a96f8b9a0, 836.852, OfdmRate6Mbps)
++0.135382224s 1 ConstantRateWifiManager:DoReportRxOk(0x564a97028bf0, 0x564a96f8c320, 836.852, OfdmRate6Mbps)
++0.135382224s 1 ConstantRateWifiManager:DoReportDataOk(0x564a97028bf0, 0x564a96f8c320, 836.852, OfdmRate6Mbps, 836.852)
++0.204800000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.204800000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.204800000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.204800000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.274283565s 1 ConstantRateWifiManager:DoCreateStation(0x564a97028bf0)
++0.274283565s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a9708a330, 1)
++0.274283565s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a9708a330, 1)
++0.307200000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.307200000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.307200000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.307200000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.409600000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.409600000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.409600000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.409600000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.512000000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.512000000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.512000000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.512000000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.614400000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.614400000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.614400000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.614400000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.634423293s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a970830a0, 1)
++0.634423293s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a970830a0, 1)
++0.716800000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.716800000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.716800000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.716800000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.774283565s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a9708a330, 1)
++0.774283565s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a9708a330, 1)
++0.819200000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.819200000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.819200000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.819200000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.921600000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.921600000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
++0.921600000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
++0.921600000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
+CreateVariables () DONE !!!
+Creating 2 APs 40.00 m apart.
+CreateApNodes () DONE !!!
+Creating 0 CLs 20.00 m away from each AP.
+CreateClNodes () DONE !!!
+CreateNodes () DONE !!!
+CreateMeshDevices () DONE !!!
+CreateWifiDevices () DONE !!!
+CreateCsmaDevices () DONE !!!
+CreateDevices () DONE !!!
+InstallMeshInternetStack () DONE !!!
+InstallWifiInternetStack () DONE !!!
+InstallCsmaInternetStack () DONE !!!
+InstallInternetStack () DONE !!!
+Gateway is connect to AP 0
+InstallApplications () DONE !!!
+Starting simulation for 20.00 s ...
+-------------------------------------------------
+Time[s]	ap-0	ap-1
++1.012484532s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a9708a330, 1)
++1.012833532s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a9708a330, 1)
++1.012833532s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a9708a330, 1)
++1.012949665s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
++1.012949665s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
++1.012992665s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
++1.012992665s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
++1.013100798s 1 ConstantRateWifiManager:DoReportRxOk(0x564a97028bf0, 0x564a96f8c320, 836.852, OfdmRate6Mbps)
++1.013100798s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
++1.013100798s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
++1.013160931s 0 ConstantRateWifiManager:DoReportRxOk(0x564a97028ab0, 0x564a96f8b9a0, 836.852, OfdmRate6Mbps)
++1.013160931s 0 ConstantRateWifiManager:DoReportDataOk(0x564a97028ab0, 0x564a96f8b9a0, 836.852, OfdmRate6Mbps, 836.852)
++1.013248798s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
++1.013248798s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
++1.013248798s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
+msg="MCS value does not match NSS value: MCS = 31, NSS = 1", file=../src/wifi/model/wifi-phy.cc, line=2396
+terminate called without an active exception
+Command ['/home/jiaming/eclipse-workspace/ns-3.29-mesh/build/scratch/mesh-aodv-4', '--rndSeed=1234', '--gridSize=6', '--apNum=2', '--clNum=0', '--apStep=40', '--clStep=20', '--aptx=true', '--datarate=60Mbps'] terminated with signal SIGIOT. Run it under a debugger to get more information (./waf --run <program> --command-template="gdb --args %s <args>").

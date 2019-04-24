@@ -307,6 +307,7 @@ MeshWifiInterfaceMac::SendManagementFrame (Ptr<Packet> packet, const WifiMacHead
       m_edca[AC_BK]->Queue (packet, header);
     }
 }
+
 SupportedRates
 MeshWifiInterfaceMac::GetSupportedRates () const
 {
@@ -342,6 +343,7 @@ MeshWifiInterfaceMac::CheckSupportedRates (SupportedRates rates) const
     }
   return true;
 }
+
 //-----------------------------------------------------------------------------
 // Beacons
 //-----------------------------------------------------------------------------
