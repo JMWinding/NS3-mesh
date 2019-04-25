@@ -79,7 +79,7 @@ int main (int argc, char *argv[])
 
   WifiMacHelper mac;
   WifiHelper wifi;
-  wifi.SetStandard (WIFI_PHY_STANDARD_80211n_5GHZ);
+  wifi.SetStandard (WIFI_PHY_STANDARD_80211n_2_4GHZ);
 
   std::ostringstream oss;
   oss << "HtMcs" << mcs;
@@ -111,7 +111,7 @@ int main (int argc, char *argv[])
   positionAlloc->Add (Vector (0.0, 0.0, 0.0));
   for (uint32_t i = 0; i < nWifi; i++)
     {
-      positionAlloc->Add (Vector (distance * i, 0.0, 0.0));
+      positionAlloc->Add (Vector (distance * (i+1), 0.0, 0.0));
     }
   mobility.SetPositionAllocator (positionAlloc);
   mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
