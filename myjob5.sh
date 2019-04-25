@@ -1,6 +1,5 @@
 #!/bin/bash
 
-cd ~/scratch/sp2019-ns3-mesh
 ./waf
 
 temp=0
@@ -11,7 +10,7 @@ rrend=10005
 
 for ((aa=10; aa<=25; aa=aa+1))
 do
-  for ((dd=1; dd<=2; dd=dd+1))
+  for ((dd=9; dd<=10; dd=dd+1))
   do
     for ((gg=1; gg<=3; gg=gg+1))
     do
