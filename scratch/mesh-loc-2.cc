@@ -732,7 +732,7 @@ AodvExample::InstallApplications ()
               client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
               client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
               client.SetAttribute ("PacketSize", UintegerValue (1448));
-              client.SetAttribute ("DataRate", StringValue (datarate));
+              client.SetAttribute ("DataRate", StringValue (std::to_string (locations[i][3]) + "Mbps"));
               client.SetAttribute ("MaxBytes", UintegerValue (0));
               AddressValue remoteAddress (InetSocketAddress (csmaInterfaces.GetAddress (0), port)); //
               client.SetAttribute ("Remote", remoteAddress);
