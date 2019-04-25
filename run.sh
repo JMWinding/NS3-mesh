@@ -1,8 +1,9 @@
 #!/bin/bash
 
 temp=0
+rrstart=10001
 
-for ((rr=10001; rr<=10020; rr=rr+1))
+for ((rr=${rrstart}; rr<=${rrstart}; rr=rr+1))
 do
   for ((aa=11; aa<=25; aa=aa+2))
   do
@@ -10,7 +11,7 @@ do
     do
       for ((gg=1; gg<=3; gg=gg+1))
       do
-        if [ ${aa} = 11 ] && [ ${dd} = 1 ] && [ ${gg} = 1 ] && [ ${rr} = 10001 ]; then
+        if [ ${aa} = 17 ] && [ ${dd} = 8 ] && [ ${gg} = 1 ] && [ ${rr} = ${rrstart} ]; then
           temp=1
         fi
         if [ ${temp} = 1 ]; then
