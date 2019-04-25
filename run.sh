@@ -15,7 +15,7 @@ do
         fi
         if [ ${temp} = 1 ]; then
           echo mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt
-          ./waf --run "mesh-loc-1 --apNum=${aa} --clNum=0 --aptx=true --rndSeed=${rr} -totalTime=30 --locationFile=my-simulations/1_location_and_throughput/input/location_400_0_${aa}_${dd}.txt --gateways=${gg} --scale=0.8" &> my-simulations/1_location_and_throughput/output/mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt
+          ./waf --run "mesh-loc-1 --apNum=${aa} --clNum=0 --aptx=true --rndSeed=${rr} -totalTime=40 --locationFile=my-simulations/1_location_and_throughput/input/location_400_0_${aa}_${dd}.txt --gateways=${gg} --scale=0.8" &> my-simulations/1_location_and_throughput/output/mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt
         fi
       done
     done

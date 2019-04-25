@@ -52,6 +52,11 @@ for nsamples2 = 10:25
 %         pause;
 %         close all;
 
+        if z2(end) == 0
+            k = k - 1;
+            continue;
+        end
+
         filename = ['location_' int2str(nsamples) '_' int2str(count) ...
             '_' int2str(nsamples2) '_' int2str(k) '.txt'];
         fid = fopen(filename, 'w');
