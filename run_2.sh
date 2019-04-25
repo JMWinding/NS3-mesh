@@ -1,7 +1,11 @@
 #!/bin/bash
 
 temp=0
+<<<<<<< HEAD:run_2.sh
 rrstart=10002
+=======
+rrstart=10001
+>>>>>>> d9541c91e29c3260c25f4368ae1fb2813d61d541:run.sh
 
 for ((rr=${rrstart}; rr<=${rrstart}; rr=rr+1))
 do
