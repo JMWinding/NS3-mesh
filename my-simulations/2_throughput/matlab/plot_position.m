@@ -1,6 +1,7 @@
+A = dlmread('../input/location_400_0.txt');
+
 for i = 10:25
 for j = 1:10
-A = dlmread('../input/location_400_0.txt');
 B = dlmread(['../input/location_400_0_' int2str(i) '_' int2str(j) '.txt']);
 figure; hold on;
 scatter(A(:,1), A(:,2), '.');
