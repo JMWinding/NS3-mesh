@@ -32,7 +32,7 @@ for i = 3:6
             end
             [mdist, z(kk)] = min(dists);
             if mdist < wrange
-                z2(k) = z2(k) + 1;
+                z2(z(kk)) = z2(z(kk)) + 1;
             end
         end
         
@@ -44,7 +44,7 @@ for i = 3:6
             '_' int2str(i*j) '.txt'];
         fid = fopen(filename, 'w');
         for k = 1:i*j
-            fprintf(fid, '%.2f\t%.2f\t%.2f\t%d\n', x2(j), y2(j), 0.0, z2(j)*0.3);
+            fprintf(fid, '%.2f\t%.2f\t%.2f\t%f\n', x2(k), y2(k), 0.0, z2(k)*0.3);
         end    
         fclose(fid);
         
