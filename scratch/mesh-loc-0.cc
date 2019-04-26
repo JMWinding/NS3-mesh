@@ -695,7 +695,7 @@ AodvExample::InstallApplications ()
             {
               uint16_t port = 40000+i*100;
               Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
-              PacketSinkHelper server ("ns3::UdpSocketFactory", localAddress);
+              PacketSinkHelper server ("ns3::TcpSocketFactory", localAddress);
               serverApp[apNum*clNum+i] = server.Install (csmaNodes.Get (0)); //
               serverApp[apNum*clNum+i].Start (Seconds (1.0));
               serverApp[apNum*clNum+i].Stop (Seconds (totalTime + 0.1));
