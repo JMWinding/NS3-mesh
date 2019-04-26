@@ -15,8 +15,8 @@ do
     for ((gg=1; gg<=3; gg=gg+1))
     do
       if [ ! -f "${dirout}grid_400_0_${aa}_${gg}_${rr}.txt" ]; then
-        echo mesh_400_0_${aa}_${gg}_${rr}.txt
-        ./waf --run "grid-loc-3 --apNum=${aa} --clNum=0 --aptx=true --rndSeed=${rr} -totalTime=40 --locationFile=${dirin}grid_400_0_${aa}.txt --gateways=${gg}" &> "${dirout}grid_400_0_${aa}_${gg}_${rr}.txt"
+        echo grid_400_0_${aa}_${gg}_${rr}.txt
+        ./waf --run "mesh-loc-3 --apNum=${aa} --clNum=0 --aptx=true --rndSeed=${rr} -totalTime=40 --locationFile=${dirin}grid_400_0_${aa}.txt --gateways=${gg}" &> "${dirout}grid_400_0_${aa}_${gg}_${rr}.txt"
       fi
     done
   done
