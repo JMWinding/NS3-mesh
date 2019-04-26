@@ -17,8 +17,8 @@ for i = 3:6
         y2 = zeros(i*j,1);
         z2 = zeros(i*j,1);
         
-        detx = xrange./(i+1);
-        dety = yrange./(j+1);
+        detx = xrange./i;
+        dety = yrange./j;
         for k = 1:i*j
             x2(k) = detx * (0.5 + floor((k-1)/j));
             y2(k) = dety * (0.5 + mod(k-1,j));
