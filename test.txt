@@ -1,97 +1,457 @@
 Waf: Entering directory `/home/jiaming/eclipse-workspace/ns-3.29-mesh/build'
-[2570/2619] Compiling scratch/mesh-aodv-4.cc
-[2581/2619] Linking build/scratch/mesh-aodv-4
 Waf: Leaving directory `/home/jiaming/eclipse-workspace/ns-3.29-mesh/build'
 Build commands will be stored in build/compile_commands.json
-'build' finished successfully (7.389s)
-+0.000000000s -1 ConstantRateWifiManager:ConstantRateWifiManager(0x564a97028ab0)
-+0.000000000s -1 ConstantRateWifiManager:ConstantRateWifiManager(0x564a97028bf0)
-+0.000000000s -1 ConstantRateWifiManager:ConstantRateWifiManager(0x564a970283b0)
-+0.000000000s -1 ConstantRateWifiManager:ConstantRateWifiManager(0x564a97027290)
-+0.000030000s 0 ConstantRateWifiManager:DoCreateStation(0x564a970283b0)
-+0.000030000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.000030000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.000030000s 1 ConstantRateWifiManager:DoCreateStation(0x564a97027290)
-+0.000030000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.000030000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.102400000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.102400000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.102400000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.102400000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.134423293s 0 ConstantRateWifiManager:DoCreateStation(0x564a97028ab0)
-+0.134423293s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a970830a0, 1)
-+0.134423293s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a970830a0, 1)
-+0.134527426s 1 ConstantRateWifiManager:DoCreateStation(0x564a97028bf0)
-+0.134527426s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
-+0.134579426s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
-+0.134579426s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
-+0.134687559s 0 ConstantRateWifiManager:DoCreateStation(0x564a97028ab0)
-+0.134687559s 0 ConstantRateWifiManager:DoReportRxOk(0x564a97028ab0, 0x564a96f8b9a0, 836.852, OfdmRate6Mbps)
-+0.134687559s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
-+0.134747692s 1 ConstantRateWifiManager:DoReportRxOk(0x564a97028bf0, 0x564a96f8c320, 836.852, OfdmRate6Mbps)
-+0.134747692s 1 ConstantRateWifiManager:DoReportDataOk(0x564a97028bf0, 0x564a96f8c320, 836.852, OfdmRate6Mbps, 836.852)
-+0.134781559s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
-+0.134781559s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
-+0.134885692s 1 ConstantRateWifiManager:DoReportRxOk(0x564a97028bf0, 0x564a96f8c320, 836.852, OfdmRate6Mbps)
-+0.134945825s 0 ConstantRateWifiManager:DoReportRxOk(0x564a97028ab0, 0x564a96f8b9a0, 836.852, OfdmRate6Mbps)
-+0.134945825s 0 ConstantRateWifiManager:DoReportDataOk(0x564a97028ab0, 0x564a96f8b9a0, 836.852, OfdmRate6Mbps, 836.852)
-+0.134945825s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
-+0.134997825s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
-+0.134997825s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
-+0.135105958s 1 ConstantRateWifiManager:DoReportRxOk(0x564a97028bf0, 0x564a96f8c320, 836.852, OfdmRate6Mbps)
-+0.135105958s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
-+0.135166091s 0 ConstantRateWifiManager:DoReportRxOk(0x564a97028ab0, 0x564a96f8b9a0, 836.852, OfdmRate6Mbps)
-+0.135166091s 0 ConstantRateWifiManager:DoReportDataOk(0x564a97028ab0, 0x564a96f8b9a0, 836.852, OfdmRate6Mbps, 836.852)
-+0.135217958s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
-+0.135217958s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
-+0.135322091s 0 ConstantRateWifiManager:DoReportRxOk(0x564a97028ab0, 0x564a96f8b9a0, 836.852, OfdmRate6Mbps)
-+0.135382224s 1 ConstantRateWifiManager:DoReportRxOk(0x564a97028bf0, 0x564a96f8c320, 836.852, OfdmRate6Mbps)
-+0.135382224s 1 ConstantRateWifiManager:DoReportDataOk(0x564a97028bf0, 0x564a96f8c320, 836.852, OfdmRate6Mbps, 836.852)
-+0.204800000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.204800000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.204800000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.204800000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.274283565s 1 ConstantRateWifiManager:DoCreateStation(0x564a97028bf0)
-+0.274283565s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a9708a330, 1)
-+0.274283565s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a9708a330, 1)
-+0.307200000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.307200000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.307200000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.307200000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.409600000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.409600000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.409600000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.409600000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.512000000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.512000000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.512000000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.512000000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.614400000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.614400000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.614400000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.614400000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.634423293s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a970830a0, 1)
-+0.634423293s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a970830a0, 1)
-+0.716800000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.716800000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.716800000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.716800000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.774283565s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a9708a330, 1)
-+0.774283565s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a9708a330, 1)
-+0.819200000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.819200000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.819200000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.819200000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.921600000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.921600000s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a970283b0, 0x564a96f61210, 1)
-+0.921600000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
-+0.921600000s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97027290, 0x564a96f85690, 1)
+'build' finished successfully (4.407s)
++0.000000000s -1 WifiPhy:WifiPhy(0x55bee9dd7e30)
++0.000000000s -1 WifiPhy:SetFrequency(0x55bee9dd7e30, 0)
++0.000000000s -1 WifiPhy:SetFrequency(): Saving frequency configuration for initialization
++0.000000000s -1 WifiPhy:SetChannelWidth(0x55bee9dd7e30, 20)
++0.000000000s -1 WifiPhy:AddSupportedChannelWidth(0x55bee9dd7e30, 20)
++0.000000000s -1 WifiPhy:AddSupportedChannelWidth("Adding ", 20, " to supported channel width set")
++0.000000000s -1 WifiPhy:SetChannelNumber(0x55bee9dd7e30, 50)
++0.000000000s -1 WifiPhy:SetChannelNumber(): Saving channel number configuration for initialization
++0.000000000s -1 WifiPhy:SetEdThreshold(0x55bee9dd7e30, -96)
++0.000000000s -1 WifiPhy:SetCcaMode1Threshold(0x55bee9dd7e30, -99)
++0.000000000s -1 WifiPhy:SetTxGain(0x55bee9dd7e30, 0)
++0.000000000s -1 WifiPhy:SetRxGain(0x55bee9dd7e30, 0)
++0.000000000s -1 WifiPhy:SetTxPowerEnd(0x55bee9dd7e30, 30)
++0.000000000s -1 WifiPhy:SetTxPowerStart(0x55bee9dd7e30, 30)
++0.000000000s -1 WifiPhy:SetRxNoiseFigure(0x55bee9dd7e30, 7)
++0.000000000s -1 WifiPhy:ConfigureHtDeviceMcsSet(0x55bee9dd7e30)
++0.000000000s -1 WifiPhy:SetShortGuardInterval(0x55bee9dd7e30, 1)
++0.000000000s -1 WifiPhy:SetGuardInterval(0x55bee9dd7e30, +3200.0ns)
++0.000000000s -1 WifiPhy:SetLdpc(0x55bee9dd7e30, 0)
++0.000000000s -1 WifiPhy:SetStbc(0x55bee9dd7e30, 0)
++0.000000000s -1 WifiPhy:SetGreenfield(0x55bee9dd7e30, 0)
++0.000000000s -1 WifiPhy:SetShortPlcpPreambleSupported(0x55bee9dd7e30, 0)
++0.000000000s -1 WifiPhy:ConfigureStandard(0x55bee9dd7e30, 8)
++0.000000000s -1 WifiPhy:InitializeFrequencyChannelNumber(0x55bee9dd7e30)
++0.000000000s -1 WifiPhy:SetChannelNumber(0x55bee9dd7e30, 50)
++0.000000000s -1 WifiPhy:DoChannelSwitch(): initialize to channel 50
++0.000000000s -1 WifiPhy:SetChannelNumber(): Setting frequency to 5250; width to 160
++0.000000000s -1 WifiPhy:SetChannelWidth(0x55bee9dd7e30, 160)
++0.000000000s -1 WifiPhy:AddSupportedChannelWidth(0x55bee9dd7e30, 160)
++0.000000000s -1 WifiPhy:AddSupportedChannelWidth("Adding ", 160, " to supported channel width set")
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(0x55bee9dd7e30, 8)
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Frequency set; checking whether a channel number corresponds
++0.000000000s -1 WifiPhy:FindChannelNumberForFrequencyWidth(0x55bee9dd7e30, 5250, 160)
++0.000000000s -1 WifiPhy:FindChannelNumberForFrequencyWidth(): Found, returning 50
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Channel number found; setting to 50
++0.000000000s -1 WifiPhy:SetChannelNumber(0x55bee9dd7e30, 50)
++0.000000000s -1 WifiPhy:SetChannelNumber(): No channel change requested
++0.000000000s -1 WifiPhy:Configure80211ac(0x55bee9dd7e30)
++0.000000000s -1 WifiPhy:Configure80211n(0x55bee9dd7e30)
++0.000000000s -1 WifiPhy:Configure80211a(0x55bee9dd7e30)
++0.000000000s -1 WifiPhy:ConfigureHtDeviceMcsSet(0x55bee9dd7e30)
++0.000000000s -1 WifiPhy:SetChannelNumber(0x55bee9dd7e30, 0)
++0.000000000s -1 WifiPhy:SetChannelNumber(): Setting channel number to zero
++0.000000000s -1 WifiPhy:WifiPhy(0x55bee9ddd3d0)
++0.000000000s -1 WifiPhy:SetFrequency(0x55bee9ddd3d0, 0)
++0.000000000s -1 WifiPhy:SetFrequency(): Saving frequency configuration for initialization
++0.000000000s -1 WifiPhy:SetChannelWidth(0x55bee9ddd3d0, 20)
++0.000000000s -1 WifiPhy:AddSupportedChannelWidth(0x55bee9ddd3d0, 20)
++0.000000000s -1 WifiPhy:AddSupportedChannelWidth("Adding ", 20, " to supported channel width set")
++0.000000000s -1 WifiPhy:SetChannelNumber(0x55bee9ddd3d0, 50)
++0.000000000s -1 WifiPhy:SetChannelNumber(): Saving channel number configuration for initialization
++0.000000000s -1 WifiPhy:SetEdThreshold(0x55bee9ddd3d0, -96)
++0.000000000s -1 WifiPhy:SetCcaMode1Threshold(0x55bee9ddd3d0, -99)
++0.000000000s -1 WifiPhy:SetTxGain(0x55bee9ddd3d0, 0)
++0.000000000s -1 WifiPhy:SetRxGain(0x55bee9ddd3d0, 0)
++0.000000000s -1 WifiPhy:SetTxPowerEnd(0x55bee9ddd3d0, 30)
++0.000000000s -1 WifiPhy:SetTxPowerStart(0x55bee9ddd3d0, 30)
++0.000000000s -1 WifiPhy:SetRxNoiseFigure(0x55bee9ddd3d0, 7)
++0.000000000s -1 WifiPhy:ConfigureHtDeviceMcsSet(0x55bee9ddd3d0)
++0.000000000s -1 WifiPhy:SetShortGuardInterval(0x55bee9ddd3d0, 1)
++0.000000000s -1 WifiPhy:SetGuardInterval(0x55bee9ddd3d0, +3200.0ns)
++0.000000000s -1 WifiPhy:SetLdpc(0x55bee9ddd3d0, 0)
++0.000000000s -1 WifiPhy:SetStbc(0x55bee9ddd3d0, 0)
++0.000000000s -1 WifiPhy:SetGreenfield(0x55bee9ddd3d0, 0)
++0.000000000s -1 WifiPhy:SetShortPlcpPreambleSupported(0x55bee9ddd3d0, 0)
++0.000000000s -1 WifiPhy:ConfigureStandard(0x55bee9ddd3d0, 8)
++0.000000000s -1 WifiPhy:InitializeFrequencyChannelNumber(0x55bee9ddd3d0)
++0.000000000s -1 WifiPhy:SetChannelNumber(0x55bee9ddd3d0, 50)
++0.000000000s -1 WifiPhy:DoChannelSwitch(): initialize to channel 50
++0.000000000s -1 WifiPhy:SetChannelNumber(): Setting frequency to 5250; width to 160
++0.000000000s -1 WifiPhy:SetChannelWidth(0x55bee9ddd3d0, 160)
++0.000000000s -1 WifiPhy:AddSupportedChannelWidth(0x55bee9ddd3d0, 160)
++0.000000000s -1 WifiPhy:AddSupportedChannelWidth("Adding ", 160, " to supported channel width set")
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(0x55bee9ddd3d0, 8)
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Frequency set; checking whether a channel number corresponds
++0.000000000s -1 WifiPhy:FindChannelNumberForFrequencyWidth(0x55bee9ddd3d0, 5250, 160)
++0.000000000s -1 WifiPhy:FindChannelNumberForFrequencyWidth(): Found, returning 50
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Channel number found; setting to 50
++0.000000000s -1 WifiPhy:SetChannelNumber(0x55bee9ddd3d0, 50)
++0.000000000s -1 WifiPhy:SetChannelNumber(): No channel change requested
++0.000000000s -1 WifiPhy:Configure80211ac(0x55bee9ddd3d0)
++0.000000000s -1 WifiPhy:Configure80211n(0x55bee9ddd3d0)
++0.000000000s -1 WifiPhy:Configure80211a(0x55bee9ddd3d0)
++0.000000000s -1 WifiPhy:ConfigureHtDeviceMcsSet(0x55bee9ddd3d0)
++0.000000000s -1 WifiPhy:SetChannelNumber(0x55bee9ddd3d0, 0)
++0.000000000s -1 WifiPhy:SetChannelNumber(): Setting channel number to zero
++0.000000000s -1 WifiPhy:WifiPhy(0x55bee9de3450)
++0.000000000s -1 WifiPhy:SetFrequency(0x55bee9de3450, 0)
++0.000000000s -1 WifiPhy:SetFrequency(): Saving frequency configuration for initialization
++0.000000000s -1 WifiPhy:SetChannelWidth(0x55bee9de3450, 20)
++0.000000000s -1 WifiPhy:AddSupportedChannelWidth(0x55bee9de3450, 20)
++0.000000000s -1 WifiPhy:AddSupportedChannelWidth("Adding ", 20, " to supported channel width set")
++0.000000000s -1 WifiPhy:SetChannelNumber(0x55bee9de3450, 3)
++0.000000000s -1 WifiPhy:SetChannelNumber(): Saving channel number configuration for initialization
++0.000000000s -1 WifiPhy:SetEdThreshold(0x55bee9de3450, -96)
++0.000000000s -1 WifiPhy:SetCcaMode1Threshold(0x55bee9de3450, -99)
++0.000000000s -1 WifiPhy:SetTxGain(0x55bee9de3450, 0)
++0.000000000s -1 WifiPhy:SetRxGain(0x55bee9de3450, 0)
++0.000000000s -1 WifiPhy:SetTxPowerEnd(0x55bee9de3450, 16.0206)
++0.000000000s -1 WifiPhy:SetTxPowerStart(0x55bee9de3450, 16.0206)
++0.000000000s -1 WifiPhy:SetRxNoiseFigure(0x55bee9de3450, 7)
++0.000000000s -1 WifiPhy:ConfigureHtDeviceMcsSet(0x55bee9de3450)
++0.000000000s -1 WifiPhy:SetShortGuardInterval(0x55bee9de3450, 0)
++0.000000000s -1 WifiPhy:SetGuardInterval(0x55bee9de3450, +3200.0ns)
++0.000000000s -1 WifiPhy:SetLdpc(0x55bee9de3450, 0)
++0.000000000s -1 WifiPhy:SetStbc(0x55bee9de3450, 0)
++0.000000000s -1 WifiPhy:SetGreenfield(0x55bee9de3450, 0)
++0.000000000s -1 WifiPhy:SetShortPlcpPreambleSupported(0x55bee9de3450, 0)
++0.000000000s -1 WifiPhy:ConfigureStandard(0x55bee9de3450, 6)
++0.000000000s -1 WifiPhy:InitializeFrequencyChannelNumber(0x55bee9de3450)
++0.000000000s -1 WifiPhy:SetChannelNumber(0x55bee9de3450, 3)
++0.000000000s -1 WifiPhy:DoChannelSwitch(): initialize to channel 3
++0.000000000s -1 WifiPhy:SetChannelNumber(): Setting frequency to 2422; width to 20
++0.000000000s -1 WifiPhy:SetChannelWidth(0x55bee9de3450, 20)
++0.000000000s -1 WifiPhy:AddSupportedChannelWidth(0x55bee9de3450, 20)
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(0x55bee9de3450, 6)
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Frequency set; checking whether a channel number corresponds
++0.000000000s -1 WifiPhy:FindChannelNumberForFrequencyWidth(0x55bee9de3450, 2422, 20)
++0.000000000s -1 WifiPhy:FindChannelNumberForFrequencyWidth(): Found, returning 3
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Channel number found; setting to 3
++0.000000000s -1 WifiPhy:SetChannelNumber(0x55bee9de3450, 3)
++0.000000000s -1 WifiPhy:SetChannelNumber(): No channel change requested
++0.000000000s -1 WifiPhy:Configure80211n(0x55bee9de3450)
++0.000000000s -1 WifiPhy:Configure80211b(0x55bee9de3450)
++0.000000000s -1 WifiPhy:Configure80211g(0x55bee9de3450)
++0.000000000s -1 WifiPhy:Configure80211b(0x55bee9de3450)
++0.000000000s -1 WifiPhy:ConfigureHtDeviceMcsSet(0x55bee9de3450)
++0.000000000s -1 WifiPhy:WifiPhy(0x55bee9e8cad0)
++0.000000000s -1 WifiPhy:SetFrequency(0x55bee9e8cad0, 0)
++0.000000000s -1 WifiPhy:SetFrequency(): Saving frequency configuration for initialization
++0.000000000s -1 WifiPhy:SetChannelWidth(0x55bee9e8cad0, 20)
++0.000000000s -1 WifiPhy:AddSupportedChannelWidth(0x55bee9e8cad0, 20)
++0.000000000s -1 WifiPhy:AddSupportedChannelWidth("Adding ", 20, " to supported channel width set")
++0.000000000s -1 WifiPhy:SetChannelNumber(0x55bee9e8cad0, 3)
++0.000000000s -1 WifiPhy:SetChannelNumber(): Saving channel number configuration for initialization
++0.000000000s -1 WifiPhy:SetEdThreshold(0x55bee9e8cad0, -96)
++0.000000000s -1 WifiPhy:SetCcaMode1Threshold(0x55bee9e8cad0, -99)
++0.000000000s -1 WifiPhy:SetTxGain(0x55bee9e8cad0, 0)
++0.000000000s -1 WifiPhy:SetRxGain(0x55bee9e8cad0, 0)
++0.000000000s -1 WifiPhy:SetTxPowerEnd(0x55bee9e8cad0, 16.0206)
++0.000000000s -1 WifiPhy:SetTxPowerStart(0x55bee9e8cad0, 16.0206)
++0.000000000s -1 WifiPhy:SetRxNoiseFigure(0x55bee9e8cad0, 7)
++0.000000000s -1 WifiPhy:ConfigureHtDeviceMcsSet(0x55bee9e8cad0)
++0.000000000s -1 WifiPhy:SetShortGuardInterval(0x55bee9e8cad0, 0)
++0.000000000s -1 WifiPhy:SetGuardInterval(0x55bee9e8cad0, +3200.0ns)
++0.000000000s -1 WifiPhy:SetLdpc(0x55bee9e8cad0, 0)
++0.000000000s -1 WifiPhy:SetStbc(0x55bee9e8cad0, 0)
++0.000000000s -1 WifiPhy:SetGreenfield(0x55bee9e8cad0, 0)
++0.000000000s -1 WifiPhy:SetShortPlcpPreambleSupported(0x55bee9e8cad0, 0)
++0.000000000s -1 WifiPhy:ConfigureStandard(0x55bee9e8cad0, 6)
++0.000000000s -1 WifiPhy:InitializeFrequencyChannelNumber(0x55bee9e8cad0)
++0.000000000s -1 WifiPhy:SetChannelNumber(0x55bee9e8cad0, 3)
++0.000000000s -1 WifiPhy:DoChannelSwitch(): initialize to channel 3
++0.000000000s -1 WifiPhy:SetChannelNumber(): Setting frequency to 2422; width to 20
++0.000000000s -1 WifiPhy:SetChannelWidth(0x55bee9e8cad0, 20)
++0.000000000s -1 WifiPhy:AddSupportedChannelWidth(0x55bee9e8cad0, 20)
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(0x55bee9e8cad0, 6)
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Frequency set; checking whether a channel number corresponds
++0.000000000s -1 WifiPhy:FindChannelNumberForFrequencyWidth(0x55bee9e8cad0, 2422, 20)
++0.000000000s -1 WifiPhy:FindChannelNumberForFrequencyWidth(): Found, returning 3
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Channel number found; setting to 3
++0.000000000s -1 WifiPhy:SetChannelNumber(0x55bee9e8cad0, 3)
++0.000000000s -1 WifiPhy:SetChannelNumber(): No channel change requested
++0.000000000s -1 WifiPhy:Configure80211n(0x55bee9e8cad0)
++0.000000000s -1 WifiPhy:Configure80211b(0x55bee9e8cad0)
++0.000000000s -1 WifiPhy:Configure80211g(0x55bee9e8cad0)
++0.000000000s -1 WifiPhy:Configure80211b(0x55bee9e8cad0)
++0.000000000s -1 WifiPhy:ConfigureHtDeviceMcsSet(0x55bee9e8cad0)
++0.000000000s 0 WifiPhy:DoInitialize(0x55bee9dd7e30)
++0.000000000s 0 WifiPhy:DoInitialize(): Frequency already initialized
++0.000000000s 0 WifiPhy:DoInitialize(0x55bee9de3450)
++0.000000000s 0 WifiPhy:DoInitialize(): Frequency already initialized
++0.000000000s 1 WifiPhy:DoInitialize(0x55bee9ddd3d0)
++0.000000000s 1 WifiPhy:DoInitialize(): Frequency already initialized
++0.000000000s 1 WifiPhy:DoInitialize(0x55bee9e8cad0)
++0.000000000s 1 WifiPhy:DoInitialize(): Frequency already initialized
++0.000030000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.000030000s 0 WifiPhy:SendPacket(0x55bee9de3450, 0x55bee9ea6e60, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.000030000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.000030000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.000030000s 1 WifiPhy:SendPacket(0x55bee9e8cad0, 0x55bee9ea7020, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.000030000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.000030166s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9e8cad0, 0x55bee9ea7090, -81.6262, +1344000.0ns)
++0.000030166s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.000030166s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9de3450, 0x55bee9ea72d0, -81.6262, +1344000.0ns)
++0.000030166s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.003000000s 1 WifiPhy:GetPayloadDuration(86, DsssRate1Mbps)
++0.003000000s 1 WifiPhy:SendPacket(0x55bee9e8cad0, 0x55bee9ea6e60, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.003000000s 1 WifiPhy:GetPayloadDuration(86, DsssRate1Mbps)
++0.003000166s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9de3450, 0x55bee9ea7650, -81.6262, +880000.0ns)
++0.003000166s 0 WifiPhy:StartRx(0x55bee9de3450, 0x55bee9ea7650, mode: DsssRate1Mbps txpwrlvl: 0 preamble: 1 channel width: 22 GI: 800 NTx: 1 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 6.8767e-12, +880000.0ns)
++0.003000166s 0 WifiPhy:StartRx(): sync to signal (power=6.8767e-12W)
++0.003192166s 0 WifiPhy:StartReceivePacket(0x55bee9de3450, 0x55bee9ea7650, DsssRate1Mbps, 1, 0)
++0.003192166s 0 WifiPhy:StartReceivePacket(): snr(dB)=11.9259, per=0
++0.003192166s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.003880166s 0 WifiPhy:EndReceive(0x55bee9de3450, 0x55bee9ea7650, 0x55bee9ea12b0)
++0.003880166s 0 WifiPhy:EndReceive(): mode=1000000, snr(dB)=11.9259, per=0, size=86
++0.009000000s 1 WifiPhy:GetPayloadDuration(98, OfdmRate6Mbps)
++0.009000000s 1 WifiPhy:SendPacket(0x55bee9ddd3d0, 0x55bee9ea76e0, OfdmRate6Mbps, 6000000, 0, 0, 0)
++0.009000000s 1 WifiPhy:GetPayloadDuration(98, OfdmRate6Mbps)
++0.009000166s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9dd7e30, 0x55bee9ea7960, -67.6468, +156000.0ns)
++0.009000166s 0 WifiPhy:StartRx(0x55bee9dd7e30, 0x55bee9ea7960, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 1 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +156000.0ns)
++0.009000166s 0 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++0.009020166s 0 WifiPhy:StartReceivePacket(0x55bee9dd7e30, 0x55bee9ea7960, OfdmRate6Mbps, 0, 0)
++0.009020166s 0 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++0.009020166s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.009156166s 0 WifiPhy:EndReceive(0x55bee9dd7e30, 0x55bee9ea7960, 0x55bee9ea1260)
++0.009156166s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=98
++0.023000000s 0 WifiPhy:GetPayloadDuration(98, OfdmRate6Mbps)
++0.023000000s 0 WifiPhy:SendPacket(0x55bee9dd7e30, 0x55bee9ea7b50, OfdmRate6Mbps, 6000000, 0, 0, 0)
++0.023000000s 0 WifiPhy:GetPayloadDuration(98, OfdmRate6Mbps)
++0.023000000s 0 WifiPhy:GetPayloadDuration(86, DsssRate1Mbps)
++0.023000000s 0 WifiPhy:SendPacket(0x55bee9de3450, 0x55bee9ea6d70, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.023000000s 0 WifiPhy:GetPayloadDuration(86, DsssRate1Mbps)
++0.023000166s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9ddd3d0, 0x55bee9ea7da0, -67.6468, +156000.0ns)
++0.023000166s 1 WifiPhy:StartRx(0x55bee9ddd3d0, 0x55bee9ea7da0, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 1 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +156000.0ns)
++0.023000166s 1 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++0.023000166s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9e8cad0, 0x55bee9ea78f0, -81.6262, +880000.0ns)
++0.023000166s 1 WifiPhy:StartRx(0x55bee9e8cad0, 0x55bee9ea78f0, mode: DsssRate1Mbps txpwrlvl: 0 preamble: 1 channel width: 22 GI: 800 NTx: 1 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 6.8767e-12, +880000.0ns)
++0.023000166s 1 WifiPhy:StartRx(): sync to signal (power=6.8767e-12W)
++0.023020166s 1 WifiPhy:StartReceivePacket(0x55bee9ddd3d0, 0x55bee9ea7da0, OfdmRate6Mbps, 0, 0)
++0.023020166s 1 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++0.023020166s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.023156166s 1 WifiPhy:EndReceive(0x55bee9ddd3d0, 0x55bee9ea7da0, 0x55bee9ea7600)
++0.023156166s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=98
++0.023192166s 1 WifiPhy:StartReceivePacket(0x55bee9e8cad0, 0x55bee9ea78f0, DsssRate1Mbps, 1, 0)
++0.023192166s 1 WifiPhy:StartReceivePacket(): snr(dB)=11.9259, per=0
++0.023192166s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.023880166s 1 WifiPhy:EndReceive(0x55bee9e8cad0, 0x55bee9ea78f0, 0x55bee9ea78a0)
++0.023880166s 1 WifiPhy:EndReceive(): mode=1000000, snr(dB)=11.9259, per=0, size=86
++0.102400000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.102400000s 0 WifiPhy:SendPacket(0x55bee9de3450, 0x55bee9ea2000, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.102400000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.102400000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.102400000s 1 WifiPhy:SendPacket(0x55bee9e8cad0, 0x55bee9ea7020, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.102400000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.102400166s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9e8cad0, 0x55bee9ea2070, -81.6262, +1344000.0ns)
++0.102400166s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.102400166s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9de3450, 0x55bee9ea6d00, -81.6262, +1344000.0ns)
++0.102400166s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.204800000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.204800000s 0 WifiPhy:SendPacket(0x55bee9de3450, 0x55bee9e9c5c0, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.204800000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.204800000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.204800000s 1 WifiPhy:SendPacket(0x55bee9e8cad0, 0x55bee9ea76e0, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.204800000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.204800166s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9e8cad0, 0x55bee9ea7d30, -81.6262, +1344000.0ns)
++0.204800166s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.204800166s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9de3450, 0x55bee9ea7090, -81.6262, +1344000.0ns)
++0.204800166s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.307200000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.307200000s 0 WifiPhy:SendPacket(0x55bee9de3450, 0x55bee9ea6d70, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.307200000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.307200000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.307200000s 1 WifiPhy:SendPacket(0x55bee9e8cad0, 0x55bee9ea7020, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.307200000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.307200166s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9e8cad0, 0x55bee9ea2070, -81.6262, +1344000.0ns)
++0.307200166s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.307200166s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9de3450, 0x55bee9ea6e60, -81.6262, +1344000.0ns)
++0.307200166s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.329459144s 1 WifiPhy:GetPayloadDuration(60, OfdmRate6Mbps)
++0.329459144s 1 WifiPhy:SendPacket(0x55bee9ddd3d0, 0x55bee9ea7260, OfdmRate6Mbps, 6000000, 0, 0, 0)
++0.329459144s 1 WifiPhy:GetPayloadDuration(60, OfdmRate6Mbps)
++0.329459310s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9dd7e30, 0x55bee9ea7d30, -67.6468, +104000.0ns)
++0.329459310s 0 WifiPhy:StartRx(0x55bee9dd7e30, 0x55bee9ea7d30, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 4 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +104000.0ns)
++0.329459310s 0 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++0.329479310s 0 WifiPhy:StartReceivePacket(0x55bee9dd7e30, 0x55bee9ea7d30, OfdmRate6Mbps, 0, 0)
++0.329479310s 0 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++0.329479310s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.329563310s 0 WifiPhy:EndReceive(0x55bee9dd7e30, 0x55bee9ea7d30, 0x55bee9ea7850)
++0.329563310s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=60
++0.329597310s 0 WifiPhy:GetPayloadDuration(62, OfdmRate6Mbps)
++0.329597310s 0 WifiPhy:GetPayloadDuration(14, OfdmRate6Mbps)
++0.329597310s 0 WifiPhy:SendPacket(0x55bee9dd7e30, 0x55bee9ea7ae0, OfdmRate6Mbps, 6000000, 0, 0, 0)
++0.329597310s 0 WifiPhy:GetPayloadDuration(62, OfdmRate6Mbps)
++0.329597476s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9ddd3d0, 0x55bee9ea7090, -67.6468, +108000.0ns)
++0.329597476s 1 WifiPhy:StartRx(0x55bee9ddd3d0, 0x55bee9ea7090, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 4 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +108000.0ns)
++0.329597476s 1 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++0.329617476s 1 WifiPhy:StartReceivePacket(0x55bee9ddd3d0, 0x55bee9ea7090, OfdmRate6Mbps, 0, 0)
++0.329617476s 1 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++0.329617476s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.329705476s 1 WifiPhy:EndReceive(0x55bee9ddd3d0, 0x55bee9ea7090, 0x55bee9ea1260)
++0.329705476s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=62
++0.329721476s 1 WifiPhy:GetPayloadDuration(14, OfdmRate6Mbps)
++0.329721476s 1 WifiPhy:SendPacket(0x55bee9ddd3d0, 0x55bee9ea7da0, OfdmRate6Mbps, 6000000, 0, 0, 0)
++0.329721476s 1 WifiPhy:GetPayloadDuration(14, OfdmRate6Mbps)
++0.329721642s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9dd7e30, 0x55bee9ea76e0, -67.6468, +44000.0ns)
++0.329721642s 0 WifiPhy:StartRx(0x55bee9dd7e30, 0x55bee9ea76e0, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 1 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +44000.0ns)
++0.329721642s 0 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++0.329741642s 0 WifiPhy:StartReceivePacket(0x55bee9dd7e30, 0x55bee9ea76e0, OfdmRate6Mbps, 0, 0)
++0.329741642s 0 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++0.329741642s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.329765642s 0 WifiPhy:EndReceive(0x55bee9dd7e30, 0x55bee9ea76e0, 0x55bee9ea7600)
++0.329765642s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=14
++0.329808476s 1 WifiPhy:GetPayloadDuration(60, OfdmRate6Mbps)
++0.329808476s 1 WifiPhy:GetPayloadDuration(14, OfdmRate6Mbps)
++0.329808476s 1 WifiPhy:SendPacket(0x55bee9ddd3d0, 0x55bee9e9c5c0, OfdmRate6Mbps, 6000000, 0, 0, 0)
++0.329808476s 1 WifiPhy:GetPayloadDuration(60, OfdmRate6Mbps)
++0.329808642s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9dd7e30, 0x55bee9ea7da0, -67.6468, +104000.0ns)
++0.329808642s 0 WifiPhy:StartRx(0x55bee9dd7e30, 0x55bee9ea7da0, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 4 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +104000.0ns)
++0.329808642s 0 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++0.329828642s 0 WifiPhy:StartReceivePacket(0x55bee9dd7e30, 0x55bee9ea7da0, OfdmRate6Mbps, 0, 0)
++0.329828642s 0 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++0.329828642s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.329912642s 0 WifiPhy:EndReceive(0x55bee9dd7e30, 0x55bee9ea7da0, 0x55bee9ea7c90)
++0.329912642s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=60
++0.329928642s 0 WifiPhy:GetPayloadDuration(14, OfdmRate6Mbps)
++0.329928642s 0 WifiPhy:SendPacket(0x55bee9dd7e30, 0x55bee9ea76e0, OfdmRate6Mbps, 6000000, 0, 0, 0)
++0.329928642s 0 WifiPhy:GetPayloadDuration(14, OfdmRate6Mbps)
++0.329928808s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9ddd3d0, 0x55bee9ea7d30, -67.6468, +44000.0ns)
++0.329928808s 1 WifiPhy:StartRx(0x55bee9ddd3d0, 0x55bee9ea7d30, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 1 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +44000.0ns)
++0.329928808s 1 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++0.329948808s 1 WifiPhy:StartReceivePacket(0x55bee9ddd3d0, 0x55bee9ea7d30, OfdmRate6Mbps, 0, 0)
++0.329948808s 1 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++0.329948808s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.329972808s 1 WifiPhy:EndReceive(0x55bee9ddd3d0, 0x55bee9ea7d30, 0x55bee9ea7600)
++0.329972808s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=14
++0.330015808s 1 WifiPhy:GetPayloadDuration(62, OfdmRate6Mbps)
++0.330015808s 1 WifiPhy:GetPayloadDuration(14, OfdmRate6Mbps)
++0.330015808s 1 WifiPhy:SendPacket(0x55bee9ddd3d0, 0x55bee9ea7960, OfdmRate6Mbps, 6000000, 0, 0, 0)
++0.330015808s 1 WifiPhy:GetPayloadDuration(62, OfdmRate6Mbps)
++0.330015974s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9dd7e30, 0x55bee9ea76e0, -67.6468, +108000.0ns)
++0.330015974s 0 WifiPhy:StartRx(0x55bee9dd7e30, 0x55bee9ea76e0, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 4 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +108000.0ns)
++0.330015974s 0 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++0.330035974s 0 WifiPhy:StartReceivePacket(0x55bee9dd7e30, 0x55bee9ea76e0, OfdmRate6Mbps, 0, 0)
++0.330035974s 0 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++0.330035974s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.330123974s 0 WifiPhy:EndReceive(0x55bee9dd7e30, 0x55bee9ea76e0, 0x55bee9ea7ce0)
++0.330123974s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=62
++0.330139974s 0 WifiPhy:GetPayloadDuration(14, OfdmRate6Mbps)
++0.330139974s 0 WifiPhy:SendPacket(0x55bee9dd7e30, 0x55bee9ea7da0, OfdmRate6Mbps, 6000000, 0, 0, 0)
++0.330139974s 0 WifiPhy:GetPayloadDuration(14, OfdmRate6Mbps)
++0.330140140s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9ddd3d0, 0x55bee9e9c5c0, -67.6468, +44000.0ns)
++0.330140140s 1 WifiPhy:StartRx(0x55bee9ddd3d0, 0x55bee9e9c5c0, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 1 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +44000.0ns)
++0.330140140s 1 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++0.330160140s 1 WifiPhy:StartReceivePacket(0x55bee9ddd3d0, 0x55bee9e9c5c0, OfdmRate6Mbps, 0, 0)
++0.330160140s 1 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++0.330160140s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.330184140s 1 WifiPhy:EndReceive(0x55bee9ddd3d0, 0x55bee9e9c5c0, 0x55bee9ea85d0)
++0.330184140s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=14
++0.330226974s 0 WifiPhy:GetPayloadDuration(60, OfdmRate6Mbps)
++0.330226974s 0 WifiPhy:GetPayloadDuration(14, OfdmRate6Mbps)
++0.330226974s 0 WifiPhy:SendPacket(0x55bee9dd7e30, 0x55bee9ea6d70, OfdmRate6Mbps, 6000000, 0, 0, 0)
++0.330226974s 0 WifiPhy:GetPayloadDuration(60, OfdmRate6Mbps)
++0.330227140s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9ddd3d0, 0x55bee9ea7da0, -67.6468, +104000.0ns)
++0.330227140s 1 WifiPhy:StartRx(0x55bee9ddd3d0, 0x55bee9ea7da0, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 4 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +104000.0ns)
++0.330227140s 1 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++0.330247140s 1 WifiPhy:StartReceivePacket(0x55bee9ddd3d0, 0x55bee9ea7da0, OfdmRate6Mbps, 0, 0)
++0.330247140s 1 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++0.330247140s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.330331140s 1 WifiPhy:EndReceive(0x55bee9ddd3d0, 0x55bee9ea7da0, 0x55bee9ea8ad0)
++0.330331140s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=60
++0.330347140s 1 WifiPhy:GetPayloadDuration(14, OfdmRate6Mbps)
++0.330347140s 1 WifiPhy:SendPacket(0x55bee9ddd3d0, 0x55bee9e9c5c0, OfdmRate6Mbps, 6000000, 0, 0, 0)
++0.330347140s 1 WifiPhy:GetPayloadDuration(14, OfdmRate6Mbps)
++0.330347306s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9dd7e30, 0x55bee9ea7d30, -67.6468, +44000.0ns)
++0.330347306s 0 WifiPhy:StartRx(0x55bee9dd7e30, 0x55bee9ea7d30, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 1 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +44000.0ns)
++0.330347306s 0 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++0.330367306s 0 WifiPhy:StartReceivePacket(0x55bee9dd7e30, 0x55bee9ea7d30, OfdmRate6Mbps, 0, 0)
++0.330367306s 0 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++0.330367306s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.330391306s 0 WifiPhy:EndReceive(0x55bee9dd7e30, 0x55bee9ea7d30, 0x55bee9ea73b0)
++0.330391306s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=14
++0.409600000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.409600000s 0 WifiPhy:SendPacket(0x55bee9de3450, 0x55bee9ea2000, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.409600000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.409600000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.409600000s 1 WifiPhy:SendPacket(0x55bee9e8cad0, 0x55bee9ea6d00, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.409600000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.409600166s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9e8cad0, 0x55bee9ea6d70, -81.6262, +1344000.0ns)
++0.409600166s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.409600166s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9de3450, 0x55bee9ea7020, -81.6262, +1344000.0ns)
++0.409600166s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.512000000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.512000000s 0 WifiPhy:SendPacket(0x55bee9de3450, 0x55bee9ea76e0, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.512000000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.512000000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.512000000s 1 WifiPhy:SendPacket(0x55bee9e8cad0, 0x55bee9e9c5c0, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.512000000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.512000166s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9e8cad0, 0x55bee9ea2070, -81.6262, +1344000.0ns)
++0.512000166s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.512000166s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9de3450, 0x55bee9ea7090, -81.6262, +1344000.0ns)
++0.512000166s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.614400000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.614400000s 0 WifiPhy:SendPacket(0x55bee9de3450, 0x55bee9ea7960, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.614400000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.614400000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.614400000s 1 WifiPhy:SendPacket(0x55bee9e8cad0, 0x55bee9ea6e60, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.614400000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.614400166s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9e8cad0, 0x55bee9ea6d70, -81.6262, +1344000.0ns)
++0.614400166s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.614400166s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9de3450, 0x55bee9ea6d00, -81.6262, +1344000.0ns)
++0.614400166s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.633119205s 0 WifiPhy:GetPayloadDuration(65, OfdmRate6Mbps)
++0.633119205s 0 WifiPhy:SendPacket(0x55bee9dd7e30, 0x55bee9ea7260, OfdmRate6Mbps, 6000000, 0, 0, 0)
++0.633119205s 0 WifiPhy:GetPayloadDuration(65, OfdmRate6Mbps)
++0.633119371s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9ddd3d0, 0x55bee9ea2070, -67.6468, +112000.0ns)
++0.633119371s 1 WifiPhy:StartRx(0x55bee9ddd3d0, 0x55bee9ea2070, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 4 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +112000.0ns)
++0.633119371s 1 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++0.633139371s 1 WifiPhy:StartReceivePacket(0x55bee9ddd3d0, 0x55bee9ea2070, OfdmRate6Mbps, 0, 0)
++0.633139371s 1 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++0.633139371s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.633231371s 1 WifiPhy:EndReceive(0x55bee9ddd3d0, 0x55bee9ea2070, 0x55bee9ea1260)
++0.633231371s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=65
++0.716800000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.716800000s 0 WifiPhy:SendPacket(0x55bee9de3450, 0x55bee9ea2000, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.716800000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.716800000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.716800000s 1 WifiPhy:SendPacket(0x55bee9e8cad0, 0x55bee9ea7020, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.716800000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.716800166s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9e8cad0, 0x55bee9ea7090, -81.6262, +1344000.0ns)
++0.716800166s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.716800166s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9de3450, 0x55bee9e9c5c0, -81.6262, +1344000.0ns)
++0.716800166s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.819200000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.819200000s 0 WifiPhy:SendPacket(0x55bee9de3450, 0x55bee9ea7da0, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.819200000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.819200000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.819200000s 1 WifiPhy:SendPacket(0x55bee9e8cad0, 0x55bee9ea7260, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.819200000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.819200166s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9e8cad0, 0x55bee9ea6d70, -81.6262, +1344000.0ns)
++0.819200166s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.819200166s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9de3450, 0x55bee9ea6e60, -81.6262, +1344000.0ns)
++0.819200166s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.921600000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.921600000s 0 WifiPhy:SendPacket(0x55bee9de3450, 0x55bee9ea7960, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.921600000s 0 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.921600000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.921600000s 1 WifiPhy:SendPacket(0x55bee9e8cad0, 0x55bee9ea6d00, DsssRate1Mbps, 1000000, 1, 0, 0)
++0.921600000s 1 WifiPhy:GetPayloadDuration(144, DsssRate1Mbps)
++0.921600166s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9e8cad0, 0x55bee9ea7090, -81.6262, +1344000.0ns)
++0.921600166s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
++0.921600166s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9de3450, 0x55bee9ea7020, -81.6262, +1344000.0ns)
++0.921600166s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=6.8767e-12W)
 CreateVariables () DONE !!!
-Creating 2 APs 40.00 m apart.
+Creating 2 APs 50.00 m apart.
 CreateApNodes () DONE !!!
 Creating 0 CLs 20.00 m away from each AP.
 CreateClNodes () DONE !!!
 CreateNodes () DONE !!!
+Channel Number = 0 !!!!!!!!!!!!!!!!!!
+Channel Width = 160 !!!!!!!!!!!!!!!!!!
+Antennas = 4 !!!!!!!!!!!!!!!!!!
+Tx Support = 4 !!!!!!!!!!!!!!!!!!
+Rx Support = 4 !!!!!!!!!!!!!!!!!!
+Channel Number = 0 !!!!!!!!!!!!!!!!!!
+Channel Width = 160 !!!!!!!!!!!!!!!!!!
+Antennas = 4 !!!!!!!!!!!!!!!!!!
+Tx Support = 4 !!!!!!!!!!!!!!!!!!
+Rx Support = 4 !!!!!!!!!!!!!!!!!!
 CreateMeshDevices () DONE !!!
 CreateWifiDevices () DONE !!!
 CreateCsmaDevices () DONE !!!
@@ -105,21 +465,135 @@ InstallApplications () DONE !!!
 Starting simulation for 20.00 s ...
 -------------------------------------------------
 Time[s]	ap-0	ap-1
-+1.012484532s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a9708a330, 1)
-+1.012833532s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a9708a330, 1)
-+1.012833532s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a9708a330, 1)
-+1.012949665s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
-+1.012949665s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
-+1.012992665s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
-+1.012992665s 0 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028ab0, 0x564a96f8b9a0, 1)
-+1.013100798s 1 ConstantRateWifiManager:DoReportRxOk(0x564a97028bf0, 0x564a96f8c320, 836.852, OfdmRate6Mbps)
-+1.013100798s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
-+1.013100798s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
-+1.013160931s 0 ConstantRateWifiManager:DoReportRxOk(0x564a97028ab0, 0x564a96f8b9a0, 836.852, OfdmRate6Mbps)
-+1.013160931s 0 ConstantRateWifiManager:DoReportDataOk(0x564a97028ab0, 0x564a96f8b9a0, 836.852, OfdmRate6Mbps, 836.852)
-+1.013248798s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
-+1.013248798s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
-+1.013248798s 1 ConstantRateWifiManager:DoGetDataTxVector(0x564a97028bf0, 0x564a96f8c320, 1)
++1.004117760s 1 WifiPhy:GetPayloadDuration(90, DsssRate1Mbps)
++1.004117760s 1 WifiPhy:SendPacket(0x55bee9e8cad0, 0x55bee9e9c5c0, DsssRate1Mbps, 1000000, 1, 0, 0)
++1.004117760s 1 WifiPhy:GetPayloadDuration(90, DsssRate1Mbps)
++1.004117926s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9de3450, 0x55bee9e8c970, -81.6262, +912000.0ns)
++1.004117926s 0 WifiPhy:StartRx(0x55bee9de3450, 0x55bee9e8c970, mode: DsssRate1Mbps txpwrlvl: 0 preamble: 1 channel width: 22 GI: 800 NTx: 1 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 6.8767e-12, +912000.0ns)
++1.004117926s 0 WifiPhy:StartRx(): sync to signal (power=6.8767e-12W)
++1.004309926s 0 WifiPhy:StartReceivePacket(0x55bee9de3450, 0x55bee9e8c970, DsssRate1Mbps, 1, 0)
++1.004309926s 0 WifiPhy:StartReceivePacket(): snr(dB)=11.9259, per=0
++1.004309926s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.005029926s 0 WifiPhy:EndReceive(0x55bee9de3450, 0x55bee9e8c970, 0x55bee9ea9ab0)
++1.005029926s 0 WifiPhy:EndReceive(): mode=1000000, snr(dB)=11.9259, per=0, size=90
++1.006117760s 1 WifiPhy:GetPayloadDuration(102, OfdmRate6Mbps)
++1.006117760s 1 WifiPhy:SendPacket(0x55bee9ddd3d0, 0x55bee9ea7ae0, OfdmRate6Mbps, 6000000, 0, 0, 0)
++1.006117760s 1 WifiPhy:GetPayloadDuration(102, OfdmRate6Mbps)
++1.006117926s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9dd7e30, 0x55bee9e9cef0, -67.6468, +160000.0ns)
++1.006117926s 0 WifiPhy:StartRx(0x55bee9dd7e30, 0x55bee9e9cef0, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 1 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +160000.0ns)
++1.006117926s 0 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++1.006137926s 0 WifiPhy:StartReceivePacket(0x55bee9dd7e30, 0x55bee9e9cef0, OfdmRate6Mbps, 0, 0)
++1.006137926s 0 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++1.006137926s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.006277926s 0 WifiPhy:EndReceive(0x55bee9dd7e30, 0x55bee9e9cef0, 0x55bee9ea9a40)
++1.006277926s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=102
++1.006446926s 0 WifiPhy:GetPayloadDuration(102, OfdmRate6Mbps)
++1.006446926s 0 WifiPhy:SendPacket(0x55bee9dd7e30, 0x55bee9ea76e0, OfdmRate6Mbps, 6000000, 0, 0, 0)
++1.006446926s 0 WifiPhy:GetPayloadDuration(102, OfdmRate6Mbps)
++1.006447092s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9ddd3d0, 0x55bee9ea7d30, -67.6468, +160000.0ns)
++1.006447092s 1 WifiPhy:StartRx(0x55bee9ddd3d0, 0x55bee9ea7d30, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 1 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +160000.0ns)
++1.006447092s 1 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++1.006467092s 1 WifiPhy:StartReceivePacket(0x55bee9ddd3d0, 0x55bee9ea7d30, OfdmRate6Mbps, 0, 0)
++1.006467092s 1 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++1.006467092s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.006607092s 1 WifiPhy:EndReceive(0x55bee9ddd3d0, 0x55bee9ea7d30, 0x55bee9e8e900)
++1.006607092s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=102
++1.007000000s 1 WifiPhy:GetPayloadDuration(86, DsssRate1Mbps)
++1.007000000s 1 WifiPhy:SendPacket(0x55bee9e8cad0, 0x55bee9de3270, DsssRate1Mbps, 1000000, 1, 0, 0)
++1.007000000s 1 WifiPhy:GetPayloadDuration(86, DsssRate1Mbps)
++1.007000166s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9de3450, 0x55bee9de03b0, -81.6262, +880000.0ns)
++1.007000166s 0 WifiPhy:StartRx(0x55bee9de3450, 0x55bee9de03b0, mode: DsssRate1Mbps txpwrlvl: 0 preamble: 1 channel width: 22 GI: 800 NTx: 1 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 6.8767e-12, +880000.0ns)
++1.007000166s 0 WifiPhy:StartRx(): sync to signal (power=6.8767e-12W)
++1.007192166s 0 WifiPhy:StartReceivePacket(0x55bee9de3450, 0x55bee9de03b0, DsssRate1Mbps, 1, 0)
++1.007192166s 0 WifiPhy:StartReceivePacket(): snr(dB)=11.9259, per=0
++1.007192166s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.007880166s 0 WifiPhy:EndReceive(0x55bee9de3450, 0x55bee9de03b0, 0x55bee9ea97a0)
++1.007880166s 0 WifiPhy:EndReceive(): mode=1000000, snr(dB)=11.9259, per=0, size=86
++1.008000000s 1 WifiPhy:GetPayloadDuration(98, OfdmRate6Mbps)
++1.008000000s 1 WifiPhy:SendPacket(0x55bee9ddd3d0, 0x55bee9e9ce10, OfdmRate6Mbps, 6000000, 0, 0, 0)
++1.008000000s 1 WifiPhy:GetPayloadDuration(98, OfdmRate6Mbps)
++1.008000166s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9dd7e30, 0x55bee9de5b30, -67.6468, +156000.0ns)
++1.008000166s 0 WifiPhy:StartRx(0x55bee9dd7e30, 0x55bee9de5b30, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 1 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +156000.0ns)
++1.008000166s 0 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++1.008020166s 0 WifiPhy:StartReceivePacket(0x55bee9dd7e30, 0x55bee9de5b30, OfdmRate6Mbps, 0, 0)
++1.008020166s 0 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++1.008020166s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.008156166s 0 WifiPhy:EndReceive(0x55bee9dd7e30, 0x55bee9de5b30, 0x55bee9ea8ea0)
++1.008156166s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=98
++1.008253166s 0 WifiPhy:GetPayloadDuration(98, OfdmRate6Mbps)
++1.008253166s 0 WifiPhy:SendPacket(0x55bee9dd7e30, 0x55bee9ea7ae0, OfdmRate6Mbps, 6000000, 0, 0, 0)
++1.008253166s 0 WifiPhy:GetPayloadDuration(98, OfdmRate6Mbps)
++1.008253332s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9ddd3d0, 0x55bee9ea9dc0, -67.6468, +156000.0ns)
++1.008253332s 1 WifiPhy:StartRx(0x55bee9ddd3d0, 0x55bee9ea9dc0, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 1 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +156000.0ns)
++1.008253332s 1 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++1.008273332s 1 WifiPhy:StartReceivePacket(0x55bee9ddd3d0, 0x55bee9ea9dc0, OfdmRate6Mbps, 0, 0)
++1.008273332s 1 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++1.008273332s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.008409332s 1 WifiPhy:EndReceive(0x55bee9ddd3d0, 0x55bee9ea9dc0, 0x55bee9ea9a40)
++1.008409332s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=98
++1.015277926s 0 WifiPhy:GetPayloadDuration(78, OfdmRate6Mbps)
++1.015277926s 0 WifiPhy:SendPacket(0x55bee9dd7e30, 0x55bee9ea9c40, OfdmRate6Mbps, 6000000, 0, 0, 0)
++1.015277926s 0 WifiPhy:GetPayloadDuration(78, OfdmRate6Mbps)
++1.015278092s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9ddd3d0, 0x55bee9e9ce80, -67.6468, +128000.0ns)
++1.015278092s 1 WifiPhy:StartRx(0x55bee9ddd3d0, 0x55bee9e9ce80, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 1 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +128000.0ns)
++1.015278092s 1 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++1.015298092s 1 WifiPhy:StartReceivePacket(0x55bee9ddd3d0, 0x55bee9e9ce80, OfdmRate6Mbps, 0, 0)
++1.015298092s 1 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++1.015298092s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.015406092s 1 WifiPhy:EndReceive(0x55bee9ddd3d0, 0x55bee9e9ce80, 0x55bee9ea9850)
++1.015406092s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=78
++1.015494092s 1 WifiPhy:GetPayloadDuration(78, OfdmRate6Mbps)
++1.015494092s 1 WifiPhy:SendPacket(0x55bee9ddd3d0, 0x55bee9de5a50, OfdmRate6Mbps, 6000000, 0, 0, 0)
++1.015494092s 1 WifiPhy:GetPayloadDuration(78, OfdmRate6Mbps)
++1.015494258s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9dd7e30, 0x55bee9de4a70, -67.6468, +128000.0ns)
++1.015494258s 0 WifiPhy:StartRx(0x55bee9dd7e30, 0x55bee9de4a70, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 1 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +128000.0ns)
++1.015494258s 0 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++1.015514258s 0 WifiPhy:StartReceivePacket(0x55bee9dd7e30, 0x55bee9de4a70, OfdmRate6Mbps, 0, 0)
++1.015514258s 0 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++1.015514258s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.015622258s 0 WifiPhy:EndReceive(0x55bee9dd7e30, 0x55bee9de4a70, 0x55bee9ea1260)
++1.015622258s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=78
++1.015746092s 1 WifiPhy:GetPayloadDuration(69, OfdmRate6Mbps)
++1.015746092s 1 WifiPhy:SendPacket(0x55bee9ddd3d0, 0x55bee9de48f0, OfdmRate6Mbps, 6000000, 0, 0, 0)
++1.015746092s 1 WifiPhy:GetPayloadDuration(69, OfdmRate6Mbps)
++1.015746258s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9dd7e30, 0x55bee9dd97e0, -67.6468, +116000.0ns)
++1.015746258s 0 WifiPhy:StartRx(0x55bee9dd7e30, 0x55bee9dd97e0, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 4 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +116000.0ns)
++1.015746258s 0 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++1.015766258s 0 WifiPhy:StartReceivePacket(0x55bee9dd7e30, 0x55bee9dd97e0, OfdmRate6Mbps, 0, 0)
++1.015766258s 0 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++1.015766258s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.015862258s 0 WifiPhy:EndReceive(0x55bee9dd7e30, 0x55bee9dd97e0, 0x55bee9ea9ab0)
++1.015862258s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=69
++1.015862258s 0 WifiPhy:GetPayloadDuration(1066, HtMcs31)
++1.015914258s 0 WifiPhy:GetPayloadDuration(63, OfdmRate6Mbps)
++1.015914258s 0 WifiPhy:GetPayloadDuration(14, OfdmRate6Mbps)
++1.015914258s 0 WifiPhy:SendPacket(0x55bee9dd7e30, 0x55bee9ea7ae0, OfdmRate6Mbps, 6000000, 0, 0, 0)
++1.015914258s 0 WifiPhy:GetPayloadDuration(63, OfdmRate6Mbps)
++1.015914424s 1 WifiPhy:StartReceivePreambleAndHeader(0x55bee9ddd3d0, 0x55bee9ea9bd0, -67.6468, +108000.0ns)
++1.015914424s 1 WifiPhy:StartRx(0x55bee9ddd3d0, 0x55bee9ea9bd0, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 4 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +108000.0ns)
++1.015914424s 1 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++1.015934424s 1 WifiPhy:StartReceivePacket(0x55bee9ddd3d0, 0x55bee9ea9bd0, OfdmRate6Mbps, 0, 0)
++1.015934424s 1 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++1.015934424s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.016022424s 1 WifiPhy:EndReceive(0x55bee9ddd3d0, 0x55bee9ea9bd0, 0x55bee9ea12b0)
++1.016022424s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=63
++1.016022424s 1 WifiPhy:GetPayloadDuration(1066, HtMcs31)
++1.016038424s 1 WifiPhy:GetPayloadDuration(14, OfdmRate6Mbps)
++1.016038424s 1 WifiPhy:SendPacket(0x55bee9ddd3d0, 0x55bee9ea9c40, OfdmRate6Mbps, 6000000, 0, 0, 0)
++1.016038424s 1 WifiPhy:GetPayloadDuration(14, OfdmRate6Mbps)
++1.016038590s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9dd7e30, 0x55bee9ea7d30, -67.6468, +44000.0ns)
++1.016038590s 0 WifiPhy:StartRx(0x55bee9dd7e30, 0x55bee9ea7d30, mode: OfdmRate6Mbps txpwrlvl: 0 preamble: 0 channel width: 20 GI: 800 NTx: 1 Nss: 1 Ness: 0 MPDU aggregation: 0 STBC: 0, 0, 1.71917e-10, +44000.0ns)
++1.016038590s 0 WifiPhy:StartRx(): sync to signal (power=1.71917e-10W)
++1.016058590s 0 WifiPhy:StartReceivePacket(0x55bee9dd7e30, 0x55bee9ea7d30, OfdmRate6Mbps, 0, 0)
++1.016058590s 0 WifiPhy:StartReceivePacket(): snr(dB)=26.3192, per=0
++1.016058590s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.016082590s 0 WifiPhy:EndReceive(0x55bee9dd7e30, 0x55bee9ea7d30, 0x55bee9ea7c90)
++1.016082590s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=26.3192, per=0, size=14
++1.016143424s 1 WifiPhy:GetPayloadDuration(78, HtMcs31)
++1.016143424s 1 WifiPhy:GetPayloadDuration(14, OfdmRate24Mbps)
++1.016143424s 1 WifiPhy:SendPacket(0x55bee9ddd3d0, 0x55bee9ea7960, HtMcs31, 150000001, 2, 0, 0)
++1.016143424s 1 WifiPhy:GetPayloadDuration(78, HtMcs31)
++1.016143590s 0 WifiPhy:StartReceivePreambleAndHeader(0x55bee9dd7e30, 0x55bee9dd97e0, -67.6468, +43200.0ns)
 msg="MCS value does not match NSS value: MCS = 31, NSS = 1", file=../src/wifi/model/wifi-phy.cc, line=2396
 terminate called without an active exception
-Command ['/home/jiaming/eclipse-workspace/ns-3.29-mesh/build/scratch/mesh-aodv-4', '--rndSeed=1234', '--gridSize=6', '--apNum=2', '--clNum=0', '--apStep=40', '--clStep=20', '--aptx=true', '--datarate=60Mbps'] terminated with signal SIGIOT. Run it under a debugger to get more information (./waf --run <program> --command-template="gdb --args %s <args>").
+Command ['/home/jiaming/eclipse-workspace/ns-3.29-mesh/build/scratch/mesh-loc-0-0', '--gridSize=2', '--apNum=2', '--clNum=0', '--apStep=50', '--datarate=100Mbps', '--aptx=true'] terminated with signal SIGIOT. Run it under a debugger to get more information (./waf --run <program> --command-template="gdb --args %s <args>").

@@ -12,6 +12,7 @@
 #include "ns3/aodv-module.h"
 #include "ns3/applications-module.h"
 #include "ns3/core-module.h"
+#include "ns3/config-store.h"
 #include "ns3/csma-module.h"
 #include "ns3/internet-module.h"
 #include "ns3/mobility-module.h"
@@ -270,6 +271,7 @@ AodvExample::Run ()
 
   Simulator::Stop (Seconds (totalTime));
   Simulator::Run ();
+
   Simulator::Destroy ();
 }
 
@@ -423,19 +425,20 @@ AodvExample::CreateMeshDevices ()
 {
   MeshHelper mesh = MeshHelper::Default ();
   mesh.SetStackInstaller ("ns3::Dot11sStack");
+  mesh.SetSpreadInterfaceChannels (MeshHelper::ZERO_CHANNEL);
   mesh.SetMacType ("RandomStart", TimeValue (Seconds (startTime)),
                    "BeaconInterval", TimeValue (Seconds (startTime)));
   mesh.SetStandard (WIFI_PHY_STANDARD_80211ac);
 //  mesh.SetRemoteStationManager ("ns3::IdealWifiManager");
   mesh.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-                                "ControlMode", StringValue ("VhtMcs0"),
-                                "DataMode", StringValue ("VhtMcs7"),
+                                "ControlMode", StringValue ("HtMcs0"),
+                                "DataMode", StringValue ("HtMcs31"),
                                 "RtsCtsThreshold", UintegerValue (99999));
 
   YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
   wifiPhy.SetChannel (wifiChannel.Create ());
-  wifiPhy.Set ("ChannelWidth", UintegerValue (40));
+  wifiPhy.Set ("ChannelNumber", UintegerValue (50));
   wifiPhy.Set ("Antennas", UintegerValue (4));
   wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (4));
   wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (4));
@@ -446,18 +449,19 @@ AodvExample::CreateMeshDevices ()
 
   meshDevices = mesh.Install (wifiPhy, apNodes);
 
-//  for (uint32_t i = 0; i < meshDevices.GetN (); ++i)
-//    {
-//      Ptr<NetDevice> nd = meshDevices.Get (i);
-//      Ptr<MeshPointDevice> mpd = DynamicCast<MeshPointDevice> (nd);
-//      std::vector<Ptr<NetDevice>> nds = mpd->GetInterfaces ();
-//      Ptr<WifiNetDevice> wnd = DynamicCast<WifiNetDevice> (nds[0]);
-//      Ptr<WifiPhy> wp = wnd->GetPhy ();
-//      std::cout << "Channel Width = " << wp->GetChannelWidth () << " !!!!!!!!!!!!!!!!!!\n";
-//      std::cout << "Antennas = " << wp->GetNumberOfAntennas () << " !!!!!!!!!!!!!!!!!!\n";
-//      std::cout << "Tx Support = " << wp->GetMaxSupportedTxSpatialStreams () << " !!!!!!!!!!!!!!!!!!\n";
-//      std::cout << "Rx Support = " << wp->GetMaxSupportedRxSpatialStreams () << " !!!!!!!!!!!!!!!!!!\n";
-//    }
+  for (uint32_t i = 0; i < meshDevices.GetN (); ++i)
+    {
+      Ptr<NetDevice> nd = meshDevices.Get (i);
+      Ptr<MeshPointDevice> mpd = DynamicCast<MeshPointDevice> (nd);
+      std::vector<Ptr<NetDevice>> nds = mpd->GetInterfaces ();
+      Ptr<WifiNetDevice> wnd = DynamicCast<WifiNetDevice> (nds[0]);
+      Ptr<WifiPhy> wp = wnd->GetPhy ();
+      std::cout << "Channel Number = " << (uint16_t) wp->GetChannelNumber () << " !!!!!!!!!!!!!!!!!!\n";
+      std::cout << "Channel Width = " << (uint16_t) wp->GetChannelWidth () << " !!!!!!!!!!!!!!!!!!\n";
+      std::cout << "Antennas = " << (uint16_t) wp->GetNumberOfAntennas () << " !!!!!!!!!!!!!!!!!!\n";
+      std::cout << "Tx Support = " << (uint16_t) wp->GetMaxSupportedTxSpatialStreams () << " !!!!!!!!!!!!!!!!!!\n";
+      std::cout << "Rx Support = " << (uint16_t) wp->GetMaxSupportedRxSpatialStreams () << " !!!!!!!!!!!!!!!!!!\n";
+    }
 
   if (pcap)
     wifiPhy.EnablePcapAll (std::string ("aodv"));
@@ -495,17 +499,9 @@ AodvExample::CreateWifiDevices ()
   YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
   wifiPhy.SetChannel (wifiChannel.Create ());
-  wifiPhy.Set ("ChannelWidth", UintegerValue (20));
-//  wifiPhy.Set ("Antennas", UintegerValue (4));
-//  wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (4));
-//  wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (4));
-//  wifiPhy.Set ("TxPowerStart", DoubleValue (30.0));
-//  wifiPhy.Set ("TxPowerEnd", DoubleValue (30.0));
-//  wifiPhy.Set ("TxPowerLevels", UintegerValue (1));
-//  wifiPhy.Set ("ShortGuardEnabled", BooleanValue (true));
+  wifiPhy.Set ("ChannelNumber", UintegerValue (3));
 
   WifiHelper wifi;
-  // 80211n_2_4GHZ, 80211n_5GHZ, 80211ac, 80211ax_2_4GHZ, 80211ax_5GHZ
   wifi.SetStandard (WIFI_PHY_STANDARD_80211n_2_4GHZ);
 //  wifi.SetRemoteStationManager ("ns3::IdealWifiManager");
   wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
@@ -637,6 +633,9 @@ AodvExample::InstallApplications ()
               clientApp[i*clNum+j].Stop (Seconds (totalTime + 0.1));
             }
 
+          if (i == 0)
+            continue;
+
           if (aptx)
             {
               uint16_t port = 40000+i*100;
@@ -690,6 +689,9 @@ AodvExample::InstallApplications ()
               clientApp[i*clNum+j].Start (Seconds (startTime));
               clientApp[i*clNum+j].Stop (Seconds (totalTime + 0.1));
             }
+
+          if (i == 0)
+            continue;
 
           if (aptx)
             {
