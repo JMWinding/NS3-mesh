@@ -118,6 +118,9 @@ WifiTxVector
 ConstantRateWifiManager::DoGetDataTxVector (WifiRemoteStation *st)
 {
   NS_LOG_FUNCTION (this << st);
+  // MY_OWN_TEST
+  NS_LOG_FUNCTION (this << "1" << GetNumberOfSupportedStreams (st));
+  // MY_OWN_TEST
   return WifiTxVector (m_dataMode, GetDefaultTxPowerLevel (), GetPreambleForTransmission (m_dataMode, GetAddress (st)), ConvertGuardIntervalToNanoSeconds (m_dataMode, GetShortGuardInterval (st), NanoSeconds (GetGuardInterval (st))), GetNumberOfAntennas (), Min (GetMaxNumberOfTransmitStreams (), GetNumberOfSupportedStreams (st)), 0, GetChannelWidthForTransmission (m_dataMode, GetChannelWidth (st)), GetAggregation (st), false);
 }
 

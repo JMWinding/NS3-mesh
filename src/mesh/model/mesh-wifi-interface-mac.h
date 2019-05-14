@@ -202,6 +202,7 @@ private:
    * \returns true if beacon active
    */
   bool GetBeaconGeneration () const;
+
   /// Real d-tor
   virtual void DoDispose ();
 

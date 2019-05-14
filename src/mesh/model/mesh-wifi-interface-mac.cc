@@ -71,6 +71,7 @@ MeshWifiInterfaceMac::GetTypeId ()
   ;
   return tid;
 }
+
 MeshWifiInterfaceMac::MeshWifiInterfaceMac ()
   : m_standard (WIFI_PHY_STANDARD_80211a)
 {
@@ -80,10 +81,12 @@ MeshWifiInterfaceMac::MeshWifiInterfaceMac ()
   SetTypeOfStation (MESH);
   m_coefficient = CreateObject<UniformRandomVariable> ();
 }
+
 MeshWifiInterfaceMac::~MeshWifiInterfaceMac ()
 {
   NS_LOG_FUNCTION (this);
 }
+
 //-----------------------------------------------------------------------------
 // WifiMac inherited
 //-----------------------------------------------------------------------------
@@ -93,17 +96,20 @@ MeshWifiInterfaceMac::Enqueue (Ptr<const Packet> packet, Mac48Address to, Mac48A
   NS_LOG_FUNCTION (this << packet << to << from);
   ForwardDown (packet, from, to);
 }
+
 void
 MeshWifiInterfaceMac::Enqueue (Ptr<const Packet> packet, Mac48Address to)
 {
   NS_LOG_FUNCTION (this << packet << to);
   ForwardDown (packet, m_low->GetAddress (), to);
 }
+
 bool
 MeshWifiInterfaceMac::SupportsSendFrom () const
 {
   return true;
 }
+
 void
 MeshWifiInterfaceMac::SetLinkUpCallback (Callback<void> linkUp)
 {
@@ -115,6 +121,7 @@ MeshWifiInterfaceMac::SetLinkUpCallback (Callback<void> linkUp)
   // callback if one is set
   linkUp ();
 }
+
 void
 MeshWifiInterfaceMac::DoDispose ()
 {
@@ -124,6 +131,7 @@ MeshWifiInterfaceMac::DoDispose ()
 
   RegularWifiMac::DoDispose ();
 }
+
 void
 MeshWifiInterfaceMac::DoInitialize ()
 {
@@ -168,6 +176,7 @@ MeshWifiInterfaceMac::InstallPlugin (Ptr<MeshWifiInterfaceMacPlugin> plugin)
   plugin->SetParent (this);
   m_plugins.push_back (plugin);
 }
+
 //-----------------------------------------------------------------------------
 // Switch channels
 //-----------------------------------------------------------------------------
@@ -187,6 +196,7 @@ MeshWifiInterfaceMac::GetFrequencyChannel () const
       return 0;
     }
 }
+
 void
 MeshWifiInterfaceMac::SwitchFrequencyChannel (uint16_t new_id)
 {
@@ -208,6 +218,7 @@ MeshWifiInterfaceMac::SwitchFrequencyChannel (uint16_t new_id)
   // Don't know NAV on new channel
   m_channelAccessManager->NotifyNavResetNow (Seconds (0));
 }
+
 //-----------------------------------------------------------------------------
 // Forward frame down
 //-----------------------------------------------------------------------------
@@ -217,6 +228,14 @@ MeshWifiInterfaceMac::ForwardDown (Ptr<const Packet> const_packet, Mac48Address 
   // copy packet to allow modifications
   Ptr<Packet> packet = const_packet->Copy ();
   WifiMacHeader hdr;
+
+  // MY_OWN_MODIFICATION
+  if (GetHtSupported () || GetVhtSupported () || GetHeSupported ())
+    {
+      hdr.SetNoOrder (); // explicitly set to 0 for the time being since HT/VHT/HE control field is not yet implemented (set it to 1 when implemented)
+    }
+  // MY_OWN_MODIFICATION */
+
   hdr.SetType (WIFI_MAC_QOSDATA);
   hdr.SetAddr2 (GetAddress ());
   hdr.SetAddr3 (to);
@@ -250,6 +269,26 @@ MeshWifiInterfaceMac::ForwardDown (Ptr<const Packet> const_packet, Mac48Address 
         {
           m_stationManager->AddSupportedMode (hdr.GetAddr1 (), m_phy->GetMode (i));
         }
+      /*/ MY_OWN_MODIFICATION
+      if (GetHtSupported () || GetVhtSupported () || GetHeSupported ())
+        {
+          m_stationManager->AddAllSupportedMcs (hdr.GetAddr1 ());
+        }
+      if (GetHtSupported ())
+        {
+          m_stationManager->AddStationHtCapabilities (hdr.GetAddr1 (), GetHtCapabilities ());
+          std::cout << GetHtCapabilities () << std::endl;
+        }
+      if (GetVhtSupported ())
+        {
+          m_stationManager->AddStationVhtCapabilities (hdr.GetAddr1 (), GetVhtCapabilities ());
+          std::cout << GetVhtCapabilities () << std::endl;
+        }
+      if (GetHeSupported ())
+        {
+          m_stationManager->AddStationHeCapabilities (hdr.GetAddr1 (), GetHeCapabilities ());
+        }
+      // MY_OWN_MODIFICATION */
       m_stationManager->RecordDisassociated (hdr.GetAddr1 ());
     }
   // Classify: application may have set a tag, which is removed here
@@ -271,6 +310,7 @@ MeshWifiInterfaceMac::ForwardDown (Ptr<const Packet> const_packet, Mac48Address 
   NS_ASSERT (m_edca.find (ac) != m_edca.end ());
   m_edca[ac]->Queue (packet, hdr);
 }
+
 void
 MeshWifiInterfaceMac::SendManagementFrame (Ptr<Packet> packet, const WifiMacHeader& hdr)
 {
@@ -327,8 +367,10 @@ MeshWifiInterfaceMac::GetSupportedRates () const
       uint16_t gi = ConvertGuardIntervalToNanoSeconds (mode, m_phy->GetShortGuardInterval (), m_phy->GetGuardInterval ());
       rates.SetBasicRate (mode.GetDataRate (m_phy->GetChannelWidth (), gi, 1));
     }
+
   return rates;
 }
+
 bool
 MeshWifiInterfaceMac::CheckSupportedRates (SupportedRates rates) const
 {
@@ -353,33 +395,39 @@ MeshWifiInterfaceMac::SetRandomStartDelay (Time interval)
   NS_LOG_FUNCTION (this << interval);
   m_randomStart = interval;
 }
+
 void
 MeshWifiInterfaceMac::SetBeaconInterval (Time interval)
 {
   NS_LOG_FUNCTION (this << interval);
   m_beaconInterval = interval;
 }
+
 Time
 MeshWifiInterfaceMac::GetBeaconInterval () const
 {
   return m_beaconInterval;
 }
+
 void
 MeshWifiInterfaceMac::SetBeaconGeneration (bool enable)
 {
   NS_LOG_FUNCTION (this << enable);
   m_beaconEnable = enable;
 }
+
 bool
 MeshWifiInterfaceMac::GetBeaconGeneration () const
 {
   return m_beaconSendEvent.IsRunning ();
 }
+
 Time
 MeshWifiInterfaceMac::GetTbtt () const
 {
   return m_tbtt;
 }
+
 void
 MeshWifiInterfaceMac::ShiftTbtt (Time shift)
 {
@@ -392,12 +440,14 @@ MeshWifiInterfaceMac::ShiftTbtt (Time shift)
   m_beaconSendEvent = Simulator::Schedule (GetTbtt () - Simulator::Now (), &MeshWifiInterfaceMac::SendBeacon,
                                            this);
 }
+
 void
 MeshWifiInterfaceMac::ScheduleNextBeacon ()
 {
   m_tbtt += GetBeaconInterval ();
   m_beaconSendEvent = Simulator::Schedule (GetBeaconInterval (), &MeshWifiInterfaceMac::SendBeacon, this);
 }
+
 void
 MeshWifiInterfaceMac::SendBeacon ()
 {
@@ -418,6 +468,7 @@ MeshWifiInterfaceMac::SendBeacon ()
 
   ScheduleNextBeacon ();
 }
+
 void
 MeshWifiInterfaceMac::Receive (Ptr<Packet> packet, WifiMacHeader const *hdr)
 {
@@ -426,6 +477,36 @@ MeshWifiInterfaceMac::Receive (Ptr<Packet> packet, WifiMacHeader const *hdr)
     {
       return;
     }
+
+  /*/ MY_OWN_MODIFICATION
+  // update capabilities
+  Mac48Address from = hdr->GetAddr2 ();
+  if (m_stationManager->IsBrandNew (from))
+    {
+      //In ad hoc mode, we assume that every destination supports all
+      //the rates we support.
+      if (GetHtSupported () || GetVhtSupported () || GetHeSupported ())
+        {
+          m_stationManager->AddAllSupportedMcs (from);
+          m_stationManager->AddStationHtCapabilities (from, GetHtCapabilities ());
+        }
+      if (GetHtSupported ())
+        {
+          m_stationManager->AddStationHtCapabilities (from, GetHtCapabilities ());
+        }
+      if (GetVhtSupported ())
+        {
+          m_stationManager->AddStationVhtCapabilities (from, GetVhtCapabilities ());
+        }
+      if (GetHeSupported ())
+        {
+          m_stationManager->AddStationHeCapabilities (from, GetHeCapabilities ());
+        }
+      m_stationManager->AddAllSupportedModes (from);
+      m_stationManager->RecordDisassociated (from);
+    }
+  // MY_OWN_MODIFICATION */
+
   if (hdr->IsBeacon ())
     {
       m_stats.recvBeacons++;
@@ -488,6 +569,7 @@ MeshWifiInterfaceMac::Receive (Ptr<Packet> packet, WifiMacHeader const *hdr)
   // we've explicitly handled all the frames we care about. This is in
   // contrast to most classes which derive from RegularWifiMac.
 }
+
 uint32_t
 MeshWifiInterfaceMac::GetLinkMetric (Mac48Address peerAddress)
 {
@@ -498,21 +580,25 @@ MeshWifiInterfaceMac::GetLinkMetric (Mac48Address peerAddress)
     }
   return metric;
 }
+
 void
 MeshWifiInterfaceMac::SetLinkMetricCallback (Callback<uint32_t, Mac48Address, Ptr<MeshWifiInterfaceMac> > cb)
 {
   m_linkMetricCallback = cb;
 }
+
 void
 MeshWifiInterfaceMac::SetMeshPointAddress (Mac48Address a)
 {
   m_mpAddress = a;
 }
+
 Mac48Address
 MeshWifiInterfaceMac::GetMeshPointAddress () const
 {
   return m_mpAddress;
 }
+
 //Statistics:
 MeshWifiInterfaceMac::Statistics::Statistics ()
   : recvBeacons (0),
@@ -522,6 +608,7 @@ MeshWifiInterfaceMac::Statistics::Statistics ()
     recvBytes (0)
 {
 }
+
 void
 MeshWifiInterfaceMac::Statistics::Print (std::ostream & os) const
 {
@@ -533,6 +620,7 @@ MeshWifiInterfaceMac::Statistics::Print (std::ostream & os) const
     "rxFrames=\"" << recvFrames << "\" "
     "rxBytes=\"" << recvBytes << "\"/>" << std::endl;
 }
+
 void
 MeshWifiInterfaceMac::Report (std::ostream & os) const
 {
@@ -543,6 +631,7 @@ MeshWifiInterfaceMac::Report (std::ostream & os) const
   m_stats.Print (os);
   os << "</Interface>" << std::endl;
 }
+
 void
 MeshWifiInterfaceMac::ResetStats ()
 {
@@ -562,10 +651,11 @@ MeshWifiInterfaceMac::FinishConfigureStandard (enum WifiPhyStandard standard)
   m_txop->SetMaxCw (0);
   m_txop->SetAifsn (1);
 }
+
 WifiPhyStandard
 MeshWifiInterfaceMac::GetPhyStandard () const
 {
   return m_standard;
 }
-} // namespace ns3
 
+} // namespace ns3

@@ -2107,6 +2107,9 @@ WifiRemoteStationManager::GetAggregation (const WifiRemoteStation *station) cons
 uint8_t
 WifiRemoteStationManager::GetNumberOfSupportedStreams (const WifiRemoteStation *station) const
 {
+  // MY_OWN_TEST
+  NS_LOG_FUNCTION (this << "2" << station->m_state->m_streams);
+  // MY_OWN_TEST
   return station->m_state->m_streams;
 }
 
