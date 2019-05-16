@@ -256,24 +256,6 @@ MeshWifiInterfaceMac::ForwardDown (Ptr<const Packet> const_packet, Mac48Address 
   // Queue frame
   if (m_stationManager->IsBrandNew (hdr.GetAddr1 ()))
     {
-      /*/
-      if (GetHtSupported () || GetVhtSupported () || GetHeSupported ())
-        {
-          m_stationManager->AddAllSupportedMcs (hdr.GetAddr1 ());
-        }
-      if (GetHtSupported ())
-        {
-          m_stationManager->AddStationHtCapabilities (hdr.GetAddr1 (), GetHtCapabilities ());
-        }
-      if (GetVhtSupported ())
-        {
-          m_stationManager->AddStationVhtCapabilities (hdr.GetAddr1 (), GetVhtCapabilities ());
-        }
-      if (GetHeSupported ())
-        {
-          m_stationManager->AddStationHeCapabilities (hdr.GetAddr1 (), GetHeCapabilities ());
-        }
-      // */
       m_stationManager->AddAllSupportedModes (hdr.GetAddr1 ());
       m_stationManager->RecordDisassociated (hdr.GetAddr1 ());
     }
@@ -344,7 +326,8 @@ MeshWifiInterfaceMac::GetSupportedRates () const
     {
       WifiMode mode = m_phy->GetMode (i);
       uint16_t gi = ConvertGuardIntervalToNanoSeconds (mode, m_phy->GetShortGuardInterval (), m_phy->GetGuardInterval ());
-      rates.AddSupportedRate (mode.GetDataRate (m_phy->GetChannelWidth (), gi, 1));
+      for (uint32_t j = 1; j <= m_phy->GetNumberOfAntennas(); j++)
+        rates.AddSupportedRate (mode.GetDataRate (m_phy->GetChannelWidth (), gi, j));
     }
   // set the basic rates
   for (uint32_t i = 0; i < m_stationManager->GetNBasicModes (); i++)
@@ -458,34 +441,6 @@ MeshWifiInterfaceMac::SendBeacon ()
 void
 MeshWifiInterfaceMac::Receive (Ptr<Packet> packet, WifiMacHeader const *hdr)
 {
-  /*/
-  Mac48Address from = hdr->GetAddr2 ();
-  if (m_stationManager->IsBrandNew (from))
-    {
-      //In ad hoc mode, we assume that every destination supports all
-      //the rates we support.
-      if (GetHtSupported () || GetVhtSupported () || GetHeSupported ())
-        {
-          m_stationManager->AddAllSupportedMcs (from);
-          m_stationManager->AddStationHtCapabilities (from, GetHtCapabilities ());
-        }
-      if (GetHtSupported ())
-        {
-          m_stationManager->AddStationHtCapabilities (from, GetHtCapabilities ());
-        }
-      if (GetVhtSupported ())
-        {
-          m_stationManager->AddStationVhtCapabilities (from, GetVhtCapabilities ());
-        }
-      if (GetHeSupported ())
-        {
-          m_stationManager->AddStationHeCapabilities (from, GetHeCapabilities ());
-        }
-      m_stationManager->AddAllSupportedModes (from);
-      m_stationManager->RecordDisassociated (from);
-    }
-  // */
-
   // Process beacon
   if ((hdr->GetAddr1 () != GetAddress ()) && (hdr->GetAddr1 () != Mac48Address::GetBroadcast ()))
     {
