@@ -25,6 +25,7 @@
 #include "ns3/mesh-point-device.h"
 #include "ns3/wifi-net-device.h"
 #include "ns3/minstrel-wifi-manager.h"
+#include "ns3/minstrel-ht-wifi-manager.h"
 #include "ns3/mesh-wifi-interface-mac.h"
 #include "ns3/wifi-helper.h"
 
@@ -241,6 +242,13 @@ MeshHelper::AssignStreams (NetDeviceContainer c, int64_t stream)
                 {
                   currentStream += minstrel->AssignStreams (currentStream);
                 }
+
+              Ptr<MinstrelHtWifiManager> minstrelHt = DynamicCast<MinstrelHtWifiManager> (manager);
+              if (minstrelHt)
+                {
+                  currentStream += minstrelHt->AssignStreams (currentStream);
+                }
+
               // Handle any random numbers in the mesh mac and plugins
               mac = DynamicCast<MeshWifiInterfaceMac> (wifi->GetMac ());
               if (mac)

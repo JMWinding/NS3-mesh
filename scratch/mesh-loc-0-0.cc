@@ -36,7 +36,7 @@ std::vector<Ptr<PacketSink>> packetSink;
 double
 CalculateSingleStreamThroughput (Ptr<PacketSink> sink, uint64_t &lastTotalRx, double monitorInterval)
 {
-  double thr = (sink->GetTotalRx () - lastTotalRx) * (double) 8/1024/1024/monitorInterval;
+  double thr = (sink->GetTotalRx () - lastTotalRx) * (double) 8/1000/1000/monitorInterval;
   lastTotalRx = sink->GetTotalRx ();
   return thr;
 }
@@ -179,6 +179,7 @@ private:
   void CreateCsmaDevices ();
   void InstallCsmaInternetStack ();
   void ReadLocations ();
+  void PreSetStationManager ();
 };
 
 int main (int argc, char **argv)
@@ -441,7 +442,7 @@ AodvExample::CreateMeshDevices ()
   mesh.SetMacType ("RandomStart", TimeValue (Seconds (startTime)),
                    "BeaconInterval", TimeValue (Seconds (startTime)));
   mesh.SetStandard (WIFI_PHY_STANDARD_80211ac);
-//  mesh.SetRemoteStationManager ("ns3::IdealWifiManager");
+  //  mesh.SetRemoteStationManager ("ns3::IdealWifiManager");
   mesh.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
                                 "ControlMode", StringValue ("HtMcs0"),
                                 "DataMode", StringValue ("HtMcs7"),
@@ -454,24 +455,10 @@ AodvExample::CreateMeshDevices ()
 //  WifiHelper wifi;
 //  wifi.SetStandard (WIFI_PHY_STANDARD_80211ac);
 //  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-//                                "ControlMode", StringValue ("HtMcs0"),
-//                                "DataMode", StringValue ("HtMcs31"),
+//                                "ControlMode", StringValue ("VhtMcs0"),
+//                                "DataMode", StringValue ("VhtMcs7"),
 //                                "RtsCtsThreshold", UintegerValue (99999));
 //  meshDevices = wifi.Install (wifiPhy, wifiMac, apNodes);
-
-//  for (uint32_t i = 0; i < meshDevices.GetN (); ++i)
-//    {
-//      Ptr<NetDevice> nd = meshDevices.Get (i);
-//      Ptr<MeshPointDevice> mpd = DynamicCast<MeshPointDevice> (nd);
-//      std::vector<Ptr<NetDevice>> nds = mpd->GetInterfaces ();
-//      Ptr<WifiNetDevice> wnd = DynamicCast<WifiNetDevice> (nds[0]);
-//      Ptr<WifiPhy> wp = wnd->GetPhy ();
-//      std::cout << "Channel Number = " << (uint16_t) wp->GetChannelNumber () << " !!!!!!!!!!!!!!!!!!\n";
-//      std::cout << "Channel Width = " << (uint16_t) wp->GetChannelWidth () << " !!!!!!!!!!!!!!!!!!\n";
-//      std::cout << "Antennas = " << (uint16_t) wp->GetNumberOfAntennas () << " !!!!!!!!!!!!!!!!!!\n";
-//      std::cout << "Tx Support = " << (uint16_t) wp->GetMaxSupportedTxSpatialStreams () << " !!!!!!!!!!!!!!!!!!\n";
-//      std::cout << "Rx Support = " << (uint16_t) wp->GetMaxSupportedRxSpatialStreams () << " !!!!!!!!!!!!!!!!!!\n";
-//    }
 
   if (pcap)
     wifiPhy.EnablePcapAll (std::string ("aodv"));
