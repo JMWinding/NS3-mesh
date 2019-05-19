@@ -97,7 +97,6 @@ PeerManagementProtocolMac::Receive (Ptr<Packet> const_packet, const WifiMacHeade
   IeConfiguration config;
   if (header.IsAction ())
     {
-      NS_LOG_DEBUG ("Is action");
       WifiActionHeader actionHdr;
       packet->RemoveHeader (actionHdr);
       WifiActionHeader::ActionValue actionValue = actionHdr.GetAction ();
@@ -239,6 +238,7 @@ PeerManagementProtocolMac::UpdateOutcomingFrame (Ptr<Packet> packet, WifiMacHead
 void
 PeerManagementProtocolMac::UpdateBeacon (MeshWifiBeacon & beacon) const
 {
+  NS_LOG_FUNCTION (this);
   if (m_protocol->GetBeaconCollisionAvoidance ())
     {
       Ptr<IeBeaconTiming> beaconTiming = m_protocol->GetBeaconTimingElement (m_ifIndex);

@@ -109,6 +109,7 @@ private:
   /// Simulation time, seconds
   double startTime;
   double totalTime;
+  double beaconInterval;
   /// Write per-device PCAP traces if true
   bool pcap;
   /// Print routes if true
@@ -205,6 +206,7 @@ AodvExample::AodvExample () :
   clStep (20),
   startTime (1),
   totalTime (20),
+  beaconInterval (1),
   pcap (false),
   printRoutes (false),
   app ("udp"),
@@ -234,6 +236,7 @@ AodvExample::Configure (int argc, char **argv)
   cmd.AddValue ("clNum", "Number of CL nodes for each Service Set.", clNum);
   cmd.AddValue ("startTime", "Application start time, s.", startTime);
   cmd.AddValue ("totalTime", "Simulation time, s.", totalTime);
+  cmd.AddValue ("beaconInterval", "Mesh beacon interval, s.", beaconInterval);
   cmd.AddValue ("monitorInterval", "Monitor interval, s.", monitorInterval);
   cmd.AddValue ("apStep", "AP grid step, m", apStep);
   cmd.AddValue ("clStep", "CL grid step, m", clStep);
@@ -440,7 +443,7 @@ AodvExample::CreateMeshDevices ()
   mesh.SetStackInstaller ("ns3::Dot11sStack");
   mesh.SetSpreadInterfaceChannels (MeshHelper::ZERO_CHANNEL);
   mesh.SetMacType ("RandomStart", TimeValue (Seconds (startTime)),
-                   "BeaconInterval", TimeValue (Seconds (startTime)));
+                   "BeaconInterval", TimeValue (Seconds (beaconInterval)));
   mesh.SetStandard (WIFI_PHY_STANDARD_80211ac);
   //  mesh.SetRemoteStationManager ("ns3::IdealWifiManager");
   mesh.SetRemoteStationManager ("ns3::ConstantRateWifiManager",

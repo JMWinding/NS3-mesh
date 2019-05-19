@@ -1,0 +1,400 @@
+Waf: Entering directory `/home/jiaming/eclipse-workspace/ns-3.29-mesh/build'
+Waf: Leaving directory `/home/jiaming/eclipse-workspace/ns-3.29-mesh/build'
+Build commands will be stored in build/compile_commands.json
+'build' finished successfully (3.977s)
++0.000000000s -1 MeshWifiInterfaceMac:MeshWifiInterfaceMac(0x55a331717400)
++0.000000000s -1 MeshWifiInterfaceMac:SetBeaconGeneration(0x55a331717400, 1)
++0.000000000s -1 MeshWifiInterfaceMac:SetLinkUpCallback(0x55a331717400)
++0.000000000s -1 MeshWifiInterfaceMac:SwitchFrequencyChannel(0x55a331717400)
++0.000000000s -1 MeshWifiInterfaceMac:InstallPlugin(0x55a331717400)
++0.000000000s -1 HwmpProtocol:HwmpProtocol(0x55a33171e950)
++0.000000000s -1 HwmpProtocol:Install(0x55a33171e950, 0x55a3316d1000)
++0.000000000s -1 HwmpProtocolMac:HwmpProtocolMac(0x55a331725a90, 1, 0x55a33171e950)
++0.000000000s -1 MeshWifiInterfaceMac:InstallPlugin(0x55a331717400)
++0.000000000s -1 HwmpProtocolMac:SetParent(0x55a331725a90, 0x55a331717400)
++0.000000000s -1 MeshWifiInterfaceMac:MeshWifiInterfaceMac(0x55a3317178e0)
++0.000000000s -1 MeshWifiInterfaceMac:SetBeaconGeneration(0x55a3317178e0, 1)
++0.000000000s -1 MeshWifiInterfaceMac:SetLinkUpCallback(0x55a3317178e0)
++0.000000000s -1 MeshWifiInterfaceMac:SwitchFrequencyChannel(0x55a3317178e0)
++0.000000000s -1 MeshWifiInterfaceMac:InstallPlugin(0x55a3317178e0)
++0.000000000s -1 HwmpProtocol:HwmpProtocol(0x55a33171eb40)
++0.000000000s -1 HwmpProtocol:Install(0x55a33171eb40, 0x55a33167c5d0)
++0.000000000s -1 HwmpProtocolMac:HwmpProtocolMac(0x55a3316db520, 1, 0x55a33171eb40)
++0.000000000s -1 MeshWifiInterfaceMac:InstallPlugin(0x55a3317178e0)
++0.000000000s -1 HwmpProtocolMac:SetParent(0x55a3316db520, 0x55a3317178e0)
++0.000000000s 0 HwmpProtocol:DoInitialize(0x55a33171e950)
++0.000000000s 0 MeshWifiInterfaceMac:DoInitialize(0x55a331717400)
++0.000000000s 1 HwmpProtocol:DoInitialize(0x55a33171eb40)
++0.000000000s 1 MeshWifiInterfaceMac:DoInitialize(0x55a3317178e0)
++0.024000000s 0 HwmpProtocol:RequestRoute(0x55a33171e950, 0, 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff, 0x55a3317a52c0, 2048)
++0.024000000s 0 MeshWifiInterfaceMac:GetFrequencyChannel(0x55a331717400)
++0.024000000s 0 HwmpProtocol:GetBroadcastReceivers(0x55a33171e950, 1)
++0.024000000s 0 MeshWifiInterfaceMac:Enqueue(0x55a331717400, 0x55a3317a54b0, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:01)
++0.024000000s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55a331725a90, 0x55a3317a5590, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
++0.024000000s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316d71e0, 0x55a3317a5590, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
++0.024000000s 0 MeshWifiInterfaceMac:ForwardDown(0x55a331717400, 0x55a3317a5590, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
++0.024156033s 1 PeerManagementProtocolMac:Receive(0x55a3316dc8d0, 0x55a3317a59f0, QOSDATA )
++0.086000000s 1 HwmpProtocol:RequestRoute(0x55a33171eb40, 0, 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff, 0x55a33179ff80, 2048)
++0.086000000s 1 MeshWifiInterfaceMac:GetFrequencyChannel(0x55a3317178e0)
++0.086000000s 1 HwmpProtocol:GetBroadcastReceivers(0x55a33171eb40, 1)
++0.086000000s 1 MeshWifiInterfaceMac:Enqueue(0x55a3317178e0, 0x55a3317a4fe0, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:02)
++0.086000000s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55a3316db520, 0x55a3317a5590, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++0.086000000s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316dc8d0, 0x55a3317a5590, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++0.086000000s 1 MeshWifiInterfaceMac:ForwardDown(0x55a3317178e0, 0x55a3317a5590, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++0.086156033s 0 PeerManagementProtocolMac:Receive(0x55a3316d71e0, 0x55a3317a6400, QOSDATA )
++0.343115231s 0 MeshWifiInterfaceMac:SendBeacon(0x55a331717400)
++0.343115231s 0 MeshWifiInterfaceMac:SendBeacon(): 00:00:00:00:00:01 is sending beacon
++0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 6000000
++0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate6Mbps
++0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 9000000
++0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 12000000
++0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate12Mbps
++0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 18000000
++0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 24000000
++0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate24Mbps
++0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 36000000
++0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 48000000
++0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 54000000
++0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate6Mbps
++0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate12Mbps
++0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate24Mbps
++0.343115231s 0 PeerManagementProtocolMac:UpdateBeacon(0x55a3316d71e0)
++0.343223231s 0 PeerManagementProtocol:TransmissionSuccess(): transmission success 00:00:00:00:00:01 and ff:ff:ff:ff:ff:ff
++0.343223264s 1 MeshWifiInterfaceMac:Receive(): Beacon received from 00:00:00:00:00:01 I am 00:00:00:00:00:02 at 343223 microseconds
++0.343223264s 1 PeerManagementProtocolMac:Receive(0x55a3316dc8d0, 0x55a3317a5980, MGT_BEACON ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=1)
++0.343223264s 1 PeerManagementProtocolMac:Receive(): Is Beacon from 00:00:00:00:00:01
++0.343223264s 1 PeerManagementProtocol:PeerLinkStatus(): Link between me:00:00:00:00:00:02 my interface:00:00:00:00:00:02 and peer mesh point:ff:ff:ff:ff:ff:ff and its interface:00:00:00:00:00:01, at my interface ID:1. State movement:IDLE -> OPN_SNT
++0.343223264s 1 PeerManagementProtocolMac:SendPeerLinkManagementFrame(0x55a3316dc8d0, 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
++0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 6000000
++0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate6Mbps
++0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 9000000
++0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 12000000
++0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate12Mbps
++0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 18000000
++0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 24000000
++0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate24Mbps
++0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 36000000
++0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 48000000
++0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 54000000
++0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate6Mbps
++0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate12Mbps
++0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate24Mbps
++0.343223264s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55a3316db520, 0x55a3317a59f0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=11622us, DA=00:00:00:00:00:01, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=12672, 00:00:00:00:00:00, 00:00:00:00:00:00)
++0.343223264s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316dc8d0, 0x55a3317a59f0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=11622us, DA=00:00:00:00:00:01, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=12672, 00:00:00:00:00:00, 00:00:00:00:00:00)
++0.343223264s 1 HwmpProtocolMac:Receive(0x55a3316db520, 0x55a3317a5980, MGT_BEACON ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=1)
++0.343319297s 0 PeerManagementProtocolMac:Receive(0x55a3316d71e0, 0x55a3317a5330, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=60us, DA=00:00:00:00:00:01, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=1)
++0.343319297s 0 PeerManagementProtocolMac:Receive(): Received PEER_LINK_OPEN
++0.343319297s 0 PeerManagementProtocol:PeerLinkStatus(): Link between me:00:00:00:00:00:01 my interface:00:00:00:00:00:01 and peer mesh point:00:00:00:00:00:02 and its interface:00:00:00:00:00:02, at my interface ID:1. State movement:IDLE -> OPN_RCVD
++0.343319297s 0 PeerManagementProtocolMac:SendPeerLinkManagementFrame(0x55a3316d71e0, 00:00:00:00:00:02, 00:00:00:00:00:02)
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 6000000
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate6Mbps
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 9000000
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 12000000
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate12Mbps
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 18000000
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 24000000
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate24Mbps
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 36000000
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 48000000
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 54000000
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate6Mbps
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate12Mbps
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate24Mbps
++0.343319297s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55a331725a90, 0x55a3317a4e30, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=12672, 00:00:00:00:00:00, 00:00:00:00:00:00)
++0.343319297s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316d71e0, 0x55a3317a4e30, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=12672, 00:00:00:00:00:00, 00:00:00:00:00:00)
++0.343319297s 0 PeerManagementProtocolMac:SendPeerLinkManagementFrame(0x55a3316d71e0, 00:00:00:00:00:02, 00:00:00:00:00:02)
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 6000000
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate6Mbps
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 9000000
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 12000000
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate12Mbps
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 18000000
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 24000000
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate24Mbps
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 36000000
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 48000000
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 54000000
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate6Mbps
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate12Mbps
++0.343319297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate24Mbps
++0.343319297s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55a331725a90, 0x55a3317a5660, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=11622us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=12672, 00:00:00:00:00:00, 00:00:00:00:00:00)
++0.343319297s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316d71e0, 0x55a3317a5660, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=11622us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=12672, 00:00:00:00:00:00, 00:00:00:00:00:00)
++0.343379330s 1 PeerManagementProtocol:TransmissionSuccess(): transmission success 00:00:00:00:00:02 and 00:00:00:00:00:01
++0.343475330s 1 PeerManagementProtocolMac:Receive(0x55a3316dc8d0, 0x55a3317a6400, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=60us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=2)
++0.343475330s 1 PeerManagementProtocolMac:Receive(): Received PEER_LINK_CONFIRM
++0.343475330s 1 PeerManagementProtocol:PeerLinkStatus(): Link between me:00:00:00:00:00:02 my interface:00:00:00:00:00:02 and peer mesh point:00:00:00:00:00:01 and its interface:00:00:00:00:00:01, at my interface ID:1. State movement:OPN_SNT -> CNF_RCVD
++0.343535363s 0 PeerManagementProtocol:TransmissionSuccess(): transmission success 00:00:00:00:00:01 and 00:00:00:00:00:02
++0.343631396s 1 PeerManagementProtocolMac:Receive(0x55a3316dc8d0, 0x55a33179fff0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=60us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=3)
++0.343631396s 1 PeerManagementProtocolMac:Receive(): Received PEER_LINK_OPEN
++0.343631396s 1 PeerManagementProtocol:PeerLinkStatus(): Link between me:00:00:00:00:00:02 my interface:00:00:00:00:00:02 and peer mesh point:00:00:00:00:00:01 and its interface:00:00:00:00:00:01, at my interface ID:1. State movement:CNF_RCVD -> ESTAB
++0.343631396s 1 PeerManagementProtocol:NotifyLinkOpen(): link_open 00:00:00:00:00:02 00:00:00:00:00:01
++0.343631396s 1 HwmpProtocol:PeerLinkStatus(0x55a33171eb40, 00:00:00:00:00:01, 00:00:00:00:00:01, 1, 1)
++0.343631396s 1 PeerManagementProtocolMac:SendPeerLinkManagementFrame(0x55a3316dc8d0, 00:00:00:00:00:01, 00:00:00:00:00:01)
++0.343631396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 6000000
++0.343631396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate6Mbps
++0.343631396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 9000000
++0.343631396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 12000000
++0.343631396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate12Mbps
++0.343631396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 18000000
++0.343631396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 24000000
++0.343631396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate24Mbps
++0.343631396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 36000000
++0.343631396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 48000000
++0.343631396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 54000000
++0.343631396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate6Mbps
++0.343631396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate12Mbps
++0.343631396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate24Mbps
++0.343631396s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55a3316db520, 0x55a3317a59f0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=00:00:00:00:00:01, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=12672, 00:00:00:00:00:00, 00:00:00:00:00:00)
++0.343631396s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316dc8d0, 0x55a3317a59f0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=00:00:00:00:00:01, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=12672, 00:00:00:00:00:00, 00:00:00:00:00:00)
++0.343691429s 0 PeerManagementProtocol:TransmissionSuccess(): transmission success 00:00:00:00:00:01 and 00:00:00:00:00:02
++0.343769429s 0 PeerManagementProtocolMac:Receive(0x55a3316d71e0, 0x55a3317a6400, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=60us, DA=00:00:00:00:00:01, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=2)
++0.343769429s 0 PeerManagementProtocolMac:Receive(): Received PEER_LINK_CONFIRM
++0.343769429s 0 PeerManagementProtocol:PeerLinkStatus(): Link between me:00:00:00:00:00:01 my interface:00:00:00:00:00:01 and peer mesh point:00:00:00:00:00:02 and its interface:00:00:00:00:00:02, at my interface ID:1. State movement:OPN_RCVD -> ESTAB
++0.343769429s 0 PeerManagementProtocol:NotifyLinkOpen(): link_open 00:00:00:00:00:01 00:00:00:00:00:02
++0.343769429s 0 HwmpProtocol:PeerLinkStatus(0x55a33171e950, 00:00:00:00:00:02, 00:00:00:00:00:02, 1, 1)
++0.343829462s 1 PeerManagementProtocol:TransmissionSuccess(): transmission success 00:00:00:00:00:02 and 00:00:00:00:00:01
++0.622492614s 1 MeshWifiInterfaceMac:SendBeacon(0x55a3317178e0)
++0.622492614s 1 MeshWifiInterfaceMac:SendBeacon(): 00:00:00:00:00:02 is sending beacon
++0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 6000000
++0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate6Mbps
++0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 9000000
++0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 12000000
++0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate12Mbps
++0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 18000000
++0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 24000000
++0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate24Mbps
++0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 36000000
++0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 48000000
++0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 54000000
++0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate6Mbps
++0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate12Mbps
++0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate24Mbps
++0.622492614s 1 PeerManagementProtocolMac:UpdateBeacon(0x55a3316dc8d0)
++0.622608614s 1 PeerManagementProtocol:TransmissionSuccess(): transmission success 00:00:00:00:00:02 and ff:ff:ff:ff:ff:ff
++0.622608647s 0 MeshWifiInterfaceMac:Receive(): Beacon received from 00:00:00:00:00:02 I am 00:00:00:00:00:01 at 622608 microseconds
++0.622608647s 0 PeerManagementProtocolMac:Receive(0x55a3316d71e0, 0x55a3317a4ca0, MGT_BEACON ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=3)
++0.622608647s 0 PeerManagementProtocolMac:Receive(): Is Beacon from 00:00:00:00:00:02
++0.622608647s 0 HwmpProtocolMac:Receive(0x55a331725a90, 0x55a3317a4ca0, MGT_BEACON ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=3)
+CreateVariables () DONE !!!
+Creating 2 APs 10.00 m apart.
+CreateApNodes () DONE !!!
+Creating 0 CLs 20.00 m away from each AP.
+CreateClNodes () DONE !!!
+CreateNodes () DONE !!!
+CreateMeshDevices () DONE !!!
+CreateWifiDevices () DONE !!!
+CreateCsmaDevices () DONE !!!
+CreateDevices () DONE !!!
+InstallMeshInternetStack () DONE !!!
+InstallWifiInternetStack () DONE !!!
+InstallCsmaInternetStack () DONE !!!
+InstallInternetStack () DONE !!!
+Gateway is connect to AP 0
+InstallApplications () DONE !!!
+Starting simulation for 2.00 s ...
+-------------------------------------------------
+Time[s]	ap-0	ap-1
++1.025000000s 0 HwmpProtocol:RequestRoute(0x55a33171e950, 0, 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff, 0x55a3317a5330, 2048)
++1.025000000s 0 MeshWifiInterfaceMac:GetFrequencyChannel(0x55a331717400)
++1.025000000s 0 HwmpProtocol:GetBroadcastReceivers(0x55a33171e950, 1)
++1.025000000s 0 MeshWifiInterfaceMac:Enqueue(0x55a331717400, 0x55a3317a7ee0, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:01)
++1.025000000s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55a331725a90, 0x55a3317a8000, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
++1.025000000s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316d71e0, 0x55a3317a8000, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
++1.025000000s 0 MeshWifiInterfaceMac:ForwardDown(0x55a331717400, 0x55a3317a8000, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
+
++1.025156033s 1 PeerManagementProtocolMac:Receive(0x55a3316dc8d0, 0x55a3317a8250, QOSDATA )
++1.025156033s 1 HwmpProtocolMac:Receive(0x55a3316db520, 0x55a3317a8250, QOSDATA )
++1.025156033s 1 HwmpProtocolMac:ReceiveData(0x55a3316db520, 0x55a3317a8250, QOSDATA )
++1.025156033s 1 HwmpProtocol:DropDataFrame(0x55a33171eb40, 2, 00:00:00:00:00:01)
++1.025156033s 1 HwmpProtocol:RequestRoute(0x55a33171eb40, 1, 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff, 0x55a3317a8250, 2048)
++1.025156033s 1 MeshWifiInterfaceMac:GetFrequencyChannel(0x55a3317178e0)
++1.025156033s 1 HwmpProtocol:GetBroadcastReceivers(0x55a33171eb40, 1)
++1.025156033s 1 MeshWifiInterfaceMac:Enqueue(0x55a3317178e0, 0x55a3317a56d0, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:01)
++1.025156033s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55a3316db520, 0x55a33179a540, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
++1.025156033s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316dc8d0, 0x55a33179a540, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
++1.025156033s 1 MeshWifiInterfaceMac:ForwardDown(0x55a3317178e0, 0x55a33179a540, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
+
++1.025391066s 0 PeerManagementProtocolMac:Receive(0x55a3316d71e0, 0x55a3317a56d0, QOSDATA )
++1.025391066s 0 HwmpProtocolMac:Receive(0x55a331725a90, 0x55a3317a56d0, QOSDATA )
++1.025391066s 0 HwmpProtocolMac:ReceiveData(0x55a331725a90, 0x55a3317a56d0, QOSDATA )
++1.025391066s 0 HwmpProtocol:DropDataFrame(0x55a33171e950, 2, 00:00:00:00:00:01)
+
++1.085000000s 1 HwmpProtocol:RequestRoute(0x55a33171eb40, 0, 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff, 0x55a3317a5330, 2048)
++1.085000000s 1 MeshWifiInterfaceMac:GetFrequencyChannel(0x55a3317178e0)
++1.085000000s 1 HwmpProtocol:GetBroadcastReceivers(0x55a33171eb40, 1)
++1.085000000s 1 MeshWifiInterfaceMac:Enqueue(0x55a3317178e0, 0x55a3317a4e30, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:02)
++1.085000000s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55a3316db520, 0x55a3317a81e0, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++1.085000000s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316dc8d0, 0x55a3317a81e0, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++1.085000000s 1 MeshWifiInterfaceMac:ForwardDown(0x55a3317178e0, 0x55a3317a81e0, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
+
++1.085156033s 0 PeerManagementProtocolMac:Receive(0x55a3316d71e0, 0x55a3317a6400, QOSDATA )
++1.085156033s 0 HwmpProtocolMac:Receive(0x55a331725a90, 0x55a3317a6400, QOSDATA )
++1.085156033s 0 HwmpProtocolMac:ReceiveData(0x55a331725a90, 0x55a3317a6400, QOSDATA )
++1.085156033s 0 HwmpProtocol:DropDataFrame(0x55a33171e950, 2, 00:00:00:00:00:02)
++1.085156033s 0 HwmpProtocol:RequestRoute(0x55a33171e950, 1, 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff, 0x55a3317a6400, 2048)
++1.085156033s 0 MeshWifiInterfaceMac:GetFrequencyChannel(0x55a331717400)
++1.085156033s 0 HwmpProtocol:GetBroadcastReceivers(0x55a33171e950, 1)
++1.085156033s 0 MeshWifiInterfaceMac:Enqueue(0x55a331717400, 0x55a3317a5980, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:02)
++1.085156033s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55a331725a90, 0x55a3317a8000, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++1.085156033s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316d71e0, 0x55a3317a8000, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++1.085156033s 0 MeshWifiInterfaceMac:ForwardDown(0x55a331717400, 0x55a3317a8000, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
+
++1.085427066s 1 PeerManagementProtocolMac:Receive(0x55a3316dc8d0, 0x55a3317a5980, QOSDATA )
++1.085427066s 1 HwmpProtocolMac:Receive(0x55a3316db520, 0x55a3317a5980, QOSDATA )
++1.085427066s 1 HwmpProtocolMac:ReceiveData(0x55a3316db520, 0x55a3317a5980, QOSDATA )
++1.085427066s 1 HwmpProtocol:DropDataFrame(0x55a33171eb40, 2, 00:00:00:00:00:02)
++1.126760000s 1 HwmpProtocol:RequestRoute(0x55a33171eb40, 0, 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff, 0x55a3317a56d0, 2048)
++1.126760000s 1 MeshWifiInterfaceMac:GetFrequencyChannel(0x55a3317178e0)
++1.126760000s 1 HwmpProtocol:GetBroadcastReceivers(0x55a33171eb40, 1)
++1.126760000s 1 MeshWifiInterfaceMac:Enqueue(0x55a3317178e0, 0x55a33179a540, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:02)
++1.126760000s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55a3316db520, 0x55a3317a8070, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++1.126760000s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316dc8d0, 0x55a3317a8070, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++1.126760000s 1 MeshWifiInterfaceMac:ForwardDown(0x55a3317178e0, 0x55a3317a8070, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
+
++1.126920033s 0 PeerManagementProtocolMac:Receive(0x55a3316d71e0, 0x55a3317a52c0, QOSDATA )
++1.126920033s 0 HwmpProtocolMac:Receive(0x55a331725a90, 0x55a3317a52c0, QOSDATA )
++1.126920033s 0 HwmpProtocolMac:ReceiveData(0x55a331725a90, 0x55a3317a52c0, QOSDATA )
++1.126920033s 0 HwmpProtocol:DropDataFrame(0x55a33171e950, 3, 00:00:00:00:00:02)
++1.126920033s 0 HwmpProtocol:RequestRoute(0x55a33171e950, 1, 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff, 0x55a3317a52c0, 2048)
++1.126920033s 0 MeshWifiInterfaceMac:GetFrequencyChannel(0x55a331717400)
++1.126920033s 0 HwmpProtocol:GetBroadcastReceivers(0x55a33171e950, 1)
++1.126920033s 0 MeshWifiInterfaceMac:Enqueue(0x55a331717400, 0x55a33179a540, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:02)
++1.126920033s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55a331725a90, 0x55a33179ff80, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++1.126920033s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316d71e0, 0x55a33179ff80, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++1.126920033s 0 MeshWifiInterfaceMac:ForwardDown(0x55a331717400, 0x55a33179ff80, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
+
++1.127222066s 1 PeerManagementProtocolMac:Receive(0x55a3316dc8d0, 0x55a33179a540, QOSDATA )
++1.127222066s 1 HwmpProtocolMac:Receive(0x55a3316db520, 0x55a33179a540, QOSDATA )
++1.127222066s 1 HwmpProtocolMac:ReceiveData(0x55a3316db520, 0x55a33179a540, QOSDATA )
++1.127222066s 1 HwmpProtocol:DropDataFrame(0x55a33171eb40, 3, 00:00:00:00:00:02)
+
++1.127920033s 0 HwmpProtocol:RequestRoute(0x55a33171e950, 0, 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff, 0x55a3317a5980, 2054)
++1.127920033s 0 MeshWifiInterfaceMac:GetFrequencyChannel(0x55a331717400)
++1.127920033s 0 HwmpProtocol:GetBroadcastReceivers(0x55a33171e950, 1)
++1.127920033s 0 MeshWifiInterfaceMac:Enqueue(0x55a331717400, 0x55a3317a4fe0, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:01)
++1.127920033s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55a331725a90, 0x55a3317a5660, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
++1.127920033s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316d71e0, 0x55a3317a5660, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
++1.127920033s 0 MeshWifiInterfaceMac:ForwardDown(0x55a331717400, 0x55a3317a5660, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
+
++1.128048066s 1 PeerManagementProtocolMac:Receive(0x55a3316dc8d0, 0x55a3317a8b10, QOSDATA )
++1.128048066s 1 HwmpProtocolMac:Receive(0x55a3316db520, 0x55a3317a8b10, QOSDATA )
++1.128048066s 1 HwmpProtocolMac:ReceiveData(0x55a3316db520, 0x55a3317a8b10, QOSDATA )
++1.128048066s 1 HwmpProtocol:DropDataFrame(0x55a33171eb40, 3, 00:00:00:00:00:01)
++1.128048066s 1 HwmpProtocol:RequestRoute(0x55a33171eb40, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55a3317a5980, 2054)
++1.128048066s 1 HwmpProtocol:ForwardUnicast(0x55a33171eb40, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55a3317a4e30, 2054, 32)
++1.128048066s 1 HwmpProtocol:ForwardUnicast(): Requested src = 00:00:00:00:00:02, dst = 00:00:00:00:00:01, I am 00:00:00:00:00:02, RA = ff:ff:ff:ff:ff:ff
++1.128048066s 1 HwmpProtocol:ShouldSendPreq(0x55a33171eb40, 00:00:00:00:00:01)
++1.128048066s 1 HwmpProtocolMac:RequestDestination(0x55a3316db520, 00:00:00:00:00:01, 2, 0)
++1.128048066s 1 HwmpProtocolMac:SendMyPreq(0x55a3316db520)
++1.128048066s 1 HwmpProtocolMac:SendPreq(0x55a3316db520)
++1.128048066s 1 HwmpProtocol:GetPreqReceivers(0x55a33171eb40, 1)
++1.128048066s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55a3316db520, 0x55a3317a4fe0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=bb, Retry=7f, MoreData=0 Duration/ID=12653us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=7680, 00:00:00:00:00:00, 00:00:00:00:00:00)
++1.128048066s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316dc8d0, 0x55a3317a4fe0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=bb, Retry=7f, MoreData=0 Duration/ID=12653us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=7680, 00:00:00:00:00:00, 00:00:00:00:00:00)
++1.128048066s 1 HwmpProtocol:QueuePacket(0x55a33171eb40)
++1.128048066s 1 HwmpProtocol:RequestRoute(0x55a33171eb40, 1, 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff, 0x55a3317a8b10, 2054)
++1.128048066s 1 MeshWifiInterfaceMac:GetFrequencyChannel(0x55a3317178e0)
++1.128048066s 1 HwmpProtocol:GetBroadcastReceivers(0x55a33171eb40, 1)
++1.128048066s 1 MeshWifiInterfaceMac:Enqueue(0x55a3317178e0, 0x55a3317a5980, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:01)
++1.128048066s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55a3316db520, 0x55a3317a5590, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
++1.128048066s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316dc8d0, 0x55a3317a5590, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
++1.128048066s 1 MeshWifiInterfaceMac:ForwardDown(0x55a3317178e0, 0x55a3317a5590, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
+
++1.128237099s 0 PeerManagementProtocolMac:Receive(0x55a3316d71e0, 0x55a3317a8990, QOSDATA )
++1.128237099s 0 HwmpProtocolMac:Receive(0x55a331725a90, 0x55a3317a8990, QOSDATA )
++1.128237099s 0 HwmpProtocolMac:ReceiveData(0x55a331725a90, 0x55a3317a8990, QOSDATA )
++1.128237099s 0 HwmpProtocol:DropDataFrame(0x55a33171e950, 3, 00:00:00:00:00:01)
++1.128450099s 0 PeerManagementProtocolMac:Receive(0x55a3316d71e0, 0x55a3317a8000, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=8)
++1.128450099s 0 PeerManagementProtocolMac:Receive(): Cannot handle non SELF PROTECTED
++1.128450099s 0 HwmpProtocolMac:Receive(0x55a331725a90, 0x55a3317a8000, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=8)
++1.128450099s 0 HwmpProtocolMac:ReceiveAction(0x55a331725a90, 0x55a3317a8000, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=8)
++1.128450099s 0 HwmpProtocolMac:ReceiveAction(): Receive PREQ!
++1.128450099s 0 HwmpProtocol:ReceivePreq(0x55a33171e950, 00:00:00:00:00:02, 1, 00:00:00:00:00:02, 24)
++1.128450099s 0 HwmpProtocol:ReceivePreq(): I am 00:00:00:00:00:01, Accepted preq from address00:00:00:00:00:02, preq:PREQ=(originator address=00:00:00:00:00:02, TTL=31, hop count=1, metric=24, seqno=2, lifetime=5000, preq ID=1, Destinations=(00:00:00:00:00:01)
++1.128450099s 0 HwmpProtocol:ReactivePathResolved(0x55a33171e950, 00:00:00:00:00:02)
++1.128450099s 0 HwmpProtocol:DequeueFirstPacketByDst(0x55a33171e950, 00:00:00:00:00:02)
++1.128450099s 0 HwmpProtocolMac:SendPrep(0x55a331725a90, 00:00:00:00:00:02)
++1.128450099s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55a331725a90, 0x55a3317a8990, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=fc, Retry=7f, MoreData=0 Duration/ID=10049us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=43632, 00:00:00:00:00:00, 00:00:00:00:00:00)
++1.128450099s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316d71e0, 0x55a3317a8990, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=fc, Retry=7f, MoreData=0 Duration/ID=10049us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=43632, 00:00:00:00:00:00, 00:00:00:00:00:00)
+
++1.128528132s 1 PeerManagementProtocolMac:Receive(0x55a3316dc8d0, 0x55a3317a52c0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=60us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=8)
++1.128528132s 1 PeerManagementProtocolMac:Receive(): Cannot handle non SELF PROTECTED
++1.128528132s 1 HwmpProtocolMac:Receive(0x55a3316db520, 0x55a3317a52c0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=60us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=8)
++1.128528132s 1 HwmpProtocolMac:ReceiveAction(0x55a3316db520, 0x55a3317a52c0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=60us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=8)
++1.128528132s 1 HwmpProtocolMac:ReceiveAction(): Receive PREP!
++1.128528132s 1 HwmpProtocol:ReceivePrep(0x55a33171eb40, 00:00:00:00:00:01, 1, 00:00:00:00:00:01, 24)
++1.128528132s 1 HwmpProtocol:ReceivePrep(): I am 00:00:00:00:00:02, received prep from 00:00:00:00:00:01, receiver was:00:00:00:00:00:01
++1.128528132s 1 HwmpProtocol:ReactivePathResolved(0x55a33171eb40, 00:00:00:00:00:01)
++1.128528132s 1 HwmpProtocol:DequeueFirstPacketByDst(0x55a33171eb40, 00:00:00:00:00:01)
++1.128528132s 1 MeshWifiInterfaceMac:Enqueue(0x55a3317178e0, 0x55a3317a4e30, 00:00:00:00:00:01, 00:00:00:00:00:02)
++1.128528132s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55a3316db520, 0x55a3317a8070, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
++1.128528132s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316dc8d0, 0x55a3317a8070, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
++1.128528132s 1 MeshWifiInterfaceMac:ForwardDown(0x55a3317178e0, 0x55a3317a8070, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
++1.128528132s 1 HwmpProtocol:DequeueFirstPacketByDst(0x55a33171eb40, 00:00:00:00:00:01)
++1.128528132s 1 HwmpProtocol:ReceivePrep(): I am 00:00:00:00:00:02, resolved 00:00:00:00:00:01
+
++1.128588165s 0 PeerManagementProtocol:TransmissionSuccess(): transmission success 00:00:00:00:00:01 and 00:00:00:00:00:02
++1.128739165s 0 PeerManagementProtocolMac:Receive(0x55a3316d71e0, 0x55a3317a5660, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=60us, DA=00:00:00:00:00:01, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=9)
++1.128739165s 0 PeerManagementProtocolMac:Receive(): Cannot handle non SELF PROTECTED
++1.128739165s 0 HwmpProtocolMac:Receive(0x55a331725a90, 0x55a3317a5660, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=60us, DA=00:00:00:00:00:01, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=9)
++1.128739165s 0 HwmpProtocolMac:ReceiveAction(0x55a331725a90, 0x55a3317a5660, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=60us, DA=00:00:00:00:00:01, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=9)
+
++1.128799198s 1 PeerManagementProtocol:TransmissionSuccess(): transmission success 00:00:00:00:00:02 and 00:00:00:00:00:01
++1.230448066s 1 HwmpProtocolMac:SendMyPreq(0x55a3316db520)
++1.332848066s 1 HwmpProtocol:RetryPathDiscovery(0x55a33171eb40, 00:00:00:00:00:01, 1)
++1.366760000s 1 HwmpProtocol:RequestRoute(0x55a33171eb40, 0, 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff, 0x55a3317a8250, 2048)
++1.366760000s 1 MeshWifiInterfaceMac:GetFrequencyChannel(0x55a3317178e0)
++1.366760000s 1 HwmpProtocol:GetBroadcastReceivers(0x55a33171eb40, 1)
++1.366760000s 1 MeshWifiInterfaceMac:Enqueue(0x55a3317178e0, 0x55a3317a56d0, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:02)
++1.366760000s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55a3316db520, 0x55a3317a4dc0, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++1.366760000s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316dc8d0, 0x55a3317a4dc0, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++1.366760000s 1 MeshWifiInterfaceMac:ForwardDown(0x55a3317178e0, 0x55a3317a4dc0, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
+
++1.366920033s 0 PeerManagementProtocolMac:Receive(0x55a3316d71e0, 0x55a3317a5590, QOSDATA )
++1.366920033s 0 HwmpProtocolMac:Receive(0x55a331725a90, 0x55a3317a5590, QOSDATA )
++1.366920033s 0 HwmpProtocolMac:ReceiveData(0x55a331725a90, 0x55a3317a5590, QOSDATA )
++1.366920033s 0 HwmpProtocol:DropDataFrame(0x55a33171e950, 4, 00:00:00:00:00:02)
++1.366920033s 0 HwmpProtocol:RequestRoute(0x55a33171e950, 1, 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff, 0x55a3317a5590, 2048)
++1.366920033s 0 MeshWifiInterfaceMac:GetFrequencyChannel(0x55a331717400)
++1.366920033s 0 HwmpProtocol:GetBroadcastReceivers(0x55a33171e950, 1)
++1.366920033s 0 MeshWifiInterfaceMac:Enqueue(0x55a331717400, 0x55a3317a56d0, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:02)
++1.366920033s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55a331725a90, 0x55a3317a8000, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++1.366920033s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316d71e0, 0x55a3317a8000, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++1.366920033s 0 MeshWifiInterfaceMac:ForwardDown(0x55a331717400, 0x55a3317a8000, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
+
++1.367231066s 1 PeerManagementProtocolMac:Receive(0x55a3316dc8d0, 0x55a3317a56d0, QOSDATA )
++1.367231066s 1 HwmpProtocolMac:Receive(0x55a3316db520, 0x55a3317a56d0, QOSDATA )
++1.367231066s 1 HwmpProtocolMac:ReceiveData(0x55a3316db520, 0x55a3317a56d0, QOSDATA )
++1.367231066s 1 HwmpProtocol:DropDataFrame(0x55a33171eb40, 4, 00:00:00:00:00:02)
++1.764760000s 1 HwmpProtocol:RequestRoute(0x55a33171eb40, 0, 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff, 0x55a33179a540, 2048)
++1.764760000s 1 MeshWifiInterfaceMac:GetFrequencyChannel(0x55a3317178e0)
++1.764760000s 1 HwmpProtocol:GetBroadcastReceivers(0x55a33171eb40, 1)
++1.764760000s 1 MeshWifiInterfaceMac:Enqueue(0x55a3317178e0, 0x55a3317a8000, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:02)
++1.764760000s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55a3316db520, 0x55a3317a81e0, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++1.764760000s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316dc8d0, 0x55a3317a81e0, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++1.764760000s 1 MeshWifiInterfaceMac:ForwardDown(0x55a3317178e0, 0x55a3317a81e0, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
+
++1.764920033s 0 PeerManagementProtocolMac:Receive(0x55a3316d71e0, 0x55a3317a7ee0, QOSDATA )
++1.764920033s 0 HwmpProtocolMac:Receive(0x55a331725a90, 0x55a3317a7ee0, QOSDATA )
++1.764920033s 0 HwmpProtocolMac:ReceiveData(0x55a331725a90, 0x55a3317a7ee0, QOSDATA )
++1.764920033s 0 HwmpProtocol:DropDataFrame(0x55a33171e950, 5, 00:00:00:00:00:02)
++1.764920033s 0 HwmpProtocol:RequestRoute(0x55a33171e950, 1, 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff, 0x55a3317a7ee0, 2048)
++1.764920033s 0 MeshWifiInterfaceMac:GetFrequencyChannel(0x55a331717400)
++1.764920033s 0 HwmpProtocol:GetBroadcastReceivers(0x55a33171e950, 1)
++1.764920033s 0 MeshWifiInterfaceMac:Enqueue(0x55a331717400, 0x55a3317a8000, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:02)
++1.764920033s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55a331725a90, 0x55a3317a5050, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++1.764920033s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55a3316d71e0, 0x55a3317a5050, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
++1.764920033s 0 MeshWifiInterfaceMac:ForwardDown(0x55a331717400, 0x55a3317a5050, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
+
++1.765159066s 1 PeerManagementProtocolMac:Receive(0x55a3316dc8d0, 0x55a3317a8000, QOSDATA )
++1.765159066s 1 HwmpProtocolMac:Receive(0x55a3316db520, 0x55a3317a8000, QOSDATA )
++1.765159066s 1 HwmpProtocolMac:ReceiveData(0x55a3316db520, 0x55a3317a8000, QOSDATA )
++1.765159066s 1 HwmpProtocol:DropDataFrame(0x55a33171eb40, 5, 00:00:00:00:00:02)
+2.00	-1.00	0.00
+HwmpProtocol:DoDispose(0x55a33171e950)
+MeshWifiInterfaceMac:DoDispose(0x55a331717400)
+MeshWifiInterfaceMac:~MeshWifiInterfaceMac(0x55a331717400)
+HwmpProtocol:DoDispose(0x55a33171eb40)
+MeshWifiInterfaceMac:DoDispose(0x55a3317178e0)
+MeshWifiInterfaceMac:~MeshWifiInterfaceMac(0x55a3317178e0)
+HwmpProtocol:~HwmpProtocol(0x55a33171eb40)
+HwmpProtocol:~HwmpProtocol(0x55a33171e950)

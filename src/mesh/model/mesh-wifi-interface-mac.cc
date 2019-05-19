@@ -150,6 +150,8 @@ MeshWifiInterfaceMac::DoInitialize ()
       // stop sending beacons
       m_beaconSendEvent.Cancel ();
     }
+
+  RegularWifiMac::DoInitialize ();
 }
 
 int64_t
@@ -291,6 +293,9 @@ MeshWifiInterfaceMac::ForwardDown (Ptr<const Packet> const_packet, Mac48Address 
       ac = AC_BE;
       hdr.SetQosTid (0);
     }
+
+  NS_LOG_FUNCTION (this << packet << hdr << from << to);
+
   m_stats.sentFrames++;
   m_stats.sentBytes += packet->GetSize ();
   NS_ASSERT (m_edca.find (ac) != m_edca.end ());
@@ -344,14 +349,31 @@ MeshWifiInterfaceMac::GetSupportedRates () const
     {
       WifiMode mode = m_phy->GetMode (i);
       uint16_t gi = ConvertGuardIntervalToNanoSeconds (mode, m_phy->GetShortGuardInterval (), m_phy->GetGuardInterval ());
-      rates.AddSupportedRate (mode.GetDataRate (m_phy->GetChannelWidth (), gi, 1));
+      uint64_t modeDataRate = mode.GetDataRate (m_phy->GetChannelWidth (), gi, 1);
+      NS_LOG_DEBUG ("Adding supported rate of " << modeDataRate);
+      rates.AddSupportedRate (modeDataRate);
+      if (mode.IsMandatory () && (mode.GetModulationClass () != WIFI_MOD_CLASS_HR_DSSS))
+        {
+          NS_LOG_DEBUG ("Adding basic mode " << mode.GetUniqueName ());
+          m_stationManager->AddBasicMode (mode);
+        }
     }
   // set the basic rates
   for (uint32_t i = 0; i < m_stationManager->GetNBasicModes (); i++)
     {
       WifiMode mode = m_stationManager->GetBasicMode (i);
       uint16_t gi = ConvertGuardIntervalToNanoSeconds (mode, m_phy->GetShortGuardInterval (), m_phy->GetGuardInterval ());
-      rates.SetBasicRate (mode.GetDataRate (m_phy->GetChannelWidth (), gi, 1));
+      uint64_t modeDataRate = mode.GetDataRate (m_phy->GetChannelWidth (), gi, 1);
+      NS_LOG_DEBUG ("Setting basic rate " << mode.GetUniqueName ());
+      rates.SetBasicRate (modeDataRate);
+    }
+  // for HT/VHT/HE-AP
+  if (GetHtSupported () || GetVhtSupported () || GetHeSupported ())
+    {
+      for (uint8_t i = 0; i < m_phy->GetNBssMembershipSelectors (); i++)
+        {
+          rates.AddBssMembershipSelectorRate (m_phy->GetBssMembershipSelector (i));
+        }
     }
 
   return rates;
@@ -364,7 +386,8 @@ MeshWifiInterfaceMac::CheckSupportedRates (SupportedRates rates) const
     {
       WifiMode mode = m_stationManager->GetBasicMode (i);
       uint16_t gi = ConvertGuardIntervalToNanoSeconds (mode, m_phy->GetShortGuardInterval (), m_phy->GetGuardInterval ());
-      if (!rates.IsSupportedRate (mode.GetDataRate (m_phy->GetChannelWidth (), gi, 1)))
+      uint64_t modeDataRate = mode.GetDataRate (m_phy->GetChannelWidth (), gi, 1);
+      if (!rates.IsSupportedRate (modeDataRate))
         {
           return false;
         }
@@ -446,7 +469,7 @@ MeshWifiInterfaceMac::SendBeacon ()
   MeshWifiBeacon beacon (GetSsid (), GetSupportedRates (), m_beaconInterval.GetMicroSeconds ());
 
   // Ask all plugins to add their specific information elements to beacon
-  for (PluginList::const_iterator i = m_plugins.begin (); i != m_plugins.end (); ++i)
+  for (PluginList::const_iterator i = m_plugins.end ()-1; i != m_plugins.begin ()-1; --i)
     {
       (*i)->UpdateBeacon (beacon);
     }
@@ -462,8 +485,6 @@ MeshWifiInterfaceMac::Receive (Ptr<Packet> packet, WifiMacHeader const *hdr)
   Mac48Address from = hdr->GetAddr2 ();
   if (m_stationManager->IsBrandNew (from))
     {
-      //In ad hoc mode, we assume that every destination supports all
-      //the rates we support.
       if (GetHtSupported () || GetVhtSupported () || GetHeSupported ())
         {
           m_stationManager->AddAllSupportedMcs (from);
