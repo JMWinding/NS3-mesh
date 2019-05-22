@@ -119,6 +119,7 @@ HwmpProtocolMac::ReceiveAction (Ptr<Packet> packet, const WifiMacHeader & header
         }
       if ((*i)->ElementId () == IE_PREQ)
         {
+          NS_LOG_DEBUG ("Receive PREQ!");
           Ptr<IePreq> preq = DynamicCast<IePreq> (*i);
           NS_ASSERT (preq != 0);
           m_stats.rxPreq++;
@@ -136,6 +137,7 @@ HwmpProtocolMac::ReceiveAction (Ptr<Packet> packet, const WifiMacHeader & header
         }
       if ((*i)->ElementId () == IE_PREP)
         {
+          NS_LOG_DEBUG ("Receive PREP!");
           Ptr<IePrep> prep = DynamicCast<IePrep> (*i);
           NS_ASSERT (prep != 0);
           m_stats.rxPrep++;
@@ -149,6 +151,7 @@ HwmpProtocolMac::ReceiveAction (Ptr<Packet> packet, const WifiMacHeader & header
         }
       if ((*i)->ElementId () == IE_PERR)
         {
+          NS_LOG_DEBUG ("Receive PERR!");
           Ptr<IePerr> perr = DynamicCast<IePerr> (*i);
           NS_ASSERT (perr != 0);
           m_stats.rxPerr++;

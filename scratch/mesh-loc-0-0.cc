@@ -206,7 +206,7 @@ AodvExample::AodvExample () :
   clStep (20),
   startTime (1),
   totalTime (20),
-  beaconInterval (1),
+  beaconInterval (0.5),
   pcap (false),
   printRoutes (false),
   app ("udp"),
@@ -543,7 +543,7 @@ AodvExample::InstallInternetStack ()
 void
 AodvExample::InstallMeshInternetStack ()
 {
-   AodvHelper aodv;
+  AodvHelper aodv;
 
   InternetStackHelper stack;
   stack.SetRoutingHelper (aodv); // has effect on the next Install ()

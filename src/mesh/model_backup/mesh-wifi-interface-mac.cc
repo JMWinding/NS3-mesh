@@ -33,6 +33,8 @@
 #include "ns3/trace-source-accessor.h"
 #include "ns3/socket.h"
 
+#define MYMOD
+
 namespace ns3 {
 
 NS_LOG_COMPONENT_DEFINE ("MeshWifiInterfaceMac");
@@ -150,6 +152,8 @@ MeshWifiInterfaceMac::DoInitialize ()
       // stop sending beacons
       m_beaconSendEvent.Cancel ();
     }
+
+  RegularWifiMac::DoInitialize ();
 }
 
 int64_t
@@ -243,6 +247,7 @@ MeshWifiInterfaceMac::ForwardDown (Ptr<const Packet> const_packet, Mac48Address 
   // Address 1 is unknown here. Routing plugin is responsible to correctly set it.
   hdr.SetAddr1 (Mac48Address ());
   // Filter packet through all installed plugins
+  NS_LOG_DEBUG ("1" << hdr);
   for (PluginList::const_iterator i = m_plugins.end () - 1; i != m_plugins.begin () - 1; i--)
     {
       bool drop = !((*i)->UpdateOutcomingFrame (packet, hdr, from, to));
@@ -251,13 +256,37 @@ MeshWifiInterfaceMac::ForwardDown (Ptr<const Packet> const_packet, Mac48Address 
           return; // plugin drops frame
         }
     }
+  NS_LOG_DEBUG ("2" << hdr);
   // Assert that address1 is set. Assert will fail e.g. if there is no installed routing plugin.
   NS_ASSERT (hdr.GetAddr1 () != Mac48Address ());
   // Queue frame
   if (m_stationManager->IsBrandNew (hdr.GetAddr1 ()))
     {
+#ifdef MYMOD
+      if (GetHtSupported () || GetVhtSupported () || GetHeSupported ())
+        {
+          m_stationManager->AddAllSupportedMcs (hdr.GetAddr1 ());
+        }
+      if (GetHtSupported ())
+        {
+          m_stationManager->AddStationHtCapabilities (hdr.GetAddr1 (), GetHtCapabilities ());
+        }
+      if (GetVhtSupported ())
+        {
+          m_stationManager->AddStationVhtCapabilities (hdr.GetAddr1 (), GetVhtCapabilities ());
+        }
+      if (GetHeSupported ())
+        {
+          m_stationManager->AddStationHeCapabilities (hdr.GetAddr1 (), GetHeCapabilities ());
+        }
+      if (GetQosSupported ())
+        {
+          m_stationManager->SetQosSupport (hdr.GetAddr1 (), false);
+        }
+#endif
       m_stationManager->AddAllSupportedModes (hdr.GetAddr1 ());
       m_stationManager->RecordDisassociated (hdr.GetAddr1 ());
+      NS_LOG_DEBUG ("QosSupported is " << m_stationManager->GetQosSupported (hdr.GetAddr1 ()));
     }
   // Classify: application may have set a tag, which is removed here
   AcIndex ac;
@@ -273,6 +302,10 @@ MeshWifiInterfaceMac::ForwardDown (Ptr<const Packet> const_packet, Mac48Address 
       ac = AC_BE;
       hdr.SetQosTid (0);
     }
+
+  NS_LOG_FUNCTION (this << packet << hdr << from << to);
+  NS_LOG_DEBUG (hdr.GetSize () << "+" << packet->GetSize ());
+
   m_stats.sentFrames++;
   m_stats.sentBytes += packet->GetSize ();
   NS_ASSERT (m_edca.find (ac) != m_edca.end ());
@@ -306,6 +339,9 @@ MeshWifiInterfaceMac::SendManagementFrame (Ptr<Packet> packet, const WifiMacHead
    * size, and two packets will be collided). So, broadcast management
    * frames go to BK queue.
    */
+
+  NS_LOG_DEBUG (hdr.GetSize () << "+" << packet->GetSize ());
+
   if (hdr.GetAddr1 () != Mac48Address::GetBroadcast ())
     {
       m_edca[AC_VO]->Queue (packet, header);
@@ -326,15 +362,31 @@ MeshWifiInterfaceMac::GetSupportedRates () const
     {
       WifiMode mode = m_phy->GetMode (i);
       uint16_t gi = ConvertGuardIntervalToNanoSeconds (mode, m_phy->GetShortGuardInterval (), m_phy->GetGuardInterval ());
-      for (uint32_t j = 1; j <= m_phy->GetNumberOfAntennas(); j++)
-        rates.AddSupportedRate (mode.GetDataRate (m_phy->GetChannelWidth (), gi, j));
+      uint64_t modeDataRate = mode.GetDataRate (m_phy->GetChannelWidth (), gi, 1);
+      NS_LOG_DEBUG ("Adding supported rate of " << modeDataRate);
+      rates.AddSupportedRate (modeDataRate);
+      if (mode.IsMandatory () && (mode.GetModulationClass () != WIFI_MOD_CLASS_HR_DSSS))
+        {
+          NS_LOG_DEBUG ("Adding basic mode " << mode.GetUniqueName ());
+          m_stationManager->AddBasicMode (mode);
+        }
     }
   // set the basic rates
   for (uint32_t i = 0; i < m_stationManager->GetNBasicModes (); i++)
     {
       WifiMode mode = m_stationManager->GetBasicMode (i);
       uint16_t gi = ConvertGuardIntervalToNanoSeconds (mode, m_phy->GetShortGuardInterval (), m_phy->GetGuardInterval ());
-      rates.SetBasicRate (mode.GetDataRate (m_phy->GetChannelWidth (), gi, 1));
+      uint64_t modeDataRate = mode.GetDataRate (m_phy->GetChannelWidth (), gi, 1);
+      NS_LOG_DEBUG ("Setting basic rate " << mode.GetUniqueName ());
+      rates.SetBasicRate (modeDataRate);
+    }
+  // for HT/VHT/HE-AP
+  if (GetHtSupported () || GetVhtSupported () || GetHeSupported ())
+    {
+      for (uint8_t i = 0; i < m_phy->GetNBssMembershipSelectors (); i++)
+        {
+          rates.AddBssMembershipSelectorRate (m_phy->GetBssMembershipSelector (i));
+        }
     }
 
   return rates;
@@ -347,7 +399,8 @@ MeshWifiInterfaceMac::CheckSupportedRates (SupportedRates rates) const
     {
       WifiMode mode = m_stationManager->GetBasicMode (i);
       uint16_t gi = ConvertGuardIntervalToNanoSeconds (mode, m_phy->GetShortGuardInterval (), m_phy->GetGuardInterval ());
-      if (!rates.IsSupportedRate (mode.GetDataRate (m_phy->GetChannelWidth (), gi, 1)))
+      uint64_t modeDataRate = mode.GetDataRate (m_phy->GetChannelWidth (), gi, 1);
+      if (!rates.IsSupportedRate (modeDataRate))
         {
           return false;
         }
@@ -429,10 +482,13 @@ MeshWifiInterfaceMac::SendBeacon ()
   MeshWifiBeacon beacon (GetSsid (), GetSupportedRates (), m_beaconInterval.GetMicroSeconds ());
 
   // Ask all plugins to add their specific information elements to beacon
-  for (PluginList::const_iterator i = m_plugins.begin (); i != m_plugins.end (); ++i)
+  for (PluginList::const_iterator i = m_plugins.end ()-1; i != m_plugins.begin ()-1; --i)
     {
       (*i)->UpdateBeacon (beacon);
     }
+
+  NS_LOG_DEBUG (beacon.CreateHeader (GetAddress (), GetMeshPointAddress ()).GetSize () << "+" << beacon.CreatePacket ()->GetSize ());
+
   m_txop->Queue (beacon.CreatePacket (), beacon.CreateHeader (GetAddress (), GetMeshPointAddress ()));
 
   ScheduleNextBeacon ();
@@ -441,6 +497,38 @@ MeshWifiInterfaceMac::SendBeacon ()
 void
 MeshWifiInterfaceMac::Receive (Ptr<Packet> packet, WifiMacHeader const *hdr)
 {
+  NS_LOG_DEBUG (hdr->GetSize () << "+" << packet->GetSize ());
+  Mac48Address from = hdr->GetAddr2 ();
+  if (m_stationManager->IsBrandNew (from))
+    {
+#ifdef MYMOD
+      if (GetHtSupported () || GetVhtSupported () || GetHeSupported ())
+        {
+          m_stationManager->AddAllSupportedMcs (from);
+          m_stationManager->AddStationHtCapabilities (from, GetHtCapabilities ());
+        }
+      if (GetHtSupported ())
+        {
+          m_stationManager->AddStationHtCapabilities (from, GetHtCapabilities ());
+        }
+      if (GetVhtSupported ())
+        {
+          m_stationManager->AddStationVhtCapabilities (from, GetVhtCapabilities ());
+        }
+      if (GetHeSupported ())
+        {
+          m_stationManager->AddStationHeCapabilities (from, GetHeCapabilities ());
+        }
+      if (GetQosSupported ())
+        {
+          m_stationManager->SetQosSupport (from, false);
+        }
+#endif
+      m_stationManager->AddAllSupportedModes (from);
+      m_stationManager->RecordDisassociated (from);
+      NS_LOG_DEBUG ("QosSupported is " << m_stationManager->GetQosSupported (from));
+    }
+
   // Process beacon
   if ((hdr->GetAddr1 () != GetAddress ()) && (hdr->GetAddr1 () != Mac48Address::GetBroadcast ()))
     {
@@ -470,10 +558,10 @@ MeshWifiInterfaceMac::Receive (Ptr<Packet> packet, WifiMacHeader const *hdr)
               if (rates.IsSupportedRate (rate))
                 {
                   m_stationManager->AddSupportedMode (hdr->GetAddr2 (), mode);
-                  if (rates.IsBasicRate (rate))
-                    {
-                      m_stationManager->AddBasicMode (mode);
-                    }
+//                  if (rates.IsBasicRate (rate))
+//                    {
+//                      m_stationManager->AddBasicMode (mode);
+//                    }
                 }
             }
         }
@@ -492,6 +580,7 @@ MeshWifiInterfaceMac::Receive (Ptr<Packet> packet, WifiMacHeader const *hdr)
           return; // plugin drops frame
         }
     }
+
   // Check if QoS tag exists and add it:
   if (hdr->IsQosData ())
     {
