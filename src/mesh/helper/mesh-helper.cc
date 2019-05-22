@@ -190,7 +190,8 @@ MeshHelper::CreateInterface (const WifiPhyHelper &phyHelper, Ptr<Node> node, uin
   device->SetPhy (phy);
   device->SetRemoteStationManager (manager);
   node->AddDevice (device);
-  mac->SwitchFrequencyChannel (channelId);
+  if (phy->GetChannelNumber () == 0)
+    mac->SwitchFrequencyChannel (channelId);
   return device;
 }
 void

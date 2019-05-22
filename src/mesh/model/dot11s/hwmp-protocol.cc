@@ -706,6 +706,7 @@ HwmpProtocol::ReceivePrep (IePrep prep, Mac48Address from, uint32_t interface, M
       return;
     }
   //Forward PREP
+  NS_LOG_DEBUG ("Forward PREP!");
   HwmpProtocolMacMap::const_iterator prep_sender = m_interfaces.find (result.ifIndex);
   NS_ASSERT (prep_sender != m_interfaces.end ());
   prep_sender->second->SendPrep (prep, result.retransmitter);

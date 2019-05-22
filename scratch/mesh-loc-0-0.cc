@@ -543,7 +543,7 @@ AodvExample::InstallInternetStack ()
 void
 AodvExample::InstallMeshInternetStack ()
 {
-  AodvHelper aodv;
+   AodvHelper aodv;
 
   InternetStackHelper stack;
   stack.SetRoutingHelper (aodv); // has effect on the next Install ()
