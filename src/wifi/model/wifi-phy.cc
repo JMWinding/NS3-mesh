@@ -2294,6 +2294,7 @@ WifiPhy::SendPacket (Ptr<const Packet> packet, WifiTxVector txVector, MpduType m
                         << txVector.GetPreambleType ()
                         << +txVector.GetTxPowerLevel ()
                         << +mpdutype);
+  NS_LOG_DEBUG (packet->GetSize () << "-" << txVector.GetMode ().GetUniqueName ());
   /* Transmission can happen if:
    *  - we are syncing on a packet. It is the responsibility of the
    *    MAC layer to avoid doing this but the PHY does nothing to
@@ -2371,6 +2372,8 @@ WifiPhy::StartReceivePreambleAndHeader (Ptr<Packet> packet, double rxPowerW, Tim
                               txVector,
                               rxDuration,
                               rxPowerW);
+
+  NS_LOG_DEBUG (packet->GetSize () << "-" << txVector.GetMode ().GetUniqueName ());
 
   //This function should be later split to check separately whether plcp preamble and plcp header can be successfully received.
   //Note: plcp preamble reception is not yet modeled.

@@ -1,187 +1,379 @@
 Waf: Entering directory `/home/jiaming/eclipse-workspace/ns-3.29-mesh/build'
 Waf: Leaving directory `/home/jiaming/eclipse-workspace/ns-3.29-mesh/build'
 Build commands will be stored in build/compile_commands.json
-'build' finished successfully (4.006s)
-+0.000000000s -1 MeshWifiInterfaceMac:MeshWifiInterfaceMac(0x55ad99b8f620)
-+0.000000000s -1 MeshWifiInterfaceMac:SetBeaconGeneration(0x55ad99b8f620, 1)
-+0.000000000s -1 MeshWifiInterfaceMac:SetLinkUpCallback(0x55ad99b8f620)
-+0.000000000s -1 MeshWifiInterfaceMac:InstallPlugin(0x55ad99b8f620)
-+0.000000000s -1 HwmpProtocol:HwmpProtocol(0x55ad99b96b70)
-+0.000000000s -1 HwmpProtocol:Install(0x55ad99b96b70, 0x55ad99af4540)
-+0.000000000s -1 HwmpProtocolMac:HwmpProtocolMac(0x55ad99b2e970, 1, 0x55ad99b96b70)
-+0.000000000s -1 MeshWifiInterfaceMac:InstallPlugin(0x55ad99b8f620)
-+0.000000000s -1 HwmpProtocolMac:SetParent(0x55ad99b2e970, 0x55ad99b8f620)
-+0.000000000s -1 MeshWifiInterfaceMac:MeshWifiInterfaceMac(0x55ad99b8fa60)
-+0.000000000s -1 MeshWifiInterfaceMac:SetBeaconGeneration(0x55ad99b8fa60, 1)
-+0.000000000s -1 MeshWifiInterfaceMac:SetLinkUpCallback(0x55ad99b8fa60)
-+0.000000000s -1 MeshWifiInterfaceMac:InstallPlugin(0x55ad99b8fa60)
-+0.000000000s -1 HwmpProtocol:HwmpProtocol(0x55ad99b96d60)
-+0.000000000s -1 HwmpProtocol:Install(0x55ad99b96d60, 0x55ad99b7fdf0)
-+0.000000000s -1 HwmpProtocolMac:HwmpProtocolMac(0x55ad99b534a0, 1, 0x55ad99b96d60)
-+0.000000000s -1 MeshWifiInterfaceMac:InstallPlugin(0x55ad99b8fa60)
-+0.000000000s -1 HwmpProtocolMac:SetParent(0x55ad99b534a0, 0x55ad99b8fa60)
-+0.000000000s 0 HwmpProtocol:DoInitialize(0x55ad99b96b70)
-+0.000000000s 0 MeshWifiInterfaceMac:DoInitialize(0x55ad99b8f620)
-+0.000000000s 1 HwmpProtocol:DoInitialize(0x55ad99b96d60)
-+0.000000000s 1 MeshWifiInterfaceMac:DoInitialize(0x55ad99b8fa60)
-+0.024000000s 0 HwmpProtocol:RequestRoute(0x55ad99b96b70, 0, 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff, 0x55ad99c1d3b0, 2048)
-+0.024000000s 0 MeshWifiInterfaceMac:GetFrequencyChannel(0x55ad99b8f620)
-+0.024000000s 0 HwmpProtocol:GetBroadcastReceivers(0x55ad99b96b70, 1)
-+0.024000000s 0 MeshWifiInterfaceMac:Enqueue(0x55ad99b8f620, 0x55ad99c1d5a0, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:01)
-+0.024000000s 0 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+0.024000000s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b2e970, 0x55ad99c1d680, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
-+0.024000000s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b4ede0, 0x55ad99c1d680, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
-+0.024000000s 0 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+0.024000000s 0 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8f620, 0x55ad99c1d680, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
-+0.024000000s 0 MeshWifiInterfaceMac:ForwardDown(): 32+62
-+0.024156033s 1 MeshWifiInterfaceMac:Receive(): 32+62
-+0.024156033s 1 MeshWifiInterfaceMac:Receive(): QosSupported is 0
-+0.024156033s 1 PeerManagementProtocolMac:Receive(0x55ad99b54430, 0x55ad99c1dae0, QOSDATA )
-+0.086000000s 1 HwmpProtocol:RequestRoute(0x55ad99b96d60, 0, 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff, 0x55ad99c18070, 2048)
-+0.086000000s 1 MeshWifiInterfaceMac:GetFrequencyChannel(0x55ad99b8fa60)
-+0.086000000s 1 HwmpProtocol:GetBroadcastReceivers(0x55ad99b96d60, 1)
-+0.086000000s 1 MeshWifiInterfaceMac:Enqueue(0x55ad99b8fa60, 0x55ad99c1d0d0, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:02)
-+0.086000000s 1 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+0.086000000s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c1d680, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+0.086000000s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c1d680, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+0.086000000s 1 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+0.086000000s 1 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8fa60, 0x55ad99c1d680, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+0.086000000s 1 MeshWifiInterfaceMac:ForwardDown(): 32+62
-+0.086156033s 0 MeshWifiInterfaceMac:Receive(): 32+62
-+0.086156033s 0 MeshWifiInterfaceMac:Receive(): QosSupported is 0
-+0.086156033s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c1e3c0, QOSDATA )
-+0.343115231s 0 MeshWifiInterfaceMac:SendBeacon(0x55ad99b8f620)
-+0.343115231s 0 MeshWifiInterfaceMac:SendBeacon(): 00:00:00:00:00:01 is sending beacon
-+0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 6000000
-+0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate6Mbps
-+0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 9000000
-+0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 12000000
-+0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate12Mbps
-+0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 18000000
-+0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 24000000
-+0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate24Mbps
-+0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 36000000
-+0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 48000000
-+0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 54000000
-+0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate6Mbps
-+0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate12Mbps
-+0.343115231s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate24Mbps
-+0.343115231s 0 PeerManagementProtocolMac:UpdateBeacon(0x55ad99b4ede0)
-+0.343115231s 0 MeshWifiInterfaceMac:SendBeacon(): 24+35
-+0.343223264s 1 MeshWifiInterfaceMac:Receive(): 24+35
-+0.343223264s 1 MeshWifiInterfaceMac:Receive(): Beacon received from 00:00:00:00:00:01 I am 00:00:00:00:00:02 at 343223 microseconds
-+0.343223264s 1 PeerManagementProtocolMac:Receive(0x55ad99b54430, 0x55ad99c1da70, MGT_BEACON ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=1)
-+0.343223264s 1 PeerManagementProtocolMac:Receive(): Is Beacon from 00:00:00:00:00:01
-+0.343223264s 1 PeerManagementProtocolMac:SendPeerLinkManagementFrame(0x55ad99b54430, 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
-+0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 6000000
-+0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate6Mbps
-+0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 9000000
-+0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 12000000
-+0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate12Mbps
-+0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 18000000
-+0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 24000000
-+0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate24Mbps
-+0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 36000000
-+0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 48000000
-+0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 54000000
-+0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate6Mbps
-+0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate12Mbps
-+0.343223264s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate24Mbps
-+0.343223264s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c1dae0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=18601us, DA=00:00:00:00:00:01, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=61824, 00:00:00:00:00:00, 00:00:00:00:00:00)
-+0.343223264s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c1dae0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=18601us, DA=00:00:00:00:00:01, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=61824, 00:00:00:00:00:00, 00:00:00:00:00:00)
-+0.343223264s 1 MeshWifiInterfaceMac:SendManagementFrame(): 24+37
-+0.343223264s 1 HwmpProtocolMac:Receive(0x55ad99b534a0, 0x55ad99c1da70, MGT_BEACON ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=1)
-+0.343387297s 0 MeshWifiInterfaceMac:Receive(): 24+37
-+0.343387297s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c1d420, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=60us, DA=00:00:00:00:00:01, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=1)
-+0.343387297s 0 PeerManagementProtocolMac:Receive(): Received PEER_LINK_OPEN
-+0.343387297s 0 PeerManagementProtocolMac:SendPeerLinkManagementFrame(0x55ad99b4ede0, 00:00:00:00:00:02, 00:00:00:00:00:02)
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 6000000
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate6Mbps
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 9000000
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 12000000
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate12Mbps
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 18000000
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 24000000
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate24Mbps
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 36000000
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 48000000
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 54000000
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate6Mbps
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate12Mbps
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate24Mbps
-+0.343387297s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b2e970, 0x55ad99c1cf20, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=61824, 00:00:00:00:00:00, 00:00:00:00:00:00)
-+0.343387297s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b4ede0, 0x55ad99c1cf20, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=61824, 00:00:00:00:00:00, 00:00:00:00:00:00)
-+0.343387297s 0 MeshWifiInterfaceMac:SendManagementFrame(): 24+35
-+0.343387297s 0 PeerManagementProtocolMac:SendPeerLinkManagementFrame(0x55ad99b4ede0, 00:00:00:00:00:02, 00:00:00:00:00:02)
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 6000000
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate6Mbps
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 9000000
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 12000000
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate12Mbps
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 18000000
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 24000000
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate24Mbps
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 36000000
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 48000000
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 54000000
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate6Mbps
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate12Mbps
-+0.343387297s 0 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate24Mbps
-+0.343387297s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b2e970, 0x55ad99c1d750, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=18601us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=61824, 00:00:00:00:00:00, 00:00:00:00:00:00)
-+0.343387297s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b4ede0, 0x55ad99c1d750, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=18601us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=61824, 00:00:00:00:00:00, 00:00:00:00:00:00)
-+0.343387297s 0 MeshWifiInterfaceMac:SendManagementFrame(): 24+37
-+0.343607330s 1 MeshWifiInterfaceMac:Receive(): 24+35
-+0.343607330s 1 PeerManagementProtocolMac:Receive(0x55ad99b54430, 0x55ad99c1e3c0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=60us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=2)
-+0.343607330s 1 PeerManagementProtocolMac:Receive(): Received PEER_LINK_CONFIRM
-+0.343831396s 1 MeshWifiInterfaceMac:Receive(): 24+37
-+0.343831396s 1 PeerManagementProtocolMac:Receive(0x55ad99b54430, 0x55ad99c180e0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=60us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=3)
-+0.343831396s 1 PeerManagementProtocolMac:Receive(): Received PEER_LINK_OPEN
-+0.343831396s 1 HwmpProtocol:PeerLinkStatus(0x55ad99b96d60, 00:00:00:00:00:01, 00:00:00:00:00:01, 1, 1)
-+0.343831396s 1 PeerManagementProtocolMac:SendPeerLinkManagementFrame(0x55ad99b54430, 00:00:00:00:00:01, 00:00:00:00:00:01)
-+0.343831396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 6000000
-+0.343831396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate6Mbps
-+0.343831396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 9000000
-+0.343831396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 12000000
-+0.343831396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate12Mbps
-+0.343831396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 18000000
-+0.343831396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 24000000
-+0.343831396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate24Mbps
-+0.343831396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 36000000
-+0.343831396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 48000000
-+0.343831396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 54000000
-+0.343831396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate6Mbps
-+0.343831396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate12Mbps
-+0.343831396s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate24Mbps
-+0.343831396s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c1dae0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=00:00:00:00:00:01, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=61824, 00:00:00:00:00:00, 00:00:00:00:00:00)
-+0.343831396s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c1dae0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=00:00:00:00:00:01, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=61824, 00:00:00:00:00:00, 00:00:00:00:00:00)
-+0.343831396s 1 MeshWifiInterfaceMac:SendManagementFrame(): 24+35
-+0.344033429s 0 MeshWifiInterfaceMac:Receive(): 24+35
-+0.344033429s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c1e3c0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=60us, DA=00:00:00:00:00:01, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=2)
-+0.344033429s 0 PeerManagementProtocolMac:Receive(): Received PEER_LINK_CONFIRM
-+0.344033429s 0 HwmpProtocol:PeerLinkStatus(0x55ad99b96b70, 00:00:00:00:00:02, 00:00:00:00:00:02, 1, 1)
-+0.622492614s 1 MeshWifiInterfaceMac:SendBeacon(0x55ad99b8fa60)
-+0.622492614s 1 MeshWifiInterfaceMac:SendBeacon(): 00:00:00:00:00:02 is sending beacon
-+0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 6000000
-+0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate6Mbps
-+0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 9000000
-+0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 12000000
-+0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate12Mbps
-+0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 18000000
-+0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 24000000
-+0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding basic mode OfdmRate24Mbps
-+0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 36000000
-+0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 48000000
-+0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Adding supported rate of 54000000
-+0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate6Mbps
-+0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate12Mbps
-+0.622492614s 1 MeshWifiInterfaceMac:GetSupportedRates(): Setting basic rate OfdmRate24Mbps
-+0.622492614s 1 PeerManagementProtocolMac:UpdateBeacon(0x55ad99b54430)
-+0.622492614s 1 MeshWifiInterfaceMac:SendBeacon(): 24+40
-+0.622608647s 0 MeshWifiInterfaceMac:Receive(): 24+40
-+0.622608647s 0 MeshWifiInterfaceMac:Receive(): Beacon received from 00:00:00:00:00:02 I am 00:00:00:00:00:01 at 622608 microseconds
-+0.622608647s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c1cd90, MGT_BEACON ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=3)
-+0.622608647s 0 PeerManagementProtocolMac:Receive(): Is Beacon from 00:00:00:00:00:02
-+0.622608647s 0 HwmpProtocolMac:Receive(0x55ad99b2e970, 0x55ad99c1cd90, MGT_BEACON ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=3)
+'build' finished successfully (3.881s)
++0.000000000s -1 WifiPhy:SetFrequency(): Saving frequency configuration for initialization
++0.000000000s -1 WifiPhy:SetChannelNumber(): Saving channel number configuration for initialization
++0.000000000s -1 WifiPhy:DoChannelSwitch(): initialize to channel 50
++0.000000000s -1 WifiPhy:SetChannelNumber(): Setting frequency to 5250; width to 160
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Frequency set; checking whether a channel number corresponds
++0.000000000s -1 WifiPhy:FindChannelNumberForFrequencyWidth(): Found, returning 50
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Channel number found; setting to 50
++0.000000000s -1 WifiPhy:SetChannelNumber(): No channel change requested
++0.000000000s -1 WifiPhy:SetFrequency(): Saving frequency configuration for initialization
++0.000000000s -1 WifiPhy:SetChannelNumber(): Saving channel number configuration for initialization
++0.000000000s -1 WifiPhy:DoChannelSwitch(): initialize to channel 50
++0.000000000s -1 WifiPhy:SetChannelNumber(): Setting frequency to 5250; width to 160
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Frequency set; checking whether a channel number corresponds
++0.000000000s -1 WifiPhy:FindChannelNumberForFrequencyWidth(): Found, returning 50
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Channel number found; setting to 50
++0.000000000s -1 WifiPhy:SetChannelNumber(): No channel change requested
++0.000000000s -1 WifiPhy:SetFrequency(): Saving frequency configuration for initialization
++0.000000000s -1 WifiPhy:SetChannelNumber(): Saving channel number configuration for initialization
++0.000000000s -1 WifiPhy:DoChannelSwitch(): initialize to channel 3
++0.000000000s -1 WifiPhy:SetChannelNumber(): Setting frequency to 2422; width to 20
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Frequency set; checking whether a channel number corresponds
++0.000000000s -1 WifiPhy:FindChannelNumberForFrequencyWidth(): Found, returning 3
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Channel number found; setting to 3
++0.000000000s -1 WifiPhy:SetChannelNumber(): No channel change requested
++0.000000000s -1 WifiPhy:SetFrequency(): Saving frequency configuration for initialization
++0.000000000s -1 WifiPhy:SetChannelNumber(): Saving channel number configuration for initialization
++0.000000000s -1 WifiPhy:DoChannelSwitch(): initialize to channel 3
++0.000000000s -1 WifiPhy:SetChannelNumber(): Setting frequency to 2422; width to 20
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Frequency set; checking whether a channel number corresponds
++0.000000000s -1 WifiPhy:FindChannelNumberForFrequencyWidth(): Found, returning 3
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Channel number found; setting to 3
++0.000000000s -1 WifiPhy:SetChannelNumber(): No channel change requested
++0.000000000s 0 WifiPhy:DoInitialize(): Frequency already initialized
++0.000000000s 0 WifiPhy:DoInitialize(): Frequency already initialized
++0.000000000s 1 WifiPhy:DoInitialize(): Frequency already initialized
++0.000000000s 1 WifiPhy:DoInitialize(): Frequency already initialized
++0.000000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.000000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.000000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.000000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.000000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.000000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.000000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.000000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.000000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.000000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.000000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.000000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.000000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.000000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.000000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.000000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.000030000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.000030000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.000030033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.000030033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.000030033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.000030033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.064000000s 0 WifiPhy:SendPacket(): 86-OfdmRate6Mbps
++0.064000033s 1 WifiPhy:StartReceivePreambleAndHeader(): 86-OfdmRate6Mbps
++0.064000033s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++0.064020033s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++0.064020033s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.064140033s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=86
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 15000001
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 30000001
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 45000001
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 60000001
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 90000001
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 120000001
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 135000001
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 150000001
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 180000002
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 240000002
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 270000002
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 300000002
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 360000003
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 405000003
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 450000003
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 480000004
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 540000004
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 600000004
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 15000001
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 30000001
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 45000001
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 60000001
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 90000001
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 120000001
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 135000001
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 150000001
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 180000002
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 240000002
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 270000002
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 300000002
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 360000003
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 405000003
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 450000003
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 480000004
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 540000004
++0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 600000004
++0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 58500000
++0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 117000000
++0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 175500000
++0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 234000000
++0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 351000000
++0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 468000000
++0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 526500000
++0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 585000000
++0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 702000000
++0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 780000000
++0.070000000s 0 WifiPhy:SendPacket(): 86-DsssRate1Mbps
++0.070000033s 1 WifiPhy:StartReceivePreambleAndHeader(): 86-DsssRate1Mbps
++0.070000033s 1 WifiPhy:StartRx(): sync to signal (power=8.59587e-10W)
++0.070192033s 1 WifiPhy:StartReceivePacket(): snr(dB)=32.895, per=0
++0.070192033s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.070880033s 1 WifiPhy:EndReceive(): mode=1000000, snr(dB)=32.895, per=0, size=86
++0.097000000s 1 WifiPhy:SendPacket(): 86-DsssRate1Mbps
++0.097000033s 0 WifiPhy:StartReceivePreambleAndHeader(): 86-DsssRate1Mbps
++0.097000033s 0 WifiPhy:StartRx(): sync to signal (power=8.59587e-10W)
++0.097192033s 0 WifiPhy:StartReceivePacket(): snr(dB)=32.895, per=0
++0.097192033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.097880033s 0 WifiPhy:EndReceive(): mode=1000000, snr(dB)=32.895, per=0, size=86
++0.102000000s 1 WifiPhy:SendPacket(): 86-OfdmRate6Mbps
++0.102000033s 0 WifiPhy:StartReceivePreambleAndHeader(): 86-OfdmRate6Mbps
++0.102000033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++0.102020033s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++0.102020033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.102140033s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=86
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 15000001
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 30000001
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 45000001
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 60000001
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 90000001
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 120000001
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 135000001
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 150000001
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 180000002
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 240000002
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 270000002
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 300000002
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 360000003
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 405000003
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 450000003
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 480000004
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 540000004
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 600000004
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 15000001
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 30000001
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 45000001
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 60000001
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 90000001
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 120000001
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 135000001
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 150000001
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 180000002
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 240000002
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 270000002
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 300000002
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 360000003
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 405000003
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 450000003
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 480000004
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 540000004
++0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 600000004
++0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 58500000
++0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 117000000
++0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 175500000
++0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 234000000
++0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 351000000
++0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 468000000
++0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 526500000
++0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 585000000
++0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 702000000
++0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 780000000
++0.102400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.102400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.102400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.102400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.102400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.102400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.102400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.102400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.102400000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.102400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.102400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.102400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.102400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.102400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.102400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.102400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.102400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.102400000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.102400033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.102400033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.102400033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.102400033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.204800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.204800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.204800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.204800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.204800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.204800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.204800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.204800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.204800000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.204800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.204800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.204800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.204800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.204800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.204800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.204800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.204800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.204800000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.204800033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.204800033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.204800033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.204800033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.307200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.307200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.307200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.307200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.307200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.307200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.307200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.307200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.307200000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.307200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.307200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.307200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.307200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.307200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.307200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.307200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.307200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.307200000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.307200033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.307200033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.307200033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.307200033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.409600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.409600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.409600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.409600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.409600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.409600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.409600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.409600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.409600000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.409600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.409600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.409600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.409600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.409600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.409600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.409600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.409600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.409600000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.409600033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.409600033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.409600033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.409600033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.512000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.512000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.512000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.512000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.512000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.512000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.512000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.512000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.512000000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.512000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.512000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.512000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.512000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.512000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.512000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.512000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.512000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.512000000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.512000033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.512000033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.512000033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.512000033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.614400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.614400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.614400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.614400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.614400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.614400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.614400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.614400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.614400000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.614400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.614400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.614400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.614400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.614400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.614400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.614400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.614400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.614400000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.614400033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.614400033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.614400033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.614400033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.716800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.716800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.716800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.716800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.716800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.716800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.716800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.716800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.716800000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.716800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.716800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.716800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.716800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.716800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.716800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.716800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.716800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.716800000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.716800033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.716800033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.716800033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.716800033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.819200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.819200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.819200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.819200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.819200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.819200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.819200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.819200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.819200000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.819200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.819200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.819200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.819200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.819200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.819200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.819200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.819200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.819200000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.819200033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.819200033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.819200033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.819200033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.921600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.921600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.921600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.921600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.921600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.921600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.921600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.921600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.921600000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.921600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++0.921600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++0.921600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++0.921600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++0.921600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++0.921600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++0.921600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++0.921600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.921600000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++0.921600033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.921600033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.921600033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.921600033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
 CreateVariables () DONE !!!
 Creating 2 APs 10.00 m apart.
 CreateApNodes () DONE !!!
@@ -201,367 +393,468 @@ InstallApplications () DONE !!!
 Starting simulation for 2.00 s ...
 -------------------------------------------------
 Time[s]	ap-0	ap-1
-+1.025000000s 0 HwmpProtocol:RequestRoute(0x55ad99b96b70, 0, 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff, 0x55ad99c1d420, 2048)
-+1.025000000s 0 MeshWifiInterfaceMac:GetFrequencyChannel(0x55ad99b8f620)
-+1.025000000s 0 HwmpProtocol:GetBroadcastReceivers(0x55ad99b96b70, 1)
-+1.025000000s 0 MeshWifiInterfaceMac:Enqueue(0x55ad99b8f620, 0x55ad99c1fdb0, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:01)
-+1.025000000s 0 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.025000000s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b2e970, 0x55ad99c1fed0, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
-+1.025000000s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b4ede0, 0x55ad99c1fed0, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
-+1.025000000s 0 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.025000000s 0 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8f620, 0x55ad99c1fed0, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
-+1.025000000s 0 MeshWifiInterfaceMac:ForwardDown(): 32+62
-+1.025156033s 1 MeshWifiInterfaceMac:Receive(): 32+62
-+1.025156033s 1 PeerManagementProtocolMac:Receive(0x55ad99b54430, 0x55ad99c20120, QOSDATA )
-+1.025156033s 1 HwmpProtocolMac:Receive(0x55ad99b534a0, 0x55ad99c20120, QOSDATA )
-+1.025156033s 1 HwmpProtocolMac:ReceiveData(0x55ad99b534a0, 0x55ad99c20120, QOSDATA )
-+1.025156033s 1 HwmpProtocol:DropDataFrame(0x55ad99b96d60, 2, 00:00:00:00:00:01)
-+1.025156033s 1 HwmpProtocol:RequestRoute(0x55ad99b96d60, 1, 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff, 0x55ad99c20120, 2048)
-+1.025156033s 1 MeshWifiInterfaceMac:GetFrequencyChannel(0x55ad99b8fa60)
-+1.025156033s 1 HwmpProtocol:GetBroadcastReceivers(0x55ad99b96d60, 1)
-+1.025156033s 1 MeshWifiInterfaceMac:Enqueue(0x55ad99b8fa60, 0x55ad99c1d7c0, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:01)
-+1.025156033s 1 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.025156033s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c12630, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
-+1.025156033s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c12630, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
-+1.025156033s 1 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.025156033s 1 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8fa60, 0x55ad99c12630, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
-+1.025156033s 1 MeshWifiInterfaceMac:ForwardDown(): 32+62
-+1.025391066s 0 MeshWifiInterfaceMac:Receive(): 32+62
-+1.025391066s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c1d7c0, QOSDATA )
-+1.025391066s 0 HwmpProtocolMac:Receive(0x55ad99b2e970, 0x55ad99c1d7c0, QOSDATA )
-+1.025391066s 0 HwmpProtocolMac:ReceiveData(0x55ad99b2e970, 0x55ad99c1d7c0, QOSDATA )
-+1.025391066s 0 HwmpProtocol:DropDataFrame(0x55ad99b96b70, 2, 00:00:00:00:00:01)
-+1.085000000s 1 HwmpProtocol:RequestRoute(0x55ad99b96d60, 0, 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff, 0x55ad99c1d420, 2048)
-+1.085000000s 1 MeshWifiInterfaceMac:GetFrequencyChannel(0x55ad99b8fa60)
-+1.085000000s 1 HwmpProtocol:GetBroadcastReceivers(0x55ad99b96d60, 1)
-+1.085000000s 1 MeshWifiInterfaceMac:Enqueue(0x55ad99b8fa60, 0x55ad99c1cf20, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:02)
-+1.085000000s 1 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.085000000s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c200b0, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.085000000s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c200b0, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.085000000s 1 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.085000000s 1 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8fa60, 0x55ad99c200b0, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.085000000s 1 MeshWifiInterfaceMac:ForwardDown(): 32+62
-+1.085156033s 0 MeshWifiInterfaceMac:Receive(): 32+62
-+1.085156033s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c1e3c0, QOSDATA )
-+1.085156033s 0 HwmpProtocolMac:Receive(0x55ad99b2e970, 0x55ad99c1e3c0, QOSDATA )
-+1.085156033s 0 HwmpProtocolMac:ReceiveData(0x55ad99b2e970, 0x55ad99c1e3c0, QOSDATA )
-+1.085156033s 0 HwmpProtocol:DropDataFrame(0x55ad99b96b70, 2, 00:00:00:00:00:02)
-+1.085156033s 0 HwmpProtocol:RequestRoute(0x55ad99b96b70, 1, 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff, 0x55ad99c1e3c0, 2048)
-+1.085156033s 0 MeshWifiInterfaceMac:GetFrequencyChannel(0x55ad99b8f620)
-+1.085156033s 0 HwmpProtocol:GetBroadcastReceivers(0x55ad99b96b70, 1)
-+1.085156033s 0 MeshWifiInterfaceMac:Enqueue(0x55ad99b8f620, 0x55ad99c1da70, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:02)
-+1.085156033s 0 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.085156033s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b2e970, 0x55ad99c1fed0, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.085156033s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b4ede0, 0x55ad99c1fed0, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.085156033s 0 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.085156033s 0 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8f620, 0x55ad99c1fed0, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.085156033s 0 MeshWifiInterfaceMac:ForwardDown(): 32+62
-+1.085427066s 1 MeshWifiInterfaceMac:Receive(): 32+62
-+1.085427066s 1 PeerManagementProtocolMac:Receive(0x55ad99b54430, 0x55ad99c1da70, QOSDATA )
-+1.085427066s 1 HwmpProtocolMac:Receive(0x55ad99b534a0, 0x55ad99c1da70, QOSDATA )
-+1.085427066s 1 HwmpProtocolMac:ReceiveData(0x55ad99b534a0, 0x55ad99c1da70, QOSDATA )
-+1.085427066s 1 HwmpProtocol:DropDataFrame(0x55ad99b96d60, 2, 00:00:00:00:00:02)
-+1.126760000s 1 HwmpProtocol:RequestRoute(0x55ad99b96d60, 0, 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff, 0x55ad99c1d7c0, 2048)
-+1.126760000s 1 MeshWifiInterfaceMac:GetFrequencyChannel(0x55ad99b8fa60)
-+1.126760000s 1 HwmpProtocol:GetBroadcastReceivers(0x55ad99b96d60, 1)
-+1.126760000s 1 MeshWifiInterfaceMac:Enqueue(0x55ad99b8fa60, 0x55ad99c12630, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:02)
-+1.126760000s 1 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.126760000s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c1ff40, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.126760000s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c1ff40, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.126760000s 1 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.126760000s 1 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8fa60, 0x55ad99c1ff40, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.126760000s 1 MeshWifiInterfaceMac:ForwardDown(): 32+66
-+1.126920033s 0 MeshWifiInterfaceMac:Receive(): 32+66
-+1.126920033s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c1d3b0, QOSDATA )
-+1.126920033s 0 HwmpProtocolMac:Receive(0x55ad99b2e970, 0x55ad99c1d3b0, QOSDATA )
-+1.126920033s 0 HwmpProtocolMac:ReceiveData(0x55ad99b2e970, 0x55ad99c1d3b0, QOSDATA )
-+1.126920033s 0 HwmpProtocol:DropDataFrame(0x55ad99b96b70, 3, 00:00:00:00:00:02)
-+1.126920033s 0 HwmpProtocol:RequestRoute(0x55ad99b96b70, 1, 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff, 0x55ad99c1d3b0, 2048)
-+1.126920033s 0 MeshWifiInterfaceMac:GetFrequencyChannel(0x55ad99b8f620)
-+1.126920033s 0 HwmpProtocol:GetBroadcastReceivers(0x55ad99b96b70, 1)
-+1.126920033s 0 MeshWifiInterfaceMac:Enqueue(0x55ad99b8f620, 0x55ad99c12630, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:02)
-+1.126920033s 0 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.126920033s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b2e970, 0x55ad99c18070, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.126920033s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b4ede0, 0x55ad99c18070, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.126920033s 0 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.126920033s 0 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8f620, 0x55ad99c18070, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.126920033s 0 MeshWifiInterfaceMac:ForwardDown(): 32+66
-+1.127222066s 1 MeshWifiInterfaceMac:Receive(): 32+66
-+1.127222066s 1 PeerManagementProtocolMac:Receive(0x55ad99b54430, 0x55ad99c12630, QOSDATA )
-+1.127222066s 1 HwmpProtocolMac:Receive(0x55ad99b534a0, 0x55ad99c12630, QOSDATA )
-+1.127222066s 1 HwmpProtocolMac:ReceiveData(0x55ad99b534a0, 0x55ad99c12630, QOSDATA )
-+1.127222066s 1 HwmpProtocol:DropDataFrame(0x55ad99b96d60, 3, 00:00:00:00:00:02)
-+1.127920033s 0 HwmpProtocol:RequestRoute(0x55ad99b96b70, 0, 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff, 0x55ad99c1da70, 2054)
-+1.127920033s 0 MeshWifiInterfaceMac:GetFrequencyChannel(0x55ad99b8f620)
-+1.127920033s 0 HwmpProtocol:GetBroadcastReceivers(0x55ad99b96b70, 1)
-+1.127920033s 0 MeshWifiInterfaceMac:Enqueue(0x55ad99b8f620, 0x55ad99c1d0d0, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:01)
-+1.127920033s 0 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.127920033s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b2e970, 0x55ad99c1d750, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
-+1.127920033s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b4ede0, 0x55ad99c1d750, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
-+1.127920033s 0 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.127920033s 0 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8f620, 0x55ad99c1d750, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
-+1.127920033s 0 MeshWifiInterfaceMac:ForwardDown(): 32+42
-+1.128048066s 1 MeshWifiInterfaceMac:Receive(): 32+42
-+1.128048066s 1 PeerManagementProtocolMac:Receive(0x55ad99b54430, 0x55ad99c209e0, QOSDATA )
-+1.128048066s 1 HwmpProtocolMac:Receive(0x55ad99b534a0, 0x55ad99c209e0, QOSDATA )
-+1.128048066s 1 HwmpProtocolMac:ReceiveData(0x55ad99b534a0, 0x55ad99c209e0, QOSDATA )
-+1.128048066s 1 HwmpProtocol:DropDataFrame(0x55ad99b96d60, 3, 00:00:00:00:00:01)
-+1.128048066s 1 HwmpProtocol:RequestRoute(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c1da70, 2054)
-+1.128048066s 1 HwmpProtocol:ForwardUnicast(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c1cf20, 2054, 32)
-+1.128048066s 1 HwmpProtocol:ForwardUnicast(): Requested src = 00:00:00:00:00:02, dst = 00:00:00:00:00:01, I am 00:00:00:00:00:02, RA = ff:ff:ff:ff:ff:ff
-+1.128048066s 1 HwmpProtocol:ShouldSendPreq(0x55ad99b96d60, 00:00:00:00:00:01)
-+1.128048066s 1 HwmpProtocolMac:RequestDestination(0x55ad99b534a0, 00:00:00:00:00:01, 2, 0)
-+1.128048066s 1 HwmpProtocolMac:SendMyPreq(0x55ad99b534a0)
-+1.128048066s 1 HwmpProtocolMac:SendPreq(0x55ad99b534a0)
-+1.128048066s 1 HwmpProtocol:GetPreqReceivers(0x55ad99b96d60, 1)
-+1.128048066s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c1d0d0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=75, Retry=7f, MoreData=0 Duration/ID=39349us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=56320, 00:00:00:00:00:00, 00:00:00:00:00:00)
-+1.128048066s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c1d0d0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=75, Retry=7f, MoreData=0 Duration/ID=39349us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=56320, 00:00:00:00:00:00, 00:00:00:00:00:00)
-+1.128048066s 1 MeshWifiInterfaceMac:SendManagementFrame(): 24+41
-+1.128048066s 1 HwmpProtocol:QueuePacket(0x55ad99b96d60)
-+1.128048066s 1 HwmpProtocol:RequestRoute(0x55ad99b96d60, 1, 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff, 0x55ad99c209e0, 2054)
-+1.128048066s 1 MeshWifiInterfaceMac:GetFrequencyChannel(0x55ad99b8fa60)
-+1.128048066s 1 HwmpProtocol:GetBroadcastReceivers(0x55ad99b96d60, 1)
-+1.128048066s 1 MeshWifiInterfaceMac:Enqueue(0x55ad99b8fa60, 0x55ad99c1da70, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:01)
-+1.128048066s 1 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.128048066s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c1d680, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
-+1.128048066s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c1d680, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
-+1.128048066s 1 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.128048066s 1 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8fa60, 0x55ad99c1d680, QOSDATA , 00:00:00:00:00:01, ff:ff:ff:ff:ff:ff)
-+1.128048066s 1 MeshWifiInterfaceMac:ForwardDown(): 32+42
-+1.128237099s 0 MeshWifiInterfaceMac:Receive(): 32+42
-+1.128237099s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c20860, QOSDATA )
-+1.128237099s 0 HwmpProtocolMac:Receive(0x55ad99b2e970, 0x55ad99c20860, QOSDATA )
-+1.128237099s 0 HwmpProtocolMac:ReceiveData(0x55ad99b2e970, 0x55ad99c20860, QOSDATA )
-+1.128237099s 0 HwmpProtocol:DropDataFrame(0x55ad99b96b70, 3, 00:00:00:00:00:01)
-+1.128450099s 0 MeshWifiInterfaceMac:Receive(): 24+41
-+1.128450099s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c1fed0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=8)
-+1.128450099s 0 PeerManagementProtocolMac:Receive(): Cannot handle non SELF PROTECTED
-+1.128450099s 0 HwmpProtocolMac:Receive(0x55ad99b2e970, 0x55ad99c1fed0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=8)
-+1.128450099s 0 HwmpProtocolMac:ReceiveAction(0x55ad99b2e970, 0x55ad99c1fed0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=0us, DA=ff:ff:ff:ff:ff:ff, SA=00:00:00:00:00:02, BSSID=00:00:00:00:00:02, FragNumber=0, SeqNumber=8)
-+1.128450099s 0 HwmpProtocolMac:ReceiveAction(): Receive PREQ!
-+1.128450099s 0 HwmpProtocol:ReceivePreq(0x55ad99b96b70, 00:00:00:00:00:02, 1, 00:00:00:00:00:02, 24)
-+1.128450099s 0 HwmpProtocol:ReceivePreq(): I am 00:00:00:00:00:01, Accepted preq from address00:00:00:00:00:02, preq:PREQ=(originator address=00:00:00:00:00:02, TTL=31, hop count=1, metric=24, seqno=2, lifetime=5000, preq ID=1, Destinations=(00:00:00:00:00:01)
-+1.128450099s 0 HwmpProtocol:ReactivePathResolved(0x55ad99b96b70, 00:00:00:00:00:02)
-+1.128450099s 0 HwmpProtocol:DequeueFirstPacketByDst(0x55ad99b96b70, 00:00:00:00:00:02)
-+1.128450099s 0 HwmpProtocolMac:SendPrep(0x55ad99b2e970, 00:00:00:00:00:02)
-+1.128450099s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b2e970, 0x55ad99c20860, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=ff, Retry=7f, MoreData=0 Duration/ID=42246us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=65200, 00:00:00:00:00:00, 00:00:00:00:00:00)
-+1.128450099s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b4ede0, 0x55ad99c20860, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=ff, Retry=7f, MoreData=0 Duration/ID=42246us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=65200, 00:00:00:00:00:00, 00:00:00:00:00:00)
-+1.128450099s 0 MeshWifiInterfaceMac:SendManagementFrame(): 24+35
-+1.128592132s 1 MeshWifiInterfaceMac:Receive(): 24+35
-+1.128592132s 1 PeerManagementProtocolMac:Receive(0x55ad99b54430, 0x55ad99c1d3b0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=60us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=8)
-+1.128592132s 1 PeerManagementProtocolMac:Receive(): Cannot handle non SELF PROTECTED
-+1.128592132s 1 HwmpProtocolMac:Receive(0x55ad99b534a0, 0x55ad99c1d3b0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=60us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=8)
-+1.128592132s 1 HwmpProtocolMac:ReceiveAction(0x55ad99b534a0, 0x55ad99c1d3b0, MGT_ACTION ToDS=0, FromDS=0, MoreFrag=0, Retry=0, MoreData=0 Duration/ID=60us, DA=00:00:00:00:00:02, SA=00:00:00:00:00:01, BSSID=00:00:00:00:00:01, FragNumber=0, SeqNumber=8)
-+1.128592132s 1 HwmpProtocolMac:ReceiveAction(): Receive PREP!
-+1.128592132s 1 HwmpProtocol:ReceivePrep(0x55ad99b96d60, 00:00:00:00:00:01, 1, 00:00:00:00:00:01, 24)
-+1.128592132s 1 HwmpProtocol:ReceivePrep(): I am 00:00:00:00:00:02, received prep from 00:00:00:00:00:01, receiver was:00:00:00:00:00:01
-+1.128592132s 1 HwmpProtocol:ReactivePathResolved(0x55ad99b96d60, 00:00:00:00:00:01)
-+1.128592132s 1 HwmpProtocol:DequeueFirstPacketByDst(0x55ad99b96d60, 00:00:00:00:00:01)
-+1.128592132s 1 MeshWifiInterfaceMac:Enqueue(0x55ad99b8fa60, 0x55ad99c1cf20, 00:00:00:00:00:01, 00:00:00:00:00:02)
-+1.128592132s 1 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.128592132s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c1ff40, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.128592132s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c1ff40, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.128592132s 1 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.128592132s 1 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8fa60, 0x55ad99c1ff40, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.128592132s 1 MeshWifiInterfaceMac:ForwardDown(): 32+42
-+1.128592132s 1 HwmpProtocol:DequeueFirstPacketByDst(0x55ad99b96d60, 00:00:00:00:00:01)
-+1.128592132s 1 HwmpProtocol:ReceivePrep(): I am 00:00:00:00:00:02, resolved 00:00:00:00:00:01
-+1.128810365s 0 MeshWifiInterfaceMac:Receive(): 32+42
-+1.128810365s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c1cf20, QOSDATA )
-+1.128810365s 0 HwmpProtocolMac:Receive(0x55ad99b2e970, 0x55ad99c1cf20, QOSDATA )
-+1.128810365s 0 HwmpProtocolMac:ReceiveData(0x55ad99b2e970, 0x55ad99c1cf20, QOSDATA )
-+1.128810365s 0 HwmpProtocol:RequestRoute(0x55ad99b96b70, 0, 00:00:00:00:00:01, 00:00:00:00:00:02, 0x55ad99c1e3c0, 2048)
-+1.128810365s 0 HwmpProtocol:ForwardUnicast(0x55ad99b96b70, 0, 00:00:00:00:00:01, 00:00:00:00:00:02, 0x55ad99c1fed0, 2048, 32)
-+1.128810365s 0 HwmpProtocol:ForwardUnicast(): Requested src = 00:00:00:00:00:01, dst = 00:00:00:00:00:02, I am 00:00:00:00:00:01, RA = 00:00:00:00:00:02
-+1.128810365s 0 MeshWifiInterfaceMac:Enqueue(0x55ad99b8f620, 0x55ad99c1fed0, 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.128810365s 0 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.128810365s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b2e970, 0x55ad99c1d750, QOSDATA , 00:00:00:00:00:01, 00:00:00:00:00:02)
-+1.128810365s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b4ede0, 0x55ad99c1d750, QOSDATA , 00:00:00:00:00:01, 00:00:00:00:00:02)
-+1.128810365s 0 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.128810365s 0 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8f620, 0x55ad99c1d750, QOSDATA , 00:00:00:00:00:01, 00:00:00:00:00:02)
-+1.128810365s 0 MeshWifiInterfaceMac:ForwardDown(): 32+62
-+1.129048598s 1 MeshWifiInterfaceMac:Receive(): 32+62
-+1.129048598s 1 PeerManagementProtocolMac:Receive(0x55ad99b54430, 0x55ad99c12630, QOSDATA )
-+1.129048598s 1 HwmpProtocolMac:Receive(0x55ad99b534a0, 0x55ad99c12630, QOSDATA )
-+1.129048598s 1 HwmpProtocolMac:ReceiveData(0x55ad99b534a0, 0x55ad99c12630, QOSDATA )
-+1.130048598s 1 HwmpProtocol:RequestRoute(0x55ad99b96d60, 0, 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff, 0x55ad99c1cf20, 2054)
-+1.130048598s 1 MeshWifiInterfaceMac:GetFrequencyChannel(0x55ad99b8fa60)
-+1.130048598s 1 HwmpProtocol:GetBroadcastReceivers(0x55ad99b96d60, 1)
-+1.130048598s 1 MeshWifiInterfaceMac:Enqueue(0x55ad99b8fa60, 0x55ad99c1fed0, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:02)
-+1.130048598s 1 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.130048598s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c1d140, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.130048598s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c1d140, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.130048598s 1 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.130048598s 1 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8fa60, 0x55ad99c1d140, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.130048598s 1 MeshWifiInterfaceMac:ForwardDown(): 32+42
-+1.130176631s 0 MeshWifiInterfaceMac:Receive(): 32+42
-+1.130176631s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c20120, QOSDATA )
-+1.130176631s 0 HwmpProtocolMac:Receive(0x55ad99b2e970, 0x55ad99c20120, QOSDATA )
-+1.130176631s 0 HwmpProtocolMac:ReceiveData(0x55ad99b2e970, 0x55ad99c20120, QOSDATA )
-+1.130176631s 0 HwmpProtocol:DropDataFrame(0x55ad99b96b70, 4, 00:00:00:00:00:02)
-+1.130176631s 0 HwmpProtocol:RequestRoute(0x55ad99b96b70, 0, 00:00:00:00:00:01, 00:00:00:00:00:02, 0x55ad99c1cf20, 2054)
-+1.130176631s 0 HwmpProtocol:ForwardUnicast(0x55ad99b96b70, 0, 00:00:00:00:00:01, 00:00:00:00:00:02, 0x55ad99c1d680, 2054, 32)
-+1.130176631s 0 HwmpProtocol:ForwardUnicast(): Requested src = 00:00:00:00:00:01, dst = 00:00:00:00:00:02, I am 00:00:00:00:00:01, RA = 00:00:00:00:00:02
-+1.130176631s 0 MeshWifiInterfaceMac:Enqueue(0x55ad99b8f620, 0x55ad99c1d680, 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.130176631s 0 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.130176631s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b2e970, 0x55ad99c1fed0, QOSDATA , 00:00:00:00:00:01, 00:00:00:00:00:02)
-+1.130176631s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b4ede0, 0x55ad99c1fed0, QOSDATA , 00:00:00:00:00:01, 00:00:00:00:00:02)
-+1.130176631s 0 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.130176631s 0 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8f620, 0x55ad99c1fed0, QOSDATA , 00:00:00:00:00:01, 00:00:00:00:00:02)
-+1.130176631s 0 MeshWifiInterfaceMac:ForwardDown(): 32+42
-+1.130176631s 0 HwmpProtocol:RequestRoute(0x55ad99b96b70, 1, 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff, 0x55ad99c20120, 2054)
-+1.130176631s 0 MeshWifiInterfaceMac:GetFrequencyChannel(0x55ad99b8f620)
-+1.130176631s 0 HwmpProtocol:GetBroadcastReceivers(0x55ad99b96b70, 1)
-+1.130176631s 0 MeshWifiInterfaceMac:Enqueue(0x55ad99b8f620, 0x55ad99c1cf20, ff:ff:ff:ff:ff:ff, 00:00:00:00:00:02)
-+1.130176631s 0 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.130176631s 0 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b2e970, 0x55ad99c1d680, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.130176631s 0 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b4ede0, 0x55ad99c1d680, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.130176631s 0 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.130176631s 0 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8f620, 0x55ad99c1d680, QOSDATA , 00:00:00:00:00:02, ff:ff:ff:ff:ff:ff)
-+1.130176631s 0 MeshWifiInterfaceMac:ForwardDown(): 32+42
-+1.130298864s 1 MeshWifiInterfaceMac:Receive(): 32+42
-+1.130298864s 1 PeerManagementProtocolMac:Receive(0x55ad99b54430, 0x55ad99c20860, QOSDATA )
-+1.130298864s 1 HwmpProtocolMac:Receive(0x55ad99b534a0, 0x55ad99c20860, QOSDATA )
-+1.130298864s 1 HwmpProtocolMac:ReceiveData(0x55ad99b534a0, 0x55ad99c20860, QOSDATA )
-+1.130298864s 1 HwmpProtocol:RequestRoute(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c1d5a0, 2048)
-+1.130298864s 1 HwmpProtocol:ForwardUnicast(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c1fe20, 2048, 32)
-+1.130298864s 1 HwmpProtocol:ForwardUnicast(): Requested src = 00:00:00:00:00:02, dst = 00:00:00:00:00:01, I am 00:00:00:00:00:02, RA = 00:00:00:00:00:01
-+1.130298864s 1 MeshWifiInterfaceMac:Enqueue(0x55ad99b8fa60, 0x55ad99c1fe20, 00:00:00:00:00:01, 00:00:00:00:00:02)
-+1.130298864s 1 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.130298864s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c18070, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.130298864s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c18070, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.130298864s 1 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.130298864s 1 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8fa60, 0x55ad99c18070, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.130298864s 1 MeshWifiInterfaceMac:ForwardDown(): 32+44
-+1.130298864s 1 HwmpProtocol:RequestRoute(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c1e350, 2048)
-+1.130298864s 1 HwmpProtocol:ForwardUnicast(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c1d5a0, 2048, 32)
-+1.130298864s 1 HwmpProtocol:ForwardUnicast(): Requested src = 00:00:00:00:00:02, dst = 00:00:00:00:00:01, I am 00:00:00:00:00:02, RA = 00:00:00:00:00:01
-+1.130298864s 1 MeshWifiInterfaceMac:Enqueue(0x55ad99b8fa60, 0x55ad99c1d5a0, 00:00:00:00:00:01, 00:00:00:00:00:02)
-+1.130298864s 1 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.130298864s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c1fe20, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.130298864s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c1fe20, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.130298864s 1 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.130298864s 1 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8fa60, 0x55ad99c1fe20, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.130298864s 1 MeshWifiInterfaceMac:ForwardDown(): 32+1514
-+1.130447097s 0 MeshWifiInterfaceMac:Receive(): 32+44
-+1.130447097s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c12630, QOSDATA )
-+1.130447097s 0 HwmpProtocolMac:Receive(0x55ad99b2e970, 0x55ad99c12630, QOSDATA )
-+1.130447097s 0 HwmpProtocolMac:ReceiveData(0x55ad99b2e970, 0x55ad99c12630, QOSDATA )
-+1.130698130s 1 MeshWifiInterfaceMac:Receive(): 32+42
-+1.130698130s 1 PeerManagementProtocolMac:Receive(0x55ad99b54430, 0x55ad99c1cf20, QOSDATA )
-+1.130698130s 1 HwmpProtocolMac:Receive(0x55ad99b534a0, 0x55ad99c1cf20, QOSDATA )
-+1.130698130s 1 HwmpProtocolMac:ReceiveData(0x55ad99b534a0, 0x55ad99c1cf20, QOSDATA )
-+1.130698130s 1 HwmpProtocol:DropDataFrame(0x55ad99b96d60, 4, 00:00:00:00:00:02)
-+1.130944563s 0 MeshWifiInterfaceMac:Receive(): 32+1514
-+1.130944563s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c20860, QOSDATA )
-+1.130944563s 0 HwmpProtocolMac:Receive(0x55ad99b2e970, 0x55ad99c20860, QOSDATA )
-+1.130944563s 0 HwmpProtocolMac:ReceiveData(0x55ad99b2e970, 0x55ad99c20860, QOSDATA )
-+1.230448066s 1 HwmpProtocolMac:SendMyPreq(0x55ad99b534a0)
-+1.235520000s 1 HwmpProtocol:RequestRoute(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c200b0, 2048)
-+1.235520000s 1 HwmpProtocol:ForwardUnicast(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c1ceb0, 2048, 32)
-+1.235520000s 1 HwmpProtocol:ForwardUnicast(): Requested src = 00:00:00:00:00:02, dst = 00:00:00:00:00:01, I am 00:00:00:00:00:02, RA = 00:00:00:00:00:01
-+1.235520000s 1 MeshWifiInterfaceMac:Enqueue(0x55ad99b8fa60, 0x55ad99c1ceb0, 00:00:00:00:00:01, 00:00:00:00:00:02)
-+1.235520000s 1 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.235520000s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c1cd90, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.235520000s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c1cd90, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.235520000s 1 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.235520000s 1 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8fa60, 0x55ad99c1cd90, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.235520000s 1 MeshWifiInterfaceMac:ForwardDown(): 32+1514
-+1.235642433s 0 MeshWifiInterfaceMac:Receive(): 32+1514
-+1.235642433s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c1d3b0, QOSDATA )
-+1.235642433s 0 HwmpProtocolMac:Receive(0x55ad99b2e970, 0x55ad99c1d3b0, QOSDATA )
-+1.235642433s 0 HwmpProtocolMac:ReceiveData(0x55ad99b2e970, 0x55ad99c1d3b0, QOSDATA )
-+1.332848066s 1 HwmpProtocol:RetryPathDiscovery(0x55ad99b96d60, 00:00:00:00:00:01, 1)
-+1.353280000s 1 HwmpProtocol:RequestRoute(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c1ff40, 2048)
-+1.353280000s 1 HwmpProtocol:ForwardUnicast(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c1fe20, 2048, 32)
-+1.353280000s 1 HwmpProtocol:ForwardUnicast(): Requested src = 00:00:00:00:00:02, dst = 00:00:00:00:00:01, I am 00:00:00:00:00:02, RA = 00:00:00:00:00:01
-+1.353280000s 1 MeshWifiInterfaceMac:Enqueue(0x55ad99b8fa60, 0x55ad99c1fe20, 00:00:00:00:00:01, 00:00:00:00:00:02)
-+1.353280000s 1 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.353280000s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c1d7c0, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.353280000s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c1d7c0, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.353280000s 1 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.353280000s 1 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8fa60, 0x55ad99c1d7c0, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.353280000s 1 MeshWifiInterfaceMac:ForwardDown(): 32+1514
-+1.353402433s 0 MeshWifiInterfaceMac:Receive(): 32+1514
-+1.353402433s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c1ceb0, QOSDATA )
-+1.353402433s 0 HwmpProtocolMac:Receive(0x55ad99b2e970, 0x55ad99c1ceb0, QOSDATA )
-+1.353402433s 0 HwmpProtocolMac:ReceiveData(0x55ad99b2e970, 0x55ad99c1ceb0, QOSDATA )
-+1.471040000s 1 HwmpProtocol:RequestRoute(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c1d680, 2048)
-+1.471040000s 1 HwmpProtocol:ForwardUnicast(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c12630, 2048, 32)
-+1.471040000s 1 HwmpProtocol:ForwardUnicast(): Requested src = 00:00:00:00:00:02, dst = 00:00:00:00:00:01, I am 00:00:00:00:00:02, RA = 00:00:00:00:00:01
-+1.471040000s 1 MeshWifiInterfaceMac:Enqueue(0x55ad99b8fa60, 0x55ad99c12630, 00:00:00:00:00:01, 00:00:00:00:00:02)
-+1.471040000s 1 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.471040000s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c20120, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.471040000s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c20120, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.471040000s 1 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.471040000s 1 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8fa60, 0x55ad99c20120, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.471040000s 1 MeshWifiInterfaceMac:ForwardDown(): 32+1514
-+1.471162433s 0 MeshWifiInterfaceMac:Receive(): 32+1514
-+1.471162433s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c1d7c0, QOSDATA )
-+1.471162433s 0 HwmpProtocolMac:Receive(0x55ad99b2e970, 0x55ad99c1d7c0, QOSDATA )
-+1.471162433s 0 HwmpProtocolMac:ReceiveData(0x55ad99b2e970, 0x55ad99c1d7c0, QOSDATA )
-+1.588800000s 1 HwmpProtocol:RequestRoute(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c1d420, 2048)
-+1.588800000s 1 HwmpProtocol:ForwardUnicast(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c1e3c0, 2048, 32)
-+1.588800000s 1 HwmpProtocol:ForwardUnicast(): Requested src = 00:00:00:00:00:02, dst = 00:00:00:00:00:01, I am 00:00:00:00:00:02, RA = 00:00:00:00:00:01
-+1.588800000s 1 MeshWifiInterfaceMac:Enqueue(0x55ad99b8fa60, 0x55ad99c1e3c0, 00:00:00:00:00:01, 00:00:00:00:00:02)
-+1.588800000s 1 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.588800000s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c1fe20, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.588800000s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c1fe20, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.588800000s 1 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.588800000s 1 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8fa60, 0x55ad99c1fe20, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.588800000s 1 MeshWifiInterfaceMac:ForwardDown(): 32+1514
-+1.588922433s 0 MeshWifiInterfaceMac:Receive(): 32+1514
-+1.588922433s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c12630, QOSDATA )
-+1.588922433s 0 HwmpProtocolMac:Receive(0x55ad99b2e970, 0x55ad99c12630, QOSDATA )
-+1.588922433s 0 HwmpProtocolMac:ReceiveData(0x55ad99b2e970, 0x55ad99c12630, QOSDATA )
-+1.706560000s 1 HwmpProtocol:RequestRoute(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c20970, 2048)
-+1.706560000s 1 HwmpProtocol:ForwardUnicast(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c200b0, 2048, 32)
-+1.706560000s 1 HwmpProtocol:ForwardUnicast(): Requested src = 00:00:00:00:00:02, dst = 00:00:00:00:00:01, I am 00:00:00:00:00:02, RA = 00:00:00:00:00:01
-+1.706560000s 1 MeshWifiInterfaceMac:Enqueue(0x55ad99b8fa60, 0x55ad99c200b0, 00:00:00:00:00:01, 00:00:00:00:00:02)
-+1.706560000s 1 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.706560000s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c1d750, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.706560000s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c1d750, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.706560000s 1 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.706560000s 1 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8fa60, 0x55ad99c1d750, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.706560000s 1 MeshWifiInterfaceMac:ForwardDown(): 32+1514
-+1.706682433s 0 MeshWifiInterfaceMac:Receive(): 32+1514
-+1.706682433s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c1e3c0, QOSDATA )
-+1.706682433s 0 HwmpProtocolMac:Receive(0x55ad99b2e970, 0x55ad99c1e3c0, QOSDATA )
-+1.706682433s 0 HwmpProtocolMac:ReceiveData(0x55ad99b2e970, 0x55ad99c1e3c0, QOSDATA )
-+1.824320000s 1 HwmpProtocol:RequestRoute(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c1cd90, 2048)
-+1.824320000s 1 HwmpProtocol:ForwardUnicast(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c1e350, 2048, 32)
-+1.824320000s 1 HwmpProtocol:ForwardUnicast(): Requested src = 00:00:00:00:00:02, dst = 00:00:00:00:00:01, I am 00:00:00:00:00:02, RA = 00:00:00:00:00:01
-+1.824320000s 1 MeshWifiInterfaceMac:Enqueue(0x55ad99b8fa60, 0x55ad99c1e350, 00:00:00:00:00:01, 00:00:00:00:00:02)
-+1.824320000s 1 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.824320000s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c1dae0, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.824320000s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c1dae0, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.824320000s 1 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.824320000s 1 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8fa60, 0x55ad99c1dae0, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.824320000s 1 MeshWifiInterfaceMac:ForwardDown(): 32+1514
-+1.824442433s 0 MeshWifiInterfaceMac:Receive(): 32+1514
-+1.824442433s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c1d750, QOSDATA )
-+1.824442433s 0 HwmpProtocolMac:Receive(0x55ad99b2e970, 0x55ad99c1d750, QOSDATA )
-+1.824442433s 0 HwmpProtocolMac:ReceiveData(0x55ad99b2e970, 0x55ad99c1d750, QOSDATA )
-+1.942080000s 1 HwmpProtocol:RequestRoute(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c1fed0, 2048)
-+1.942080000s 1 HwmpProtocol:ForwardUnicast(0x55ad99b96d60, 0, 00:00:00:00:00:02, 00:00:00:00:00:01, 0x55ad99c1da70, 2048, 32)
-+1.942080000s 1 HwmpProtocol:ForwardUnicast(): Requested src = 00:00:00:00:00:02, dst = 00:00:00:00:00:01, I am 00:00:00:00:00:02, RA = 00:00:00:00:00:01
-+1.942080000s 1 MeshWifiInterfaceMac:Enqueue(0x55ad99b8fa60, 0x55ad99c1da70, 00:00:00:00:00:01, 00:00:00:00:00:02)
-+1.942080000s 1 MeshWifiInterfaceMac:ForwardDown(): 1QOSDATA 
-+1.942080000s 1 HwmpProtocolMac:UpdateOutcomingFrame(0x55ad99b534a0, 0x55ad99c200b0, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.942080000s 1 PeerManagementProtocolMac:UpdateOutcomingFrame(0x55ad99b54430, 0x55ad99c200b0, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.942080000s 1 MeshWifiInterfaceMac:ForwardDown(): 2QOSDATA 
-+1.942080000s 1 MeshWifiInterfaceMac:ForwardDown(0x55ad99b8fa60, 0x55ad99c200b0, QOSDATA , 00:00:00:00:00:02, 00:00:00:00:00:01)
-+1.942080000s 1 MeshWifiInterfaceMac:ForwardDown(): 32+1514
-+1.942202433s 0 MeshWifiInterfaceMac:Receive(): 32+1514
-+1.942202433s 0 PeerManagementProtocolMac:Receive(0x55ad99b4ede0, 0x55ad99c1e350, QOSDATA )
-+1.942202433s 0 HwmpProtocolMac:Receive(0x55ad99b2e970, 0x55ad99c1e350, QOSDATA )
-+1.942202433s 0 HwmpProtocolMac:ReceiveData(0x55ad99b2e970, 0x55ad99c1e350, QOSDATA )
++1.024000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.024000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.024000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.024000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.024000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.024000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.024000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.024000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.024000000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.024000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.024000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.024000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.024000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.024000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.024000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.024000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.024000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.024000000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.024000033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.024000033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.024000033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.024000033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.067000000s 0 WifiPhy:SendPacket(): 86-DsssRate1Mbps
++1.067000033s 1 WifiPhy:StartReceivePreambleAndHeader(): 86-DsssRate1Mbps
++1.067000033s 1 WifiPhy:StartRx(): sync to signal (power=8.59587e-10W)
++1.067192033s 1 WifiPhy:StartReceivePacket(): snr(dB)=32.895, per=0
++1.067192033s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.067880033s 1 WifiPhy:EndReceive(): mode=1000000, snr(dB)=32.895, per=0, size=86
++1.068000000s 0 WifiPhy:SendPacket(): 86-OfdmRate6Mbps
++1.068000033s 1 WifiPhy:StartReceivePreambleAndHeader(): 86-OfdmRate6Mbps
++1.068000033s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.068020033s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.068020033s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.068140033s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=86
++1.103000000s 1 WifiPhy:SendPacket(): 86-OfdmRate6Mbps
++1.103000000s 1 WifiPhy:SendPacket(): 86-DsssRate1Mbps
++1.103000033s 0 WifiPhy:StartReceivePreambleAndHeader(): 86-OfdmRate6Mbps
++1.103000033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.103000033s 0 WifiPhy:StartReceivePreambleAndHeader(): 86-DsssRate1Mbps
++1.103000033s 0 WifiPhy:StartRx(): sync to signal (power=8.59587e-10W)
++1.103020033s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.103020033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.103140033s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=86
++1.103192033s 0 WifiPhy:StartReceivePacket(): snr(dB)=32.895, per=0
++1.103192033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.103880033s 0 WifiPhy:EndReceive(): mode=1000000, snr(dB)=32.895, per=0, size=86
++1.121760000s 1 WifiPhy:SendPacket(): 90-DsssRate1Mbps
++1.121760033s 0 WifiPhy:StartReceivePreambleAndHeader(): 90-DsssRate1Mbps
++1.121760033s 0 WifiPhy:StartRx(): sync to signal (power=8.59587e-10W)
++1.121952033s 0 WifiPhy:StartReceivePacket(): snr(dB)=32.895, per=0
++1.121952033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.122672033s 0 WifiPhy:EndReceive(): mode=1000000, snr(dB)=32.895, per=0, size=90
++1.126400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.126400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.126400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.126400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.126400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.126400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.126400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.126400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.126400000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.126400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.126400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.126400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.126400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.126400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.126400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.126400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.126400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.126400000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.126400033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.126400033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.126400033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.126400033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.127760000s 1 WifiPhy:SendPacket(): 90-OfdmRate6Mbps
++1.127760033s 0 WifiPhy:StartReceivePreambleAndHeader(): 90-OfdmRate6Mbps
++1.127760033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.127780033s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.127780033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.127904033s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=90
++1.128019033s 0 WifiPhy:SendPacket(): 66-OfdmRate6Mbps
++1.128019066s 1 WifiPhy:StartReceivePreambleAndHeader(): 66-OfdmRate6Mbps
++1.128019066s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.128039066s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.128039066s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.128131066s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=66
++1.128246066s 1 WifiPhy:SendPacket(): 37-OfdmRate6Mbps
++1.128246099s 0 WifiPhy:StartReceivePreambleAndHeader(): 37-OfdmRate6Mbps
++1.128246099s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.128266099s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.128266099s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.128282099s 0 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=37
++1.128282099s 0 RegularWifiMac:Receive(): Receive MGT_ACTION!!!
++1.128282099s 0 RegularWifiMac:Receive(): Receive BLOCK_ACK!!!
++1.128282099s 0 RegularWifiMac:Receive(): Receive BLOCK_ACK_ADDBA_REQUEST!!!
++1.128298099s 0 WifiPhy:SendPacket(): 14-OfdmRate6Mbps
++1.128298132s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate6Mbps
++1.128298132s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.128318132s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.128318132s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.128342132s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=14
++1.128484099s 0 WifiPhy:SendPacket(): 37-OfdmRate6Mbps
++1.128484132s 1 WifiPhy:StartReceivePreambleAndHeader(): 37-OfdmRate6Mbps
++1.128484132s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.128504132s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.128504132s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.128520132s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=37
++1.128520132s 1 RegularWifiMac:Receive(): Receive MGT_ACTION!!!
++1.128520132s 1 RegularWifiMac:Receive(): Receive BLOCK_ACK!!!
++1.128520132s 1 RegularWifiMac:Receive(): Receive BLOCK_ACK_ADDBA_RESPONSE!!!
++1.128536132s 1 WifiPhy:SendPacket(): 14-OfdmRate6Mbps
++1.128536165s 0 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate6Mbps
++1.128536165s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.128556165s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.128556165s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.128580165s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=14
++1.128713132s 1 WifiPhy:SendPacket(): 70-VhtMcs7
++1.128713165s 0 WifiPhy:StartReceivePreambleAndHeader(): 70-VhtMcs7
++1.128713165s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.128765165s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
++1.128765165s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.128768765s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=70
++1.128784765s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.128784798s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.128784798s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.128804798s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.128804798s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.128812798s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
++1.128945765s 0 WifiPhy:SendPacket(): 37-OfdmRate6Mbps
++1.128945798s 1 WifiPhy:StartReceivePreambleAndHeader(): 37-OfdmRate6Mbps
++1.128945798s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.128965798s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.128965798s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.128981798s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=37
++1.128981798s 1 RegularWifiMac:Receive(): Receive MGT_ACTION!!!
++1.128981798s 1 RegularWifiMac:Receive(): Receive BLOCK_ACK!!!
++1.128981798s 1 RegularWifiMac:Receive(): Receive BLOCK_ACK_ADDBA_REQUEST!!!
++1.128997798s 1 WifiPhy:SendPacket(): 14-OfdmRate6Mbps
++1.128997831s 0 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate6Mbps
++1.128997831s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.129017831s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.129017831s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.129041831s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=14
++1.129102798s 1 WifiPhy:SendPacket(): 37-OfdmRate6Mbps
++1.129102831s 0 WifiPhy:StartReceivePreambleAndHeader(): 37-OfdmRate6Mbps
++1.129102831s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.129122831s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.129122831s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.129138831s 0 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=37
++1.129138831s 0 RegularWifiMac:Receive(): Receive MGT_ACTION!!!
++1.129138831s 0 RegularWifiMac:Receive(): Receive BLOCK_ACK!!!
++1.129138831s 0 RegularWifiMac:Receive(): Receive BLOCK_ACK_ADDBA_RESPONSE!!!
++1.129154831s 0 WifiPhy:SendPacket(): 14-OfdmRate6Mbps
++1.129154864s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate6Mbps
++1.129154864s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.129174864s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.129174864s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.129198864s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=14
++1.129322831s 0 WifiPhy:SendPacket(): 90-VhtMcs7
++1.129322864s 1 WifiPhy:StartReceivePreambleAndHeader(): 90-VhtMcs7
++1.129322864s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.129374864s 1 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
++1.129374864s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.129378464s 1 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=90
++1.129394464s 1 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.129394497s 0 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.129394497s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.129414497s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.129414497s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.129422497s 0 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
++1.133378464s 1 WifiPhy:SendPacket(): 66-OfdmRate6Mbps
++1.133378497s 0 WifiPhy:StartReceivePreambleAndHeader(): 66-OfdmRate6Mbps
++1.133378497s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.133398497s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.133398497s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.133490497s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=66
++1.133569497s 0 WifiPhy:SendPacket(): 70-VhtMcs7
++1.133569530s 1 WifiPhy:StartReceivePreambleAndHeader(): 70-VhtMcs7
++1.133569530s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.133621530s 1 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
++1.133621530s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.133625130s 1 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=70
++1.133641130s 1 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.133641163s 0 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.133641163s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.133661163s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.133661163s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.133669163s 0 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
++1.133784130s 1 WifiPhy:SendPacket(): 72-VhtMcs7
++1.133784163s 0 WifiPhy:StartReceivePreambleAndHeader(): 72-VhtMcs7
++1.133784163s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.133836163s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
++1.133836163s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.133836371s 1 WifiPhy:SendPacket(): 1542-VhtMcs7
++1.133836404s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=72
++1.133836404s 0 WifiPhy:StartReceivePreambleAndHeader(): 1542-VhtMcs7
++1.133836404s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.133843362s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=1542
++1.133859363s 0 WifiPhy:SendPacket(): 32-OfdmRate24Mbps
++1.133859396s 1 WifiPhy:StartReceivePreambleAndHeader(): 32-OfdmRate24Mbps
++1.133859396s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.133879396s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.133879396s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.133891396s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=32
++1.228800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.228800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.228800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.228800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.228800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.228800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.228800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.228800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.228800000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.228800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.228800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.228800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.228800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.228800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.228800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.228800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.228800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.228800000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.228800033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.228800033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.228800033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.228800033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.235520000s 1 WifiPhy:SendPacket(): 1542-VhtMcs7
++1.235520033s 0 WifiPhy:StartReceivePreambleAndHeader(): 1542-VhtMcs7
++1.235520033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.235572033s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
++1.235572033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.235579233s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=1542
++1.235595233s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.235595266s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.235595266s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.235615266s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.235615266s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.235623266s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
++1.331200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.331200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.331200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.331200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.331200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.331200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.331200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.331200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.331200000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.331200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.331200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.331200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.331200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.331200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.331200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.331200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.331200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.331200000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.331200033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.331200033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.331200033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.331200033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.353280000s 1 WifiPhy:SendPacket(): 1542-VhtMcs7
++1.353280033s 0 WifiPhy:StartReceivePreambleAndHeader(): 1542-VhtMcs7
++1.353280033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.353332033s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
++1.353332033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.353339233s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=1542
++1.353355233s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.353355266s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.353355266s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.353375266s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.353375266s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.353383266s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
++1.433600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.433600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.433600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.433600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.433600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.433600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.433600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.433600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.433600000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.433600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.433600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.433600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.433600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.433600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.433600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.433600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.433600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.433600000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.433600033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.433600033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.433600033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.433600033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.471040000s 1 WifiPhy:SendPacket(): 1542-VhtMcs7
++1.471040033s 0 WifiPhy:StartReceivePreambleAndHeader(): 1542-VhtMcs7
++1.471040033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.471092033s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
++1.471092033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.471099233s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=1542
++1.471115233s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.471115266s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.471115266s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.471135266s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.471135266s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.471143266s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
++1.536000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.536000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.536000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.536000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.536000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.536000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.536000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.536000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.536000000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.536000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.536000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.536000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.536000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.536000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.536000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.536000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.536000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.536000000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.536000033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.536000033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.536000033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.536000033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.588800000s 1 WifiPhy:SendPacket(): 1542-VhtMcs7
++1.588800033s 0 WifiPhy:StartReceivePreambleAndHeader(): 1542-VhtMcs7
++1.588800033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.588852033s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
++1.588852033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.588859233s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=1542
++1.588875233s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.588875266s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.588875266s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.588895266s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.588895266s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.588903266s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
++1.638400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.638400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.638400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.638400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.638400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.638400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.638400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.638400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.638400000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.638400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.638400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.638400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.638400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.638400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.638400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.638400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.638400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.638400000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.638400033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.638400033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.638400033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.638400033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.706560000s 1 WifiPhy:SendPacket(): 1542-VhtMcs7
++1.706560033s 0 WifiPhy:StartReceivePreambleAndHeader(): 1542-VhtMcs7
++1.706560033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.706612033s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
++1.706612033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.706619233s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=1542
++1.706635233s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.706635266s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.706635266s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.706655266s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.706655266s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.706663266s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
++1.740800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.740800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.740800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.740800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.740800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.740800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.740800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.740800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.740800000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.740800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.740800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.740800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.740800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.740800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.740800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.740800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.740800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.740800000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.740800033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.740800033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.740800033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.740800033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.824320000s 1 WifiPhy:SendPacket(): 1542-VhtMcs7
++1.824320033s 0 WifiPhy:StartReceivePreambleAndHeader(): 1542-VhtMcs7
++1.824320033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.824372033s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
++1.824372033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.824379233s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=1542
++1.824395233s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.824395266s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.824395266s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.824415266s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.824415266s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.824423266s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
++1.843200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.843200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.843200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.843200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.843200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.843200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.843200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.843200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.843200000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.843200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.843200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.843200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.843200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.843200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.843200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.843200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.843200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.843200000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.843200033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.843200033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.843200033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.843200033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.942080000s 1 WifiPhy:SendPacket(): 1542-VhtMcs7
++1.942080033s 0 WifiPhy:StartReceivePreambleAndHeader(): 1542-VhtMcs7
++1.942080033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.942132033s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
++1.942132033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.942139233s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=1542
++1.942155233s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.942155266s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.942155266s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
++1.942175266s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
++1.942175266s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.942183266s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
++1.945600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.945600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.945600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.945600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.945600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.945600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.945600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.945600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.945600000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.945600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
++1.945600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
++1.945600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
++1.945600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
++1.945600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
++1.945600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
++1.945600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
++1.945600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.945600000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
++1.945600033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.945600033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++1.945600033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.945600033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
 2.00	-1.00	0.09
-HwmpProtocol:DoDispose(0x55ad99b96b70)
-MeshWifiInterfaceMac:DoDispose(0x55ad99b8f620)
-MeshWifiInterfaceMac:~MeshWifiInterfaceMac(0x55ad99b8f620)
-HwmpProtocol:DoDispose(0x55ad99b96d60)
-MeshWifiInterfaceMac:DoDispose(0x55ad99b8fa60)
-MeshWifiInterfaceMac:~MeshWifiInterfaceMac(0x55ad99b8fa60)
-HwmpProtocol:~HwmpProtocol(0x55ad99b96b70)
-HwmpProtocol:~HwmpProtocol(0x55ad99b96d60)

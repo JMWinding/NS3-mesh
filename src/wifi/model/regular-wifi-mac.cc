@@ -928,6 +928,7 @@ RegularWifiMac::Receive (Ptr<Packet> packet, const WifiMacHeader *hdr)
       //There is currently only any reason for Management Action
       //frames to be flying about if we are a QoS STA.
       NS_ASSERT (m_qosSupported);
+      NS_LOG_DEBUG ("Receive MGT_ACTION!!!");
 
       WifiActionHeader actionHdr;
       packet->RemoveHeader (actionHdr);
@@ -935,11 +936,13 @@ RegularWifiMac::Receive (Ptr<Packet> packet, const WifiMacHeader *hdr)
       switch (actionHdr.GetCategory ())
         {
         case WifiActionHeader::BLOCK_ACK:
+          NS_LOG_DEBUG ("Receive BLOCK_ACK!!!");
 
           switch (actionHdr.GetAction ().blockAck)
             {
             case WifiActionHeader::BLOCK_ACK_ADDBA_REQUEST:
               {
+                NS_LOG_DEBUG ("Receive BLOCK_ACK_ADDBA_REQUEST!!!");
                 MgtAddBaRequestHeader reqHdr;
                 packet->RemoveHeader (reqHdr);
 
@@ -952,6 +955,7 @@ RegularWifiMac::Receive (Ptr<Packet> packet, const WifiMacHeader *hdr)
               }
             case WifiActionHeader::BLOCK_ACK_ADDBA_RESPONSE:
               {
+                NS_LOG_DEBUG ("Receive BLOCK_ACK_ADDBA_RESPONSE!!!");
                 MgtAddBaResponseHeader respHdr;
                 packet->RemoveHeader (respHdr);
 
@@ -968,6 +972,7 @@ RegularWifiMac::Receive (Ptr<Packet> packet, const WifiMacHeader *hdr)
               }
             case WifiActionHeader::BLOCK_ACK_DELBA:
               {
+                NS_LOG_DEBUG ("Receive BLOCK_ACK_DELBA!!!");
                 MgtDelBaHeader delBaHdr;
                 packet->RemoveHeader (delBaHdr);
 

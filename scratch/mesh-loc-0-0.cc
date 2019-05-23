@@ -458,7 +458,6 @@ AodvExample::CreateMeshDevices ()
 //  WifiHelper wifi;
 //  wifi.SetStandard (WIFI_PHY_STANDARD_80211ac);
 //  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-//                                "ControlMode", StringValue ("VhtMcs0"),
 //                                "DataMode", StringValue ("VhtMcs7"),
 //                                "RtsCtsThreshold", UintegerValue (99999));
 //  meshDevices = wifi.Install (wifiPhy, wifiMac, apNodes);

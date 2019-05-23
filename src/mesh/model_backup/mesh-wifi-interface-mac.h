@@ -193,6 +193,7 @@ private:
    * \param to the to address
    */
   void ForwardDown (Ptr<const Packet> packet, Mac48Address from, Mac48Address to);
+  void ForwardDown (Ptr<const Packet> packet, Mac48Address from, Mac48Address to, uint8_t tid);
   /// Send beacon
   void SendBeacon ();
   /// Schedule next beacon

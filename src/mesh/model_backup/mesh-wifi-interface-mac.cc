@@ -229,25 +229,56 @@ MeshWifiInterfaceMac::SwitchFrequencyChannel (uint16_t new_id)
 void
 MeshWifiInterfaceMac::ForwardDown (Ptr<const Packet> const_packet, Mac48Address from, Mac48Address to)
 {
+  NS_LOG_FUNCTION (this << const_packet << from << to);
+  uint8_t tid = 0;
+
+  if (GetQosSupported ())
+    {
+      tid = QosUtilsGetTidForPacket (const_packet);
+      if (tid > 7)
+        {
+          tid = 0;
+        }
+    }
+
+  ForwardDown (const_packet, from, to, tid);
+}
+
+void
+MeshWifiInterfaceMac::ForwardDown (Ptr<const Packet> const_packet, Mac48Address from, Mac48Address to, uint8_t tid)
+{
   // copy packet to allow modifications
   Ptr<Packet> packet = const_packet->Copy ();
   WifiMacHeader hdr;
 
-  hdr.SetType (WIFI_MAC_QOSDATA);
+  if (GetQosSupported ())
+    {
+      hdr.SetType (WIFI_MAC_QOSDATA);
+      hdr.SetQosAckPolicy (WifiMacHeader::NORMAL_ACK);
+      hdr.SetQosNoEosp ();
+      hdr.SetQosNoAmsdu ();
+      hdr.SetQosTxopLimit (0);
+      hdr.SetQosTid (tid);
+    }
+  else
+    {
+      hdr.SetType (WIFI_MAC_DATA);
+    }
+
+  if (GetQosSupported () || GetHtSupported () || GetVhtSupported () || GetHeSupported ())
+    {
+      hdr.SetNoOrder (); // explicitly set to 0 for the time being since HT/VHT/HE control field is not yet implemented (set it to 1 when implemented)
+    }
+
   hdr.SetAddr2 (GetAddress ());
   hdr.SetAddr3 (to);
   hdr.SetAddr4 (from);
   hdr.SetDsFrom ();
   hdr.SetDsTo ();
-  // Fill QoS fields:
-  hdr.SetQosAckPolicy (WifiMacHeader::NORMAL_ACK);
-  hdr.SetQosNoEosp ();
-  hdr.SetQosNoAmsdu ();
-  hdr.SetQosTxopLimit (0);
   // Address 1 is unknown here. Routing plugin is responsible to correctly set it.
   hdr.SetAddr1 (Mac48Address ());
+
   // Filter packet through all installed plugins
-  NS_LOG_DEBUG ("1" << hdr);
   for (PluginList::const_iterator i = m_plugins.end () - 1; i != m_plugins.begin () - 1; i--)
     {
       bool drop = !((*i)->UpdateOutcomingFrame (packet, hdr, from, to));
@@ -256,60 +287,56 @@ MeshWifiInterfaceMac::ForwardDown (Ptr<const Packet> const_packet, Mac48Address 
           return; // plugin drops frame
         }
     }
-  NS_LOG_DEBUG ("2" << hdr);
   // Assert that address1 is set. Assert will fail e.g. if there is no installed routing plugin.
   NS_ASSERT (hdr.GetAddr1 () != Mac48Address ());
+
+
   // Queue frame
-  if (m_stationManager->IsBrandNew (hdr.GetAddr1 ()))
-    {
-#ifdef MYMOD
-      if (GetHtSupported () || GetVhtSupported () || GetHeSupported ())
-        {
-          m_stationManager->AddAllSupportedMcs (hdr.GetAddr1 ());
-        }
-      if (GetHtSupported ())
-        {
-          m_stationManager->AddStationHtCapabilities (hdr.GetAddr1 (), GetHtCapabilities ());
-        }
-      if (GetVhtSupported ())
-        {
-          m_stationManager->AddStationVhtCapabilities (hdr.GetAddr1 (), GetVhtCapabilities ());
-        }
-      if (GetHeSupported ())
-        {
-          m_stationManager->AddStationHeCapabilities (hdr.GetAddr1 (), GetHeCapabilities ());
-        }
-      if (GetQosSupported ())
-        {
-          m_stationManager->SetQosSupport (hdr.GetAddr1 (), false);
-        }
-#endif
-      m_stationManager->AddAllSupportedModes (hdr.GetAddr1 ());
-      m_stationManager->RecordDisassociated (hdr.GetAddr1 ());
-      NS_LOG_DEBUG ("QosSupported is " << m_stationManager->GetQosSupported (hdr.GetAddr1 ()));
-    }
-  // Classify: application may have set a tag, which is removed here
-  AcIndex ac;
-  SocketPriorityTag tag;
-  if (packet->RemovePacketTag (tag))
-    {
-      hdr.SetQosTid (tag.GetPriority ());
-      ac = QosUtilsMapTidToAc (tag.GetPriority ());
-    }
-  else
-    {
-      // No tag found; set to best effort
-      ac = AC_BE;
-      hdr.SetQosTid (0);
-    }
+//  if (m_stationManager->IsBrandNew (hdr.GetAddr1 ()))
+//    {
+//#ifdef MYMOD
+//      if (GetHtSupported () || GetVhtSupported () || GetHeSupported ())
+//        {
+//          m_stationManager->AddAllSupportedMcs (hdr.GetAddr1 ());
+//        }
+//      if (GetHtSupported ())
+//        {
+//          m_stationManager->AddStationHtCapabilities (hdr.GetAddr1 (), GetHtCapabilities ());
+//        }
+//      if (GetVhtSupported ())
+//        {
+//          m_stationManager->AddStationVhtCapabilities (hdr.GetAddr1 (), GetVhtCapabilities ());
+//        }
+//      if (GetHeSupported ())
+//        {
+//          m_stationManager->AddStationHeCapabilities (hdr.GetAddr1 (), GetHeCapabilities ());
+//        }
+//      if (GetQosSupported ())
+//        {
+//          m_stationManager->SetQosSupport (hdr.GetAddr1 (), false);
+//        }
+//#endif
+//      m_stationManager->AddAllSupportedModes (hdr.GetAddr1 ());
+//      m_stationManager->RecordDisassociated (hdr.GetAddr1 ());
+//      NS_LOG_DEBUG ("QosSupported is " << m_stationManager->GetQosSupported (hdr.GetAddr1 ()));
+//    }
 
   NS_LOG_FUNCTION (this << packet << hdr << from << to);
   NS_LOG_DEBUG (hdr.GetSize () << "+" << packet->GetSize ());
 
   m_stats.sentFrames++;
   m_stats.sentBytes += packet->GetSize ();
-  NS_ASSERT (m_edca.find (ac) != m_edca.end ());
-  m_edca[ac]->Queue (packet, hdr);
+
+  if (GetQosSupported ())
+    {
+      //Sanity check that the TID is valid
+      NS_ASSERT (tid < 8);
+      m_edca[QosUtilsMapTidToAc (tid)]->Queue (packet, hdr);
+    }
+  else
+    {
+      m_txop->Queue (packet, hdr);
+    }
 }
 
 void
@@ -499,35 +526,6 @@ MeshWifiInterfaceMac::Receive (Ptr<Packet> packet, WifiMacHeader const *hdr)
 {
   NS_LOG_DEBUG (hdr->GetSize () << "+" << packet->GetSize ());
   Mac48Address from = hdr->GetAddr2 ();
-  if (m_stationManager->IsBrandNew (from))
-    {
-#ifdef MYMOD
-      if (GetHtSupported () || GetVhtSupported () || GetHeSupported ())
-        {
-          m_stationManager->AddAllSupportedMcs (from);
-          m_stationManager->AddStationHtCapabilities (from, GetHtCapabilities ());
-        }
-      if (GetHtSupported ())
-        {
-          m_stationManager->AddStationHtCapabilities (from, GetHtCapabilities ());
-        }
-      if (GetVhtSupported ())
-        {
-          m_stationManager->AddStationVhtCapabilities (from, GetVhtCapabilities ());
-        }
-      if (GetHeSupported ())
-        {
-          m_stationManager->AddStationHeCapabilities (from, GetHeCapabilities ());
-        }
-      if (GetQosSupported ())
-        {
-          m_stationManager->SetQosSupport (from, false);
-        }
-#endif
-      m_stationManager->AddAllSupportedModes (from);
-      m_stationManager->RecordDisassociated (from);
-      NS_LOG_DEBUG ("QosSupported is " << m_stationManager->GetQosSupported (from));
-    }
 
   // Process beacon
   if ((hdr->GetAddr1 () != GetAddress ()) && (hdr->GetAddr1 () != Mac48Address::GetBroadcast ()))
@@ -538,6 +536,37 @@ MeshWifiInterfaceMac::Receive (Ptr<Packet> packet, WifiMacHeader const *hdr)
   if (hdr->IsBeacon ())
     {
       m_stats.recvBeacons++;
+
+      if (m_stationManager->IsBrandNew (from))
+        {
+#ifdef MYMOD
+          if (GetHtSupported () || GetVhtSupported () || GetHeSupported ())
+            {
+              m_stationManager->AddAllSupportedMcs (from);
+              m_stationManager->AddStationHtCapabilities (from, GetHtCapabilities ());
+            }
+          if (GetHtSupported ())
+            {
+              m_stationManager->AddStationHtCapabilities (from, GetHtCapabilities ());
+            }
+          if (GetVhtSupported ())
+            {
+              m_stationManager->AddStationVhtCapabilities (from, GetVhtCapabilities ());
+            }
+          if (GetHeSupported ())
+            {
+              m_stationManager->AddStationHeCapabilities (from, GetHeCapabilities ());
+            }
+          if (GetQosSupported ())
+            {
+              m_stationManager->SetQosSupport (from, false);
+            }
+#endif
+          m_stationManager->AddAllSupportedModes (from);
+          m_stationManager->RecordDisassociated (from);
+          NS_LOG_DEBUG ("QosSupported is " << m_stationManager->GetQosSupported (from));
+        }
+
       MgtBeaconHeader beacon_hdr;
 
       packet->PeekHeader (beacon_hdr);
