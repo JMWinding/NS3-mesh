@@ -527,6 +527,8 @@ MeshWifiInterfaceMac::Receive (Ptr<Packet> packet, WifiMacHeader const *hdr)
   NS_LOG_DEBUG (hdr->GetSize () << "+" << packet->GetSize ());
   Mac48Address from = hdr->GetAddr2 ();
 
+  ReceiveBlockAck (packet, hdr);
+
   // Process beacon
   if ((hdr->GetAddr1 () != GetAddress ()) && (hdr->GetAddr1 () != Mac48Address::GetBroadcast ()))
     {
@@ -557,10 +559,10 @@ MeshWifiInterfaceMac::Receive (Ptr<Packet> packet, WifiMacHeader const *hdr)
             {
               m_stationManager->AddStationHeCapabilities (from, GetHeCapabilities ());
             }
-          if (GetQosSupported ())
-            {
-              m_stationManager->SetQosSupport (from, false);
-            }
+//          if (GetQosSupported ())
+//            {
+//              m_stationManager->SetQosSupport (from, false);
+//            }
 #endif
           m_stationManager->AddAllSupportedModes (from);
           m_stationManager->RecordDisassociated (from);
@@ -573,33 +575,13 @@ MeshWifiInterfaceMac::Receive (Ptr<Packet> packet, WifiMacHeader const *hdr)
 
       NS_LOG_DEBUG ("Beacon received from " << hdr->GetAddr2 () << " I am " << GetAddress () << " at "
                                             << Simulator::Now ().GetMicroSeconds () << " microseconds");
-
-      // update supported rates
-      if (beacon_hdr.GetSsid ().IsEqual (GetSsid ()))
-        {
-          SupportedRates rates = beacon_hdr.GetSupportedRates ();
-
-          for (uint32_t i = 0; i < m_phy->GetNModes (); i++)
-            {
-              WifiMode mode = m_phy->GetMode (i);
-              uint16_t gi = ConvertGuardIntervalToNanoSeconds (mode, m_phy->GetShortGuardInterval (), m_phy->GetGuardInterval ());
-              uint64_t rate = mode.GetDataRate (m_phy->GetChannelWidth (), gi, 1);
-              if (rates.IsSupportedRate (rate))
-                {
-                  m_stationManager->AddSupportedMode (hdr->GetAddr2 (), mode);
-//                  if (rates.IsBasicRate (rate))
-//                    {
-//                      m_stationManager->AddBasicMode (mode);
-//                    }
-                }
-            }
-        }
     }
   else
     {
       m_stats.recvBytes += packet->GetSize ();
       m_stats.recvFrames++;
     }
+
   // Filter frame through all installed plugins
   for (PluginList::iterator i = m_plugins.begin (); i != m_plugins.end (); ++i)
     {
@@ -623,9 +605,122 @@ MeshWifiInterfaceMac::Receive (Ptr<Packet> packet, WifiMacHeader const *hdr)
       ForwardUp (packet, hdr->GetAddr4 (), hdr->GetAddr3 ());
     }
 
+//  if (hdr->IsData ())
+//    {
+//      if (hdr->IsQosData () && hdr->IsQosAmsdu ())
+//        {
+//          NS_LOG_DEBUG ("Received A-MSDU from" << from);
+//          DeaggregateAmsduAndForward (packet, hdr);
+//        }
+//      else
+//        {
+//          ForwardUp (packet, hdr->GetAddr4 (), hdr->GetAddr3 ());
+//        }
+//      return;
+//    }
+
   // We don't bother invoking RegularWifiMac::Receive() here, because
   // we've explicitly handled all the frames we care about. This is in
   // contrast to most classes which derive from RegularWifiMac.
+}
+
+void
+MeshWifiInterfaceMac::ReceiveBlockAck (Ptr<Packet> const_packet, WifiMacHeader const *hdr)
+{
+  NS_LOG_FUNCTION (this << const_packet << hdr);
+  Ptr<Packet> packet = const_packet->Copy ();
+
+  Mac48Address to = hdr->GetAddr1 ();
+  Mac48Address from = hdr->GetAddr2 ();
+
+  //We don't know how to deal with any frame that is not addressed to
+  //us (and odds are there is nothing sensible we could do anyway),
+  //so we ignore such frames.
+  //
+  //The derived class may also do some such filtering, but it doesn't
+  //hurt to have it here too as a backstop.
+  if (to != GetAddress ())
+    {
+      return;
+    }
+
+  if (hdr->IsMgt () && hdr->IsAction ())
+    {
+      //There is currently only any reason for Management Action
+      //frames to be flying about if we are a QoS STA.
+      NS_ASSERT (GetQosSupported ());
+
+      WifiActionHeader actionHdr;
+      packet->RemoveHeader (actionHdr);
+
+      if (actionHdr.GetCategory () == WifiActionHeader::BLOCK_ACK)
+        {
+          NS_LOG_DEBUG ("BLOCK_ACK!!!");
+          NS_LOG_DEBUG ("FromDs =" << hdr->IsFromDs () << ", ToDs =" << hdr->IsToDs ());
+          NS_LOG_DEBUG ("Addr1 =" << hdr->GetAddr1 () << ", Addr2 =" << hdr->GetAddr2 ());
+          NS_LOG_DEBUG ("Addr3 =" << hdr->GetAddr3 () << ", Addr4 =" << hdr->GetAddr4 ());
+          if (actionHdr.GetAction ().blockAck == WifiActionHeader::BLOCK_ACK_ADDBA_REQUEST)
+            {
+              NS_LOG_DEBUG ("BLOCK_ACK_ADDBA_REQUEST!!!");
+              MgtAddBaRequestHeader reqHdr;
+              packet->RemoveHeader (reqHdr);
+
+              //We've received an ADDBA Request. Our policy here is
+              //to automatically accept it, so we get the ADDBA
+              //Response on it's way immediately.
+              SendAddBaResponse (&reqHdr, from);
+              //This frame is now completely dealt with, so we're done.
+              return;
+            }
+          else if (actionHdr.GetAction ().blockAck == WifiActionHeader::BLOCK_ACK_ADDBA_RESPONSE)
+            {
+              NS_LOG_DEBUG ("BLOCK_ACK_ADDBA_RESPONSE!!!");
+              MgtAddBaResponseHeader respHdr;
+              packet->RemoveHeader (respHdr);
+
+              //We've received an ADDBA Response. We assume that it
+              //indicates success after an ADDBA Request we have
+              //sent (we could, in principle, check this, but it
+              //seems a waste given the level of the current model)
+              //and act by locally establishing the agreement on
+              //the appropriate queue.
+              AcIndex ac = QosUtilsMapTidToAc (respHdr.GetTid ());
+              m_edca[ac]->GotAddBaResponse (&respHdr, from);
+              //This frame is now completely dealt with, so we're done.
+              return;
+            }
+          else if (actionHdr.GetAction ().blockAck == WifiActionHeader::BLOCK_ACK_DELBA)
+            {
+              NS_LOG_DEBUG ("BLOCK_ACK_DELBA!!!");
+              MgtDelBaHeader delBaHdr;
+              packet->RemoveHeader (delBaHdr);
+
+              if (delBaHdr.IsByOriginator ())
+                {
+                  //This DELBA frame was sent by the originator, so
+                  //this means that an ingoing established
+                  //agreement exists in MacLow and we need to
+                  //destroy it.
+                  m_low->DestroyBlockAckAgreement (from, delBaHdr.GetTid ());
+                }
+              else
+                {
+                  //We must have been the originator. We need to
+                  //tell the correct queue that the agreement has
+                  //been torn down
+                  AcIndex ac = QosUtilsMapTidToAc (delBaHdr.GetTid ());
+                  m_edca[ac]->GotDelBaFrame (&delBaHdr, from);
+                }
+              //This frame is now completely dealt with, so we're done.
+              return;
+            }
+          else
+            {
+              NS_FATAL_ERROR ("Unsupported Action field in Block Ack Action frame");
+              return;
+            }
+        }
+    }
 }
 
 uint32_t

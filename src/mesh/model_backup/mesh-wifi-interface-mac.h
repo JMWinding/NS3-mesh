@@ -185,6 +185,7 @@ private:
    * \param hdr the wifi MAC header
    */
   void Receive (Ptr<Packet> packet, WifiMacHeader const *hdr);
+  void ReceiveBlockAck (Ptr<Packet> packet, WifiMacHeader const *hdr);
   /**
    * Send frame. Frame is supposed to be tagged by routing information.
    *
