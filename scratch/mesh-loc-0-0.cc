@@ -324,8 +324,8 @@ AodvExample::CreateVariables ()
 
   if (aptx && (clNum > 0))
     {
-      std::cout << "Concurrent AP and CL application does not make sense !!!\n";
-      std::exit (0);
+      clNum = 0;
+      std::cout << "Throughput aggregation has higher priority than individual clients!!!\n";
     }
 
   ReadLocations ();
@@ -439,13 +439,24 @@ AodvExample::CreateMeshDevices ()
   wifiPhy.Set ("TxPowerLevels", UintegerValue (1));
   wifiPhy.Set ("ShortGuardEnabled", BooleanValue (true));
 
+  Config::SetDefault ("ns3::dot11s::PeerLink::MaxBeaconLoss", UintegerValue (20));
+  Config::SetDefault ("ns3::dot11s::PeerLink::MaxRetries", UintegerValue (4));
+  Config::SetDefault ("ns3::dot11s::PeerLink::MaxPacketFailure", UintegerValue (5));
+  Config::SetDefault ("ns3::dot11s::HwmpProtocol::Dot11MeshHWMPactivePathTimeout", TimeValue (Seconds (100)));
+  Config::SetDefault ("ns3::dot11s::HwmpProtocol::Dot11MeshHWMPactiveRootTimeout", TimeValue (Seconds (100)));
+  Config::SetDefault ("ns3::dot11s::HwmpProtocol::Dot11MeshHWMPmaxPREQretries", UintegerValue (5));
+  Config::SetDefault ("ns3::dot11s::HwmpProtocol::UnicastPreqThreshold", UintegerValue (10));
+  Config::SetDefault ("ns3::dot11s::HwmpProtocol::UnicastDataThreshold", UintegerValue (5));
+  Config::SetDefault ("ns3::dot11s::HwmpProtocol::DoFlag", BooleanValue (true));
+  Config::SetDefault ("ns3::dot11s::HwmpProtocol::RfFlag", BooleanValue (false));
+
   MeshHelper mesh = MeshHelper::Default ();
   mesh.SetStackInstaller ("ns3::Dot11sStack");
   mesh.SetSpreadInterfaceChannels (MeshHelper::ZERO_CHANNEL);
   mesh.SetMacType ("RandomStart", TimeValue (Seconds (startTime)),
                    "BeaconInterval", TimeValue (Seconds (beaconInterval)));
   mesh.SetStandard (WIFI_PHY_STANDARD_80211ac);
-  //  mesh.SetRemoteStationManager ("ns3::IdealWifiManager");
+//  mesh.SetRemoteStationManager ("ns3::IdealWifiManager");
   mesh.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
                                 "ControlMode", StringValue ("VhtMcs0"),
                                 "DataMode", StringValue ("VhtMcs7"),
@@ -533,9 +544,32 @@ AodvExample::CreateWifiDevices ()
 void
 AodvExample::InstallInternetStack ()
 {
-  InstallMeshInternetStack ();
-  InstallWifiInternetStack ();
-  InstallCsmaInternetStack ();
+  AodvHelper aodv;
+
+  InternetStackHelper stack;
+  stack.SetRoutingHelper (aodv); // has effect on the next Install ()
+  stack.Install (apNodes);
+  stack.SetRoutingHelper (aodv); // has effect on the next Install ()
+  stack.Install (csmaNodes.Get (0));
+  for (uint32_t i = 0; i < apNum; ++i)
+    {
+      stack.SetRoutingHelper (aodv);
+      stack.Install (clNodes[i]);
+    }
+
+  Ipv4AddressHelper address;
+  address.SetBase ("10.1.1.0", "255.255.255.0");
+  meshInterfaces = address.Assign (meshDevices);
+  address.SetBase ("10.2.1.0", "255.255.255.0");
+  csmaInterfaces = address.Assign (csmaDevices);
+  for (uint32_t i = 0; i < apNum; ++i)
+    {
+      std::ostringstream os;
+      os << "10.1." << 11+i << ".0";
+      address.SetBase (os.str ().c_str (), "255.255.255.0");
+      apInterfaces[i] = address.Assign (apDevices[i]);
+      clInterfaces[i] = address.Assign (clDevices[i]);
+    }
 
   std::cout << "InstallInternetStack () DONE !!!\n";
 }
