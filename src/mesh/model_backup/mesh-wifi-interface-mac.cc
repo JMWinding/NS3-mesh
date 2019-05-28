@@ -75,7 +75,7 @@ MeshWifiInterfaceMac::GetTypeId ()
 }
 
 MeshWifiInterfaceMac::MeshWifiInterfaceMac ()
-  : m_standard (WIFI_PHY_STANDARD_80211a)
+//  : m_standard (WIFI_PHY_STANDARD_80211a)
 {
   NS_LOG_FUNCTION (this);
 
@@ -323,6 +323,9 @@ MeshWifiInterfaceMac::ForwardDown (Ptr<const Packet> const_packet, Mac48Address 
 
   NS_LOG_FUNCTION (this << packet << hdr << from << to);
   NS_LOG_DEBUG (hdr.GetSize () << "+" << packet->GetSize ());
+  NS_LOG_DEBUG ("FromDs=" << hdr.IsFromDs () << ", ToDs=" << hdr.IsToDs ());
+  NS_LOG_DEBUG ("Addr1=" << hdr.GetAddr1 () << ", Addr2=" << hdr.GetAddr2 ());
+  NS_LOG_DEBUG ("Addr3=" << hdr.GetAddr3 () << ", Addr4=" << hdr.GetAddr4 ());
 
   m_stats.sentFrames++;
   m_stats.sentBytes += packet->GetSize ();
@@ -368,6 +371,9 @@ MeshWifiInterfaceMac::SendManagementFrame (Ptr<Packet> packet, const WifiMacHead
    */
 
   NS_LOG_DEBUG (hdr.GetSize () << "+" << packet->GetSize ());
+  NS_LOG_DEBUG ("FromDs=" << hdr.IsFromDs () << ", ToDs=" << hdr.IsToDs ());
+  NS_LOG_DEBUG ("Addr1=" << hdr.GetAddr1 () << ", Addr2=" << hdr.GetAddr2 ());
+  NS_LOG_DEBUG ("Addr3=" << hdr.GetAddr3 () << ", Addr4=" << hdr.GetAddr4 ());
 
   if (hdr.GetAddr1 () != Mac48Address::GetBroadcast ())
     {
@@ -514,9 +520,15 @@ MeshWifiInterfaceMac::SendBeacon ()
       (*i)->UpdateBeacon (beacon);
     }
 
-  NS_LOG_DEBUG (beacon.CreateHeader (GetAddress (), GetMeshPointAddress ()).GetSize () << "+" << beacon.CreatePacket ()->GetSize ());
+  Ptr<Packet> packet = beacon.CreatePacket ();
+  WifiMacHeader hdr = beacon.CreateHeader (GetAddress (), GetMeshPointAddress ());
 
-  m_txop->Queue (beacon.CreatePacket (), beacon.CreateHeader (GetAddress (), GetMeshPointAddress ()));
+  NS_LOG_DEBUG (hdr.GetSize () << "+" << packet->GetSize ());
+  NS_LOG_DEBUG ("FromDs=" << hdr.IsFromDs () << ", ToDs=" << hdr.IsToDs ());
+  NS_LOG_DEBUG ("Addr1=" << hdr.GetAddr1 () << ", Addr2=" << hdr.GetAddr2 ());
+  NS_LOG_DEBUG ("Addr3=" << hdr.GetAddr3 () << ", Addr4=" << hdr.GetAddr4 ());
+
+  m_txop->Queue (packet, hdr);
 
   ScheduleNextBeacon ();
 }
@@ -525,6 +537,9 @@ void
 MeshWifiInterfaceMac::Receive (Ptr<Packet> packet, WifiMacHeader const *hdr)
 {
   NS_LOG_DEBUG (hdr->GetSize () << "+" << packet->GetSize ());
+  NS_LOG_DEBUG ("FromDs=" << hdr->IsFromDs () << ", ToDs=" << hdr->IsToDs ());
+  NS_LOG_DEBUG ("Addr1=" << hdr->GetAddr1 () << ", Addr2=" << hdr->GetAddr2 ());
+  NS_LOG_DEBUG ("Addr3=" << hdr->GetAddr3 () << ", Addr4=" << hdr->GetAddr4 ());
   Mac48Address from = hdr->GetAddr2 ();
 
   ReceiveBlockAck (packet, hdr);
@@ -656,9 +671,6 @@ MeshWifiInterfaceMac::ReceiveBlockAck (Ptr<Packet> const_packet, WifiMacHeader c
       if (actionHdr.GetCategory () == WifiActionHeader::BLOCK_ACK)
         {
           NS_LOG_DEBUG ("BLOCK_ACK!!!");
-          NS_LOG_DEBUG ("FromDs =" << hdr->IsFromDs () << ", ToDs =" << hdr->IsToDs ());
-          NS_LOG_DEBUG ("Addr1 =" << hdr->GetAddr1 () << ", Addr2 =" << hdr->GetAddr2 ());
-          NS_LOG_DEBUG ("Addr3 =" << hdr->GetAddr3 () << ", Addr4 =" << hdr->GetAddr4 ());
           if (actionHdr.GetAction ().blockAck == WifiActionHeader::BLOCK_ACK_ADDBA_REQUEST)
             {
               NS_LOG_DEBUG ("BLOCK_ACK_ADDBA_REQUEST!!!");
