@@ -1,7 +1,9 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 /*
  * Input locations of routers
- * Mesh antennas not fixed
+ * Mesh with 802.11n/ac fixed
+ * WIFI_MAC_MGT_ACTION for MESH and BLOCK_ACK modulation changed
+ * Flow monitor - delay
  */
 
 #include <iostream>
@@ -12,7 +14,9 @@
 #include "ns3/aodv-module.h"
 #include "ns3/applications-module.h"
 #include "ns3/core-module.h"
+#include "ns3/config-store.h"
 #include "ns3/csma-module.h"
+#include "ns3/dsdv-module.h"
 #include "ns3/internet-module.h"
 #include "ns3/mobility-module.h"
 #include "ns3/network-module.h"
@@ -35,7 +39,7 @@ std::vector<Ptr<PacketSink>> packetSink;
 double
 CalculateSingleStreamThroughput (Ptr<PacketSink> sink, uint64_t &lastTotalRx, double monitorInterval)
 {
-  double thr = (sink->GetTotalRx () - lastTotalRx) * (double) 8/1024/1024/monitorInterval;
+  double thr = (sink->GetTotalRx () - lastTotalRx) * (double) 8/1000/1000/monitorInterval;
   lastTotalRx = sink->GetTotalRx ();
   return thr;
 }
@@ -108,6 +112,7 @@ private:
   /// Simulation time, seconds
   double startTime;
   double totalTime;
+  double beaconInterval;
   /// Write per-device PCAP traces if true
   bool pcap;
   /// Print routes if true
@@ -152,6 +157,8 @@ private:
   NetDeviceContainer csmaDevices;
   Ipv4InterfaceContainer csmaInterfaces;
 
+  std::string route;
+
 
 private:
   void CreateVariables ();
@@ -168,16 +175,14 @@ private:
 
   /// Create the network
   void InstallInternetStack ();
-  void InstallMeshInternetStack ();
-  void InstallWifiInternetStack ();
 
   /// Create the simulation applications
   void InstallApplications ();
 
   /// Connect gateways
   void CreateCsmaDevices ();
-  void InstallCsmaInternetStack ();
   void ReadLocations ();
+  void PreSetStationManager ();
 };
 
 int main (int argc, char **argv)
@@ -203,6 +208,7 @@ AodvExample::AodvExample () :
   clStep (20),
   startTime (1),
   totalTime (20),
+  beaconInterval (0.5),
   pcap (false),
   printRoutes (false),
   app ("udp"),
@@ -212,7 +218,8 @@ AodvExample::AodvExample () :
   aptx (false),
   locationFile (""),
   gateways (1),
-  scale (100)
+  scale (100),
+  route ("aodv")
 {
 }
 
@@ -232,6 +239,7 @@ AodvExample::Configure (int argc, char **argv)
   cmd.AddValue ("clNum", "Number of CL nodes for each Service Set.", clNum);
   cmd.AddValue ("startTime", "Application start time, s.", startTime);
   cmd.AddValue ("totalTime", "Simulation time, s.", totalTime);
+  cmd.AddValue ("beaconInterval", "Mesh beacon interval, s.", beaconInterval);
   cmd.AddValue ("monitorInterval", "Monitor interval, s.", monitorInterval);
   cmd.AddValue ("apStep", "AP grid step, m", apStep);
   cmd.AddValue ("clStep", "CL grid step, m", clStep);
@@ -243,6 +251,7 @@ AodvExample::Configure (int argc, char **argv)
   cmd.AddValue ("locationFile", "Location file name.", locationFile);
   cmd.AddValue ("gateways", "Number of gateway AP.", gateways);
   cmd.AddValue ("scale", "Ratio between experiment and simulation.", scale);
+  cmd.AddValue ("route", "Routing protocol", route);
 
   cmd.Parse (argc, argv);
 
@@ -268,8 +277,37 @@ AodvExample::Run ()
   if (!anim)
     netanim.SetStopTime (Seconds (0));
 
+  FlowMonitorHelper flowmon;
+  Ptr<FlowMonitor> monitor = flowmon.InstallAll ();
+
   Simulator::Stop (Seconds (totalTime));
   Simulator::Run ();
+
+  monitor->CheckForLostPackets ();
+  Ptr<Ipv4FlowClassifier> classifier = DynamicCast<Ipv4FlowClassifier> (flowmon.GetClassifier ());
+  std::map<FlowId, FlowMonitor::FlowStats> stats = monitor->GetFlowStats ();
+  for (std::map<FlowId, FlowMonitor::FlowStats>::const_iterator i = stats.begin (); i != stats.end (); ++i)
+    {
+      Ipv4FlowClassifier::FiveTuple t = classifier->FindFlow (i->first);
+      if (!t.destinationAddress.IsEqual (csmaInterfaces.GetAddress (0)))
+        continue;
+      if ((t.destinationPort < 40000) || (t.destinationPort >= 40000 + apNodes.GetN ()))
+        continue;
+      std::cout << t.sourceAddress << '\t';
+      if (i->second.rxPackets > 1)
+        {
+          std::cout << (double)i->second.rxBytes * 8/1000/1000 / (i->second.timeLastRxPacket.GetSeconds () - i->second.timeFirstRxPacket.GetSeconds ()) << '\t';
+        }
+      else
+        std::cout << 0 << '\t';
+      if (i->second.rxPackets > 0)
+        {
+          std::cout << (double)i->second.delaySum.GetMicroSeconds() / (double)i->second.rxPackets << '\n';
+        }
+      else
+        std::cout << 0 << '\n';
+    }
+
   Simulator::Destroy ();
 }
 
@@ -318,8 +356,8 @@ AodvExample::CreateVariables ()
 
   if (aptx && (clNum > 0))
     {
-      std::cout << "Concurrent AP and CL application does not make sense !!!\n";
-      std::exit (0);
+      clNum = 0;
+      std::cout << "Throughput aggregation has higher priority than individual clients!!!\n";
     }
 
   ReadLocations ();
@@ -421,21 +459,10 @@ AodvExample::CreateDevices ()
 void
 AodvExample::CreateMeshDevices ()
 {
-  MeshHelper mesh = MeshHelper::Default ();
-  mesh.SetStackInstaller ("ns3::Dot11sStack");
-  mesh.SetMacType ("RandomStart", TimeValue (Seconds (startTime)),
-                   "BeaconInterval", TimeValue (Seconds (startTime)));
-  mesh.SetStandard (WIFI_PHY_STANDARD_80211ac);
-//  mesh.SetRemoteStationManager ("ns3::IdealWifiManager");
-  mesh.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-                                "ControlMode", StringValue ("VhtMcs0"),
-                                "DataMode", StringValue ("VhtMcs7"),
-                                "RtsCtsThreshold", UintegerValue (99999));
-
   YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
   wifiPhy.SetChannel (wifiChannel.Create ());
-  wifiPhy.Set ("ChannelWidth", UintegerValue (40));
+  wifiPhy.Set ("ChannelNumber", UintegerValue (50));
   wifiPhy.Set ("Antennas", UintegerValue (4));
   wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (4));
   wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (4));
@@ -444,20 +471,40 @@ AodvExample::CreateMeshDevices ()
   wifiPhy.Set ("TxPowerLevels", UintegerValue (1));
   wifiPhy.Set ("ShortGuardEnabled", BooleanValue (true));
 
+  Config::SetDefault ("ns3::dot11s::PeerLink::MaxBeaconLoss", UintegerValue (20));
+  Config::SetDefault ("ns3::dot11s::PeerLink::MaxRetries", UintegerValue (4));
+  Config::SetDefault ("ns3::dot11s::PeerLink::MaxPacketFailure", UintegerValue (5));
+  Config::SetDefault ("ns3::dot11s::HwmpProtocol::Dot11MeshHWMPactivePathTimeout", TimeValue (Seconds (100)));
+  Config::SetDefault ("ns3::dot11s::HwmpProtocol::Dot11MeshHWMPactiveRootTimeout", TimeValue (Seconds (100)));
+  Config::SetDefault ("ns3::dot11s::HwmpProtocol::Dot11MeshHWMPmaxPREQretries", UintegerValue (5));
+  Config::SetDefault ("ns3::dot11s::HwmpProtocol::UnicastPreqThreshold", UintegerValue (10));
+  Config::SetDefault ("ns3::dot11s::HwmpProtocol::UnicastDataThreshold", UintegerValue (5));
+  Config::SetDefault ("ns3::dot11s::HwmpProtocol::DoFlag", BooleanValue (false));
+  Config::SetDefault ("ns3::dot11s::HwmpProtocol::RfFlag", BooleanValue (true));
+
+  MeshHelper mesh = MeshHelper::Default ();
+  mesh.SetStackInstaller ("ns3::Dot11sStack");
+  mesh.SetSpreadInterfaceChannels (MeshHelper::ZERO_CHANNEL);
+  mesh.SetMacType ("RandomStart", TimeValue (Seconds (startTime)),
+                   "BeaconInterval", TimeValue (Seconds (beaconInterval)));
+  mesh.SetStandard (WIFI_PHY_STANDARD_80211ac);
+//  mesh.SetRemoteStationManager ("ns3::IdealWifiManager");
+  mesh.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
+                                "ControlMode", StringValue ("VhtMcs0"),
+                                "DataMode", StringValue ("VhtMcs7"),
+                                "RtsCtsThreshold", UintegerValue (99999));
   meshDevices = mesh.Install (wifiPhy, apNodes);
 
-//  for (uint32_t i = 0; i < meshDevices.GetN (); ++i)
-//    {
-//      Ptr<NetDevice> nd = meshDevices.Get (i);
-//      Ptr<MeshPointDevice> mpd = DynamicCast<MeshPointDevice> (nd);
-//      std::vector<Ptr<NetDevice>> nds = mpd->GetInterfaces ();
-//      Ptr<WifiNetDevice> wnd = DynamicCast<WifiNetDevice> (nds[0]);
-//      Ptr<WifiPhy> wp = wnd->GetPhy ();
-//      std::cout << "Channel Width = " << wp->GetChannelWidth () << " !!!!!!!!!!!!!!!!!!\n";
-//      std::cout << "Antennas = " << wp->GetNumberOfAntennas () << " !!!!!!!!!!!!!!!!!!\n";
-//      std::cout << "Tx Support = " << wp->GetMaxSupportedTxSpatialStreams () << " !!!!!!!!!!!!!!!!!!\n";
-//      std::cout << "Rx Support = " << wp->GetMaxSupportedRxSpatialStreams () << " !!!!!!!!!!!!!!!!!!\n";
-//    }
+//  WifiMacHelper wifiMac;
+//  wifiMac.SetType ("ns3::AdhocWifiMac");
+//
+//  WifiHelper wifi;
+//  wifi.SetStandard (WIFI_PHY_STANDARD_80211ac);
+//  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
+//                                "ControlMode", StringValue ("VhtMcs0"),
+//                                "DataMode", StringValue ("VhtMcs7"),
+//                                "RtsCtsThreshold", UintegerValue (99999));
+//  meshDevices = wifi.Install (wifiPhy, wifiMac, apNodes);
 
   if (pcap)
     wifiPhy.EnablePcapAll (std::string ("aodv"));
@@ -490,22 +537,12 @@ AodvExample::CreateCsmaDevices ()
 void
 AodvExample::CreateWifiDevices ()
 {
-  WifiMacHelper wifiMac;
-
   YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
   wifiPhy.SetChannel (wifiChannel.Create ());
-  wifiPhy.Set ("ChannelWidth", UintegerValue (20));
-//  wifiPhy.Set ("Antennas", UintegerValue (4));
-//  wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (4));
-//  wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (4));
-//  wifiPhy.Set ("TxPowerStart", DoubleValue (30.0));
-//  wifiPhy.Set ("TxPowerEnd", DoubleValue (30.0));
-//  wifiPhy.Set ("TxPowerLevels", UintegerValue (1));
-//  wifiPhy.Set ("ShortGuardEnabled", BooleanValue (true));
+  wifiPhy.Set ("ChannelNumber", UintegerValue (3));
 
   WifiHelper wifi;
-  // 80211n_2_4GHZ, 80211n_5GHZ, 80211ac, 80211ax_2_4GHZ, 80211ax_5GHZ
   wifi.SetStandard (WIFI_PHY_STANDARD_80211n_2_4GHZ);
 //  wifi.SetRemoteStationManager ("ns3::IdealWifiManager");
   wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
@@ -513,6 +550,7 @@ AodvExample::CreateWifiDevices ()
                                 "DataMode", StringValue ("HtMcs7"),
                                 "RtsCtsThreshold", UintegerValue (99999));
 
+  WifiMacHelper wifiMac;
   for (uint32_t i = 0; i < apNum; ++i)
     {
       std::ostringstream os;
@@ -538,71 +576,51 @@ AodvExample::CreateWifiDevices ()
 void
 AodvExample::InstallInternetStack ()
 {
-  InstallMeshInternetStack ();
-  InstallWifiInternetStack ();
-  InstallCsmaInternetStack ();
-
-  std::cout << "InstallInternetStack () DONE !!!\n";
-}
-
-void
-AodvExample::InstallMeshInternetStack ()
-{
   AodvHelper aodv;
+  aodv.Set ("AllowedHelloLoss", UintegerValue (20));
+  aodv.Set ("HelloInterval", TimeValue (Seconds (3)));
+  aodv.Set ("RreqRetries", UintegerValue (5));
+  aodv.Set ("ActiveRouteTimeout", TimeValue (Seconds (100)));
+  aodv.Set ("DestinationOnly", BooleanValue (false));
+
+  OlsrHelper olsr;
+
+  DsdvHelper dsdv;
+
+  Ipv4ListRoutingHelper list;
+  if (route == std::string ("olsr"))
+    list.Add (olsr, 100);
+  else if (route == std::string ("dsdv"))
+    list.Add (dsdv, 100);
+  else
+    list.Add (aodv, 100);
 
   InternetStackHelper stack;
-  stack.SetRoutingHelper (aodv); // has effect on the next Install ()
+  stack.SetRoutingHelper (list); // has effect on the next Install ()
   stack.Install (apNodes);
+  stack.SetRoutingHelper (list); // has effect on the next Install ()
+  stack.Install (csmaNodes.Get (0));
+  for (uint32_t i = 0; i < apNum; ++i)
+    {
+      stack.SetRoutingHelper (list);
+      stack.Install (clNodes[i]);
+    }
 
   Ipv4AddressHelper address;
   address.SetBase ("10.1.1.0", "255.255.255.0");
   meshInterfaces = address.Assign (meshDevices);
-
-  if (printRoutes)
-    {
-      Ptr<OutputStreamWrapper> routingStream = Create<OutputStreamWrapper> ("./output-aodv/aodv.routes."+std::to_string (apNum)+"."+std::to_string (uint32_t (apStep))+"."+std::to_string (rndSeed), std::ios::out);
-      aodv.PrintRoutingTableAllAt (Seconds (totalTime - 0.01), routingStream);
-    }
-
-  std::cout << "InstallMeshInternetStack () DONE !!!\n";
-}
-
-void
-AodvExample::InstallCsmaInternetStack ()
-{
-  AodvHelper aodv;
-
-  InternetStackHelper stack;
-  stack.SetRoutingHelper (aodv); // has effect on the next Install ()
-  stack.Install (csmaNodes.Get (0));
-
-  Ipv4AddressHelper address;
   address.SetBase ("10.2.1.0", "255.255.255.0");
   csmaInterfaces = address.Assign (csmaDevices);
-
-  std::cout << "InstallCsmaInternetStack () DONE !!!\n";
-}
-
-void
-AodvExample::InstallWifiInternetStack ()
-{
   for (uint32_t i = 0; i < apNum; ++i)
     {
-      AodvHelper aodv;
-
-      InternetStackHelper stack;
-      stack.SetRoutingHelper (aodv);
-      stack.Install (clNodes[i]);
-
       std::ostringstream os;
       os << "10.1." << 11+i << ".0";
-      Ipv4AddressHelper address;
       address.SetBase (os.str ().c_str (), "255.255.255.0");
       apInterfaces[i] = address.Assign (apDevices[i]);
       clInterfaces[i] = address.Assign (clDevices[i]);
     }
 
-  std::cout << "InstallWifiInternetStack () DONE !!!\n";
+  std::cout << "InstallInternetStack () DONE !!!\n";
 }
 
 void
@@ -639,7 +657,7 @@ AodvExample::InstallApplications ()
 
           if (aptx)
             {
-              uint16_t port = 40000+i*100;
+              uint16_t port = 40000+i;
               Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
               PacketSinkHelper server ("ns3::UdpSocketFactory", localAddress);
               serverApp[apNum*clNum+i] = server.Install (csmaNodes.Get (0)); //
@@ -693,7 +711,7 @@ AodvExample::InstallApplications ()
 
           if (aptx)
             {
-              uint16_t port = 40000+i*100;
+              uint16_t port = 40000+i;
               Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
               PacketSinkHelper server ("ns3::TcpSocketFactory", localAddress);
               serverApp[apNum*clNum+i] = server.Install (csmaNodes.Get (0)); //
