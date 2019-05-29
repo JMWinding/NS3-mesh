@@ -1,6 +1,6 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 /*
- * Input locations of routers and throughput
+ * Input locations of routers
  * Mesh with 802.11n/ac fixed
  * WIFI_MAC_MGT_ACTION for MESH and BLOCK_ACK modulation changed
  * Flow monitor - delay
@@ -630,7 +630,7 @@ AodvExample::InstallApplications ()
     {
       // UDP flow
 
-      for (uint32_t i = 0; i < apNum; ++i)
+      for (uint32_t i = apNum-1; i < apNum; ++i)
         {
           for (uint32_t j = 0; j < clNum; ++j)
             {
@@ -669,7 +669,7 @@ AodvExample::InstallApplications ()
               client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
               client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
               client.SetAttribute ("PacketSize", UintegerValue (1472));
-              client.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (datarate * locations[i][3]))));
+              client.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (datarate))));
               client.SetAttribute ("MaxBytes", UintegerValue (0));
               AddressValue remoteAddress (InetSocketAddress (csmaInterfaces.GetAddress (0), port)); //
               client.SetAttribute ("Remote", remoteAddress);
@@ -684,7 +684,7 @@ AodvExample::InstallApplications ()
     {
       // TCP flow
 
-      for (uint32_t i = 0; i < apNum; ++i)
+      for (uint32_t i = apNum-1; i < apNum; ++i)
         {
           for (uint32_t j = 0; j < clNum; ++j)
             {
@@ -723,7 +723,7 @@ AodvExample::InstallApplications ()
               client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
               client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
               client.SetAttribute ("PacketSize", UintegerValue (1448));
-              client.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (datarate * locations[i][3]))));
+              client.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (datarate))));
               client.SetAttribute ("MaxBytes", UintegerValue (0));
               AddressValue remoteAddress (InetSocketAddress (csmaInterfaces.GetAddress (0), port)); //
               client.SetAttribute ("Remote", remoteAddress);
@@ -751,7 +751,7 @@ AodvExample::ReadLocations ()
   if (fin.is_open ())
     {
       for (uint32_t i = 0; i < apNum; ++i)
-        fin >> locations[i][0] >> locations[i][1] >> locations[i][2] >> locations[i][3];
+        fin >> locations[i][0] >> locations[i][1] >> locations[i][2];
       fin.close ();
     }
 }

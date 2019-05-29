@@ -39,7 +39,7 @@ std::vector<Ptr<PacketSink>> packetSink;
 double
 CalculateSingleStreamThroughput (Ptr<PacketSink> sink, uint64_t &lastTotalRx, double monitorInterval)
 {
-  double thr = (sink->GetTotalRx () - lastTotalRx) * (double) 8/1000/1000/monitorInterval;
+  double thr = (sink->GetTotalRx () - lastTotalRx) * (double) 8/1e6 / monitorInterval;
   lastTotalRx = sink->GetTotalRx ();
   return thr;
 }
@@ -135,7 +135,7 @@ private:
 
   /// application
   std::string app;
-  std::string datarate;
+  double datarate;
   std::vector<ApplicationContainer> serverApp;
   std::vector<ApplicationContainer> clientApp;
 
@@ -212,7 +212,7 @@ AodvExample::AodvExample () :
   pcap (false),
   printRoutes (false),
   app ("udp"),
-  datarate ("1Mbps"),
+  datarate (1e6),
   monitorInterval (1.0),
   anim (false),
   aptx (false),
@@ -296,7 +296,7 @@ AodvExample::Run ()
       std::cout << t.sourceAddress << '\t';
       if (i->second.rxPackets > 1)
         {
-          std::cout << (double)i->second.rxBytes * 8/1000/1000 / (i->second.timeLastRxPacket.GetSeconds () - i->second.timeFirstRxPacket.GetSeconds ()) << '\t';
+          std::cout << (double)i->second.rxBytes * 8/1e6 / (i->second.timeLastRxPacket.GetSeconds () - i->second.timeFirstRxPacket.GetSeconds ()) << '\t';
         }
       else
         std::cout << 0 << '\t';
@@ -646,7 +646,7 @@ AodvExample::InstallApplications ()
               client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
               client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
               client.SetAttribute ("PacketSize", UintegerValue (1472));
-              client.SetAttribute ("DataRate", StringValue (datarate));
+              client.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (datarate))));
               client.SetAttribute ("MaxBytes", UintegerValue (0));
               AddressValue remoteAddress (InetSocketAddress (csmaInterfaces.GetAddress (0), port)); //
               client.SetAttribute ("Remote", remoteAddress);
@@ -669,7 +669,7 @@ AodvExample::InstallApplications ()
               client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
               client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
               client.SetAttribute ("PacketSize", UintegerValue (1472));
-              client.SetAttribute ("DataRate", StringValue (datarate));
+              client.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (datarate))));
               client.SetAttribute ("MaxBytes", UintegerValue (0));
               AddressValue remoteAddress (InetSocketAddress (csmaInterfaces.GetAddress (0), port)); //
               client.SetAttribute ("Remote", remoteAddress);
@@ -700,7 +700,7 @@ AodvExample::InstallApplications ()
               client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
               client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
               client.SetAttribute ("PacketSize", UintegerValue (1448));
-              client.SetAttribute ("DataRate", StringValue (datarate));
+              client.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (datarate))));
               client.SetAttribute ("MaxBytes", UintegerValue (0));
               AddressValue remoteAddress (InetSocketAddress (csmaInterfaces.GetAddress (0), port)); //
               client.SetAttribute ("Remote", remoteAddress);
@@ -723,7 +723,7 @@ AodvExample::InstallApplications ()
               client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
               client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
               client.SetAttribute ("PacketSize", UintegerValue (1448));
-              client.SetAttribute ("DataRate", StringValue (datarate));
+              client.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (datarate))));
               client.SetAttribute ("MaxBytes", UintegerValue (0));
               AddressValue remoteAddress (InetSocketAddress (csmaInterfaces.GetAddress (0), port)); //
               client.SetAttribute ("Remote", remoteAddress);

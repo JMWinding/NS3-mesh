@@ -1,6 +1,6 @@
 A = dlmread('../input/location_400_0.txt');
 
-for i = 16:16
+for i = 25:25
     for j = 1:10
     B = dlmread(['../input/location_400_0_' int2str(i) '_' int2str(j) '.txt']);
     figure; hold on;
