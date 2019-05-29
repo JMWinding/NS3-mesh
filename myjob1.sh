@@ -18,7 +18,7 @@ do
       do
         if [ ! -f "${dirout}mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt" ]; then
           echo mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt
-          ./waf --run "mesh-loc-3 --apNum=${aa} --clNum=0 --aptx=true --rndSeed=${rr} -totalTime=40 --locationFile=${dirin}location_400_0_${aa}_${dd}.txt --gateways=${gg}" &> "${dirout}mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt"
+          ./waf --run "mesh-loc-1 --apNum=${aa} --clNum=0 --aptx=true --rndSeed=${rr} -totalTime=120 --locationFile=${dirin}location_400_0_${aa}_${dd}.txt --scale=80 --gateways=${gg}" &> "${dirout}mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt"
         fi
       done
     done
