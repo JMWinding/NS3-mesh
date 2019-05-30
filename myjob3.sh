@@ -12,7 +12,7 @@ for ((rr=${rrstart}; rr<=${rrend}; rr=rr+1))
 do
   for ((aa=10; aa<=25; aa=aa+1))
   do
-    for ((dd=1; dd<=20; dd=dd+4))
+    for ((dd=3; dd<=20; dd=dd+4))
     do
       for ((gg=1; gg<=3; gg=gg+1))
       do
