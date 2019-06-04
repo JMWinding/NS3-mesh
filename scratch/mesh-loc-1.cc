@@ -488,11 +488,11 @@ AodvExample::CreateMeshDevices ()
   mesh.SetMacType ("RandomStart", TimeValue (Seconds (startTime)),
                    "BeaconInterval", TimeValue (Seconds (beaconInterval)));
   mesh.SetStandard (WIFI_PHY_STANDARD_80211ac);
-//  mesh.SetRemoteStationManager ("ns3::IdealWifiManager");
-  mesh.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-                                "ControlMode", StringValue ("VhtMcs0"),
-                                "DataMode", StringValue ("VhtMcs7"),
-                                "RtsCtsThreshold", UintegerValue (99999));
+  mesh.SetRemoteStationManager ("ns3::AarfWifiManager");
+//  mesh.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
+//                                "ControlMode", StringValue ("VhtMcs0"),
+//                                "DataMode", StringValue ("VhtMcs7"),
+//                                "RtsCtsThreshold", UintegerValue (99999));
   meshDevices = mesh.Install (wifiPhy, apNodes);
 
 //  WifiMacHelper wifiMac;
