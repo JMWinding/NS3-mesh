@@ -6,7 +6,7 @@ temp=0
 dirin="my-simulations/2_throughput/input/"
 dirout="my-simulations/2_throughput/output/aodv-udp/"
 rrstart=10004
-rrend=10020
+rrend=10016
 
 for ((rr=${rrstart}; rr<=${rrend}; rr=rr+4))
 do
