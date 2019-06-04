@@ -347,7 +347,7 @@ AodvExample::CreateVariables ()
       apInterfaces.push_back (Ipv4InterfaceContainer ());
       clInterfaces.push_back (Ipv4InterfaceContainer ());
       locations.push_back (std::vector<double> (4, 0));
-      locations.push_back (std::vector<double> (apNum, 1));
+      pairloss.push_back (std::vector<double> (apNum, 1));
     }
   for (uint32_t i = 0; i < txNum; ++i)
     {
@@ -761,9 +761,9 @@ AodvExample::ReadLocations ()
     {
       for (uint32_t i = 0; i < apNum; ++i)
         fin >> locations[i][0] >> locations[i][1] >> locations[i][2] >> locations[i][3];
-//      for (uint32_t i = 0; i < apNum; ++i)
-//        for (uint32_t j = 0; j < apNum; ++j)
-//          fin >> pairloss[i][j];
+      for (uint32_t i = 0; i < apNum; ++i)
+        for (uint32_t j = 0; j < apNum; ++j)
+          fin >> pairloss[i][j];
       fin.close ();
     }
 }
@@ -773,9 +773,11 @@ AodvExample::UpdatePropagationLoss (Ptr<MatrixPropagationLossModel> propLoss)
 {
   propLoss->SetDefaultLoss (0);
   for (uint32_t i = 0; i < apNum; ++i)
-    {
-//      std::cout << apNodes.Get (i)->GetObject<MobilityModel> () << std::endl;
-//      for (uint32_t j = 0; j < apNum; ++j)
-//        propLoss->SetLoss (apNodes.Get (i)->GetObject<MobilityModel> (), apNodes.Get (j)->GetObject<MobilityModel> (), pairloss[i][j], false);
-    }
+    for (uint32_t j = 0; j < apNum; ++j)
+      if (i == j)
+        continue;
+      else if (pairloss[i][j] > 0)
+        propLoss->SetLoss (apNodes.Get (i)->GetObject<MobilityModel> (), apNodes.Get (j)->GetObject<MobilityModel> (), 30+pairloss[i][j], false);
+      else
+        propLoss->SetLoss (apNodes.Get (i)->GetObject<MobilityModel> (), apNodes.Get (j)->GetObject<MobilityModel> (), 1e3, false);
 }

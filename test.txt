@@ -1,22 +1,22 @@
 Waf: Entering directory `/home/jiaming/eclipse-workspace/ns-3.29-mesh/build'
 Waf: Leaving directory `/home/jiaming/eclipse-workspace/ns-3.29-mesh/build'
 Build commands will be stored in build/compile_commands.json
-'build' finished successfully (3.881s)
+'build' finished successfully (3.964s)
 +0.000000000s -1 WifiPhy:SetFrequency(): Saving frequency configuration for initialization
 +0.000000000s -1 WifiPhy:SetChannelNumber(): Saving channel number configuration for initialization
-+0.000000000s -1 WifiPhy:DoChannelSwitch(): initialize to channel 50
-+0.000000000s -1 WifiPhy:SetChannelNumber(): Setting frequency to 5250; width to 160
++0.000000000s -1 WifiPhy:DoChannelSwitch(): initialize to channel 38
++0.000000000s -1 WifiPhy:SetChannelNumber(): Setting frequency to 5190; width to 40
 +0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Frequency set; checking whether a channel number corresponds
-+0.000000000s -1 WifiPhy:FindChannelNumberForFrequencyWidth(): Found, returning 50
-+0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Channel number found; setting to 50
++0.000000000s -1 WifiPhy:FindChannelNumberForFrequencyWidth(): Found, returning 38
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Channel number found; setting to 38
 +0.000000000s -1 WifiPhy:SetChannelNumber(): No channel change requested
 +0.000000000s -1 WifiPhy:SetFrequency(): Saving frequency configuration for initialization
 +0.000000000s -1 WifiPhy:SetChannelNumber(): Saving channel number configuration for initialization
-+0.000000000s -1 WifiPhy:DoChannelSwitch(): initialize to channel 50
-+0.000000000s -1 WifiPhy:SetChannelNumber(): Setting frequency to 5250; width to 160
++0.000000000s -1 WifiPhy:DoChannelSwitch(): initialize to channel 38
++0.000000000s -1 WifiPhy:SetChannelNumber(): Setting frequency to 5190; width to 40
 +0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Frequency set; checking whether a channel number corresponds
-+0.000000000s -1 WifiPhy:FindChannelNumberForFrequencyWidth(): Found, returning 50
-+0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Channel number found; setting to 50
++0.000000000s -1 WifiPhy:FindChannelNumberForFrequencyWidth(): Found, returning 38
++0.000000000s -1 WifiPhy:ConfigureChannelForStandard(): Channel number found; setting to 38
 +0.000000000s -1 WifiPhy:SetChannelNumber(): No channel change requested
 +0.000000000s -1 WifiPhy:SetFrequency(): Saving frequency configuration for initialization
 +0.000000000s -1 WifiPhy:SetChannelNumber(): Saving channel number configuration for initialization
@@ -38,344 +38,158 @@ Build commands will be stored in build/compile_commands.json
 +0.000000000s 0 WifiPhy:DoInitialize(): Frequency already initialized
 +0.000000000s 1 WifiPhy:DoInitialize(): Frequency already initialized
 +0.000000000s 1 WifiPhy:DoInitialize(): Frequency already initialized
-+0.000000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.000000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.000000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.000000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.000000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.000000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.000000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.000000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
-+0.000000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.000000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.000000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.000000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.000000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.000000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.000000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.000000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +0.000030000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
 +0.000030000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.000030033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.000030033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.000030033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.000030033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.064000000s 0 WifiPhy:SendPacket(): 86-OfdmRate6Mbps
-+0.064000033s 1 WifiPhy:StartReceivePreambleAndHeader(): 86-OfdmRate6Mbps
-+0.064000033s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+0.064020033s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+0.064020033s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+0.064140033s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=86
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 15000001
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 30000001
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 45000001
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 60000001
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 90000001
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 120000001
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 135000001
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 150000001
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 180000002
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 240000002
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 270000002
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 300000002
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 360000003
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 405000003
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 450000003
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 480000004
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 540000004
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 600000004
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 15000001
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 30000001
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 45000001
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 60000001
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 90000001
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 120000001
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 135000001
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 150000001
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 180000002
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 240000002
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 270000002
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 300000002
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 360000003
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 405000003
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 450000003
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 480000004
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 540000004
-+0.064140033s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 600000004
-+0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 58500000
-+0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 117000000
-+0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 175500000
-+0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 234000000
-+0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 351000000
-+0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 468000000
-+0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 526500000
-+0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 585000000
-+0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 702000000
-+0.064140033s 1 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 780000000
-+0.070000000s 0 WifiPhy:SendPacket(): 86-DsssRate1Mbps
-+0.070000033s 1 WifiPhy:StartReceivePreambleAndHeader(): 86-DsssRate1Mbps
-+0.070000033s 1 WifiPhy:StartRx(): sync to signal (power=8.59587e-10W)
-+0.070192033s 1 WifiPhy:StartReceivePacket(): snr(dB)=32.895, per=0
-+0.070192033s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+0.070880033s 1 WifiPhy:EndReceive(): mode=1000000, snr(dB)=32.895, per=0, size=86
-+0.097000000s 1 WifiPhy:SendPacket(): 86-DsssRate1Mbps
-+0.097000033s 0 WifiPhy:StartReceivePreambleAndHeader(): 86-DsssRate1Mbps
-+0.097000033s 0 WifiPhy:StartRx(): sync to signal (power=8.59587e-10W)
-+0.097192033s 0 WifiPhy:StartReceivePacket(): snr(dB)=32.895, per=0
-+0.097192033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+0.097880033s 0 WifiPhy:EndReceive(): mode=1000000, snr(dB)=32.895, per=0, size=86
-+0.102000000s 1 WifiPhy:SendPacket(): 86-OfdmRate6Mbps
-+0.102000033s 0 WifiPhy:StartReceivePreambleAndHeader(): 86-OfdmRate6Mbps
-+0.102000033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+0.102020033s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+0.102020033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+0.102140033s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=86
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 15000001
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 30000001
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 45000001
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 60000001
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 90000001
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 120000001
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 135000001
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 150000001
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 180000002
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 240000002
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 270000002
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 300000002
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 360000003
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 405000003
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 450000003
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 480000004
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 540000004
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 600000004
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 15000001
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 30000001
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 45000001
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 60000001
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 90000001
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 120000001
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 135000001
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 150000001
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 180000002
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 240000002
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 270000002
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 300000002
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 360000003
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 405000003
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 450000003
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 480000004
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 540000004
-+0.102140033s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 600000004
-+0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 58500000
-+0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 117000000
-+0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 175500000
-+0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 234000000
-+0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 351000000
-+0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 468000000
-+0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 526500000
-+0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 585000000
-+0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 702000000
-+0.102140033s 0 RegularWifiMac:GetVhtCapabilities(): Updating maxSupportedRateLGI to 780000000
-+0.102400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.102400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.102400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.102400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.102400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.102400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.102400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.102400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.000030886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.000030886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++0.000030886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.000030886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++0.077000000s 1 WifiPhy:SendPacket(): 98-OfdmRate6Mbps
++0.077000886s 0 WifiPhy:StartReceivePreambleAndHeader(): 98-OfdmRate6Mbps
++0.077000886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++0.077020886s 0 WifiPhy:StartReceivePacket(): snr(dB)=24.966, per=0
++0.077020886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.077156886s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=24.966, per=0, size=98
++0.080000000s 1 WifiPhy:SendPacket(): 86-DsssRate1Mbps
++0.080000886s 0 WifiPhy:StartReceivePreambleAndHeader(): 86-DsssRate1Mbps
++0.080000886s 0 WifiPhy:StartRx(): drop packet because signal power too Small (4.57743e-14<2.51189e-13)
++0.085000000s 0 WifiPhy:SendPacket(): 86-DsssRate1Mbps
++0.085000886s 1 WifiPhy:StartReceivePreambleAndHeader(): 86-DsssRate1Mbps
++0.085000886s 1 WifiPhy:StartRx(): drop packet because signal power too Small (4.57743e-14<2.51189e-13)
++0.088000000s 0 WifiPhy:SendPacket(): 98-OfdmRate6Mbps
++0.088000886s 1 WifiPhy:StartReceivePreambleAndHeader(): 98-OfdmRate6Mbps
++0.088000886s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++0.088020886s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++0.088020886s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.088156886s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=25.966, per=0, size=98
 +0.102400000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.102400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.102400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.102400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.102400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.102400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.102400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.102400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.102400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +0.102400000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.102400033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.102400033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.102400033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.102400033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.204800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.204800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.204800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.204800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.204800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.204800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.204800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.204800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.102400886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.102400886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++0.102400886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.102400886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
 +0.204800000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.204800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.204800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.204800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.204800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.204800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.204800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.204800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.204800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +0.204800000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.204800033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.204800033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.204800033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.204800033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.307200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.307200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.307200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.307200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.307200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.307200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.307200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.307200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.204800886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.204800886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++0.204800886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.204800886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++0.217772447s 1 WifiPhy:SendPacket(): 63-OfdmRate6Mbps
++0.217773333s 0 WifiPhy:StartReceivePreambleAndHeader(): 63-OfdmRate6Mbps
++0.217773333s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++0.217793333s 0 WifiPhy:StartReceivePacket(): snr(dB)=24.966, per=0
++0.217793333s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.217881333s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=24.966, per=0, size=63
++0.217942333s 0 WifiPhy:SendPacket(): 65-OfdmRate6Mbps
++0.217943219s 1 WifiPhy:StartReceivePreambleAndHeader(): 65-OfdmRate6Mbps
++0.217943219s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++0.217963219s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++0.217963219s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.217987219s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=65
++0.218003219s 1 WifiPhy:SendPacket(): 14-OfdmRate6Mbps
++0.218004105s 0 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate6Mbps
++0.218004105s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++0.218024105s 0 WifiPhy:StartReceivePacket(): snr(dB)=24.966, per=0
++0.218024105s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.218048105s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=24.966, per=0, size=14
++0.218090219s 1 WifiPhy:SendPacket(): 63-OfdmRate6Mbps
++0.218091105s 0 WifiPhy:StartReceivePreambleAndHeader(): 63-OfdmRate6Mbps
++0.218091105s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++0.218111105s 0 WifiPhy:StartReceivePacket(): snr(dB)=24.966, per=0
++0.218111105s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.218199105s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=24.966, per=0, size=63
++0.218215105s 0 WifiPhy:SendPacket(): 14-OfdmRate6Mbps
++0.218215991s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate6Mbps
++0.218215991s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++0.218235991s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++0.218235991s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.218259991s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=25.966, per=0, size=14
++0.218311991s 1 WifiPhy:SendPacket(): 65-OfdmRate6Mbps
++0.218312877s 0 WifiPhy:StartReceivePreambleAndHeader(): 65-OfdmRate6Mbps
++0.218312877s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++0.218332877s 0 WifiPhy:StartReceivePacket(): snr(dB)=24.966, per=0
++0.218332877s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.218424877s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=24.966, per=0, size=65
++0.218440877s 0 WifiPhy:SendPacket(): 14-OfdmRate6Mbps
++0.218441763s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate6Mbps
++0.218441763s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++0.218461763s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++0.218461763s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.218485763s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=25.966, per=0, size=14
++0.218536877s 0 WifiPhy:SendPacket(): 63-OfdmRate6Mbps
++0.218537763s 1 WifiPhy:StartReceivePreambleAndHeader(): 63-OfdmRate6Mbps
++0.218537763s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++0.218557763s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++0.218557763s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.218581763s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=63
++0.218597763s 1 WifiPhy:SendPacket(): 14-OfdmRate6Mbps
++0.218598649s 0 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate6Mbps
++0.218598649s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++0.218618649s 0 WifiPhy:StartReceivePacket(): snr(dB)=24.966, per=0
++0.218618649s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.218642649s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=24.966, per=0, size=14
 +0.307200000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.307200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.307200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.307200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.307200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.307200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.307200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.307200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.307200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +0.307200000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.307200033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.307200033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.307200033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.307200033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.409600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.409600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.409600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.409600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.409600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.409600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.409600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.409600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.307200886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.307200886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++0.307200886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.307200886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
 +0.409600000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.409600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.409600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.409600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.409600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.409600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.409600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.409600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.409600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +0.409600000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.409600033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.409600033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.409600033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.409600033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.512000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.512000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.512000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.512000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.512000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.512000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.512000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.512000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.409600886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.409600886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++0.409600886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.409600886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++0.456211420s 0 WifiPhy:SendPacket(): 68-OfdmRate6Mbps
++0.456212306s 1 WifiPhy:StartReceivePreambleAndHeader(): 68-OfdmRate6Mbps
++0.456212306s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++0.456232306s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++0.456232306s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.456328306s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=25.966, per=0, size=68
 +0.512000000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.512000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.512000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.512000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.512000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.512000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.512000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.512000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.512000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +0.512000000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.512000033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.512000033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.512000033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.512000033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.614400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.614400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.614400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.614400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.614400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.614400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.614400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.614400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.512000886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.512000886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++0.512000886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.512000886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
 +0.614400000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.614400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.614400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.614400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.614400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.614400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.614400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.614400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.614400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +0.614400000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.614400033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.614400033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.614400033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.614400033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.716800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.716800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.716800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.716800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.716800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.716800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.716800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.716800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.614400886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.614400886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++0.614400886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.614400886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
 +0.716800000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.716800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.716800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.716800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.716800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.716800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.716800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.716800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.716800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +0.716800000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.716800033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.716800033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.716800033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.716800033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.819200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.819200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.819200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.819200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.819200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.819200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.819200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.819200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.716800886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.716800886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++0.716800886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.716800886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++0.717772447s 1 WifiPhy:SendPacket(): 68-OfdmRate6Mbps
++0.717773333s 0 WifiPhy:StartReceivePreambleAndHeader(): 68-OfdmRate6Mbps
++0.717773333s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++0.717793333s 0 WifiPhy:StartReceivePacket(): snr(dB)=24.966, per=0
++0.717793333s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.717889333s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=24.966, per=0, size=68
 +0.819200000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.819200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.819200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.819200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.819200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.819200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.819200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.819200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.819200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +0.819200000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.819200033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.819200033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.819200033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.819200033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.921600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.921600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.921600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.921600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.921600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.921600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.921600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.921600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++0.819200886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.819200886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++0.819200886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.819200886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
 +0.921600000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.921600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+0.921600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+0.921600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+0.921600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+0.921600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+0.921600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+0.921600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+0.921600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +0.921600000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+0.921600033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.921600033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+0.921600033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+0.921600033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
++0.921600886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.921600886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++0.921600886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++0.921600886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++0.956211420s 0 WifiPhy:SendPacket(): 68-OfdmRate6Mbps
++0.956212306s 1 WifiPhy:StartReceivePreambleAndHeader(): 68-OfdmRate6Mbps
++0.956212306s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++0.956232306s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++0.956232306s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++0.956328306s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=25.966, per=0, size=68
 CreateVariables () DONE !!!
-Creating 2 APs 10.00 m apart.
+Creating 2 APs 50.00 m apart.
 CreateApNodes () DONE !!!
 Creating 0 CLs 20.00 m away from each AP.
 CreateClNodes () DONE !!!
@@ -384,477 +198,1267 @@ CreateMeshDevices () DONE !!!
 CreateWifiDevices () DONE !!!
 CreateCsmaDevices () DONE !!!
 CreateDevices () DONE !!!
-InstallMeshInternetStack () DONE !!!
-InstallWifiInternetStack () DONE !!!
-InstallCsmaInternetStack () DONE !!!
 InstallInternetStack () DONE !!!
 Gateway is connect to AP 0
 InstallApplications () DONE !!!
 Starting simulation for 2.00 s ...
 -------------------------------------------------
 Time[s]	ap-0	ap-1
-+1.024000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.024000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.024000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.024000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.024000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.024000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.024000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.024000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.014776000s 1 WifiPhy:SendPacket(): 90-DsssRate1Mbps
++1.014776886s 0 WifiPhy:StartReceivePreambleAndHeader(): 90-DsssRate1Mbps
++1.014776886s 0 WifiPhy:StartRx(): drop packet because signal power too Small (4.57743e-14<2.51189e-13)
++1.021776000s 1 WifiPhy:SendPacket(): 37-VhtMcs7
++1.021776886s 0 WifiPhy:StartReceivePreambleAndHeader(): 37-VhtMcs7
++1.021776886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.021828886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.021828886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.021832486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=37
++1.021848486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.021849372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.021849372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.021869372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.021869372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.021877372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.022009486s 0 WifiPhy:SendPacket(): 37-VhtMcs7
++1.022010372s 1 WifiPhy:StartReceivePreambleAndHeader(): 37-VhtMcs7
++1.022010372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.022062372s 1 WifiPhy:StartReceivePacket(): snr(dB)=22.9557, per=0
++1.022062372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.022065972s 1 WifiPhy:EndReceive(): mode=600000004, snr(dB)=22.9557, per=0, size=37
++1.022081972s 1 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.022082858s 0 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.022082858s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.022102858s 0 WifiPhy:StartReceivePacket(): snr(dB)=24.966, per=0
++1.022102858s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.022110858s 0 WifiPhy:EndReceive(): mode=24000000, snr(dB)=24.966, per=0, size=14
++1.022152972s 1 WifiPhy:SendPacket(): 106-VhtMcs7
++1.022153858s 0 WifiPhy:StartReceivePreambleAndHeader(): 106-VhtMcs7
++1.022153858s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.022205858s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.022205858s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.022209458s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=106
++1.022225458s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.022226344s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.022226344s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.022246344s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.022246344s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.022254344s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.022395458s 0 WifiPhy:SendPacket(): 37-VhtMcs7
++1.022396344s 1 WifiPhy:StartReceivePreambleAndHeader(): 37-VhtMcs7
++1.022396344s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.022448344s 1 WifiPhy:StartReceivePacket(): snr(dB)=22.9557, per=0
++1.022448344s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.022451944s 1 WifiPhy:EndReceive(): mode=600000004, snr(dB)=22.9557, per=0, size=37
++1.022467944s 1 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.022468830s 0 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.022468830s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.022488830s 0 WifiPhy:StartReceivePacket(): snr(dB)=24.966, per=0
++1.022488830s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.022496830s 0 WifiPhy:EndReceive(): mode=24000000, snr(dB)=24.966, per=0, size=14
++1.022556944s 1 WifiPhy:SendPacket(): 37-VhtMcs7
++1.022557830s 0 WifiPhy:StartReceivePreambleAndHeader(): 37-VhtMcs7
++1.022557830s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.022609830s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.022609830s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.022613430s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=37
++1.022629430s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.022630316s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.022630316s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.022650316s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.022650316s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.022658316s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.022799430s 0 WifiPhy:SendPacket(): 106-VhtMcs7
++1.022800316s 1 WifiPhy:StartReceivePreambleAndHeader(): 106-VhtMcs7
++1.022800316s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.022852316s 1 WifiPhy:StartReceivePacket(): snr(dB)=22.9557, per=0
++1.022852316s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.022855916s 1 WifiPhy:EndReceive(): mode=600000004, snr(dB)=22.9557, per=0, size=106
++1.022871916s 1 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.022872802s 0 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.022872802s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.022892802s 0 WifiPhy:StartReceivePacket(): snr(dB)=24.966, per=0
++1.022892802s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.022900802s 0 WifiPhy:EndReceive(): mode=24000000, snr(dB)=24.966, per=0, size=14
 +1.024000000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.024000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.024000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.024000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.024000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.024000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.024000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.024000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.024000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +1.024000000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.024000033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.024000033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.024000033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.024000033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.067000000s 0 WifiPhy:SendPacket(): 86-DsssRate1Mbps
-+1.067000033s 1 WifiPhy:StartReceivePreambleAndHeader(): 86-DsssRate1Mbps
-+1.067000033s 1 WifiPhy:StartRx(): sync to signal (power=8.59587e-10W)
-+1.067192033s 1 WifiPhy:StartReceivePacket(): snr(dB)=32.895, per=0
-+1.067192033s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.067880033s 1 WifiPhy:EndReceive(): mode=1000000, snr(dB)=32.895, per=0, size=86
-+1.068000000s 0 WifiPhy:SendPacket(): 86-OfdmRate6Mbps
-+1.068000033s 1 WifiPhy:StartReceivePreambleAndHeader(): 86-OfdmRate6Mbps
-+1.068000033s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.068020033s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.068020033s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.068140033s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=86
-+1.103000000s 1 WifiPhy:SendPacket(): 86-OfdmRate6Mbps
-+1.103000000s 1 WifiPhy:SendPacket(): 86-DsssRate1Mbps
-+1.103000033s 0 WifiPhy:StartReceivePreambleAndHeader(): 86-OfdmRate6Mbps
-+1.103000033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.103000033s 0 WifiPhy:StartReceivePreambleAndHeader(): 86-DsssRate1Mbps
-+1.103000033s 0 WifiPhy:StartRx(): sync to signal (power=8.59587e-10W)
-+1.103020033s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.103020033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.103140033s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=86
-+1.103192033s 0 WifiPhy:StartReceivePacket(): snr(dB)=32.895, per=0
-+1.103192033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.103880033s 0 WifiPhy:EndReceive(): mode=1000000, snr(dB)=32.895, per=0, size=86
-+1.121760000s 1 WifiPhy:SendPacket(): 90-DsssRate1Mbps
-+1.121760033s 0 WifiPhy:StartReceivePreambleAndHeader(): 90-DsssRate1Mbps
-+1.121760033s 0 WifiPhy:StartRx(): sync to signal (power=8.59587e-10W)
-+1.121952033s 0 WifiPhy:StartReceivePacket(): snr(dB)=32.895, per=0
-+1.121952033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.122672033s 0 WifiPhy:EndReceive(): mode=1000000, snr(dB)=32.895, per=0, size=90
-+1.126400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.126400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.126400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.126400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.126400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.126400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.126400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.126400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.024000886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.024000886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.024000886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.024000886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.027209458s 0 WifiPhy:SendPacket(): 82-VhtMcs7
++1.027210344s 1 WifiPhy:StartReceivePreambleAndHeader(): 82-VhtMcs7
++1.027210344s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.027262344s 1 WifiPhy:StartReceivePacket(): snr(dB)=22.9557, per=0
++1.027262344s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.027265944s 1 WifiPhy:EndReceive(): mode=600000004, snr(dB)=22.9557, per=0, size=82
++1.027281944s 1 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.027282830s 0 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.027282830s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.027302830s 0 WifiPhy:StartReceivePacket(): snr(dB)=24.966, per=0
++1.027302830s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.027310830s 0 WifiPhy:EndReceive(): mode=24000000, snr(dB)=24.966, per=0, size=14
++1.027370944s 1 WifiPhy:SendPacket(): 69-VhtMcs7
++1.027371830s 0 WifiPhy:StartReceivePreambleAndHeader(): 69-VhtMcs7
++1.027371830s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.027423830s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.027423830s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.027427430s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=69
++1.027443430s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.027444316s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.027444316s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.027464316s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.027464316s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.027472316s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.027532430s 0 WifiPhy:SendPacket(): 63-VhtMcs7
++1.027533316s 1 WifiPhy:StartReceivePreambleAndHeader(): 63-VhtMcs7
++1.027533316s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.027585316s 1 WifiPhy:StartReceivePacket(): snr(dB)=22.9557, per=0
++1.027585316s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.027588916s 1 WifiPhy:EndReceive(): mode=600000004, snr(dB)=22.9557, per=0, size=63
++1.027604916s 1 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.027605802s 0 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.027605802s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.027625802s 0 WifiPhy:StartReceivePacket(): snr(dB)=24.966, per=0
++1.027625802s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.027633802s 0 WifiPhy:EndReceive(): mode=24000000, snr(dB)=24.966, per=0, size=14
++1.027756916s 1 WifiPhy:SendPacket(): 84-VhtMcs7
++1.027757802s 0 WifiPhy:StartReceivePreambleAndHeader(): 84-VhtMcs7
++1.027757802s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.027809802s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.027809802s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.027810072s 1 WifiPhy:SendPacket(): 82-VhtMcs7
++1.027810958s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=84
++1.027810958s 0 WifiPhy:StartReceivePreambleAndHeader(): 82-VhtMcs7
++1.027810958s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.027813401s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=82
++1.027829402s 0 WifiPhy:SendPacket(): 32-OfdmRate24Mbps
++1.027830288s 1 WifiPhy:StartReceivePreambleAndHeader(): 32-OfdmRate24Mbps
++1.027830288s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.027850288s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.027850288s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.027862288s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=32
++1.027904402s 0 WifiPhy:SendPacket(): 102-VhtMcs7
++1.027905288s 1 WifiPhy:StartReceivePreambleAndHeader(): 102-VhtMcs7
++1.027905288s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.027957288s 1 WifiPhy:StartReceivePacket(): snr(dB)=22.9557, per=0
++1.027957288s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.027960888s 1 WifiPhy:EndReceive(): mode=600000004, snr(dB)=22.9557, per=0, size=102
++1.027976888s 1 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.027977774s 0 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.027977774s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.027997774s 0 WifiPhy:StartReceivePacket(): snr(dB)=24.966, per=0
++1.027997774s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.028005774s 0 WifiPhy:EndReceive(): mode=24000000, snr(dB)=24.966, per=0, size=14
++1.030960888s 1 WifiPhy:SendPacket(): 82-VhtMcs7
++1.030961774s 0 WifiPhy:StartReceivePreambleAndHeader(): 82-VhtMcs7
++1.030961774s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.031013774s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.031013774s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.031017374s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=82
++1.031033374s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.031034260s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.031034260s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.031054260s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.031054260s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.031062260s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.031194374s 0 WifiPhy:SendPacket(): 84-VhtMcs7
++1.031195260s 1 WifiPhy:StartReceivePreambleAndHeader(): 84-VhtMcs7
++1.031195260s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.031247260s 1 WifiPhy:StartReceivePacket(): snr(dB)=22.9557, per=0
++1.031247260s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.031247530s 0 WifiPhy:SendPacket(): 82-VhtMcs7
++1.031248416s 1 WifiPhy:EndReceive(): mode=600000004, snr(dB)=22.9557, per=0, size=84
++1.031248416s 1 WifiPhy:StartReceivePreambleAndHeader(): 82-VhtMcs7
++1.031248416s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.031250859s 1 WifiPhy:EndReceive(): mode=600000004, snr(dB)=22.9557, per=0, size=82
++1.031266860s 1 WifiPhy:SendPacket(): 32-OfdmRate24Mbps
++1.031267746s 0 WifiPhy:StartReceivePreambleAndHeader(): 32-OfdmRate24Mbps
++1.031267746s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.031287746s 0 WifiPhy:StartReceivePacket(): snr(dB)=24.966, per=0
++1.031287746s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.031299746s 0 WifiPhy:EndReceive(): mode=24000000, snr(dB)=24.966, per=0, size=32
++1.031368860s 1 WifiPhy:SendPacket(): 84-VhtMcs7
++1.031369746s 0 WifiPhy:StartReceivePreambleAndHeader(): 84-VhtMcs7
++1.031369746s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.031421746s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.031421746s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.031422016s 1 WifiPhy:SendPacket(): 1556-VhtMcs7
++1.031422902s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=84
++1.031422902s 0 WifiPhy:StartReceivePreambleAndHeader(): 1556-VhtMcs7
++1.031422902s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.031442762s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.031443648s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1556
++1.031443648s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.031443648s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.031464944s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.031480946s 0 WifiPhy:SendPacket(): 32-OfdmRate24Mbps
++1.031481832s 1 WifiPhy:StartReceivePreambleAndHeader(): 32-OfdmRate24Mbps
++1.031481832s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.031501832s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.031501832s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.031513832s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=32
++1.035328000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.035328886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.035328886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.035380886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.035380886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.035402486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.035418486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.035419372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.035419372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.035439372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.035439372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.035447372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.047104000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.047104886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.047104886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.047156886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.047156886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.047178486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.047194486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.047195372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.047195372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.047215372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.047215372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.047223372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.058880000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.058880886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.058880886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.058932886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.058932886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.058954486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.058970486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.058971372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.058971372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.058991372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.058991372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.058999372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.070656000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.070656886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.070656886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.070708886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.070708886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.070730486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.070746486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.070747372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.070747372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.070767372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.070767372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.070775372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.082432000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.082432886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.082432886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.082484886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.082484886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.082506486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.082522486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.082523372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.082523372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.082543372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.082543372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.082551372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.094208000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.094208886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.094208886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.094260886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.094260886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.094282486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.094298486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.094299372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.094299372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.094319372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.094319372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.094327372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.105984000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.105984886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.105984886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.106036886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.106036886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.106058486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.106074486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.106075372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.106075372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.106095372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.106095372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.106103372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.117760000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.117760886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.117760886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.117812886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.117812886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.117834486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.117850486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.117851372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.117851372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.117871372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.117871372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.117879372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
 +1.126400000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.126400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.126400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.126400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.126400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.126400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.126400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.126400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.126400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +1.126400000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.126400033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.126400033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.126400033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.126400033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.127760000s 1 WifiPhy:SendPacket(): 90-OfdmRate6Mbps
-+1.127760033s 0 WifiPhy:StartReceivePreambleAndHeader(): 90-OfdmRate6Mbps
-+1.127760033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.127780033s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.127780033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.127904033s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=90
-+1.128019033s 0 WifiPhy:SendPacket(): 66-OfdmRate6Mbps
-+1.128019066s 1 WifiPhy:StartReceivePreambleAndHeader(): 66-OfdmRate6Mbps
-+1.128019066s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.128039066s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.128039066s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.128131066s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=66
-+1.128246066s 1 WifiPhy:SendPacket(): 37-OfdmRate6Mbps
-+1.128246099s 0 WifiPhy:StartReceivePreambleAndHeader(): 37-OfdmRate6Mbps
-+1.128246099s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.128266099s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.128266099s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.128282099s 0 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=37
-+1.128282099s 0 RegularWifiMac:Receive(): Receive MGT_ACTION!!!
-+1.128282099s 0 RegularWifiMac:Receive(): Receive BLOCK_ACK!!!
-+1.128282099s 0 RegularWifiMac:Receive(): Receive BLOCK_ACK_ADDBA_REQUEST!!!
-+1.128298099s 0 WifiPhy:SendPacket(): 14-OfdmRate6Mbps
-+1.128298132s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate6Mbps
-+1.128298132s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.128318132s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.128318132s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.128342132s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=14
-+1.128484099s 0 WifiPhy:SendPacket(): 37-OfdmRate6Mbps
-+1.128484132s 1 WifiPhy:StartReceivePreambleAndHeader(): 37-OfdmRate6Mbps
-+1.128484132s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.128504132s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.128504132s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.128520132s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=37
-+1.128520132s 1 RegularWifiMac:Receive(): Receive MGT_ACTION!!!
-+1.128520132s 1 RegularWifiMac:Receive(): Receive BLOCK_ACK!!!
-+1.128520132s 1 RegularWifiMac:Receive(): Receive BLOCK_ACK_ADDBA_RESPONSE!!!
-+1.128536132s 1 WifiPhy:SendPacket(): 14-OfdmRate6Mbps
-+1.128536165s 0 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate6Mbps
-+1.128536165s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.128556165s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.128556165s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.128580165s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=14
-+1.128713132s 1 WifiPhy:SendPacket(): 70-VhtMcs7
-+1.128713165s 0 WifiPhy:StartReceivePreambleAndHeader(): 70-VhtMcs7
-+1.128713165s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.128765165s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
-+1.128765165s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.128768765s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=70
-+1.128784765s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
-+1.128784798s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
-+1.128784798s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.128804798s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.128804798s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.128812798s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
-+1.128945765s 0 WifiPhy:SendPacket(): 37-OfdmRate6Mbps
-+1.128945798s 1 WifiPhy:StartReceivePreambleAndHeader(): 37-OfdmRate6Mbps
-+1.128945798s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.128965798s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.128965798s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.128981798s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=37
-+1.128981798s 1 RegularWifiMac:Receive(): Receive MGT_ACTION!!!
-+1.128981798s 1 RegularWifiMac:Receive(): Receive BLOCK_ACK!!!
-+1.128981798s 1 RegularWifiMac:Receive(): Receive BLOCK_ACK_ADDBA_REQUEST!!!
-+1.128997798s 1 WifiPhy:SendPacket(): 14-OfdmRate6Mbps
-+1.128997831s 0 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate6Mbps
-+1.128997831s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.129017831s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.129017831s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.129041831s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=14
-+1.129102798s 1 WifiPhy:SendPacket(): 37-OfdmRate6Mbps
-+1.129102831s 0 WifiPhy:StartReceivePreambleAndHeader(): 37-OfdmRate6Mbps
-+1.129102831s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.129122831s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.129122831s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.129138831s 0 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=37
-+1.129138831s 0 RegularWifiMac:Receive(): Receive MGT_ACTION!!!
-+1.129138831s 0 RegularWifiMac:Receive(): Receive BLOCK_ACK!!!
-+1.129138831s 0 RegularWifiMac:Receive(): Receive BLOCK_ACK_ADDBA_RESPONSE!!!
-+1.129154831s 0 WifiPhy:SendPacket(): 14-OfdmRate6Mbps
-+1.129154864s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate6Mbps
-+1.129154864s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.129174864s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.129174864s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.129198864s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=14
-+1.129322831s 0 WifiPhy:SendPacket(): 90-VhtMcs7
-+1.129322864s 1 WifiPhy:StartReceivePreambleAndHeader(): 90-VhtMcs7
-+1.129322864s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.129374864s 1 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
-+1.129374864s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.129378464s 1 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=90
-+1.129394464s 1 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
-+1.129394497s 0 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
-+1.129394497s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.129414497s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.129414497s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.129422497s 0 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
-+1.133378464s 1 WifiPhy:SendPacket(): 66-OfdmRate6Mbps
-+1.133378497s 0 WifiPhy:StartReceivePreambleAndHeader(): 66-OfdmRate6Mbps
-+1.133378497s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.133398497s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.133398497s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.133490497s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=47.2883, per=0, size=66
-+1.133569497s 0 WifiPhy:SendPacket(): 70-VhtMcs7
-+1.133569530s 1 WifiPhy:StartReceivePreambleAndHeader(): 70-VhtMcs7
-+1.133569530s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.133621530s 1 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
-+1.133621530s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.133625130s 1 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=70
-+1.133641130s 1 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
-+1.133641163s 0 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
-+1.133641163s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.133661163s 0 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.133661163s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.133669163s 0 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
-+1.133784130s 1 WifiPhy:SendPacket(): 72-VhtMcs7
-+1.133784163s 0 WifiPhy:StartReceivePreambleAndHeader(): 72-VhtMcs7
-+1.133784163s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.133836163s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
-+1.133836163s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.133836371s 1 WifiPhy:SendPacket(): 1542-VhtMcs7
-+1.133836404s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=72
-+1.133836404s 0 WifiPhy:StartReceivePreambleAndHeader(): 1542-VhtMcs7
-+1.133836404s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.133843362s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=1542
-+1.133859363s 0 WifiPhy:SendPacket(): 32-OfdmRate24Mbps
-+1.133859396s 1 WifiPhy:StartReceivePreambleAndHeader(): 32-OfdmRate24Mbps
-+1.133859396s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.133879396s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.133879396s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.133891396s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=32
-+1.228800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.228800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.228800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.228800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.228800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.228800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.228800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.228800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.126400886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.126400886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.126400886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.126400886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.129536000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.129536886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.129536886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.129588886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.129588886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.129610486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.129626486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.129627372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.129627372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.129647372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.129647372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.129655372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.141312000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.141312886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.141312886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.141364886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.141364886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.141386486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.141402486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.141403372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.141403372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.141423372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.141423372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.141431372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.153088000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.153088886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.153088886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.153140886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.153140886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.153162486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.153178486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.153179372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.153179372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.153199372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.153199372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.153207372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.164864000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.164864886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.164864886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.164916886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.164916886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.164938486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.164954486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.164955372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.164955372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.164975372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.164975372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.164983372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.176640000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.176640886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.176640886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.176692886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.176692886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.176714486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.176730486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.176731372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.176731372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.176751372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.176751372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.176759372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.188416000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.188416886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.188416886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.188468886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.188468886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.188490486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.188506486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.188507372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.188507372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.188527372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.188527372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.188535372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.200192000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.200192886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.200192886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.200244886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.200244886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.200266486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.200282486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.200283372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.200283372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.200303372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.200303372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.200311372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.211968000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.211968886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.211968886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.212020886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.212020886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.212042486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.212058486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.212059372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.212059372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.212079372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.212079372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.212087372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.217772447s 1 WifiPhy:SendPacket(): 68-OfdmRate6Mbps
++1.217773333s 0 WifiPhy:StartReceivePreambleAndHeader(): 68-OfdmRate6Mbps
++1.217773333s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.217793333s 0 WifiPhy:StartReceivePacket(): snr(dB)=24.966, per=0
++1.217793333s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.217889333s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=24.966, per=0, size=68
++1.223744000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.223744886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.223744886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.223796886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.223796886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.223818486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.223834486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.223835372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.223835372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.223855372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.223855372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.223863372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
 +1.228800000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.228800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.228800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.228800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.228800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.228800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.228800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.228800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.228800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +1.228800000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.228800033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.228800033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.228800033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.228800033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.235520000s 1 WifiPhy:SendPacket(): 1542-VhtMcs7
-+1.235520033s 0 WifiPhy:StartReceivePreambleAndHeader(): 1542-VhtMcs7
-+1.235520033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.235572033s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
-+1.235572033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.235579233s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=1542
-+1.235595233s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
-+1.235595266s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
-+1.235595266s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.235615266s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.235615266s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.235623266s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
-+1.331200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.331200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.331200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.331200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.331200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.331200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.331200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.331200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.228800886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.228800886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.228800886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.228800886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.235520000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.235520886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.235520886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.235572886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.235572886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.235594486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.235610486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.235611372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.235611372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.235631372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.235631372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.235639372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.247296000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.247296886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.247296886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.247348886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.247348886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.247370486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.247386486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.247387372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.247387372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.247407372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.247407372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.247415372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.259072000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.259072886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.259072886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.259124886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.259124886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.259146486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.259162486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.259163372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.259163372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.259183372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.259183372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.259191372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.270848000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.270848886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.270848886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.270900886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.270900886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.270922486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.270938486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.270939372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.270939372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.270959372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.270959372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.270967372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.282624000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.282624886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.282624886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.282676886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.282676886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.282698486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.282714486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.282715372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.282715372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.282735372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.282735372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.282743372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.294400000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.294400886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.294400886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.294452886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.294452886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.294474486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.294490486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.294491372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.294491372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.294511372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.294511372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.294519372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.306176000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.306176886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.306176886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.306228886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.306228886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.306250486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.306266486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.306267372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.306267372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.306287372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.306287372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.306295372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.317952000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.317952886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.317952886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.318004886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.318004886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.318026486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.318042486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.318043372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.318043372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.318063372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.318063372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.318071372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.329728000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.329728886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.329728886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.329780886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.329780886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.329802486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.329818486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.329819372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.329819372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.329839372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.329839372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.329847372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
 +1.331200000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.331200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.331200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.331200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.331200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.331200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.331200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.331200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.331200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +1.331200000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.331200033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.331200033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.331200033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.331200033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.353280000s 1 WifiPhy:SendPacket(): 1542-VhtMcs7
-+1.353280033s 0 WifiPhy:StartReceivePreambleAndHeader(): 1542-VhtMcs7
-+1.353280033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.353332033s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
-+1.353332033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.353339233s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=1542
-+1.353355233s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
-+1.353355266s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
-+1.353355266s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.353375266s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.353375266s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.353383266s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
-+1.433600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.433600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.433600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.433600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.433600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.433600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.433600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.433600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.331200886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.331200886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.331200886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.331200886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.341504000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.341504886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.341504886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.341556886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.341556886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.341578486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.341594486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.341595372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.341595372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.341615372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.341615372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.341623372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.353280000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.353280886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.353280886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.353332886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.353332886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.353354486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.353370486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.353371372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.353371372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.353391372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.353391372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.353399372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.365056000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.365056886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.365056886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.365108886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.365108886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.365130486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.365146486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.365147372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.365147372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.365167372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.365167372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.365175372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.376832000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.376832886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.376832886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.376884886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.376884886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.376906486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.376922486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.376923372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.376923372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.376943372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.376943372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.376951372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.388608000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.388608886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.388608886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.388660886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.388660886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.388682486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.388698486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.388699372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.388699372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.388719372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.388719372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.388727372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.400384000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.400384886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.400384886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.400436886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.400436886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.400458486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.400474486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.400475372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.400475372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.400495372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.400495372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.400503372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.412160000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.412160886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.412160886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.412212886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.412212886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.412234486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.412250486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.412251372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.412251372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.412271372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.412271372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.412279372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.423936000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.423936886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.423936886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.423988886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.423988886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.424010486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.424026486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.424027372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.424027372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.424047372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.424047372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.424055372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
 +1.433600000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.433600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.433600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.433600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.433600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.433600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.433600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.433600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.433600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +1.433600000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.433600033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.433600033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.433600033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.433600033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.471040000s 1 WifiPhy:SendPacket(): 1542-VhtMcs7
-+1.471040033s 0 WifiPhy:StartReceivePreambleAndHeader(): 1542-VhtMcs7
-+1.471040033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.471092033s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
-+1.471092033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.471099233s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=1542
-+1.471115233s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
-+1.471115266s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
-+1.471115266s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.471135266s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.471135266s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.471143266s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
-+1.536000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.536000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.536000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.536000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.536000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.536000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.536000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.536000000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.433600886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.433600886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.433600886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.433600886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.435712000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.435712886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.435712886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.435764886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.435764886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.435786486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.435802486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.435803372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.435803372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.435823372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.435823372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.435831372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.447488000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.447488886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.447488886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.447540886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.447540886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.447562486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.447578486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.447579372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.447579372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.447599372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.447599372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.447607372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.456211420s 0 WifiPhy:SendPacket(): 68-OfdmRate6Mbps
++1.456212306s 1 WifiPhy:StartReceivePreambleAndHeader(): 68-OfdmRate6Mbps
++1.456212306s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.456232306s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.456232306s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.456328306s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=25.966, per=0, size=68
++1.459264000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.459264886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.459264886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.459316886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.459316886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.459338486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.459354486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.459355372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.459355372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.459375372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.459375372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.459383372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.471040000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.471040886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.471040886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.471092886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.471092886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.471114486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.471130486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.471131372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.471131372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.471151372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.471151372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.471159372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.482816000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.482816886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.482816886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.482868886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.482868886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.482890486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.482906486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.482907372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.482907372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.482927372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.482927372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.482935372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.494592000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.494592886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.494592886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.494644886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.494644886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.494666486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.494682486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.494683372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.494683372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.494703372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.494703372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.494711372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.506368000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.506368886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.506368886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.506420886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.506420886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.506442486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.506458486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.506459372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.506459372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.506479372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.506479372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.506487372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.518144000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.518144886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.518144886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.518196886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.518196886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.518218486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.518234486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.518235372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.518235372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.518255372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.518255372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.518263372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.529920000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.529920886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.529920886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.529972886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.529972886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.529994486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.530010486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.530011372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.530011372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.530031372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.530031372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.530039372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
 +1.536000000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.536000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.536000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.536000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.536000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.536000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.536000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.536000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.536000000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +1.536000000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.536000033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.536000033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.536000033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.536000033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.588800000s 1 WifiPhy:SendPacket(): 1542-VhtMcs7
-+1.588800033s 0 WifiPhy:StartReceivePreambleAndHeader(): 1542-VhtMcs7
-+1.588800033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.588852033s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
-+1.588852033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.588859233s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=1542
-+1.588875233s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
-+1.588875266s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
-+1.588875266s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.588895266s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.588895266s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.588903266s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
-+1.638400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.638400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.638400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.638400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.638400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.638400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.638400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.638400000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.536000886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.536000886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.536000886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.536000886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.541696000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.541696886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.541696886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.541748886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.541748886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.541770486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.541786486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.541787372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.541787372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.541807372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.541807372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.541815372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.553472000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.553472886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.553472886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.553524886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.553524886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.553546486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.553562486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.553563372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.553563372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.553583372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.553583372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.553591372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.565248000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.565248886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.565248886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.565300886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.565300886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.565322486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.565338486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.565339372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.565339372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.565359372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.565359372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.565367372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.577024000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.577024886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.577024886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.577076886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.577076886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.577098486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.577114486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.577115372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.577115372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.577135372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.577135372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.577143372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.588800000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.588800886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.588800886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.588852886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.588852886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.588874486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.588890486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.588891372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.588891372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.588911372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.588911372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.588919372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.600576000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.600576886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.600576886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.600628886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.600628886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.600650486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.600666486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.600667372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.600667372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.600687372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.600687372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.600695372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.612352000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.612352886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.612352886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.612404886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.612404886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.612426486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.612442486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.612443372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.612443372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.612463372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.612463372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.612471372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.624128000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.624128886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.624128886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.624180886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.624180886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.624202486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.624218486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.624219372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.624219372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.624239372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.624239372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.624247372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.635904000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.635904886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.635904886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.635956886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.635956886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.635978486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.635994486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.635995372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.635995372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.636015372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.636015372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.636023372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
 +1.638400000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.638400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.638400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.638400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.638400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.638400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.638400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.638400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.638400000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +1.638400000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.638400033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.638400033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.638400033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.638400033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.706560000s 1 WifiPhy:SendPacket(): 1542-VhtMcs7
-+1.706560033s 0 WifiPhy:StartReceivePreambleAndHeader(): 1542-VhtMcs7
-+1.706560033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.706612033s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
-+1.706612033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.706619233s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=1542
-+1.706635233s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
-+1.706635266s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
-+1.706635266s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.706655266s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.706655266s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.706663266s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
-+1.740800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.740800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.740800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.740800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.740800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.740800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.740800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.740800000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.638400886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.638400886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.638400886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.638400886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.647680000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.647680886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.647680886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.647732886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.647732886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.647754486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.647770486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.647771372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.647771372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.647791372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.647791372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.647799372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.659456000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.659456886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.659456886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.659508886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.659508886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.659530486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.659546486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.659547372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.659547372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.659567372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.659567372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.659575372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.671232000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.671232886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.671232886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.671284886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.671284886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.671306486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.671322486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.671323372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.671323372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.671343372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.671343372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.671351372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.683008000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.683008886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.683008886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.683060886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.683060886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.683082486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.683098486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.683099372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.683099372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.683119372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.683119372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.683127372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.694784000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.694784886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.694784886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.694836886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.694836886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.694858486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.694874486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.694875372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.694875372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.694895372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.694895372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.694903372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.706560000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.706560886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.706560886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.706612886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.706612886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.706634486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.706650486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.706651372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.706651372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.706671372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.706671372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.706679372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.717772447s 1 WifiPhy:SendPacket(): 68-OfdmRate6Mbps
++1.717773333s 0 WifiPhy:StartReceivePreambleAndHeader(): 68-OfdmRate6Mbps
++1.717773333s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.717793333s 0 WifiPhy:StartReceivePacket(): snr(dB)=24.966, per=0
++1.717793333s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.717889333s 0 WifiPhy:EndReceive(): mode=6000000, snr(dB)=24.966, per=0, size=68
++1.718336000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.718336886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.718336886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.718388886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.718388886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.718410486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.718426486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.718427372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.718427372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.718447372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.718447372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.718455372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.730112000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.730112886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.730112886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.730164886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.730164886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.730186486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.730202486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.730203372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.730203372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.730223372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.730223372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.730231372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
 +1.740800000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.740800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.740800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.740800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.740800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.740800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.740800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.740800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.740800000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +1.740800000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.740800033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.740800033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.740800033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.740800033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.824320000s 1 WifiPhy:SendPacket(): 1542-VhtMcs7
-+1.824320033s 0 WifiPhy:StartReceivePreambleAndHeader(): 1542-VhtMcs7
-+1.824320033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.824372033s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
-+1.824372033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.824379233s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=1542
-+1.824395233s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
-+1.824395266s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
-+1.824395266s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.824415266s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.824415266s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.824423266s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
-+1.843200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.843200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.843200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.843200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.843200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.843200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.843200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.843200000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.740800886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.740800886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.740800886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.740800886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.741888000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.741888886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.741888886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.741940886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.741940886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.741962486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.741978486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.741979372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.741979372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.741999372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.741999372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.742007372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.753664000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.753664886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.753664886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.753716886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.753716886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.753738486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.753754486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.753755372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.753755372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.753775372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.753775372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.753783372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.765440000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.765440886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.765440886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.765492886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.765492886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.765514486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.765530486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.765531372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.765531372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.765551372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.765551372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.765559372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.777216000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.777216886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.777216886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.777268886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.777268886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.777290486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.777306486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.777307372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.777307372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.777327372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.777327372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.777335372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.788992000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.788992886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.788992886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.789044886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.789044886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.789066486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.789082486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.789083372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.789083372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.789103372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.789103372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.789111372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.800768000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.800768886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.800768886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.800820886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.800820886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.800842486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.800858486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.800859372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.800859372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.800879372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.800879372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.800887372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.812544000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.812544886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.812544886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.812596886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.812596886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.812618486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.812634486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.812635372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.812635372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.812655372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.812655372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.812663372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.824320000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.824320886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.824320886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.824372886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.824372886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.824394486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.824410486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.824411372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.824411372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.824431372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.824431372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.824439372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.836096000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.836096886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.836096886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.836148886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.836148886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.836170486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.836186486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.836187372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.836187372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.836207372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.836207372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.836215372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
 +1.843200000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.843200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.843200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.843200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.843200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.843200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.843200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.843200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.843200000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +1.843200000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.843200033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.843200033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.843200033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.843200033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.942080000s 1 WifiPhy:SendPacket(): 1542-VhtMcs7
-+1.942080033s 0 WifiPhy:StartReceivePreambleAndHeader(): 1542-VhtMcs7
-+1.942080033s 0 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.942132033s 0 WifiPhy:StartReceivePacket(): snr(dB)=38.2574, per=0
-+1.942132033s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.942139233s 0 WifiPhy:EndReceive(): mode=2600000004, snr(dB)=38.2574, per=0, size=1542
-+1.942155233s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
-+1.942155266s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
-+1.942155266s 1 WifiPhy:StartRx(): sync to signal (power=2.14897e-08W)
-+1.942175266s 1 WifiPhy:StartReceivePacket(): snr(dB)=47.2883, per=0
-+1.942175266s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
-+1.942183266s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=47.2883, per=0, size=14
-+1.945600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.945600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.945600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.945600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.945600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.945600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.945600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.945600000s 0 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
++1.843200886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.843200886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.843200886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.843200886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.847872000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.847872886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.847872886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.847924886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.847924886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.847946486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.847962486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.847963372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.847963372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.847983372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.847983372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.847991372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.859648000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.859648886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.859648886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.859700886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.859700886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.859722486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.859738486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.859739372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.859739372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.859759372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.859759372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.859767372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.871424000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.871424886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.871424886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.871476886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.871476886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.871498486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.871514486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.871515372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.871515372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.871535372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.871535372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.871543372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.883200000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.883200886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.883200886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.883252886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.883252886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.883274486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.883290486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.883291372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.883291372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.883311372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.883311372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.883319372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.894976000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.894976886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.894976886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.895028886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.895028886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.895050486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.895066486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.895067372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.895067372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.895087372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.895087372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.895095372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.906752000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.906752886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.906752886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.906804886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.906804886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.906826486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.906842486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.906843372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.906843372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.906863372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.906863372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.906871372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.918528000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.918528886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.918528886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.918580886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.918580886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.918602486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.918618486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.918619372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.918619372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.918639372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.918639372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.918647372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.930304000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.930304886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.930304886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.930356886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.930356886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.930378486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.930394486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.930395372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.930395372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.930415372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.930415372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.930423372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.942080000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.942080886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.942080886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.942132886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.942132886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.942154486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.942170486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.942171372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.942171372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.942191372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.942191372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.942199372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
 +1.945600000s 0 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.945600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 6500000
-+1.945600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 13000000
-+1.945600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 19500000
-+1.945600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 26000000
-+1.945600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 39000000
-+1.945600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 52000000
-+1.945600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 58500000
-+1.945600000s 1 RegularWifiMac:GetHtCapabilities(): Updating maxSupportedRate to 65000000
 +1.945600000s 1 WifiPhy:SendPacket(): 144-DsssRate1Mbps
-+1.945600033s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.945600033s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-+1.945600033s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
-+1.945600033s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=8.59587e-10W)
-2.00	-1.00	0.09
++1.945600886s 1 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.945600886s 1 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.945600886s 0 WifiPhy:StartReceivePreambleAndHeader(): 144-DsssRate1Mbps
++1.945600886s 0 WifiPhy:StartReceivePreambleAndHeader(): drop packet because already in Tx (power=4.57743e-14W)
++1.953856000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.953856886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.953856886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.953908886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.953908886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.953930486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.953946486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.953947372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.953947372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.953967372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.953967372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.953975372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.956211420s 0 WifiPhy:SendPacket(): 68-OfdmRate6Mbps
++1.956212306s 1 WifiPhy:StartReceivePreambleAndHeader(): 68-OfdmRate6Mbps
++1.956212306s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.956232306s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.956232306s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.956328306s 1 WifiPhy:EndReceive(): mode=6000000, snr(dB)=25.966, per=0, size=68
++1.965632000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.965632886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.965632886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.965684886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.965684886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.965706486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.965722486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.965723372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.965723372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.965743372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.965743372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.965751372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.977408000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.977408886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.977408886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.977460886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.977460886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.977482486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.977498486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.977499372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.977499372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.977519372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.977519372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.977527372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
++1.989184000s 1 WifiPhy:SendPacket(): 1554-VhtMcs7
++1.989184886s 0 WifiPhy:StartReceivePreambleAndHeader(): 1554-VhtMcs7
++1.989184886s 0 WifiPhy:StartRx(): sync to signal (power=1.25893e-10W)
++1.989236886s 0 WifiPhy:StartReceivePacket(): snr(dB)=21.9557, per=0
++1.989236886s 0 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.989258486s 0 WifiPhy:EndReceive(): mode=600000004, snr(dB)=21.9557, per=0, size=1554
++1.989274486s 0 WifiPhy:SendPacket(): 14-OfdmRate24Mbps
++1.989275372s 1 WifiPhy:StartReceivePreambleAndHeader(): 14-OfdmRate24Mbps
++1.989275372s 1 WifiPhy:StartRx(): sync to signal (power=1.58489e-10W)
++1.989295372s 1 WifiPhy:StartReceivePacket(): snr(dB)=25.966, per=0
++1.989295372s 1 WifiPhy:StartReceivePacket(): receiving plcp payload
++1.989303372s 1 WifiPhy:EndReceive(): mode=24000000, snr(dB)=25.966, per=0, size=14
+2.00	0.99	0.99
+10.2.1.2	1.04	115.10
+10.1.1.2	1.05	408.82
