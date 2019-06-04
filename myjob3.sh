@@ -5,14 +5,14 @@
 temp=0
 dirin="my-simulations/2_throughput/input/"
 dirout="my-simulations/2_throughput/output/aodv-udp/"
-rrstart=10001
-rrend=10010
+rrstart=10003
+rrend=10016
 
-for ((rr=${rrstart}; rr<=${rrend}; rr=rr+1))
+for ((rr=${rrstart}; rr<=${rrend}; rr=rr+4))
 do
   for ((aa=10; aa<=25; aa=aa+1))
   do
-    for ((dd=5; dd<=6; dd=dd+1))
+    for ((dd=1; dd<=10; dd=dd+1))
     do
       for ((gg=1; gg<=3; gg=gg+1))
       do
