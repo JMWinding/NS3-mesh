@@ -4,6 +4,7 @@
  * Mesh with 802.11n/ac fixed
  * WIFI_MAC_MGT_ACTION for MESH and BLOCK_ACK modulation changed
  * Flow monitor - delay
+ * Propagation loss model adapted to real testbeds
  */
 
 #include <iostream>
@@ -151,6 +152,7 @@ private:
   /// specified real implementation
   std::string locationFile;
   std::vector<std::vector<double>> locations;
+  std::vector<std::vector<double>> pairloss;
   uint32_t gateways;
   double scale;
   NodeContainer csmaNodes;
@@ -182,6 +184,7 @@ private:
   /// Connect gateways
   void CreateCsmaDevices ();
   void ReadLocations ();
+  void UpdatePropagationLoss (Ptr<MatrixPropagationLossModel> propLoss);
   void PreSetStationManager ();
 };
 
@@ -344,6 +347,7 @@ AodvExample::CreateVariables ()
       apInterfaces.push_back (Ipv4InterfaceContainer ());
       clInterfaces.push_back (Ipv4InterfaceContainer ());
       locations.push_back (std::vector<double> (4, 0));
+      locations.push_back (std::vector<double> (apNum, 1));
     }
   for (uint32_t i = 0; i < txNum; ++i)
     {
@@ -461,7 +465,12 @@ AodvExample::CreateMeshDevices ()
 {
   YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
-  wifiPhy.SetChannel (wifiChannel.Create ());
+  Ptr<YansWifiChannel> channel = wifiChannel.Create ();
+  Ptr<MatrixPropagationLossModel> propLoss = CreateObject<MatrixPropagationLossModel> ();
+  UpdatePropagationLoss (propLoss);
+  channel->SetPropagationLossModel (propLoss);
+
+  wifiPhy.SetChannel (channel);
   wifiPhy.Set ("ChannelNumber", UintegerValue (38));
   wifiPhy.Set ("Antennas", UintegerValue (4));
   wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (4));
@@ -488,11 +497,11 @@ AodvExample::CreateMeshDevices ()
   mesh.SetMacType ("RandomStart", TimeValue (Seconds (startTime)),
                    "BeaconInterval", TimeValue (Seconds (beaconInterval)));
   mesh.SetStandard (WIFI_PHY_STANDARD_80211ac);
-  mesh.SetRemoteStationManager ("ns3::AarfWifiManager");
-//  mesh.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-//                                "ControlMode", StringValue ("VhtMcs0"),
-//                                "DataMode", StringValue ("VhtMcs7"),
-//                                "RtsCtsThreshold", UintegerValue (99999));
+//  mesh.SetRemoteStationManager ("ns3::IdealWifiManager");
+  mesh.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
+                                "ControlMode", StringValue ("VhtMcs0"),
+                                "DataMode", StringValue ("VhtMcs7"),
+                                "RtsCtsThreshold", UintegerValue (99999));
   meshDevices = mesh.Install (wifiPhy, apNodes);
 
 //  WifiMacHelper wifiMac;
@@ -752,6 +761,21 @@ AodvExample::ReadLocations ()
     {
       for (uint32_t i = 0; i < apNum; ++i)
         fin >> locations[i][0] >> locations[i][1] >> locations[i][2] >> locations[i][3];
+//      for (uint32_t i = 0; i < apNum; ++i)
+//        for (uint32_t j = 0; j < apNum; ++j)
+//          fin >> pairloss[i][j];
       fin.close ();
+    }
+}
+
+void
+AodvExample::UpdatePropagationLoss (Ptr<MatrixPropagationLossModel> propLoss)
+{
+  propLoss->SetDefaultLoss (0);
+  for (uint32_t i = 0; i < apNum; ++i)
+    {
+//      std::cout << apNodes.Get (i)->GetObject<MobilityModel> () << std::endl;
+//      for (uint32_t j = 0; j < apNum; ++j)
+//        propLoss->SetLoss (apNodes.Get (i)->GetObject<MobilityModel> (), apNodes.Get (j)->GetObject<MobilityModel> (), pairloss[i][j], false);
     }
 }

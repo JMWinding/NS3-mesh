@@ -5,7 +5,7 @@
 temp=0
 dirin="my-simulations/2_throughput/input/"
 dirout="my-simulations/2_throughput/output/aodv-tcp/"
-rrstart=10013
+rrstart=10001
 rrend=10016
 
 for ((rr=${rrstart}; rr<=${rrend}; rr=rr+16))
