@@ -46,11 +46,19 @@ for aa = 1:length(arange) % # stations
 end
 
 %%
+figure(1); hold on;
 scatter(arange.'+0.2, A(:,1,1), 100, 'x', 'MarkerEdgeColor', [0 0.4470 0.7410], 'LineWidth', 2);
 scatter(arange.'+0.2, A(:,1,2), 100, 'x', 'MarkerEdgeColor', [0.8500 0.3250 0.0980], 'LineWidth', 2);
 scatter(arange.'+0.2, A(:,1,3), 100, 'x', 'MarkerEdgeColor', [0.9290 0.6940 0.1250], 'LineWidth', 2);
 legend('1 gateway', '2 gateways', '3 gateways');
 
+figure(2); hold on;
+scatter(arange.'+0.2, A(:,1,1)./arange.', 100, 'x', 'MarkerEdgeColor', [0 0.4470 0.7410], 'LineWidth', 2);
+scatter(arange.'+0.2, A(:,1,2)./arange.', 100, 'x', 'MarkerEdgeColor', [0.8500 0.3250 0.0980], 'LineWidth', 2);
+scatter(arange.'+0.2, A(:,1,3)./arange.', 100, 'x', 'MarkerEdgeColor', [0.9290 0.6940 0.1250], 'LineWidth', 2);
+legend('1 gateway', '2 gateways', '3 gateways');
+
+figure(3); hold on;
 scatter(arange.'+0.2, B(:,1,1), 100, 'x', 'MarkerEdgeColor', [0 0.4470 0.7410], 'LineWidth', 2);
 scatter(arange.'+0.2, B(:,1,2), 100, 'x', 'MarkerEdgeColor', [0.8500 0.3250 0.0980], 'LineWidth', 2);
 scatter(arange.'+0.2, B(:,1,3), 100, 'x', 'MarkerEdgeColor', [0.9290 0.6940 0.1250], 'LineWidth', 2);

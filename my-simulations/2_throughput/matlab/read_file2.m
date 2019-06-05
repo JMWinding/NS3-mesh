@@ -40,37 +40,55 @@ B = zeros(length(arange), length(brange), length(crange));
 for aa = 1:length(arange) % # stations
     for bb = 1:length(brange) % topology
         for cc = 1:length(crange) % # gateways
-            A(aa,bb,cc) = mean(result2{aa,bb,cc}(1));
-            B(aa,bb,cc) = mean(result2{aa,bb,cc}(2))./1e6;
+            A(aa,bb,cc) = mean(result2{aa,bb,cc}(:,1))./1024;
+            B(aa,bb,cc) = mean(result2{aa,bb,cc}(:,2))./1e6;
         end
     end
 end
 
+% 1
 figure; hold on;
 for cc = 1:length(crange)
-    mmean = mean(A(:,:,cc).');
+    mmedian = median(A(:,:,cc).');
     mmax = max(A(:,:,cc).');
     mmin = min(A(:,:,cc).');
-    errorbar(arange, mmean, mmin-mmean, mmax-mmean, 'LineWidth', 2);
+    errorbar(arange, mmedian, mmin-mmedian, mmax-mmedian, 'LineWidth', 2);
 end
 
 xlabel('number of routers');
-ylabel('aggregated throughput (Mbps)');
+ylabel('whole mesh throughput (Mbps)');
 legend('1 gateway', '2 gateways', '3 gateways');
 set(gcf, 'Position', [400 400 900 600]);
 set(gca, 'FontSize', 12);
 title(route);
 
+% 2
 figure; hold on;
 for cc = 1:length(crange)
-    mmean = mean(B(:,:,cc).');
-    mmax = max(B(:,:,cc).');
-    mmin = min(B(:,:,cc).');
-    errorbar(arange, mmean, mmin-mmean, mmax-mmean, 'LineWidth', 2);
+    mmedian = median(A(:,:,cc).')./arange;
+    mmax = max(A(:,:,cc).')./arange;
+    mmin = min(A(:,:,cc).')./arange;
+    errorbar(arange, mmedian, mmin-mmedian, mmax-mmedian, 'LineWidth', 2);
 end
 
 xlabel('number of routers');
-ylabel('average delay (s)');
+ylabel('per AP throughput (Mbps)');
+legend('1 gateway', '2 gateways', '3 gateways');
+set(gcf, 'Position', [400 400 900 600]);
+set(gca, 'FontSize', 12);
+title(route);
+
+% 3
+figure; hold on;
+for cc = 1:length(crange)
+    mmedian = median(B(:,:,cc).');
+    mmax = max(B(:,:,cc).');
+    mmin = min(B(:,:,cc).');
+    errorbar(arange, mmedian, mmin-mmedian, mmax-mmedian, 'LineWidth', 2);
+end
+
+xlabel('number of routers');
+ylabel('per packet delay (s)');
 legend('1 gateway', '2 gateways', '3 gateways');
 set(gcf, 'Position', [400 400 900 600]);
 set(gca, 'FontSize', 12);
