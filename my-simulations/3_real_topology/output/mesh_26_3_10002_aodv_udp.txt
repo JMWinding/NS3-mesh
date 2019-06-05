@@ -1,0 +1,23 @@
+Waf: Entering directory `/home/synrg-sc1/Desktop/Jiaming/ns-3.29-mesh/build'
+Waf: Leaving directory `/home/synrg-sc1/Desktop/Jiaming/ns-3.29-mesh/build'
+Build commands will be stored in build/compile_commands.json
+'build' finished successfully (4.603s)
+CreateVariables () DONE !!!
+Creating 26 APs 50.00 m apart.
+CreateApNodes () DONE !!!
+Creating 0 CLs 20.00 m away from each AP.
+CreateClNodes () DONE !!!
+CreateNodes () DONE !!!
+CreateMeshDevices () DONE !!!
+CreateWifiDevices () DONE !!!
+CreateCsmaDevices () DONE !!!
+CreateDevices () DONE !!!
+InstallInternetStack () DONE !!!
+Gateway is connect to AP 0
+InstallApplications () DONE !!!
+Starting simulation for 120.00 s ...
+-------------------------------------------------
+Time[s]	ap-0	ap-1	ap-2	ap-3	ap-4	ap-5	ap-6	ap-7	ap-8	ap-9	ap-10	ap-11	ap-12	ap-13	ap-14	ap-15	ap-16	ap-17	ap-18	ap-19	ap-20	ap-21	ap-22	ap-23	ap-24	ap-25
+msg="Invalid WifiPhy state.", file=../src/wifi/model/wifi-phy-state-helper.cc, line=376
+terminate called without an active exception
+Command ['/home/synrg-sc1/Desktop/Jiaming/ns-3.29-mesh/build/scratch/mesh-loc-2', '--apNum=26', '--clNum=0', '--aptx=true', '--rndSeed=10002', '-totalTime=120', '--locationFile=my-simulations/3_real_topology/input/location2.txt', '--gateways=3', '--route=aodv', '--app=udp', '-datarate=5e5'] terminated with signal SIGIOT. Run it under a debugger to get more information (./waf --run <program> --command-template="gdb --args %s <args>").

@@ -14,6 +14,6 @@ do
   app="udp"
   if [ ! -f "${dirout}mesh_26_3_${rr}_${route}_${app}.txt" ]; then
     echo mesh_26_3_${rr}.txt
-    ./waf --run "mesh-loc-3 --apNum=26 --clNum=0 --aptx=true --rndSeed=${rr} -totalTime=120 --locationFile=${dirin}location2.txt --gateways=3 --route=${route} --app=${app} -datarate=5e5" &> "${dirout}mesh_26_3_${rr}_${route}_${app}.txt"
+    ./waf --run "mesh-loc-2 --apNum=26 --clNum=0 --aptx=true --rndSeed=${rr} -totalTime=120 --locationFile=${dirin}location2.txt --gateways=3 --route=${route} --app=${app} -datarate=5e5" &> "${dirout}mesh_26_3_${rr}_${route}_${app}.txt"
   fi
 done
