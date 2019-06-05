@@ -2,8 +2,8 @@
 arange = 10:1:25;
 brange = 1:1:10;
 crange = 1:1:3;
-drange = 10001:1:10001;
-route = 'olsr-udp';
+drange = 10001:1:10016;
+route = 'aodv-tcp';
 
 result2 = cell(length(arange), length(brange), length(crange));
 
@@ -19,7 +19,7 @@ for aa = 1:length(arange) % # stations
                 filename = ['../output/' route '/mesh_400_0_' int2str(a) '_' int2str(b) '_' ...
                     int2str(c) '_' int2str(d) '.txt'];
                 fid = fopen(filename, 'r');
-                for k = 1:61
+                for k = 1:138
                     l = fgetl(fid);
                 end
                 C = textscan(fid, '%s %f %f', 'Delimiter', '\t');
@@ -40,7 +40,7 @@ B = zeros(length(arange), length(brange), length(crange));
 for aa = 1:length(arange) % # stations
     for bb = 1:length(brange) % topology
         for cc = 1:length(crange) % # gateways
-            A(aa,bb,cc) = mean(result2{aa,bb,cc}(1))./1024;
+            A(aa,bb,cc) = mean(result2{aa,bb,cc}(1));
             B(aa,bb,cc) = mean(result2{aa,bb,cc}(2))./1e6;
         end
     end
