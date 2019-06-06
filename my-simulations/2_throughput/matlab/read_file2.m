@@ -3,7 +3,7 @@ arange = 10:1:25;
 brange = 1:1:10;
 crange = 1:1:3;
 drange = 10001:1:10016;
-route = 'aodv-tcp';
+route = 'aodv-udp';
 
 result2 = cell(length(arange), length(brange), length(crange));
 
@@ -40,18 +40,21 @@ B = zeros(length(arange), length(brange), length(crange));
 for aa = 1:length(arange) % # stations
     for bb = 1:length(brange) % topology
         for cc = 1:length(crange) % # gateways
-            A(aa,bb,cc) = mean(result2{aa,bb,cc}(:,1))./1024;
+            A(aa,bb,cc) = mean(result2{aa,bb,cc}(:,1));
             B(aa,bb,cc) = mean(result2{aa,bb,cc}(:,2))./1e6;
         end
     end
 end
+temprange = 5:length(brange);
 
 % 1
 figure; hold on;
 for cc = 1:length(crange)
-    mmedian = median(A(:,:,cc).');
-    mmax = max(A(:,:,cc).');
-    mmin = min(A(:,:,cc).');
+    temp = sort(A(:,:,cc).', 1, 'descend');
+    temp = temp(temprange,:);
+    mmedian = median(temp);
+    mmax = temp(1,:);
+    mmin = temp(end,:);
     errorbar(arange, mmedian, mmin-mmedian, mmax-mmedian, 'LineWidth', 2);
 end
 
@@ -65,9 +68,11 @@ title(route);
 % 2
 figure; hold on;
 for cc = 1:length(crange)
-    mmedian = median(A(:,:,cc).')./arange;
-    mmax = max(A(:,:,cc).')./arange;
-    mmin = min(A(:,:,cc).')./arange;
+    temp = sort(A(:,:,cc).', 1, 'descend');
+    temp = temp(temprange,:);
+    mmedian = median(temp)./arange;
+    mmax = temp(1,:)./arange;
+    mmin = temp(end,:)./arange;
     errorbar(arange, mmedian, mmin-mmedian, mmax-mmedian, 'LineWidth', 2);
 end
 
@@ -81,9 +86,11 @@ title(route);
 % 3
 figure; hold on;
 for cc = 1:length(crange)
-    mmedian = median(B(:,:,cc).');
-    mmax = max(B(:,:,cc).');
-    mmin = min(B(:,:,cc).');
+    temp = sort(B(:,:,cc).', 1, 'descend');
+    temp = temp(temprange,:);
+    mmedian = median(temp);
+    mmax = temp(1,:);
+    mmin = temp(end,:);
     errorbar(arange, mmedian, mmin-mmedian, mmax-mmedian, 'LineWidth', 2);
 end
 

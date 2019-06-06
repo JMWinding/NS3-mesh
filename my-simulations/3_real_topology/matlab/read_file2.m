@@ -36,28 +36,35 @@ end
 save(['mesh_400_0_' route '2.mat'], 'result1', 'result2');
 
 %%
+temp = sortrows(result2{1}, 1);
+temprange = 1:round(length(drange)*0.7);
+temp = temp(temprange,:);
 if ~exist('thr', 'var')
     thr = [];
 end
-thr = [thr; result2{1}(:,1)];
+thr = [thr; temp(:,1)];
 if ~exist('delay', 'var')
     delay = [];
 end
-delay = [delay; result2{1}(:,2)];
-str = strings(length(drange),1);
-str(:) = route;
+delay = [delay; temp(:,2)];
+pro1 = strings(size(temp,1),1);
+pro1(:) = route;
 if ~exist('pro', 'var')
     pro = [];
 end
-pro = [pro; str];
+pro = [pro; pro1];
 
 %% figure
 figure;
-boxplot(thr/1024, pro);
+boxplot(thr, pro);
 ylabel('whole mesh throughput (Mbps)');
 set(gca, 'FontSize', 12);
+saveas(gca, 'throughput.fig');
+saveas(gca, 'throughput.jpg');
 
 figure;
 boxplot(delay/1e6, pro);
 ylabel('per packet delay (s)');
 set(gca, 'FontSize', 12);
+saveas(gca, 'delay.fig');
+saveas(gca, 'delay.jpg');
