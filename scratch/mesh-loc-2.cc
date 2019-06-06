@@ -160,7 +160,7 @@ private:
   Ipv4InterfaceContainer csmaInterfaces;
 
   std::string route;
-
+  std::string flowout;
 
 private:
   void CreateVariables ();
@@ -222,7 +222,8 @@ AodvExample::AodvExample () :
   locationFile (""),
   gateways (1),
   scale (100),
-  route ("aodv")
+  route ("aodv"),
+  flowout ("test.xml")
 {
 }
 
@@ -255,6 +256,7 @@ AodvExample::Configure (int argc, char **argv)
   cmd.AddValue ("gateways", "Number of gateway AP.", gateways);
   cmd.AddValue ("scale", "Ratio between experiment and simulation.", scale);
   cmd.AddValue ("route", "Routing protocol", route);
+  cmd.AddValue ("flowout", "Result output directory", flowout);
 
   cmd.Parse (argc, argv);
 
@@ -310,6 +312,8 @@ AodvExample::Run ()
       else
         std::cout << 0 << '\n';
     }
+
+  monitor->SerializeToXmlFile(flowout, true, true);
 
   Simulator::Destroy ();
 }

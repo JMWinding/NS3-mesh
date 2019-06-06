@@ -1,9 +1,9 @@
 %% read .txt file
-arange = 10:1:25;
+arange = 10:1:21;
 brange = 1:1:10;
 crange = 1:1:3;
 drange = 10001:1:10016;
-route = 'aodv-udp';
+route = 'olsr-udp';
 
 result2 = cell(length(arange), length(brange), length(crange));
 
