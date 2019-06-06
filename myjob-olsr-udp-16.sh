@@ -4,11 +4,11 @@
 
 temp=0
 dirin="my-simulations/2_throughput/input/"
-dirout="my-simulations/2_throughput/output/aodv-udp/"
-rrstart=10002
+dirout="my-simulations/2_throughput/output/olsr-udp/"
+rrstart=10016
 rrend=10016
 
-for ((rr=${rrstart}; rr<=${rrend}; rr=rr+4))
+for ((rr=${rrstart}; rr<=${rrend}; rr=rr+16))
 do
   for ((aa=10; aa<=25; aa=aa+1))
   do
@@ -18,7 +18,7 @@ do
       do
         if [ ! -f "${dirout}mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt" ]; then
           echo mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt
-          ./waf --run "mesh-loc-1 --apNum=${aa} --clNum=0 --aptx=true --rndSeed=${rr} -totalTime=120 --locationFile=${dirin}location_400_0_${aa}_${dd}.txt --scale=80 --gateways=${gg}" &> "${dirout}mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt"
+          ./waf --run "mesh-loc-1 --apNum=${aa} --clNum=0 --aptx=true --rndSeed=${rr} -totalTime=80 --locationFile=${dirin}location_400_0_${aa}_${dd}.txt --scale=80 --gateways=${gg} --route=olsr" &> "${dirout}mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt"
         fi
       done
     done
