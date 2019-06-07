@@ -1,5 +1,5 @@
 %% read .txt file
-arange = 10:1:21;
+arange = 10:1:25;
 brange = 1:1:10;
 crange = 1:1:3;
 drange = 10001:1:10016;
@@ -19,11 +19,14 @@ for aa = 1:length(arange) % # stations
                 filename = ['../output/' route '/mesh_400_0_' int2str(a) '_' int2str(b) '_' ...
                     int2str(c) '_' int2str(d) '.txt'];
                 fid = fopen(filename, 'r');
-                for k = 1:138
+                for k = 1:98
                     l = fgetl(fid);
                 end
                 C = textscan(fid, '%s %f %f', 'Delimiter', '\t');
                 fclose(fid);
+                
+                temp = C{2}<=50;
+                C{2} = C{2}.*temp;
                 
                 CC = [C{2} C{3}];
                 result2{aa,bb,cc} = [result2{aa,bb,cc}; sum(C{2}), sum(C{2}.*C{3})./sum(C{2})];
@@ -45,7 +48,7 @@ for aa = 1:length(arange) % # stations
         end
     end
 end
-temprange = 5:length(brange);
+temprange = 4:length(brange);
 
 % 1
 figure; hold on;
