@@ -290,37 +290,6 @@ MeshWifiInterfaceMac::ForwardDown (Ptr<const Packet> const_packet, Mac48Address 
   // Assert that address1 is set. Assert will fail e.g. if there is no installed routing plugin.
   NS_ASSERT (hdr.GetAddr1 () != Mac48Address ());
 
-
-  // Queue frame
-//  if (m_stationManager->IsBrandNew (hdr.GetAddr1 ()))
-//    {
-//#ifdef MYMOD
-//      if (GetHtSupported () || GetVhtSupported () || GetHeSupported ())
-//        {
-//          m_stationManager->AddAllSupportedMcs (hdr.GetAddr1 ());
-//        }
-//      if (GetHtSupported ())
-//        {
-//          m_stationManager->AddStationHtCapabilities (hdr.GetAddr1 (), GetHtCapabilities ());
-//        }
-//      if (GetVhtSupported ())
-//        {
-//          m_stationManager->AddStationVhtCapabilities (hdr.GetAddr1 (), GetVhtCapabilities ());
-//        }
-//      if (GetHeSupported ())
-//        {
-//          m_stationManager->AddStationHeCapabilities (hdr.GetAddr1 (), GetHeCapabilities ());
-//        }
-//      if (GetQosSupported ())
-//        {
-//          m_stationManager->SetQosSupport (hdr.GetAddr1 (), false);
-//        }
-//#endif
-//      m_stationManager->AddAllSupportedModes (hdr.GetAddr1 ());
-//      m_stationManager->RecordDisassociated (hdr.GetAddr1 ());
-//      NS_LOG_DEBUG ("QosSupported is " << m_stationManager->GetQosSupported (hdr.GetAddr1 ()));
-//    }
-
   NS_LOG_FUNCTION (this << packet << hdr << from << to);
   NS_LOG_DEBUG (hdr.GetSize () << "+" << packet->GetSize ());
   NS_LOG_DEBUG ("FromDs=" << hdr.IsFromDs () << ", ToDs=" << hdr.IsToDs ());
