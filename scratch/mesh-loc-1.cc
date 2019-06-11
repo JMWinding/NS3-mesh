@@ -147,6 +147,7 @@ private:
 
   /// test-only operations
   bool aptx;
+  bool gatx;
 
   /// specified real implementation
   std::string locationFile;
@@ -158,6 +159,7 @@ private:
   Ipv4InterfaceContainer csmaInterfaces;
 
   std::string route;
+  std::string rateControl;
   std::string flowout;
 
 private:
@@ -215,11 +217,13 @@ AodvExample::AodvExample () :
   datarate (1e6),
   monitorInterval (1.0),
   anim (false),
-  aptx (false),
+  aptx (true),
+  gatx (true),
   locationFile (""),
   gateways (1),
   scale (100),
   route ("aodv"),
+  rateControl ("constant"),
   flowout ("test.xml")
 {
 }
@@ -246,13 +250,14 @@ AodvExample::Configure (int argc, char **argv)
   cmd.AddValue ("clStep", "CL grid step, m", clStep);
   cmd.AddValue ("app", "ping or UDP or TCP", app);
   cmd.AddValue ("datarate", "tested application datarate", datarate);
-  cmd.AddValue ("monitorInterval", "Time between throughput updates.", monitorInterval);
   cmd.AddValue ("anim", "Output netanim .xml file or not.", anim);
   cmd.AddValue ("aptx", "Mount OnOffApplication on AP or not, for test.", aptx);
+  cmd.AddValue ("gatx", "Mount OnOffApplication on gateway or not, for test.", gatx);
   cmd.AddValue ("locationFile", "Location file name.", locationFile);
   cmd.AddValue ("gateways", "Number of gateway AP.", gateways);
   cmd.AddValue ("scale", "Ratio between experiment and simulation.", scale);
   cmd.AddValue ("route", "Routing protocol", route);
+  cmd.AddValue ("rateControl", "Rate control--constant/ideal", rateControl);
   cmd.AddValue ("flowout", "Result output directory", flowout);
 
   cmd.Parse (argc, argv);
@@ -492,11 +497,13 @@ AodvExample::CreateMeshDevices ()
   mesh.SetMacType ("RandomStart", TimeValue (Seconds (startTime)),
                    "BeaconInterval", TimeValue (Seconds (beaconInterval)));
   mesh.SetStandard (WIFI_PHY_STANDARD_80211ac);
-//  mesh.SetRemoteStationManager ("ns3::IdealWifiManager");
-  mesh.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-                                "ControlMode", StringValue ("VhtMcs0"),
-                                "DataMode", StringValue ("VhtMcs7"),
-                                "RtsCtsThreshold", UintegerValue (99999));
+  if (rateControl == std::string ("ideal"))
+    mesh.SetRemoteStationManager ("ns3::IdealWifiManager");
+  else
+    mesh.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
+                                  "ControlMode", StringValue ("VhtMcs0"),
+                                  "DataMode", StringValue ("VhtMcs7"),
+                                  "RtsCtsThreshold", UintegerValue (99999));
   meshDevices = mesh.Install (wifiPhy, apNodes);
 
 //  WifiMacHelper wifiMac;
@@ -548,7 +555,6 @@ AodvExample::CreateWifiDevices ()
 
   WifiHelper wifi;
   wifi.SetStandard (WIFI_PHY_STANDARD_80211n_2_4GHZ);
-//  wifi.SetRemoteStationManager ("ns3::IdealWifiManager");
   wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
                                 "ControlMode", StringValue ("HtMcs0"),
                                 "DataMode", StringValue ("HtMcs7"),
@@ -661,6 +667,9 @@ AodvExample::InstallApplications ()
 
           if (aptx)
             {
+              if (!gatx && i < gateways)
+                continue;
+
               uint16_t port = 40000+i;
               Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
               PacketSinkHelper server ("ns3::UdpSocketFactory", localAddress);
@@ -715,6 +724,9 @@ AodvExample::InstallApplications ()
 
           if (aptx)
             {
+              if (!gatx && i < gateways)
+                continue;
+
               uint16_t port = 40000+i;
               Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
               PacketSinkHelper server ("ns3::TcpSocketFactory", localAddress);

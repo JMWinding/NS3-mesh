@@ -163,7 +163,8 @@ IdealWifiManager::DoInitialize ()
                       NS_LOG_DEBUG ("In SetupPhy, adding mode = " << mode.GetUniqueName ());
                       txVector.SetNss (k);
                       txVector.SetMode (mode);
-                      AddSnrThreshold (txVector, GetPhy ()->CalculateSnr (txVector, m_ber));
+                      if (txVector.IsValid ())
+                        AddSnrThreshold (txVector, GetPhy ()->CalculateSnr (txVector, m_ber));
                     }
                 }
             }
