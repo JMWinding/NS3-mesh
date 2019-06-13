@@ -1410,7 +1410,7 @@ WifiRemoteStationManager::GetControlAnswerMode (Mac48Address address, WifiMode r
   //done and can return that mode.
   if (found)
     {
-      NS_LOG_DEBUG ("WifiRemoteStationManager::GetControlAnswerMode returning " << mode);
+      NS_LOG_DEBUG ("WifiRemoteStationManager::GetControlAnswerMode returning BSSBasicRate " << mode);
       return mode;
     }
 

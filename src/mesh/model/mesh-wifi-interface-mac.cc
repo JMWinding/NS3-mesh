@@ -543,14 +543,9 @@ MeshWifiInterfaceMac::Receive (Ptr<Packet> packet, WifiMacHeader const *hdr)
             {
               m_stationManager->AddStationHeCapabilities (from, GetHeCapabilities ());
             }
-//          if (GetQosSupported ())
-//            {
-//              m_stationManager->SetQosSupport (from, false);
-//            }
 #endif
           m_stationManager->AddAllSupportedModes (from);
           m_stationManager->RecordDisassociated (from);
-          NS_LOG_DEBUG ("QosSupported is " << m_stationManager->GetQosSupported (from));
         }
 
       MgtBeaconHeader beacon_hdr;
@@ -588,20 +583,6 @@ MeshWifiInterfaceMac::Receive (Ptr<Packet> packet, WifiMacHeader const *hdr)
     {
       ForwardUp (packet, hdr->GetAddr4 (), hdr->GetAddr3 ());
     }
-
-//  if (hdr->IsData ())
-//    {
-//      if (hdr->IsQosData () && hdr->IsQosAmsdu ())
-//        {
-//          NS_LOG_DEBUG ("Received A-MSDU from" << from);
-//          DeaggregateAmsduAndForward (packet, hdr);
-//        }
-//      else
-//        {
-//          ForwardUp (packet, hdr->GetAddr4 (), hdr->GetAddr3 ());
-//        }
-//      return;
-//    }
 
   // We don't bother invoking RegularWifiMac::Receive() here, because
   // we've explicitly handled all the frames we care about. This is in
