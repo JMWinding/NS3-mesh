@@ -11,12 +11,12 @@ ratecontrol='ideal'
 
 dirin="my-simulations/${simtip}/input"
 dirout="my-simulations/${simtip}/output/${route}-${app}-${ratecontrol}"
-[ ! -d ${dirout} ] && mkdir ${dirout}
+[ ! -d ${dirout} ] && mkdir -p ${dirout}
 
-rrstart=10001
+rrstart=$1
 rrend=10016
 
-for ((rr=${rrstart}; rr<=${rrend}; rr=rr+4))
+for ((rr=${rrstart}; rr<=${rrend}; rr=rr+16))
 do
   for ((aa=10; aa<=25; aa=aa+1))
   do
@@ -26,7 +26,7 @@ do
       do
         if [ ! -f "${dirout}/mesh_400_0_${aa}_${dd}_${gg}_${rr}.xmp" ]; then
           echo mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt
-          ./waf --run "mesh-loc-1 --apNum=${aa} --aptx=true --gateways=${gg} --gatx=true --rateControl=${ratecontrol} --rndSeed=${rr} --totalTime=80 --locationFile=${dirin}/location_400_0_${aa}_${dd}.txt --flowout=${dirout}/mesh_400_0_${aa}_${dd}_${gg}_${rr}.xmp --scale=80" &> "${dirout}/mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt"
+          ./waf --run "mesh-loc-1 --apNum=${aa} --aptx=true --gateways=${gg} --gatx=true --rateControl=${ratecontrol} --rndSeed=${rr} --totalTime=120 --locationFile=${dirin}/location_400_0_${aa}_${dd}.txt --flowout=${dirout}/mesh_400_0_${aa}_${dd}_${gg}_${rr}.xmp --scale=80" &> "${dirout}/mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt"
         fi
       done
     done

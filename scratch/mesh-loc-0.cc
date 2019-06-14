@@ -315,7 +315,7 @@ AodvExample::Run ()
         std::cout << 0 << '\n';
     }
 
-  monitor->SerializeToXmlFile(flowout, true, true);
+  monitor->SerializeToXmlFile(flowout, false, false);
 
   Simulator::Destroy ();
 }
