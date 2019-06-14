@@ -260,7 +260,7 @@ AodvExample::Configure (int argc, char **argv)
   cmd.AddValue ("gateways", "Number of gateway AP.", gateways);
   cmd.AddValue ("scale", "Ratio between experiment and simulation.", scale);
   cmd.AddValue ("route", "Routing protocol", route);
-  cmd.AddValue ("rateControl", "Rate control--constant/ideal", rateControl);
+  cmd.AddValue ("rateControl", "Rate control--constant/ideal/minstrel", rateControl);
   cmd.AddValue ("flowout", "Result output directory", flowout);
 
   cmd.Parse (argc, argv);
@@ -507,7 +507,11 @@ AodvExample::CreateMeshDevices ()
                    "BeaconInterval", TimeValue (Seconds (beaconInterval)));
   mesh.SetStandard (WIFI_PHY_STANDARD_80211ac);
   if (rateControl == std::string ("ideal"))
-    mesh.SetRemoteStationManager ("ns3::IdealWifiManager");
+    mesh.SetRemoteStationManager ("ns3::IdealWifiManager",
+                                  "RtsCtsThreshold", UintegerValue (99999));
+  else if (rateControl == std::string ("minstrel"))
+    mesh.SetRemoteStationManager ("ns3::MinstrelHtWifiManager",
+                                  "RtsCtsThreshold", UintegerValue (99999));
   else
     mesh.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
                                   "ControlMode", StringValue ("VhtMcs0"),
