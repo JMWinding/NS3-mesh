@@ -1,8 +1,7 @@
 #!/bin/bash
 
-for ((rrstart=10001; rrstart<=10016; rrstart=rrstart+1))
+for ((rrstart=$1; rrstart<=$2; rrstart=rrstart+1))
 do
-  gnome-terminal --tab -- bash myjob-aodv-udp-ideal.sh ${rrstart}
-  sleep 10
+  gnome-terminal --tab -- sh -c "bash myjob-aodv-udp-ideal.sh ${rrstart}"
+  sleep 5
 done
-

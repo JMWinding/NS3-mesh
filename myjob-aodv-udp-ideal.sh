@@ -6,7 +6,7 @@ temp=0
 
 simtip='1_throughput_rate_adaptation'
 route='aodv'
-app='udp'
+app='tcp'
 ratecontrol='ideal'
 
 dirin="my-simulations/${simtip}/input"
