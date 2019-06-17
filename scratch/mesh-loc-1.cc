@@ -147,7 +147,8 @@ private:
 
   /// test-only operations
   bool aptx;
-  bool gatx;
+  uint32_t naptx;
+  bool linkFluctuation;
 
   /// specified real implementation
   std::string locationFile;
@@ -218,7 +219,8 @@ AodvExample::AodvExample () :
   monitorInterval (1.0),
   anim (false),
   aptx (true),
-  gatx (true),
+  naptx (0),
+  linkFluctuation (false),
   locationFile (""),
   gateways (1),
   scale (100),
@@ -252,7 +254,8 @@ AodvExample::Configure (int argc, char **argv)
   cmd.AddValue ("datarate", "tested application datarate", datarate);
   cmd.AddValue ("anim", "Output netanim .xml file or not.", anim);
   cmd.AddValue ("aptx", "Mount OnOffApplication on AP or not, for test.", aptx);
-  cmd.AddValue ("gatx", "Mount OnOffApplication on gateway or not, for test.", gatx);
+  cmd.AddValue ("naptx", "Number of AP without throughput.", naptx);
+  cmd.AddValue ("linkFluctuation", "Gaussian random propagation loss.", linkFluctuation);
   cmd.AddValue ("locationFile", "Location file name.", locationFile);
   cmd.AddValue ("gateways", "Number of gateway AP.", gateways);
   cmd.AddValue ("scale", "Ratio between experiment and simulation.", scale);
@@ -470,6 +473,9 @@ AodvExample::CreateMeshDevices ()
 {
   YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
+  if (linkFluctuation)
+    wifiChannel.AddPropagationLoss ("ns3::RandomPropagationLossModel",
+                                    "Variable", StringValue ("ns3::NormalRandomVariable[Mean=0.0|Variance=3.0|Bound=9.0]"));
   wifiPhy.SetChannel (wifiChannel.Create ());
   wifiPhy.Set ("ChannelNumber", UintegerValue (38));
   wifiPhy.Set ("Antennas", UintegerValue (4));
@@ -671,7 +677,7 @@ AodvExample::InstallApplications ()
 
           if (aptx)
             {
-              if (!gatx && i < gateways)
+              if (i < naptx)
                 continue;
 
               uint16_t port = 40000+i;
@@ -728,7 +734,7 @@ AodvExample::InstallApplications ()
 
           if (aptx)
             {
-              if (!gatx && i < gateways)
+              if (i < naptx)
                 continue;
 
               uint16_t port = 40000+i;
