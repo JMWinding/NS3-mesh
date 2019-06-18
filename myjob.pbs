@@ -7,6 +7,8 @@
 #PBS -q secondary
 #PBS -j oe
 
+module load gcc
+
 cd $PBS_O_WORKDIR
 
 bash myjob.sh 10001 10012 & wait

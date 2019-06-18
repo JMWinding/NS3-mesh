@@ -1,0 +1,42 @@
+Waf: Entering directory `/home/jiaming/eclipse-workspace/ns-3.29-mesh/build'
+Waf: Leaving directory `/home/jiaming/eclipse-workspace/ns-3.29-mesh/build'
+Build commands will be stored in build/compile_commands.json
+'build' finished successfully (4.369s)
+Invalid command-line arguments: --gatx=true
+mesh-loc-1 [Program Options] [General Arguments]
+
+Program Options:
+    --rndSeed:          Random Seed [1]
+    --pcap:             Write PCAP traces. [false]
+    --printRoutes:      Print routing table dumps. [false]
+    --gridSize:         Size of AP grid. [3]
+    --apNum:            Number of AP nodes. [10]
+    --clNum:            Number of CL nodes for each Service Set. [0]
+    --startTime:        Application start time, s. [1]
+    --totalTime:        Simulation time, s. [20]
+    --beaconInterval:   Mesh beacon interval, s. [0.5]
+    --monitorInterval:  Monitor interval, s. [1]
+    --apStep:           AP grid step, m [50]
+    --clStep:           CL grid step, m [20]
+    --app:              ping or UDP or TCP [udp]
+    --datarate:         tested application datarate [1e+06]
+    --anim:             Output netanim .xml file or not. [false]
+    --aptx:             Mount OnOffApplication on AP or not, for test. [true]
+    --naptx:            Number of AP without throughput. [0]
+    --linkFluctuation:  Gaussian random propagation loss. [false]
+    --locationFile:     Location file name. []
+    --gateways:         Number of gateway AP. [1]
+    --scale:            Ratio between experiment and simulation. [100]
+    --route:            Routing protocol [aodv]
+    --rateControl:      Rate control--constant/ideal/minstrel [constant]
+    --flowout:          Result output directory [test.xml]
+
+General Arguments:
+    --PrintGlobals:              Print the list of globals.
+    --PrintGroups:               Print the list of groups.
+    --PrintGroup=[group]:        Print all TypeIds of group.
+    --PrintTypeIds:              Print all TypeIds.
+    --PrintAttributes=[typeid]:  Print all attributes of typeid.
+    --PrintHelp:                 Print this help message.
+
+Command ['/home/jiaming/eclipse-workspace/ns-3.29-mesh/build/scratch/mesh-loc-1', '--apNum=10', '--aptx=true', '--gateways=1', '--gatx=true', '--rateControl=ideal', '--rndSeed=10001', '--totalTime=120', '--locationFile=my-simulations/1_throughput_rate_adaptation/input/location_400_0_10_1.txt', '--flowout=my-simulations/1_throughput_rate_adaptation/output/aodv-udp-ideal/mesh_400_0_10_1_1_10001.xmp', '--scale=80'] exited with code 1

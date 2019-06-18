@@ -6,7 +6,7 @@ temp=0
 
 simtip='1_throughput_rate_adaptation'
 route='aodv'
-app='tcp'
+app='udp'
 ratecontrol='ideal'
 
 dirin="my-simulations/${simtip}/input"
@@ -26,7 +26,7 @@ do
       do
         if [ ! -f "${dirout}/mesh_400_0_${aa}_${dd}_${gg}_${rr}.xmp" ]; then
           echo mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt
-          ./waf --run "mesh-loc-1 --apNum=${aa} --aptx=true --gateways=${gg} --gatx=true --rateControl=${ratecontrol} --rndSeed=${rr} --totalTime=120 --locationFile=${dirin}/location_400_0_${aa}_${dd}.txt --flowout=${dirout}/mesh_400_0_${aa}_${dd}_${gg}_${rr}.xmp --scale=80" &> "${dirout}/mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt"
+          ./waf --run "mesh-loc-1 --apNum=${aa} --aptx=true --gateways=${gg} --gatx=true --rateControl=${ratecontrol} --rndSeed=${rr} --totalTime=120 --locationFile=${dirin}/location_400_0_${aa}_${dd}.txt --flowout=${dirout}/mesh_400_0_${aa}_${dd}_${gg}_${rr}.xmp --scale=100" &> "${dirout}/mesh_400_0_${aa}_${dd}_${gg}_${rr}.txt"
         fi
       done
     done
