@@ -1,7 +1,5 @@
 #!/bin/bash
 
-./waf
-
 temp=0
 
 simtip='1_throughput_rate_adaptation'
@@ -9,14 +7,13 @@ route='aodv'
 app='udp'
 ratecontrol='ideal'
 
+rrstart=$1
+
 dirin="my-simulations/${simtip}/input"
-dirout="my-simulations/${simtip}/output/${route}-${app}-${ratecontrol}"
+dirout="my-simulations/${simtip}/output/${route}-${app}-${ratecontrol}-${rrstart}"
 [ ! -d ${dirout} ] && mkdir -p ${dirout}
 
-rrstart=$1
-rrend=10016
-
-for ((rr=${rrstart}; rr<=${rrend}; rr=rr+16))
+for ((rr=${rrstart}; rr<=${rrstart}; rr=rr+1))
 do
   for ((aa=10; aa<=25; aa=aa+1))
   do
