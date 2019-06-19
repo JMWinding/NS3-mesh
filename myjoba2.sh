@@ -1,8 +1,8 @@
 #!/bin/bash
 
+./waf
+
 for ((rrstart=$1; rrstart<=$2; rrstart=rrstart+1))
 do
-  xterm -e "bash myjob-aodv-udp-ideal.sh ${rrstart}" &
+  bash myjob-aodv-tcp-ideal.sh ${rrstart} &
 done
-
-wait
