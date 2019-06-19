@@ -27,6 +27,7 @@
 
 #include "ns3/object.h"
 #include "ns3/random-variable-stream.h"
+#include "ns3/core-module.h"
 #include <map>
 
 namespace ns3 {
