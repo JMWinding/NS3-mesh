@@ -113,16 +113,16 @@ NodeDownPropagationLossModel::NodeDownPropagationLossModel () :
 
 double
 NodeDownPropagationLossModel::DoCalcRxPower (double txPowerDbm,
-                                              Ptr<MobilityModel> a,
-                                              Ptr<MobilityModel> b) const
+                                             Ptr<MobilityModel> a,
+                                             Ptr<MobilityModel> b) const
 {
-  double linkBreakRx = -1e3;
+  double NodeDownRx = -1e3;
 
   auto it = m_recover.find (a);
   if (it != m_recover.end ())
     {
       if (Simulator::Now ().GetSeconds () < it->second)
-        return linkBreakRx;
+        return NodeDownRx;
       else
         m_recover.erase (it);
     }
@@ -131,7 +131,7 @@ NodeDownPropagationLossModel::DoCalcRxPower (double txPowerDbm,
     {
       double rt = Simulator::Now ().GetSeconds () + m_period->GetValue ();
       m_recover[a] = rt;
-      return linkBreakRx;
+      return NodeDownRx;
     }
   else
     return txPowerDbm;
@@ -175,17 +175,18 @@ ChannelChangePropagationLossModel::ChannelChangePropagationLossModel ()
 
 double
 ChannelChangePropagationLossModel::DoCalcRxPower (double txPowerDbm,
-                                              Ptr<MobilityModel> a,
-                                              Ptr<MobilityModel> b) const
+                                                  Ptr<MobilityModel> a,
+                                                  Ptr<MobilityModel> b) const
 {
   double loss = m_amplitude->GetValue ();
   double next = Simulator::Now ().GetSeconds () + m_period->GetValue ();
+
   auto it1 = m_change.find (std::make_pair (a,b));
   if (it1 != m_change.end ())
     {
       if (Simulator::Now ().GetSeconds () >= it1->second.second)
         it1->second = std::make_pair (loss, next);
-      return loss;
+      return it1->second.first;
     }
 
   auto it2 = m_change.find (std::make_pair (b,a));
@@ -193,7 +194,7 @@ ChannelChangePropagationLossModel::DoCalcRxPower (double txPowerDbm,
     {
       if (Simulator::Now ().GetSeconds () >= it2->second.second)
         it2->second = std::make_pair (loss, next);
-      return loss;
+      return it2->second.first;
     }
 
   m_change[std::make_pair (a,b)] = std::make_pair (loss, next);
