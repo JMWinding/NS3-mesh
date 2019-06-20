@@ -6,15 +6,6 @@
 
 namespace ns3 {
 
-class LinkBreakRecover
-{
-public:
-  LinkBreakRecover ();
-
-public:
-  std::map<std::pair<Ptr<MobilityModel>,Ptr<MobilityModel>>, double> m_recoverTime;
-}
-
 class LinkBreakPropagationLossModel : public PropagationLossModel
 {
 public:
@@ -48,18 +39,11 @@ private:
   double m_breakProb;
   Ptr<UniformRandomVariable> m_break;
   Ptr<RandomVariableStream> m_period;
-  Ptr<LinkBreakRecover> m_recover;
+  static std::map<std::pair<Ptr<MobilityModel>,Ptr<MobilityModel>>, double> m_recover;
 
 };
 
-class NodeDownRecover
-{
-public:
-  NodeDownRecover ();
-
-public:
-  std::map<Ptr<MobilityModel>, double> m_recoverTime;
-}
+std::map<std::pair<Ptr<MobilityModel>,Ptr<MobilityModel>>, double> LinkBreakPropagationLossModel::m_recover;
 
 class NodeDownPropagationLossModel : public PropagationLossModel
 {
@@ -94,18 +78,11 @@ private:
   double m_downProb;
   Ptr<UniformRandomVariable> m_down;
   Ptr<RandomVariableStream> m_period;
-  Ptr<NodeDownRecover> m_recover;
+  static std::map<Ptr<MobilityModel>, double> m_recover;
 
 };
 
-class ChannelChange
-{
-public:
-  ChannelChange ();
-
-public:
-  std::map<std::pair<Ptr<MobilityModel>,Ptr<MobilityModel>>, double> m_changeTime;
-}
+std::map<Ptr<MobilityModel>, double> NodeDownPropagationLossModel::m_recover;
 
 class ChannelChangePropagationLossModel : public PropagationLossModel
 {
@@ -137,12 +114,13 @@ private:
   virtual int64_t DoAssignStreams (int64_t stream);
 
 private:
-  double m_loss;
   Ptr<RandomVariableStream> m_amplitude;
   Ptr<RandomVariableStream> m_period;
-  Ptr<ChannelChange> m_change;
+  static std::map<std::pair<Ptr<MobilityModel>,Ptr<MobilityModel>>, std::pair<double,double>> m_change;
 
 };
+
+std::map<std::pair<Ptr<MobilityModel>,Ptr<MobilityModel>>, std::pair<double,double>> ChannelChangePropagationLossModel::m_change;
 
 } // namespace ns3
 
