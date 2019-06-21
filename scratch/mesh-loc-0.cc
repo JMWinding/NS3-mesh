@@ -468,8 +468,9 @@ AodvExample::CreateDevices ()
 void
 AodvExample::CreateMeshDevices ()
 {
-  YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
+
+  YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
   wifiPhy.SetChannel (wifiChannel.Create ());
   wifiPhy.Set ("ChannelNumber", UintegerValue (38));
   wifiPhy.Set ("Antennas", UintegerValue (4));

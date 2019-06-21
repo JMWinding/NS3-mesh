@@ -35,7 +35,6 @@ LinkBreakPropagationLossModel::GetTypeId (void)
 LinkBreakPropagationLossModel::LinkBreakPropagationLossModel () :
     m_breakProb (0.05)
 {
-  m_break = CreateObject<UniformRandomVariable> ();
 }
 
 double
@@ -44,34 +43,18 @@ LinkBreakPropagationLossModel::DoCalcRxPower (double txPowerDbm,
                                               Ptr<MobilityModel> b) const
 {
   double linkBreakRx = -1e3;
-
   auto it1 = LinkBreakPropagationLossModel::m_recover.find (std::make_pair (a,b));
-  if (it1 != LinkBreakPropagationLossModel::m_recover.end ())
-    {
-      if (Simulator::Now ().GetSeconds () < it1->second)
-        return linkBreakRx;
-      else
-        LinkBreakPropagationLossModel::m_recover.erase (it1);
-    }
-
   auto it2 = LinkBreakPropagationLossModel::m_recover.find (std::make_pair (b,a));
-  if (it2 != LinkBreakPropagationLossModel::m_recover.end ())
-    {
-      if (Simulator::Now ().GetSeconds () < it2->second)
-        return linkBreakRx;
-      else
-        LinkBreakPropagationLossModel::m_recover.erase (it2);
-    }
 
-  if (m_break->GetValue () < m_breakProb)
-    {
-      double rt = Simulator::Now ().GetSeconds () + m_period->GetValue ();
-      LinkBreakPropagationLossModel::m_recover[std::make_pair (a,b)] = rt;
-      return linkBreakRx;
-    }
+  if (it1 != LinkBreakPropagationLossModel::m_recover.end ())
+    return it1->second ? linkBreakRx : txPowerDbm;
+  else if (it2 != LinkBreakPropagationLossModel::m_recover.end ())
+    return it2->second ? linkBreakRx : txPowerDbm;
   else
     {
-      return txPowerDbm;
+      UpdateLinkBreak (m_breakProb, m_period, a, b);
+      it1 = LinkBreakPropagationLossModel::m_recover.find (std::make_pair (a,b));
+      return  it1->second ? linkBreakRx : txPowerDbm;
     }
 
   return 0;
@@ -82,6 +65,22 @@ LinkBreakPropagationLossModel::DoAssignStreams (int64_t stream)
 {
   m_period->SetStream (stream);
   return 1;
+}
+
+void
+LinkBreakPropagationLossModel::UpdateLinkBreak (double m_breakProb,
+                                                Ptr<RandomVariableStream> m_period,
+                                                Ptr<MobilityModel> a,
+                                                Ptr<MobilityModel> b)
+{
+  Ptr<UniformRandomVariable> m_break = CreateObject<UniformRandomVariable> ();
+  bool temp = (m_break->GetValue () < m_breakProb);
+  m_recover[std::make_pair (a,b)] = temp;
+//  if (temp)
+//    std::cout << "Link Down= " << a->GetPosition () << "-" << b->GetPosition () << std::endl;
+//  else
+//    std::cout << "Link Up= " << a->GetPosition () << "-" << b->GetPosition () << std::endl;
+  Simulator::Schedule (Seconds (m_period->GetValue ()), &UpdateLinkBreak, m_breakProb, m_period, a, b);
 }
 
 // ------------------------------------------------------------------------- //
@@ -110,7 +109,6 @@ NodeDownPropagationLossModel::GetTypeId (void)
 NodeDownPropagationLossModel::NodeDownPropagationLossModel () :
     m_downProb (0.01)
 {
-  m_down = CreateObject<UniformRandomVariable> ();
 }
 
 double
@@ -119,24 +117,16 @@ NodeDownPropagationLossModel::DoCalcRxPower (double txPowerDbm,
                                              Ptr<MobilityModel> b) const
 {
   double NodeDownRx = -1e3;
-
   auto it = m_recover.find (a);
-  if (it != m_recover.end ())
-    {
-      if (Simulator::Now ().GetSeconds () < it->second)
-        return NodeDownRx;
-      else
-        m_recover.erase (it);
-    }
 
-  if (m_down->GetValue () < m_downProb)
-    {
-      double rt = Simulator::Now ().GetSeconds () + m_period->GetValue ();
-      m_recover[a] = rt;
-      return NodeDownRx;
-    }
+  if (it != m_recover.end ())
+    return it->second ? NodeDownRx : txPowerDbm;
   else
-    return txPowerDbm;
+    {
+      UpdateNodeDown (m_downProb, m_period, a);
+      it = m_recover.find (a);
+      return it->second ? NodeDownRx : txPowerDbm;
+    }
 
   return 0;
 }
@@ -146,6 +136,21 @@ NodeDownPropagationLossModel::DoAssignStreams (int64_t stream)
 {
   m_period->SetStream (stream);
   return 1;
+}
+
+void
+NodeDownPropagationLossModel::UpdateNodeDown (double m_downProb,
+                                              Ptr<RandomVariableStream> m_period,
+                                              Ptr<MobilityModel> a)
+{
+  Ptr<UniformRandomVariable> m_down = CreateObject<UniformRandomVariable> ();
+  bool temp = (m_down->GetValue () < m_downProb);
+  m_recover[a] = temp;
+//  if (temp)
+//    std::cout << "Node Down= " << a->GetPosition () << std::endl;
+//  else
+//    std::cout << "Node Up= " << a->GetPosition () << std::endl;
+  Simulator::Schedule (Seconds (m_period->GetValue ()), &UpdateNodeDown, m_downProb, m_period, a);
 }
 
 // ------------------------------------------------------------------------- //
@@ -180,27 +185,19 @@ ChannelChangePropagationLossModel::DoCalcRxPower (double txPowerDbm,
                                                   Ptr<MobilityModel> a,
                                                   Ptr<MobilityModel> b) const
 {
-  double loss = m_amplitude->GetValue ();
-  double next = Simulator::Now ().GetSeconds () + m_period->GetValue ();
-
   auto it1 = m_change.find (std::make_pair (a,b));
-  if (it1 != m_change.end ())
-    {
-      if (Simulator::Now ().GetSeconds () >= it1->second.second)
-        it1->second = std::make_pair (loss, next);
-      return txPowerDbm - it1->second.first;
-    }
-
   auto it2 = m_change.find (std::make_pair (b,a));
-  if (it2 != m_change.end ())
-    {
-      if (Simulator::Now ().GetSeconds () >= it2->second.second)
-        it2->second = std::make_pair (loss, next);
-      return txPowerDbm - it2->second.first;
-    }
 
-  m_change[std::make_pair (a,b)] = std::make_pair (loss, next);
-  return txPowerDbm - loss;
+  if (it1 != m_change.end ())
+    return txPowerDbm - it1->second;
+  else if (it2 != m_change.end ())
+    return txPowerDbm - it2->second;
+  else
+    {
+      UpdateChannelChange (m_amplitude, m_period, a, b);
+      it1 = m_change.find (std::make_pair (a,b));
+      return txPowerDbm - it1->second;
+    }
 
   return 0;
 }
@@ -211,6 +208,19 @@ ChannelChangePropagationLossModel::DoAssignStreams (int64_t stream)
   m_amplitude->SetStream (stream);
   m_period->SetStream (stream + 1);
   return 2;
+}
+
+void
+ChannelChangePropagationLossModel::UpdateChannelChange (Ptr<RandomVariableStream> m_amplitude,
+                                                        Ptr<RandomVariableStream> m_period,
+                                                        Ptr<MobilityModel> a,
+                                                        Ptr<MobilityModel> b)
+{
+  double temp = m_amplitude->GetValue ();
+  m_change[std::make_pair (a,b)] = temp;
+//  std::cout << "Extra loss of " << a->GetPosition () << "-" << b->GetPosition ()
+//      << " = " << temp << std::endl;
+  Simulator::Schedule (Seconds (m_period->GetValue ()), &UpdateChannelChange, m_amplitude, m_period, a, b);
 }
 
 // ------------------------------------------------------------------------- //

@@ -4,7 +4,7 @@
  * Mesh with 802.11n/ac fixed
  * WIFI_MAC_MGT_ACTION for MESH and BLOCK_ACK modulation changed
  * Flow monitor - delay
- * Propagation loss model adapted to real testbeds
+ * Period link/node failure and channel change
  */
 
 #include <iostream>
@@ -153,7 +153,6 @@ private:
   /// specified real implementation
   std::string locationFile;
   std::vector<std::vector<double>> locations;
-  std::vector<std::vector<double>> pairloss;
   uint32_t gateways;
   double scale;
   NodeContainer csmaNodes;
@@ -186,7 +185,6 @@ private:
   /// Connect gateways
   void CreateCsmaDevices ();
   void ReadLocations ();
-  void UpdatePropagationLoss (Ptr<MatrixPropagationLossModel> propLoss);
   void PreSetStationManager ();
 };
 
@@ -356,7 +354,6 @@ AodvExample::CreateVariables ()
       apInterfaces.push_back (Ipv4InterfaceContainer ());
       clInterfaces.push_back (Ipv4InterfaceContainer ());
       locations.push_back (std::vector<double> (4, 0));
-      pairloss.push_back (std::vector<double> (apNum, 1));
     }
   for (uint32_t i = 0; i < txNum; ++i)
     {
@@ -473,13 +470,17 @@ void
 AodvExample::CreateMeshDevices ()
 {
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
-  Ptr<YansWifiChannel> channel = wifiChannel.Create ();
-  Ptr<MatrixPropagationLossModel> propLoss = CreateObject<MatrixPropagationLossModel> ();
-  UpdatePropagationLoss (propLoss);
-  channel->SetPropagationLossModel (propLoss);
+  wifiChannel.AddPropagationLoss ("ns3::LinkBreakPropagationLossModel",
+                                  "BreakProb", DoubleValue (0.3),
+                                  "Period", StringValue ("ns3::ConstantRandomVariable[Constant=1.0]"));
+  wifiChannel.AddPropagationLoss ("ns3::NodeDownPropagationLossModel",
+                                  "DownProb", DoubleValue (0.3),
+                                  "Period", StringValue ("ns3::ConstantRandomVariable[Constant=1.0]"));
+  wifiChannel.AddPropagationLoss ("ns3::ChannelChangePropagationLossModel",
+                                  "Amplitude", StringValue ("ns3::NormalRandomVariable[Mean=0.0|Variance=3.0|Bound=6.0]"),
+                                  "Period", StringValue ("ns3::ConstantRandomVariable[Constant=1.0]"));
 
   YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
-  wifiPhy.SetChannel (channel);
   wifiPhy.SetChannel (wifiChannel.Create ());
   wifiPhy.Set ("ChannelNumber", UintegerValue (38));
   wifiPhy.Set ("Antennas", UintegerValue (4));
@@ -782,23 +783,6 @@ AodvExample::ReadLocations ()
     {
       for (uint32_t i = 0; i < apNum; ++i)
         fin >> locations[i][0] >> locations[i][1] >> locations[i][2] >> locations[i][3];
-      for (uint32_t i = 0; i < apNum; ++i)
-        for (uint32_t j = 0; j < apNum; ++j)
-          fin >> pairloss[i][j];
       fin.close ();
     }
-}
-
-void
-AodvExample::UpdatePropagationLoss (Ptr<MatrixPropagationLossModel> propLoss)
-{
-  propLoss->SetDefaultLoss (0);
-  for (uint32_t i = 0; i < apNum; ++i)
-    for (uint32_t j = 0; j < apNum; ++j)
-      if (i == j)
-        continue;
-      else if (pairloss[i][j] > 0)
-        propLoss->SetLoss (apNodes.Get (i)->GetObject<MobilityModel> (), apNodes.Get (j)->GetObject<MobilityModel> (), 30+pairloss[i][j], false);
-      else
-        propLoss->SetLoss (apNodes.Get (i)->GetObject<MobilityModel> (), apNodes.Get (j)->GetObject<MobilityModel> (), 1e3, false);
 }

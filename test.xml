@@ -1,27 +1,27 @@
 <?xml version="1.0" ?>
 <FlowMonitor>
   <FlowStats>
-    <Flow flowId="1" timeFirstTxPacket="+1000058879.0ns" timeFirstRxPacket="+1014834018.0ns" timeLastTxPacket="+39999977776.0ns" timeLastRxPacket="+39999994530.0ns" delaySum="+282382884172.0ns" jitterSum="+42560014944.0ns" lastDelay="+370028.0ns" txBytes="993562500" rxBytes="972400500" txPackets="662375" rxPackets="648267" lostPackets="14096" timesForwarded="648269">
+    <Flow flowId="1" timeFirstTxPacket="+1000058879.0ns" timeFirstRxPacket="+1010753018.0ns" timeLastTxPacket="+199999951537.0ns" timeLastRxPacket="+199999926602.0ns" delaySum="+13747565792043.0ns" jitterSum="+212711464680.0ns" lastDelay="+210581.0ns" txBytes="5069718000" rxBytes="2101798500" txPackets="3379812" rxPackets="1401199" lostPackets="1851262" timesForwarded="1401201">
       <packetsDropped reasonCode="0" number="0" />
       <packetsDropped reasonCode="1" number="0" />
       <packetsDropped reasonCode="2" number="0" />
       <packetsDropped reasonCode="3" number="0" />
       <packetsDropped reasonCode="4" number="0" />
       <packetsDropped reasonCode="5" number="0" />
-      <packetsDropped reasonCode="6" number="143" />
+      <packetsDropped reasonCode="6" number="92" />
       <bytesDropped reasonCode="0" bytes="0" />
       <bytesDropped reasonCode="1" bytes="0" />
       <bytesDropped reasonCode="2" bytes="0" />
       <bytesDropped reasonCode="3" bytes="0" />
       <bytesDropped reasonCode="4" bytes="0" />
       <bytesDropped reasonCode="5" bytes="0" />
-      <bytesDropped reasonCode="6" bytes="214500" />
+      <bytesDropped reasonCode="6" bytes="138000" />
     </Flow>
-    <Flow flowId="2" timeFirstTxPacket="+1002445078.0ns" timeFirstRxPacket="+1012219743.0ns" timeLastTxPacket="+1002445078.0ns" timeLastRxPacket="+1012219743.0ns" delaySum="+9774665.0ns" jitterSum="+0.0ns" lastDelay="+9774665.0ns" txBytes="48" rxBytes="48" txPackets="1" rxPackets="1" lostPackets="0" timesForwarded="0">
+    <Flow flowId="2" timeFirstTxPacket="+1004490078.0ns" timeFirstRxPacket="+1009228743.0ns" timeLastTxPacket="+1004490078.0ns" timeLastRxPacket="+1009228743.0ns" delaySum="+4738665.0ns" jitterSum="+0.0ns" lastDelay="+4738665.0ns" txBytes="48" rxBytes="48" txPackets="1" rxPackets="1" lostPackets="0" timesForwarded="0">
     </Flow>
-    <Flow flowId="3" timeFirstTxPacket="+1002445078.0ns" timeFirstRxPacket="+1008466912.0ns" timeLastTxPacket="+1002445078.0ns" timeLastRxPacket="+1008466912.0ns" delaySum="+6021834.0ns" jitterSum="+0.0ns" lastDelay="+6021834.0ns" txBytes="48" rxBytes="48" txPackets="1" rxPackets="1" lostPackets="0" timesForwarded="0">
+    <Flow flowId="3" timeFirstTxPacket="+1004490078.0ns" timeFirstRxPacket="+1007511912.0ns" timeLastTxPacket="+1004490078.0ns" timeLastRxPacket="+1007511912.0ns" delaySum="+3021834.0ns" jitterSum="+0.0ns" lastDelay="+3021834.0ns" txBytes="48" rxBytes="48" txPackets="1" rxPackets="1" lostPackets="0" timesForwarded="0">
     </Flow>
-    <Flow flowId="4" timeFirstTxPacket="+1012219743.0ns" timeFirstRxPacket="+1014805498.0ns" timeLastTxPacket="+1012219743.0ns" timeLastRxPacket="+1014805498.0ns" delaySum="+2585755.0ns" jitterSum="+0.0ns" lastDelay="+2585755.0ns" txBytes="30" rxBytes="30" txPackets="1" rxPackets="1" lostPackets="0" timesForwarded="0">
+    <Flow flowId="4" timeFirstTxPacket="+1009228743.0ns" timeFirstRxPacket="+1010724498.0ns" timeLastTxPacket="+1009228743.0ns" timeLastRxPacket="+1010724498.0ns" delaySum="+1495755.0ns" jitterSum="+0.0ns" lastDelay="+1495755.0ns" txBytes="30" rxBytes="30" txPackets="1" rxPackets="1" lostPackets="0" timesForwarded="0">
     </Flow>
   </FlowStats>
   <Ipv4FlowClassifier>
@@ -32,7 +32,7 @@
       <Dscp value="0x0" packets="1" />
     </Flow>
     <Flow flowId="1" sourceAddress="10.1.1.2" destinationAddress="10.2.1.1" protocol="17" sourcePort="49153" destinationPort="40001">
-      <Dscp value="0x0" packets="662375" />
+      <Dscp value="0x0" packets="3379812" />
     </Flow>
     <Flow flowId="3" sourceAddress="10.2.1.2" destinationAddress="10.2.1.1" protocol="17" sourcePort="654" destinationPort="654">
       <Dscp value="0x0" packets="1" />

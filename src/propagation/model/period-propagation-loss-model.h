@@ -34,16 +34,19 @@ private:
                                 Ptr<MobilityModel> a,
                                 Ptr<MobilityModel> b) const;
   virtual int64_t DoAssignStreams (int64_t stream);
+  static void UpdateLinkBreak (double m_breakProb,
+                               Ptr<RandomVariableStream> m_period,
+                               Ptr<MobilityModel> a,
+                               Ptr<MobilityModel> b);
 
 private:
   double m_breakProb;
-  Ptr<UniformRandomVariable> m_break;
   Ptr<RandomVariableStream> m_period;
-  static std::map<std::pair<Ptr<MobilityModel>,Ptr<MobilityModel>>, double> m_recover;
+  static std::map<std::pair<Ptr<MobilityModel>,Ptr<MobilityModel>>, bool> m_recover;
 
 };
 
-std::map<std::pair<Ptr<MobilityModel>,Ptr<MobilityModel>>, double> LinkBreakPropagationLossModel::m_recover;
+std::map<std::pair<Ptr<MobilityModel>,Ptr<MobilityModel>>, bool> LinkBreakPropagationLossModel::m_recover;
 
 class NodeDownPropagationLossModel : public PropagationLossModel
 {
@@ -73,16 +76,18 @@ private:
                                 Ptr<MobilityModel> a,
                                 Ptr<MobilityModel> b) const;
   virtual int64_t DoAssignStreams (int64_t stream);
+  static void UpdateNodeDown (double m_downProb,
+                              Ptr<RandomVariableStream> m_period,
+                              Ptr<MobilityModel> a);
 
 private:
   double m_downProb;
-  Ptr<UniformRandomVariable> m_down;
   Ptr<RandomVariableStream> m_period;
-  static std::map<Ptr<MobilityModel>, double> m_recover;
+  static std::map<Ptr<MobilityModel>, bool> m_recover;
 
 };
 
-std::map<Ptr<MobilityModel>, double> NodeDownPropagationLossModel::m_recover;
+std::map<Ptr<MobilityModel>, bool> NodeDownPropagationLossModel::m_recover;
 
 class ChannelChangePropagationLossModel : public PropagationLossModel
 {
@@ -112,15 +117,19 @@ private:
                                 Ptr<MobilityModel> a,
                                 Ptr<MobilityModel> b) const;
   virtual int64_t DoAssignStreams (int64_t stream);
+  static void UpdateChannelChange (Ptr<RandomVariableStream> m_amplitude,
+                                   Ptr<RandomVariableStream> m_period,
+                                   Ptr<MobilityModel> a,
+                                   Ptr<MobilityModel> b);
 
 private:
   Ptr<RandomVariableStream> m_amplitude;
   Ptr<RandomVariableStream> m_period;
-  static std::map<std::pair<Ptr<MobilityModel>,Ptr<MobilityModel>>, std::pair<double,double>> m_change;
+  static std::map<std::pair<Ptr<MobilityModel>,Ptr<MobilityModel>>, double> m_change;
 
 };
 
-std::map<std::pair<Ptr<MobilityModel>,Ptr<MobilityModel>>, std::pair<double,double>> ChannelChangePropagationLossModel::m_change;
+std::map<std::pair<Ptr<MobilityModel>,Ptr<MobilityModel>>, double> ChannelChangePropagationLossModel::m_change;
 
 } // namespace ns3
 
