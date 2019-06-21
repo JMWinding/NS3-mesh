@@ -148,7 +148,6 @@ private:
   /// test-only operations
   bool aptx;
   uint32_t naptx;
-  bool linkFluctuation;
 
   /// specified real implementation
   std::string locationFile;
@@ -220,7 +219,6 @@ AodvExample::AodvExample () :
   anim (false),
   aptx (true),
   naptx (0),
-  linkFluctuation (false),
   locationFile (""),
   gateways (1),
   scale (100),
@@ -255,7 +253,6 @@ AodvExample::Configure (int argc, char **argv)
   cmd.AddValue ("anim", "Output netanim .xml file or not.", anim);
   cmd.AddValue ("aptx", "Mount OnOffApplication on AP or not, for test.", aptx);
   cmd.AddValue ("naptx", "Number of AP without throughput.", naptx);
-  cmd.AddValue ("linkFluctuation", "Gaussian random propagation loss.", linkFluctuation);
   cmd.AddValue ("locationFile", "Location file name.", locationFile);
   cmd.AddValue ("gateways", "Number of gateway AP.", gateways);
   cmd.AddValue ("scale", "Ratio between experiment and simulation.", scale);
@@ -306,7 +303,7 @@ AodvExample::Run ()
       std::cout << t.sourceAddress << '\t';
       if (i->second.rxPackets > 1)
         {
-          std::cout << (double)i->second.rxBytes * 8/1e6 / (i->second.timeLastRxPacket.GetSeconds () - i->second.timeFirstRxPacket.GetSeconds ()) << '\t';
+          std::cout << (double)i->second.rxBytes * 8/1e6 / (i->second.timeLastTxPacket.GetSeconds () - i->second.timeFirstTxPacket.GetSeconds ()) << '\t';
         }
       else
         std::cout << 0 << '\t';
@@ -473,9 +470,6 @@ AodvExample::CreateMeshDevices ()
 {
   YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
-  if (linkFluctuation)
-    wifiChannel.AddPropagationLoss ("ns3::RandomPropagationLossModel",
-                                    "Variable", StringValue ("ns3::NormalRandomVariable[Mean=0.0|Variance=3.0|Bound=9.0]"));
   wifiPhy.SetChannel (wifiChannel.Create ());
   wifiPhy.Set ("ChannelNumber", UintegerValue (38));
   wifiPhy.Set ("Antennas", UintegerValue (4));

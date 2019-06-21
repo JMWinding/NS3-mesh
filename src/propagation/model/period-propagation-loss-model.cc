@@ -70,7 +70,9 @@ LinkBreakPropagationLossModel::DoCalcRxPower (double txPowerDbm,
       return linkBreakRx;
     }
   else
-    return txPowerDbm;
+    {
+      return txPowerDbm;
+    }
 
   return 0;
 }
@@ -186,7 +188,7 @@ ChannelChangePropagationLossModel::DoCalcRxPower (double txPowerDbm,
     {
       if (Simulator::Now ().GetSeconds () >= it1->second.second)
         it1->second = std::make_pair (loss, next);
-      return it1->second.first;
+      return txPowerDbm - it1->second.first;
     }
 
   auto it2 = m_change.find (std::make_pair (b,a));
@@ -194,11 +196,11 @@ ChannelChangePropagationLossModel::DoCalcRxPower (double txPowerDbm,
     {
       if (Simulator::Now ().GetSeconds () >= it2->second.second)
         it2->second = std::make_pair (loss, next);
-      return it2->second.first;
+      return txPowerDbm - it2->second.first;
     }
 
   m_change[std::make_pair (a,b)] = std::make_pair (loss, next);
-  return loss;
+  return txPowerDbm - loss;
 
   return 0;
 }
