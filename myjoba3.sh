@@ -4,5 +4,5 @@
 
 for ((rrstart=$1; rrstart<=$2; rrstart=rrstart+1))
 do
-  bash myjob-aodv-udp-ideal-error.sh ${rrstart} &
+  bash myjob-olsr-udp-ideal-error.sh ${rrstart} &
 done

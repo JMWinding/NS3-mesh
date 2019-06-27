@@ -471,14 +471,20 @@ AodvExample::CreateMeshDevices ()
 {
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
   wifiChannel.AddPropagationLoss ("ns3::LinkBreakPropagationLossModel",
+                                  "Start", DoubleValue (60),
+                                  "End", DoubleValue (1e3),
                                   "BreakProb", DoubleValue (0.05),
-                                  "Period", StringValue ("ns3::ConstantRandomVariable[Constant=1.0]"));
+                                  "Period", StringValue ("ns3::ConstantRandomVariable[Constant=5.0]"));
   wifiChannel.AddPropagationLoss ("ns3::NodeDownPropagationLossModel",
+                                  "Start", DoubleValue (60),
+                                  "End", DoubleValue (1e3),
                                   "DownProb", DoubleValue (0.05),
-                                  "Period", StringValue ("ns3::ConstantRandomVariable[Constant=1.0]"));
+                                  "Period", StringValue ("ns3::ConstantRandomVariable[Constant=5.0]"));
   wifiChannel.AddPropagationLoss ("ns3::ChannelChangePropagationLossModel",
+                                  "Start", DoubleValue (60),
+                                  "End", DoubleValue (1e3),
                                   "Amplitude", StringValue ("ns3::NormalRandomVariable[Mean=0.0|Variance=3.0|Bound=6.0]"),
-                                  "Period", StringValue ("ns3::ConstantRandomVariable[Constant=1.0]"));
+                                  "Period", StringValue ("ns3::ConstantRandomVariable[Constant=5.0]"));
 
   YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
   wifiPhy.SetChannel (wifiChannel.Create ());
