@@ -539,7 +539,8 @@ AodvExample::CreateCsmaDevices ()
   mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
   mobility.Install (csmaNodes);
 
-  for (uint32_t i = 0; i < gateways; ++i)
+  csmaNodes.Add (apNodes.Get ((uint32_t) apNum/2));
+  for (uint32_t i = 1; i < gateways; ++i)
     csmaNodes.Add (apNodes.Get (i));
 
   CsmaHelper csma;

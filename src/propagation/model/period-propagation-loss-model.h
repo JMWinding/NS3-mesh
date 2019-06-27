@@ -40,6 +40,8 @@ private:
                                Ptr<MobilityModel> b);
 
 private:
+  double m_start;
+  double m_end;
   double m_breakProb;
   Ptr<RandomVariableStream> m_period;
   static std::map<std::pair<Ptr<MobilityModel>,Ptr<MobilityModel>>, bool> m_recover;
@@ -81,6 +83,8 @@ private:
                               Ptr<MobilityModel> a);
 
 private:
+  double m_start;
+  double m_end;
   double m_downProb;
   Ptr<RandomVariableStream> m_period;
   static std::map<Ptr<MobilityModel>, bool> m_recover;
@@ -123,6 +127,8 @@ private:
                                    Ptr<MobilityModel> b);
 
 private:
+  double m_start;
+  double m_end;
   Ptr<RandomVariableStream> m_amplitude;
   Ptr<RandomVariableStream> m_period;
   static std::map<std::pair<Ptr<MobilityModel>,Ptr<MobilityModel>>, double> m_change;

@@ -471,10 +471,10 @@ AodvExample::CreateMeshDevices ()
 {
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
   wifiChannel.AddPropagationLoss ("ns3::LinkBreakPropagationLossModel",
-                                  "BreakProb", DoubleValue (0.3),
+                                  "BreakProb", DoubleValue (0.05),
                                   "Period", StringValue ("ns3::ConstantRandomVariable[Constant=1.0]"));
   wifiChannel.AddPropagationLoss ("ns3::NodeDownPropagationLossModel",
-                                  "DownProb", DoubleValue (0.3),
+                                  "DownProb", DoubleValue (0.05),
                                   "Period", StringValue ("ns3::ConstantRandomVariable[Constant=1.0]"));
   wifiChannel.AddPropagationLoss ("ns3::ChannelChangePropagationLossModel",
                                   "Amplitude", StringValue ("ns3::NormalRandomVariable[Mean=0.0|Variance=3.0|Bound=6.0]"),
@@ -549,7 +549,8 @@ AodvExample::CreateCsmaDevices ()
   mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
   mobility.Install (csmaNodes);
 
-  for (uint32_t i = 0; i < gateways; ++i)
+  csmaNodes.Add (apNodes.Get ((uint32_t) apNum/2));
+  for (uint32_t i = 1; i < gateways; ++i)
     csmaNodes.Add (apNodes.Get (i));
 
   CsmaHelper csma;

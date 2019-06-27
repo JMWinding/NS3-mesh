@@ -20,6 +20,14 @@ LinkBreakPropagationLossModel::GetTypeId (void)
     .SetParent<PropagationLossModel> ()
     .SetGroupName ("Propagation")
     .AddConstructor<LinkBreakPropagationLossModel> ()
+    .AddAttribute ("Start", "Link break start time",
+                   DoubleValue (10),
+                   MakeDoubleAccessor (&LinkBreakPropagationLossModel::m_start),
+                   MakeDoubleChecker<double> ())
+    .AddAttribute ("End", "Link break end time",
+                   DoubleValue (20),
+                   MakeDoubleAccessor (&LinkBreakPropagationLossModel::m_start),
+                   MakeDoubleChecker<double> ())
     .AddAttribute ("BreakProb", "Link break probability.",
                    DoubleValue (0.05),
                    MakeDoubleAccessor (&LinkBreakPropagationLossModel::m_breakProb),
@@ -33,6 +41,8 @@ LinkBreakPropagationLossModel::GetTypeId (void)
 }
 
 LinkBreakPropagationLossModel::LinkBreakPropagationLossModel () :
+    m_start (10),
+    m_end (20),
     m_breakProb (0.05)
 {
 }
@@ -42,6 +52,9 @@ LinkBreakPropagationLossModel::DoCalcRxPower (double txPowerDbm,
                                               Ptr<MobilityModel> a,
                                               Ptr<MobilityModel> b) const
 {
+  if (Simulator::Now ().GetSeconds () < m_start || Simulator::Now ().GetSeconds () > m_end)
+    return txPowerDbm;
+
   double linkBreakRx = -1e3;
   auto it1 = LinkBreakPropagationLossModel::m_recover.find (std::make_pair (a,b));
   auto it2 = LinkBreakPropagationLossModel::m_recover.find (std::make_pair (b,a));
@@ -94,6 +107,14 @@ NodeDownPropagationLossModel::GetTypeId (void)
     .SetParent<PropagationLossModel> ()
     .SetGroupName ("Propagation")
     .AddConstructor<NodeDownPropagationLossModel> ()
+    .AddAttribute ("Start", "Link break start time",
+                   DoubleValue (10),
+                   MakeDoubleAccessor (&NodeDownPropagationLossModel::m_start),
+                   MakeDoubleChecker<double> ())
+    .AddAttribute ("End", "Link break end time",
+                   DoubleValue (20),
+                   MakeDoubleAccessor (&NodeDownPropagationLossModel::m_start),
+                   MakeDoubleChecker<double> ())
     .AddAttribute ("DownProb", "Node down probability.",
                    DoubleValue (0.01),
                    MakeDoubleAccessor (&NodeDownPropagationLossModel::m_downProb),
@@ -107,6 +128,8 @@ NodeDownPropagationLossModel::GetTypeId (void)
 }
 
 NodeDownPropagationLossModel::NodeDownPropagationLossModel () :
+    m_start (10),
+    m_end (20),
     m_downProb (0.01)
 {
 }
@@ -116,6 +139,9 @@ NodeDownPropagationLossModel::DoCalcRxPower (double txPowerDbm,
                                              Ptr<MobilityModel> a,
                                              Ptr<MobilityModel> b) const
 {
+  if (Simulator::Now ().GetSeconds () < m_start || Simulator::Now ().GetSeconds () > m_end)
+    return txPowerDbm;
+
   double NodeDownRx = -1e3;
   auto it = m_recover.find (a);
 
@@ -164,6 +190,14 @@ ChannelChangePropagationLossModel::GetTypeId (void)
     .SetParent<PropagationLossModel> ()
     .SetGroupName ("Propagation")
     .AddConstructor<ChannelChangePropagationLossModel> ()
+    .AddAttribute ("Start", "Link break start time",
+                   DoubleValue (10),
+                   MakeDoubleAccessor (&ChannelChangePropagationLossModel::m_start),
+                   MakeDoubleChecker<double> ())
+    .AddAttribute ("End", "Link break end time",
+                   DoubleValue (20),
+                   MakeDoubleAccessor (&ChannelChangePropagationLossModel::m_start),
+                   MakeDoubleChecker<double> ())
     .AddAttribute ("Amplitude", "The random variable used to pick amplitude of channel variation.",
                    StringValue ("ns3::NormalRandomVariable[Mean=0.0|Variance=3.0|Bound=9.0]"),
                    MakePointerAccessor (&ChannelChangePropagationLossModel::m_amplitude),
@@ -176,7 +210,9 @@ ChannelChangePropagationLossModel::GetTypeId (void)
   return tid;
 }
 
-ChannelChangePropagationLossModel::ChannelChangePropagationLossModel ()
+ChannelChangePropagationLossModel::ChannelChangePropagationLossModel () :
+    m_start (10),
+    m_end (20)
 {
 }
 
@@ -185,6 +221,9 @@ ChannelChangePropagationLossModel::DoCalcRxPower (double txPowerDbm,
                                                   Ptr<MobilityModel> a,
                                                   Ptr<MobilityModel> b) const
 {
+  if (Simulator::Now ().GetSeconds () < m_start || Simulator::Now ().GetSeconds () > m_end)
+    return txPowerDbm;
+
   auto it1 = m_change.find (std::make_pair (a,b));
   auto it2 = m_change.find (std::make_pair (b,a));
 
