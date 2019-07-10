@@ -45,7 +45,6 @@ struct ArfHtWifiRemoteStation : public WifiRemoteStation
   uint32_t m_timerTimeout; ///< timer timeout
   uint32_t m_successThreshold; ///< success threshold
   uint8_t m_rate; ///< rate
-  uint8_t m_nss;
 };
 
 NS_OBJECT_ENSURE_REGISTERED (ArfHtWifiManager);
@@ -100,7 +99,6 @@ ArfHtWifiManager::DoCreateStation (void) const
   station->m_recovery = false;
   station->m_retry = 0;
   station->m_timer = 0;
-  station->m_nss = 1;
 
   return station;
 }
@@ -432,8 +430,6 @@ ArfHtWifiManager::DoGetDataTxVector (WifiRemoteStation *st)
       selectedNss = 1;
       channelWidth = GetChannelWidthForMode (mode);
     }
-
-  station->m_nss = selectedNss;
 
   if (mode.GetModulationClass () == WIFI_MOD_CLASS_HE)
     {
