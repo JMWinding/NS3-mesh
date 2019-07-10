@@ -94,6 +94,7 @@ def build(bld):
         'helper/spectrum-wifi-helper.cc',
         'helper/wifi-mac-helper.cc',
         'model/arf-ht-wifi-manager.cc',
+        'model/aarf-ht-wifi-manager.cc',
         ]
 
     obj_test = bld.create_ns3_module_test_library('wifi')
@@ -209,6 +210,7 @@ def build(bld):
         'helper/spectrum-wifi-helper.h',
         'helper/wifi-mac-helper.h',
         'model/arf-ht-wifi-manager.h',
+        'model/aarf-ht-wifi-manager.h',
         ]
 
     if bld.env['ENABLE_GSL']:

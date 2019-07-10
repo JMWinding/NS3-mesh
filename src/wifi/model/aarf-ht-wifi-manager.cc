@@ -19,80 +19,96 @@
  */
 
 #include "ns3/log.h"
-#include "arf-ht-wifi-manager.h"
+#include "aarf-ht-wifi-manager.h"
 #include "wifi-phy.h"
 #include "wifi-tx-vector.h"
 
 #define Min(a,b) ((a < b) ? a : b)
+#define Max(a,b) ((a > b) ? a : b)
 
 namespace ns3 {
 
-NS_LOG_COMPONENT_DEFINE ("ArfHtWifiManager");
+NS_LOG_COMPONENT_DEFINE ("AarfHtWifiManager");
 
 /**
- * \brief hold per-remote-station state for ARF Wifi manager.
+ * \brief hold per-remote-station state for AARF Wifi manager.
  *
  * This struct extends from WifiRemoteStation struct to hold additional
- * information required by the ARF Wifi manager
+ * information required by the AARF Wifi manager
  */
-struct ArfHtWifiRemoteStation : public WifiRemoteStation
+struct AarfHtWifiRemoteStation : public WifiRemoteStation
 {
-  uint32_t m_timer; ///< timer value
-  uint32_t m_success; ///< success count
-  uint32_t m_failed; ///< failed count
+  uint32_t m_timer; ///< timer
+  uint32_t m_success; ///< success
+  uint32_t m_failed; ///< failed
   bool m_recovery; ///< recovery
-  uint32_t m_retry; ///< retry count
+  uint32_t m_retry; ///< retry
   uint32_t m_timerTimeout; ///< timer timeout
   uint32_t m_successThreshold; ///< success threshold
   uint8_t m_rate; ///< rate
 };
 
-NS_OBJECT_ENSURE_REGISTERED (ArfHtWifiManager);
+NS_OBJECT_ENSURE_REGISTERED (AarfHtWifiManager);
 
 TypeId
-ArfHtWifiManager::GetTypeId (void)
+AarfHtWifiManager::GetTypeId (void)
 {
-  static TypeId tid = TypeId ("ns3::ArfHtWifiManager")
+  static TypeId tid = TypeId ("ns3::AarfHtWifiManager")
     .SetParent<WifiRemoteStationManager> ()
     .SetGroupName ("Wifi")
-    .AddConstructor<ArfHtWifiManager> ()
-    .AddAttribute ("TimerThreshold", "The 'timer' threshold in the ARF algorithm.",
-                   UintegerValue (15),
-                   MakeUintegerAccessor (&ArfHtWifiManager::m_timerThreshold),
+    .AddConstructor<AarfHtWifiManager> ()
+    .AddAttribute ("SuccessK", "Multiplication factor for the success threshold in the AARF algorithm.",
+                   DoubleValue (2.0),
+                   MakeDoubleAccessor (&AarfHtWifiManager::m_successK),
+                   MakeDoubleChecker<double> ())
+    .AddAttribute ("TimerK",
+                   "Multiplication factor for the timer threshold in the AARF algorithm.",
+                   DoubleValue (2.0),
+                   MakeDoubleAccessor (&AarfHtWifiManager::m_timerK),
+                   MakeDoubleChecker<double> ())
+    .AddAttribute ("MaxSuccessThreshold",
+                   "Maximum value of the success threshold in the AARF algorithm.",
+                   UintegerValue (60),
+                   MakeUintegerAccessor (&AarfHtWifiManager::m_maxSuccessThreshold),
                    MakeUintegerChecker<uint32_t> ())
-    .AddAttribute ("SuccessThreshold",
-                   "The minimum number of successful transmissions to try a new rate.",
+    .AddAttribute ("MinTimerThreshold",
+                   "The minimum value for the 'timer' threshold in the AARF algorithm.",
+                   UintegerValue (15),
+                   MakeUintegerAccessor (&AarfHtWifiManager::m_minTimerThreshold),
+                   MakeUintegerChecker<uint32_t> ())
+    .AddAttribute ("MinSuccessThreshold",
+                   "The minimum value for the success threshold in the AARF algorithm.",
                    UintegerValue (10),
-                   MakeUintegerAccessor (&ArfHtWifiManager::m_successThreshold),
+                   MakeUintegerAccessor (&AarfHtWifiManager::m_minSuccessThreshold),
                    MakeUintegerChecker<uint32_t> ())
     .AddTraceSource ("Rate",
                      "Traced value for rate changes (b/s)",
-                     MakeTraceSourceAccessor (&ArfHtWifiManager::m_currentRate),
+                     MakeTraceSourceAccessor (&AarfHtWifiManager::m_currentRate),
                      "ns3::TracedValueCallback::Uint64")
   ;
   return tid;
 }
 
-ArfHtWifiManager::ArfHtWifiManager ()
+AarfHtWifiManager::AarfHtWifiManager ()
   : WifiRemoteStationManager (),
     m_currentRate (0)
 {
   NS_LOG_FUNCTION (this);
 }
 
-ArfHtWifiManager::~ArfHtWifiManager ()
+AarfHtWifiManager::~AarfHtWifiManager ()
 {
   NS_LOG_FUNCTION (this);
 }
 
 WifiRemoteStation *
-ArfHtWifiManager::DoCreateStation (void) const
+AarfHtWifiManager::DoCreateStation (void) const
 {
   NS_LOG_FUNCTION (this);
-  ArfHtWifiRemoteStation *station = new ArfHtWifiRemoteStation ();
+  AarfHtWifiRemoteStation *station = new AarfHtWifiRemoteStation ();
 
-  station->m_successThreshold = m_successThreshold;
-  station->m_timerTimeout = m_timerThreshold;
+  station->m_successThreshold = m_minSuccessThreshold;
+  station->m_timerTimeout = m_minTimerThreshold;
   station->m_rate = 0;
   station->m_success = 0;
   station->m_failed = 0;
@@ -104,7 +120,7 @@ ArfHtWifiManager::DoCreateStation (void) const
 }
 
 uint16_t
-ArfHtWifiManager::GetChannelWidthForMode (WifiMode mode) const
+AarfHtWifiManager::GetChannelWidthForMode (WifiMode mode) const
 {
   NS_ASSERT (mode.GetModulationClass () != WIFI_MOD_CLASS_HT
              && mode.GetModulationClass () != WIFI_MOD_CLASS_VHT
@@ -121,7 +137,7 @@ ArfHtWifiManager::GetChannelWidthForMode (WifiMode mode) const
 }
 
 uint8_t
-ArfHtWifiManager::GetIncreaseMcs (WifiRemoteStation *st, uint8_t rate)
+AarfHtWifiManager::GetIncreaseMcs (WifiRemoteStation *st, uint8_t rate)
 {
   WifiMode mode = GetMcsSupported (st, rate);
 
@@ -168,7 +184,7 @@ ArfHtWifiManager::GetIncreaseMcs (WifiRemoteStation *st, uint8_t rate)
 }
 
 uint8_t
-ArfHtWifiManager::GetDecreaseMcs (WifiRemoteStation *st, uint8_t rate)
+AarfHtWifiManager::GetDecreaseMcs (WifiRemoteStation *st, uint8_t rate)
 {
   WifiMode mode = GetMcsSupported (st, rate);
 
@@ -217,11 +233,10 @@ ArfHtWifiManager::GetDecreaseMcs (WifiRemoteStation *st, uint8_t rate)
 }
 
 void
-ArfHtWifiManager::DoReportRtsFailed (WifiRemoteStation *station)
+AarfHtWifiManager::DoReportRtsFailed (WifiRemoteStation *station)
 {
   NS_LOG_FUNCTION (this << station);
 }
-
 /**
  * It is important to realize that "recovery" mode starts after failure of
  * the first transmission after a rate increase and ends at the first successful
@@ -234,10 +249,10 @@ ArfHtWifiManager::DoReportRtsFailed (WifiRemoteStation *station)
  * \param st the station that we failed to send DATA
  */
 void
-ArfHtWifiManager::DoReportDataFailed (WifiRemoteStation *st)
+AarfHtWifiManager::DoReportDataFailed (WifiRemoteStation *st)
 {
   NS_LOG_FUNCTION (this << st);
-  ArfHtWifiRemoteStation *station = (ArfHtWifiRemoteStation *)st;
+  AarfHtWifiRemoteStation *station = (AarfHtWifiRemoteStation *)st;
   station->m_timer++;
   station->m_failed++;
   station->m_retry++;
@@ -248,6 +263,11 @@ ArfHtWifiManager::DoReportDataFailed (WifiRemoteStation *st)
       NS_ASSERT (station->m_retry >= 1);
       if (station->m_retry == 1)
         {
+          //need recovery fallback
+          station->m_successThreshold = (int)(Min (station->m_successThreshold * m_successK,
+                                                   m_maxSuccessThreshold));
+          station->m_timerTimeout = (int)(Max (station->m_timerTimeout * m_timerK,
+                                               m_minSuccessThreshold));
           if ((HasVhtSupported () == true || HasHtSupported () == true || HasHeSupported () == true)
               && (GetHtSupported (st) == true || GetVhtSupported (st) == true || GetHeSupported (st) == true))
             {
@@ -268,6 +288,9 @@ ArfHtWifiManager::DoReportDataFailed (WifiRemoteStation *st)
       NS_ASSERT (station->m_retry >= 1);
       if (((station->m_retry - 1) % 2) == 1)
         {
+          //need normal fallback
+          station->m_timerTimeout = m_minTimerThreshold;
+          station->m_successThreshold = m_minSuccessThreshold;
           if ((HasVhtSupported () == true || HasHtSupported () == true || HasHeSupported () == true)
               && (GetHtSupported (st) == true || GetVhtSupported (st) == true || GetHeSupported (st) == true))
             {
@@ -289,71 +312,71 @@ ArfHtWifiManager::DoReportDataFailed (WifiRemoteStation *st)
 }
 
 void
-ArfHtWifiManager::DoReportRxOk (WifiRemoteStation *station,
-                                double rxSnr, WifiMode txMode)
+AarfHtWifiManager::DoReportRxOk (WifiRemoteStation *station,
+                                 double rxSnr, WifiMode txMode)
 {
   NS_LOG_FUNCTION (this << station << rxSnr << txMode);
 }
 
 void
-ArfHtWifiManager::DoReportRtsOk (WifiRemoteStation *station,
-                                 double ctsSnr, WifiMode ctsMode, double rtsSnr)
+AarfHtWifiManager::DoReportRtsOk (WifiRemoteStation *station,
+                                  double ctsSnr, WifiMode ctsMode, double rtsSnr)
 {
   NS_LOG_FUNCTION (this << station << ctsSnr << ctsMode << rtsSnr);
   NS_LOG_DEBUG ("station=" << station << " rts ok");
 }
 
 void
-ArfHtWifiManager::DoReportDataOk (WifiRemoteStation *st,
-                                  double ackSnr, WifiMode ackMode, double dataSnr)
+AarfHtWifiManager::DoReportDataOk (WifiRemoteStation *st,
+                                   double ackSnr, WifiMode ackMode, double dataSnr)
 {
   NS_LOG_FUNCTION (this << st << ackSnr << ackMode << dataSnr);
-  ArfHtWifiRemoteStation *station = (ArfHtWifiRemoteStation *) st;
+  AarfHtWifiRemoteStation *station = (AarfHtWifiRemoteStation *) st;
   station->m_timer++;
   station->m_success++;
   station->m_failed = 0;
   station->m_recovery = false;
   station->m_retry = 0;
   NS_LOG_DEBUG ("station=" << station << " data ok success=" << station->m_success << ", timer=" << station->m_timer);
-  if (station->m_success == m_successThreshold
-      || station->m_timer == m_timerThreshold)
-    {
-      if ((HasHtSupported () || HasVhtSupported () || HasHeSupported ())
-          && (GetHtSupported (st) || GetVhtSupported (st) || GetHeSupported (st)))
-        {
-          station->m_rate = GetIncreaseMcs (st, station->m_rate);
-        }
-      else
-        {
-          if (station->m_rate < (station->m_state->m_operationalRateSet.size () - 1))
-            {
-              NS_LOG_DEBUG ("station=" << station << " inc rate");
-              station->m_rate++;
-            }
-        }
-      station->m_timer = 0;
-      station->m_success = 0;
-      station->m_recovery = true;
-    }
+  if (station->m_success == station->m_successThreshold
+      || station->m_timer == station->m_timerTimeout)
+      {
+        if ((HasHtSupported () || HasVhtSupported () || HasHeSupported ())
+            && (GetHtSupported (st) || GetVhtSupported (st) || GetHeSupported (st)))
+          {
+            station->m_rate = GetIncreaseMcs (st, station->m_rate);
+          }
+        else
+          {
+            if (station->m_rate < (station->m_state->m_operationalRateSet.size () - 1))
+              {
+                NS_LOG_DEBUG ("station=" << station << " inc rate");
+                station->m_rate++;
+              }
+          }
+        station->m_timer = 0;
+        station->m_success = 0;
+        station->m_recovery = true;
+      }
 }
 
 void
-ArfHtWifiManager::DoReportFinalRtsFailed (WifiRemoteStation *station)
+AarfHtWifiManager::DoReportFinalRtsFailed (WifiRemoteStation *station)
 {
   NS_LOG_FUNCTION (this << station);
 }
 
 void
-ArfHtWifiManager::DoReportFinalDataFailed (WifiRemoteStation *station)
+AarfHtWifiManager::DoReportFinalDataFailed (WifiRemoteStation *station)
 {
   NS_LOG_FUNCTION (this << station);
 }
 
 WifiTxVector
-ArfHtWifiManager::DoGetDataTxVector (WifiRemoteStation *st)
+AarfHtWifiManager::DoGetDataTxVector (WifiRemoteStation *st)
 {
   NS_LOG_FUNCTION (this << st);
-  ArfHtWifiRemoteStation *station = (ArfHtWifiRemoteStation *) st;
+  AarfHtWifiRemoteStation *station = (AarfHtWifiRemoteStation *) st;
 
   WifiTxVector txVector;
   WifiMode mode;
@@ -450,12 +473,12 @@ ArfHtWifiManager::DoGetDataTxVector (WifiRemoteStation *st)
 }
 
 WifiTxVector
-ArfHtWifiManager::DoGetRtsTxVector (WifiRemoteStation *st)
+AarfHtWifiManager::DoGetRtsTxVector (WifiRemoteStation *st)
 {
   NS_LOG_FUNCTION (this << st);
-  /// \todo we could/should implement the Arf algorithm for
+  /// \todo we could/should implement the Aarf algorithm for
   /// RTS only by picking a single rate within the BasicRateSet.
-  ArfHtWifiRemoteStation *station = (ArfHtWifiRemoteStation *) st;
+  AarfHtWifiRemoteStation *station = (AarfHtWifiRemoteStation *) st;
   uint16_t channelWidth = GetChannelWidth (station);
   if (channelWidth > 20 && channelWidth != 22)
     {
@@ -477,7 +500,7 @@ ArfHtWifiManager::DoGetRtsTxVector (WifiRemoteStation *st)
 }
 
 bool
-ArfHtWifiManager::IsLowLatency (void) const
+AarfHtWifiManager::IsLowLatency (void) const
 {
   return true;
 }
