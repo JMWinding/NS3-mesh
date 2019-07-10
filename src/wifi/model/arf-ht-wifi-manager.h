@@ -22,7 +22,7 @@
 #define ARF_HT_WIFI_MANAGER_H
 
 #include "ns3/traced-value.h"
-#include "arf-wifi-manager.h"
+#include "wifi-remote-station-manager.h"
 
 namespace ns3 {
 
@@ -45,7 +45,7 @@ namespace ns3 {
  * exit if the user tries to configure this RAA with a Wi-Fi MAC
  * that has VhtSupported, HtSupported or HeSupported set.
  */
-class ArfHtWifiManager : public ArfWifiManager
+class ArfHtWifiManager : public WifiRemoteStationManager
 {
 public:
   /**
@@ -56,22 +56,33 @@ public:
   ArfHtWifiManager ();
   virtual ~ArfHtWifiManager ();
 
-  // Inherited from WifiRemoteStationManager
-  void SetHtSupported (bool enable);
-  void SetVhtSupported (bool enable);
-  void SetHeSupported (bool enable);
+  // Inherited from WifiRemoteStationManager: Ht, Vht, He
 
 
 private:
+  //overridden from base class
   WifiRemoteStation * DoCreateStation (void) const;
   uint16_t GetChannelWidthForMode (WifiMode mode) const;
-  uint8_t GetIncreaseMcs (WifiRemoteStation *station, uint8_t rate);
-  uint8_t GetDecreaseMcs (WifiRemoteStation *station, uint8_t rate);
+  uint8_t GetIncreaseMcs (WifiRemoteStation *st, uint8_t rate);
+  uint8_t GetDecreaseMcs (WifiRemoteStation *st, uint8_t rate);
+  void DoReportRxOk (WifiRemoteStation *station,
+                     double rxSnr, WifiMode txMode);
+  void DoReportRtsFailed (WifiRemoteStation *station);
   void DoReportDataFailed (WifiRemoteStation *station);
+  void DoReportRtsOk (WifiRemoteStation *station,
+                      double ctsSnr, WifiMode ctsMode, double rtsSnr);
   void DoReportDataOk (WifiRemoteStation *station,
                        double ackSnr, WifiMode ackMode, double dataSnr);
+  void DoReportFinalRtsFailed (WifiRemoteStation *station);
+  void DoReportFinalDataFailed (WifiRemoteStation *station);
   WifiTxVector DoGetDataTxVector (WifiRemoteStation *station);
   WifiTxVector DoGetRtsTxVector (WifiRemoteStation *station);
+  bool IsLowLatency (void) const;
+
+  uint32_t m_timerThreshold; ///< timer threshold
+  uint32_t m_successThreshold; ///< success threshold
+
+  TracedValue<uint64_t> m_currentRate; //!< Trace rate changes
 };
 
 } //namespace ns3

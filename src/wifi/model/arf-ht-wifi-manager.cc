@@ -48,7 +48,7 @@ struct ArfHtWifiRemoteStation : public WifiRemoteStation
   uint8_t m_nss;
 };
 
-NS_OBJECT_ENSURE_REGISTERED (ArfWifiManager);
+NS_OBJECT_ENSURE_REGISTERED (ArfHtWifiManager);
 
 TypeId
 ArfHtWifiManager::GetTypeId (void)
@@ -75,7 +75,8 @@ ArfHtWifiManager::GetTypeId (void)
 }
 
 ArfHtWifiManager::ArfHtWifiManager ()
-  : ArfWifiManager ()
+  : WifiRemoteStationManager (),
+    m_currentRate (0)
 {
   NS_LOG_FUNCTION (this);
 }
@@ -99,7 +100,7 @@ ArfHtWifiManager::DoCreateStation (void) const
   station->m_recovery = false;
   station->m_retry = 0;
   station->m_timer = 0;
-  station->m_nss = 0;
+  station->m_nss = 1;
 
   return station;
 }
@@ -122,115 +123,118 @@ ArfHtWifiManager::GetChannelWidthForMode (WifiMode mode) const
 }
 
 uint8_t
-ArfHtWifiManager::GetIncreaseMcs (WifiRemoteStation *station, uint8_t rate)
+ArfHtWifiManager::GetIncreaseMcs (WifiRemoteStation *st, uint8_t rate)
 {
-  WifiMode modeOld = GetMcsSupported (station, rate);
+  WifiMode mode = GetMcsSupported (st, rate);
 
   WifiTxVector txVector;
-  uint8_t nss = (modeOld.GetMcsValue() / 8) + 1;
+  uint8_t nss = std::min (GetMaxNumberOfTransmitStreams (), GetNumberOfSupportedStreams (st));
   txVector.SetNss (nss);
-  uint16_t channelWidth = std::min (GetChannelWidth (station), GetPhy ()->GetChannelWidth ());
+  uint16_t channelWidth = std::min (GetChannelWidth (st), GetPhy ()->GetChannelWidth ());
   txVector.SetChannelWidth (channelWidth);
   uint16_t guardInterval;
 
   WifiMode modeNew;
-  for (uint8_t i = rate + 1; i < GetNMcsSupported (station); i++)
+  for (uint8_t i = rate + 1; i < GetNMcsSupported (st); i++)
     {
-      modeNew = GetMcsSupported (station, i);
-      if (modeNew.GetModulationClass () != modeOld.GetModulationClass ())
-        {
-          break;
-        }
+      modeNew = GetMcsSupported (st, i);
+      if (modeNew.GetModulationClass () != mode.GetModulationClass ())
+        break;
       else
         {
+          txVector.SetMode (modeNew);
+
           if (modeNew.GetModulationClass () == WIFI_MOD_CLASS_HT)
-            {
-              if ((modeNew.GetMcsValue () / 8) + 1 != nss)
-                {
-                  break;
-                }
-              else
-                {
-                  guardInterval = static_cast<uint16_t> (std::max (GetShortGuardInterval (station) ? 400 : 800, GetPhy ()->GetShortGuardInterval () ? 400 : 800));
-                  txVector.SetGuardInterval (guardInterval);
-                }
-            }
+            if ((modeNew.GetMcsValue () / 8) + 1 != nss)
+              break;
+            else
+              guardInterval = static_cast<uint16_t> (std::max (GetShortGuardInterval (st) ? 400 : 800, GetPhy ()->GetShortGuardInterval () ? 400 : 800));
           else if (modeNew.GetModulationClass () == WIFI_MOD_CLASS_VHT)
-            {
-              guardInterval = static_cast<uint16_t> (std::max (GetShortGuardInterval (station) ? 400 : 800, GetPhy ()->GetShortGuardInterval () ? 400 : 800));
-              txVector.SetGuardInterval (guardInterval);
-            }
+            guardInterval = static_cast<uint16_t> (std::max (GetShortGuardInterval (st) ? 400 : 800, GetPhy ()->GetShortGuardInterval () ? 400 : 800));
           else
-            {
-              guardInterval = std::max (GetGuardInterval (station), static_cast<uint16_t> (GetPhy ()->GetGuardInterval ().GetNanoSeconds ()));
-              txVector.SetGuardInterval (guardInterval);
-            }
+            guardInterval = std::max (GetGuardInterval (st), static_cast<uint16_t> (GetPhy ()->GetGuardInterval ().GetNanoSeconds ()));
+          txVector.SetGuardInterval (guardInterval);
 
           if (txVector.IsValid ())
-            return i;
+            {
+              NS_LOG_DEBUG ("INCREASE MOD: " << modeNew.GetUniqueName ());
+              return i;
+            }
           else
             continue;
         }
     }
 
+  NS_LOG_DEBUG ("INCREASE MOD UNCHANGE: " << mode.GetUniqueName ());
   return rate;
 }
 
 uint8_t
-ArfHtWifiManager::GetDecreaseMcs (WifiRemoteStation *station, uint8_t rate)
+ArfHtWifiManager::GetDecreaseMcs (WifiRemoteStation *st, uint8_t rate)
 {
-  WifiMode modeOld = GetMcsSupported (station, rate);
+  WifiMode mode = GetMcsSupported (st, rate);
 
   WifiTxVector txVector;
-  uint8_t nss = (modeOld.GetMcsValue() / 8) + 1;
+  uint8_t nss = std::min (GetMaxNumberOfTransmitStreams (), GetNumberOfSupportedStreams (st));
   txVector.SetNss (nss);
-  uint16_t channelWidth = std::min (GetChannelWidth (station), GetPhy ()->GetChannelWidth ());
+  uint16_t channelWidth = std::min (GetChannelWidth (st), GetPhy ()->GetChannelWidth ());
   txVector.SetChannelWidth (channelWidth);
   uint16_t guardInterval;
 
   WifiMode modeNew;
   for (uint8_t i = rate - 1; i >= 0; i--)
     {
-      modeNew = GetMcsSupported (station, i);
-      if (modeNew.GetModulationClass () != modeOld.GetModulationClass ())
-        {
+      modeNew = GetMcsSupported (st, i);
+      if (modeNew.GetModulationClass () != mode.GetModulationClass ())
           break;
-        }
       else
         {
+          txVector.SetMode (modeNew);
+
           if (modeNew.GetModulationClass () == WIFI_MOD_CLASS_HT)
             {
               if ((modeNew.GetMcsValue () / 8) + 1 != nss)
-                {
                   break;
-                }
               else
-                {
-                  guardInterval = static_cast<uint16_t> (std::max (GetShortGuardInterval (station) ? 400 : 800, GetPhy ()->GetShortGuardInterval () ? 400 : 800));
-                  txVector.SetGuardInterval (guardInterval);
-                }
+                guardInterval = static_cast<uint16_t> (std::max (GetShortGuardInterval (st) ? 400 : 800, GetPhy ()->GetShortGuardInterval () ? 400 : 800));
             }
           else if (modeNew.GetModulationClass () == WIFI_MOD_CLASS_VHT)
-            {
-              guardInterval = static_cast<uint16_t> (std::max (GetShortGuardInterval (station) ? 400 : 800, GetPhy ()->GetShortGuardInterval () ? 400 : 800));
-              txVector.SetGuardInterval (guardInterval);
-            }
+            guardInterval = static_cast<uint16_t> (std::max (GetShortGuardInterval (st) ? 400 : 800, GetPhy ()->GetShortGuardInterval () ? 400 : 800));
           else
-            {
-              guardInterval = std::max (GetGuardInterval (station), static_cast<uint16_t> (GetPhy ()->GetGuardInterval ().GetNanoSeconds ()));
-              txVector.SetGuardInterval (guardInterval);
-            }
+            guardInterval = std::max (GetGuardInterval (st), static_cast<uint16_t> (GetPhy ()->GetGuardInterval ().GetNanoSeconds ()));
+          txVector.SetGuardInterval (guardInterval);
 
           if (txVector.IsValid ())
-            return i;
+            {
+              NS_LOG_DEBUG ("DECREASE MOD: " << modeNew.GetUniqueName ());
+              return i;
+            }
           else
             continue;
         }
     }
 
+  NS_LOG_DEBUG ("DECREASE MOD UNCHANGE: " << mode.GetUniqueName ());
   return rate;
 }
 
+void
+ArfHtWifiManager::DoReportRtsFailed (WifiRemoteStation *station)
+{
+  NS_LOG_FUNCTION (this << station);
+}
+
+/**
+ * It is important to realize that "recovery" mode starts after failure of
+ * the first transmission after a rate increase and ends at the first successful
+ * transmission. Specifically, recovery mode transcends retransmissions boundaries.
+ * Fundamentally, ARF handles each data transmission independently, whether it
+ * is the initial transmission of a packet or the retransmission of a packet.
+ * The fundamental reason for this is that there is a backoff between each data
+ * transmission, be it an initial transmission or a retransmission.
+ *
+ * \param st the station that we failed to send DATA
+ */
 void
 ArfHtWifiManager::DoReportDataFailed (WifiRemoteStation *st)
 {
@@ -286,8 +290,24 @@ ArfHtWifiManager::DoReportDataFailed (WifiRemoteStation *st)
     }
 }
 
-void ArfHtWifiManager::DoReportDataOk (WifiRemoteStation *st,
-                                     double ackSnr, WifiMode ackMode, double dataSnr)
+void
+ArfHtWifiManager::DoReportRxOk (WifiRemoteStation *station,
+                                double rxSnr, WifiMode txMode)
+{
+  NS_LOG_FUNCTION (this << station << rxSnr << txMode);
+}
+
+void
+ArfHtWifiManager::DoReportRtsOk (WifiRemoteStation *station,
+                                 double ctsSnr, WifiMode ctsMode, double rtsSnr)
+{
+  NS_LOG_FUNCTION (this << station << ctsSnr << ctsMode << rtsSnr);
+  NS_LOG_DEBUG ("station=" << station << " rts ok");
+}
+
+void
+ArfHtWifiManager::DoReportDataOk (WifiRemoteStation *st,
+                                  double ackSnr, WifiMode ackMode, double dataSnr)
 {
   NS_LOG_FUNCTION (this << st << ackSnr << ackMode << dataSnr);
   ArfHtWifiRemoteStation *station = (ArfHtWifiRemoteStation *) st;
@@ -300,7 +320,7 @@ void ArfHtWifiManager::DoReportDataOk (WifiRemoteStation *st,
   if ((station->m_success == m_successThreshold
        || station->m_timer == m_timerThreshold))
     {
-      if ((HasHtSupported () || HasVhtSupported () || HasHeSupported)
+      if ((HasHtSupported () || HasVhtSupported () || HasHeSupported ())
           && (GetHtSupported (st) || GetVhtSupported (st) || GetHeSupported (st)))
         {
           station->m_rate = GetIncreaseMcs (st, station->m_rate);
@@ -319,50 +339,46 @@ void ArfHtWifiManager::DoReportDataOk (WifiRemoteStation *st,
     }
 }
 
+void
+ArfHtWifiManager::DoReportFinalRtsFailed (WifiRemoteStation *station)
+{
+  NS_LOG_FUNCTION (this << station);
+}
+
+void
+ArfHtWifiManager::DoReportFinalDataFailed (WifiRemoteStation *station)
+{
+  NS_LOG_FUNCTION (this << station);
+}
+
 WifiTxVector
 ArfHtWifiManager::DoGetDataTxVector (WifiRemoteStation *st)
 {
   NS_LOG_FUNCTION (this << st);
   ArfHtWifiRemoteStation *station = (ArfHtWifiRemoteStation *) st;
 
+  WifiTxVector txVector;
   WifiMode mode;
   uint8_t selectedNss;
   uint16_t guardInterval;
   uint16_t channelWidth;
 
-  if ((HasHtSupported () || HasVhtSupported () || HasHeSupported)
+  if ((HasHtSupported () || HasVhtSupported () || HasHeSupported ())
       && (GetHtSupported (st) || GetVhtSupported (st) || GetHeSupported (st)))
     {
-      if (station->m_rate == 0 && station->m_nss == 0)
+      mode = GetMcsSupported (station, station->m_rate);
+      selectedNss = std::min (GetMaxNumberOfTransmitStreams (), GetNumberOfSupportedStreams (station));
+      channelWidth = std::min (GetChannelWidth (station), GetPhy ()->GetChannelWidth ());
+
+      txVector.SetMode (mode);
+      txVector.SetNss (selectedNss);
+      txVector.SetChannelWidth (channelWidth);
+
+      if (HasHeSupported () && GetHeSupported (st))
         {
-          station->m_nss = std::min (GetMaxNumberOfTransmitStreams (), GetNumberOfSupportedStreams (st));
-          if (HasHtSupported () && GetHtSupported (st))
+          if (mode.GetModulationClass () != WIFI_MOD_CLASS_HE || !txVector.IsValid ())
             {
-              for (uint8_t i = 0; i < this->GetNMcsSupported (station); i++)
-                {
-                  mode = GetMcsSupported (station, i);
-                  selectedNss = (mode.GetMcsValue () / 8) + 1;
-                  if (selectedNss == station->m_nss)
-                    {
-                      station->m_rate = i;
-                      break;
-                    }
-                }
-            }
-          else if (HasVhtSupported () && GetVhtSupported (st))
-            {
-              for (uint8_t i = 0; i < this->GetNMcsSupported (station); i++)
-                {
-                  mode = GetMcsSupported (station, i);
-                  if (mode.GetModulationClass () == WIFI_MOD_CLASS_VHT)
-                    {
-                      station->m_rate = i;
-                      break;
-                    }
-                }
-            }
-          else
-            {
+              NS_LOG_DEBUG ("WRONG HE MOD");
               for (uint8_t i = 0; i < this->GetNMcsSupported (station); i++)
                 {
                   mode = GetMcsSupported (station, i);
@@ -374,22 +390,41 @@ ArfHtWifiManager::DoGetDataTxVector (WifiRemoteStation *st)
                 }
             }
         }
-
-      mode = GetMcsSupported (station, station->m_rate);
-
-      if (mode.GetModulationClass () == WIFI_MOD_CLASS_HT)
+      else if (HasVhtSupported () && GetVhtSupported (st))
         {
-          selectedNss = (mode.GetMcsValue () / 8) + 1;
-        }
-      else if (mode.GetModulationClass () == WIFI_MOD_CLASS_VHT)
-        {
-          selectedNss = std::min (GetMaxNumberOfTransmitStreams (), GetNumberOfSupportedStreams (station));
+          if (mode.GetModulationClass () != WIFI_MOD_CLASS_VHT || !txVector.IsValid ())
+            {
+              NS_LOG_DEBUG ("WRONG VHT MOD");
+              for (uint8_t i = 0; i < this->GetNMcsSupported (station); i++)
+                {
+                  mode = GetMcsSupported (station, i);
+                  if (mode.GetModulationClass () == WIFI_MOD_CLASS_VHT)
+                    {
+                      station->m_rate = i;
+                      break;
+                    }
+                }
+            }
         }
       else
         {
-          selectedNss = std::min (GetMaxNumberOfTransmitStreams (), GetNumberOfSupportedStreams (station));
+          if (mode.GetModulationClass () != WIFI_MOD_CLASS_HT
+                || !txVector.IsValid ()
+                || (mode.GetMcsValue () / 8) + 1 != selectedNss)
+            {
+              NS_LOG_DEBUG ("WRONG HT MOD");
+              for (uint8_t i = 0; i < this->GetNMcsSupported (station); i++)
+                {
+                  mode = GetMcsSupported (station, i);
+                  if ((mode.GetModulationClass () == WIFI_MOD_CLASS_HT)
+                      && ((mode.GetMcsValue () / 8) + 1 == selectedNss))
+                    {
+                      station->m_rate = i;
+                      break;
+                    }
+                }
+            }
         }
-      channelWidth = std::min (GetChannelWidth (station), GetPhy ()->GetChannelWidth ());
     }
   else
     {
@@ -445,22 +480,10 @@ ArfHtWifiManager::DoGetRtsTxVector (WifiRemoteStation *st)
   return rtsTxVector;
 }
 
-void
-ArfHtWifiManager::SetHtSupported (bool enable)
+bool
+ArfHtWifiManager::IsLowLatency (void) const
 {
-  WifiRemoteStationManager::SetHtSupported (enable);
-}
-
-void
-ArfHtWifiManager::SetVhtSupported (bool enable)
-{
-  WifiRemoteStationManager::SetVhtSupported (enable);
-}
-
-void
-ArfHtWifiManager::SetHeSupported (bool enable)
-{
-  WifiRemoteStationManager::SetHeSupported (enable);
+  return true;
 }
 
 } //namespace ns3

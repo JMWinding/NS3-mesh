@@ -167,15 +167,17 @@ ArfWifiManager::DoReportRxOk (WifiRemoteStation *station,
   NS_LOG_FUNCTION (this << station << rxSnr << txMode);
 }
 
-void ArfWifiManager::DoReportRtsOk (WifiRemoteStation *station,
-                                    double ctsSnr, WifiMode ctsMode, double rtsSnr)
+void
+ArfWifiManager::DoReportRtsOk (WifiRemoteStation *station,
+                               double ctsSnr, WifiMode ctsMode, double rtsSnr)
 {
   NS_LOG_FUNCTION (this << station << ctsSnr << ctsMode << rtsSnr);
   NS_LOG_DEBUG ("station=" << station << " rts ok");
 }
 
-void ArfWifiManager::DoReportDataOk (WifiRemoteStation *st,
-                                     double ackSnr, WifiMode ackMode, double dataSnr)
+void
+ArfWifiManager::DoReportDataOk (WifiRemoteStation *st,
+                                double ackSnr, WifiMode ackMode, double dataSnr)
 {
   NS_LOG_FUNCTION (this << st << ackSnr << ackMode << dataSnr);
   ArfWifiRemoteStation *station = (ArfWifiRemoteStation *) st;
