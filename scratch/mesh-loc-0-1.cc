@@ -520,6 +520,12 @@ AodvExample::CreateMeshDevices ()
   else if (rateControl == std::string ("minstrel"))
     mesh.SetRemoteStationManager ("ns3::MinstrelHtWifiManager",
                                   "RtsCtsThreshold", UintegerValue (99999));
+  else if (rateControl == std::string ("arf"))
+    mesh.SetRemoteStationManager ("ns3::ArfHtWifiManager",
+                                  "RtsCtsThreshold", UintegerValue (99999));
+  else if (rateControl == std::string ("aarf"))
+    mesh.SetRemoteStationManager ("ns3::AarfHtWifiManager",
+                                  "RtsCtsThreshold", UintegerValue (99999));
   else
     mesh.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
                                   "ControlMode", StringValue ("VhtMcs0"),

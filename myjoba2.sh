@@ -4,5 +4,5 @@
 
 for ((rrstart=$1; rrstart<=$2; rrstart=rrstart+1))
 do
-  bash myjob-aodv-udp-ideal-grid.sh ${rrstart} &
+  bash myjob-olsr-udp-error.sh ${rrstart} &
 done
