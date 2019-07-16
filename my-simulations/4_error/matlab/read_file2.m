@@ -1,9 +1,11 @@
+close all;
+
 %% read .txt file
 arange = 3:1:9;
 brange = 1:1:sqrt(40);
 crange = 1:1:1;
 drange = 10001:1:10016;
-route = 'aodv-udp-ideal';
+route = 'olsr-udp-ideal-error';
 
 result = cell(length(arange), length(brange), length(crange));
 
@@ -58,58 +60,39 @@ for aa = 1:length(arange) % # stations
         end
     end
 end
-temprange = 4:length(brange);
 
 % 1
-figure; hold on;
-for cc = 1:length(crange)
-    temp = sort(A(:,:,cc).', 1, 'descend');
-    temp = temp(temprange,:);
-    mmedian = median(temp);
-    mmax = temp(1,:);
-    mmin = temp(end,:);
-    errorbar(arange, mmedian, mmin-mmedian, mmax-mmedian, 'LineWidth', 2);
-end
-
-xlabel('number of routers');
-ylabel('whole mesh throughput (Mbps)');
-legend('1 gateway', '2 gateways', '3 gateways');
-set(gcf, 'Position', [400 400 900 600]);
-set(gca, 'FontSize', 12);
+figure(1);
+bar3(A);
+set(gca, 'YTickLabel', arange);
+set(gca, 'XTickLabel', brange);
+xlabel('Grid Size X');
+ylabel('Grid Size Y');
+zlabel('whole mesh throughput (Mbps)');
 title(route);
+saveas(gca, [route '_wholethr.fig']);
+saveas(gca, [route '_wholethr.jpg']);
 
 % 2
-figure; hold on;
-for cc = 1:length(crange)
-    temp = sort(A(:,:,cc).', 1, 'descend');
-    temp = temp(temprange,:);
-    mmedian = median(temp)./arange;
-    mmax = temp(1,:)./arange;
-    mmin = temp(end,:)./arange;
-    errorbar(arange, mmedian, mmin-mmedian, mmax-mmedian, 'LineWidth', 2);
-end
-
-xlabel('number of routers');
-ylabel('per AP throughput (Mbps)');
-legend('1 gateway', '2 gateways', '3 gateways');
-set(gcf, 'Position', [400 400 900 600]);
-set(gca, 'FontSize', 12);
+figure(2);
+bar3(A./(arange.' * brange));
+set(gca, 'YTickLabel', arange);
+set(gca, 'XTickLabel', brange);
+xlabel('Grid Size X');
+ylabel('Grid Size Y');
+zlabel('per AP throughput (Mbps)');
 title(route);
+saveas(gca, [route '_perthr.fig']);
+saveas(gca, [route '_perthr.jpg']);
 
 % 3
-figure; hold on;
-for cc = 1:length(crange)
-    temp = sort(B(:,:,cc).', 1, 'descend');
-    temp = temp(temprange,:);
-    mmedian = median(temp);
-    mmax = temp(1,:);
-    mmin = temp(end,:);
-    errorbar(arange, mmedian, mmin-mmedian, mmax-mmedian, 'LineWidth', 2);
-end
-
-xlabel('number of routers');
-ylabel('per packet delay (s)');
-legend('1 gateway', '2 gateways', '3 gateways');
-set(gcf, 'Position', [400 400 900 600]);
-set(gca, 'FontSize', 12);
+figure(3);
+bar3(B);
+set(gca, 'YTickLabel', arange);
+set(gca, 'XTickLabel', brange);
+xlabel('Grid Size X');
+ylabel('Grid Size Y');
+zlabel('per packet delay (s)');
 title(route);
+saveas(gca, [route '_delay.fig']);
+saveas(gca, [route '_delay.jpg']);
