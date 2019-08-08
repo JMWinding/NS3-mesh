@@ -21,7 +21,7 @@ do
         [ ! ${cc} -gt 40 ] && continue
         if [ ! -f "${dirout}/mesh_${aa}_${bb}_${rr}.xmp" ]; then
           echo mesh_${aa}_${bb}_${rr}.txt
-          ./waf --run "mesh-loc-0-1 --gridSize=${aa} --apNum=${cc} --apStep=60 --aptx=true --gateways=1 --rateControl=${ratecontrol} --rndSeed=${rr} --totalTime=180 --flowout=${dirout}/mesh_${aa}_${bb}_${rr}.xmp --datarate=2e6" &> "${dirout}/mesh_${aa}_${bb}_${rr}.txt"
+          ./waf --run "mesh-loc-0-1 --gridSize=${aa} --apNum=${cc} --apStep=60 --aptx=true --gateways=1 --rateControl=${ratecontrol} --route=${route} --rndSeed=${rr} --totalTime=180 --flowout=${dirout}/mesh_${aa}_${bb}_${rr}.xmp --datarate=2e6" &> "${dirout}/mesh_${aa}_${bb}_${rr}.txt"
         fi
     done
   done
@@ -49,7 +49,7 @@ do
         [ ! ${cc} -gt 40 ] && continue
         if [ ! -f "${dirout}/mesh_${aa}_${bb}_${rr}.xmp" ]; then
           echo mesh_${aa}_${bb}_${rr}.txt
-          ./waf --run "mesh-loc-0 --gridSize=${aa} --apNum=${cc} --apStep=60 --aptx=true --gateways=1 --rateControl=${ratecontrol} --rndSeed=${rr} --totalTime=180 --flowout=${dirout}/mesh_${aa}_${bb}_${rr}.xmp --datarate=2e6" &> "${dirout}/mesh_${aa}_${bb}_${rr}.txt"
+          ./waf --run "mesh-loc-0 --gridSize=${aa} --apNum=${cc} --apStep=60 --aptx=true --gateways=1 --rateControl=${ratecontrol} --route=${route} --rndSeed=${rr} --totalTime=180 --flowout=${dirout}/mesh_${aa}_${bb}_${rr}.xmp --datarate=2e6" &> "${dirout}/mesh_${aa}_${bb}_${rr}.txt"
         fi
     done
   done
@@ -77,7 +77,7 @@ do
         [ ! ${cc} -gt 40 ] && continue
         if [ ! -f "${dirout}/mesh_${aa}_${bb}_${rr}.xmp" ]; then
           echo mesh_${aa}_${bb}_${rr}.txt
-          ./waf --run "mesh-loc-0-1 --gridSize=${aa} --apNum=${cc} --apStep=60 --aptx=true --gateways=1 --rateControl=${ratecontrol} --rndSeed=${rr} --totalTime=180 --flowout=${dirout}/mesh_${aa}_${bb}_${rr}.xmp --datarate=2e6" &> "${dirout}/mesh_${aa}_${bb}_${rr}.txt"
+          ./waf --run "mesh-loc-0-1 --gridSize=${aa} --apNum=${cc} --apStep=60 --aptx=true --gateways=1 --rateControl=${ratecontrol} --route=${route} --rndSeed=${rr} --totalTime=180 --flowout=${dirout}/mesh_${aa}_${bb}_${rr}.xmp --datarate=2e6" &> "${dirout}/mesh_${aa}_${bb}_${rr}.txt"
         fi
     done
   done
@@ -105,7 +105,7 @@ do
         [ ! ${cc} -gt 40 ] && continue
         if [ ! -f "${dirout}/mesh_${aa}_${bb}_${rr}.xmp" ]; then
           echo mesh_${aa}_${bb}_${rr}.txt
-          ./waf --run "mesh-loc-0 --gridSize=${aa} --apNum=${cc} --apStep=60 --aptx=true --gateways=1 --rateControl=${ratecontrol} --rndSeed=${rr} --totalTime=180 --flowout=${dirout}/mesh_${aa}_${bb}_${rr}.xmp --datarate=2e6" &> "${dirout}/mesh_${aa}_${bb}_${rr}.txt"
+          ./waf --run "mesh-loc-0 --gridSize=${aa} --apNum=${cc} --apStep=60 --aptx=true --gateways=1 --rateControl=${ratecontrol} --route=${route} --rndSeed=${rr} --totalTime=180 --flowout=${dirout}/mesh_${aa}_${bb}_${rr}.xmp --datarate=2e6" &> "${dirout}/mesh_${aa}_${bb}_${rr}.txt"
         fi
     done
   done
@@ -133,7 +133,7 @@ do
         [ ! ${cc} -gt 40 ] && continue
         if [ ! -f "${dirout}/mesh_${aa}_${bb}_${rr}.xmp" ]; then
           echo mesh_${aa}_${bb}_${rr}.txt
-          ./waf --run "mesh-loc-0-1 --gridSize=${aa} --apNum=${cc} --apStep=60 --aptx=true --gateways=1 --rateControl=${ratecontrol} --rndSeed=${rr} --totalTime=180 --flowout=${dirout}/mesh_${aa}_${bb}_${rr}.xmp --datarate=2e6" &> "${dirout}/mesh_${aa}_${bb}_${rr}.txt"
+          ./waf --run "mesh-loc-0-1 --gridSize=${aa} --apNum=${cc} --apStep=60 --aptx=true --gateways=1 --rateControl=${ratecontrol} --route=${route} --rndSeed=${rr} --totalTime=180 --flowout=${dirout}/mesh_${aa}_${bb}_${rr}.xmp --datarate=2e6" &> "${dirout}/mesh_${aa}_${bb}_${rr}.txt"
         fi
     done
   done
@@ -161,7 +161,7 @@ do
         [ ! ${cc} -gt 40 ] && continue
         if [ ! -f "${dirout}/mesh_${aa}_${bb}_${rr}.xmp" ]; then
           echo mesh_${aa}_${bb}_${rr}.txt
-          ./waf --run "mesh-loc-0 --gridSize=${aa} --apNum=${cc} --apStep=60 --aptx=true --gateways=1 --rateControl=${ratecontrol} --rndSeed=${rr} --totalTime=180 --flowout=${dirout}/mesh_${aa}_${bb}_${rr}.xmp --datarate=2e6" &> "${dirout}/mesh_${aa}_${bb}_${rr}.txt"
+          ./waf --run "mesh-loc-0 --gridSize=${aa} --apNum=${cc} --apStep=60 --aptx=true --gateways=1 --rateControl=${ratecontrol} --route=${route} --rndSeed=${rr} --totalTime=180 --flowout=${dirout}/mesh_${aa}_${bb}_${rr}.xmp --datarate=2e6" &> "${dirout}/mesh_${aa}_${bb}_${rr}.txt"
         fi
     done
   done

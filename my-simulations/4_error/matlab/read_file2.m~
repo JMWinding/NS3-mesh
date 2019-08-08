@@ -1,15 +1,20 @@
+% close all;
+
 %% read .txt file
 arange = 3:1:9;
-brange = 1:1:sqrt(40);
+brange = 1:1:9;
 crange = 1:1:1;
 drange = 10001:1:10016;
-route = 'aodv-udp-ideal';
+route = 'aodv-udp-ideal-error';
 
 result = cell(length(arange), length(brange), length(crange));
 
 for aa = 1:length(arange) % # stations
     for bb = 1:length(brange) % topology
         for cc = 1:length(crange) % # gateways
+            if bb > aa
+                result{aa,bb,cc} = result{bb,aa,cc}
+            end
             for dd = 1:length(drange) % random seed
                 a = arange(aa);
                 b = brange(bb);
@@ -42,7 +47,7 @@ for aa = 1:length(arange) % # stations
     end
 end
 
-save(['mesh_' route '.mat'], 'result');
+% save(['mesh_' route '.mat'], 'result');
 
 %% throughput
 A = zeros(length(arange), length(brange), length(crange));
@@ -60,23 +65,37 @@ for aa = 1:length(arange) % # stations
 end
 
 % 1
-figure(1);
+figure;
 bar3(A);
 set(gca, 'YTickLabel', arange);
 set(gca, 'XTickLabel', brange);
 xlabel('Grid Size X');
 ylabel('Grid Size Y');
-zlabel('Total Throughput (Mbps)');
+zlabel('whole mesh throughput (Mbps)');
+title(route);
+saveas(gca, [route '_wholethr.fig']);
+saveas(gca, [route '_wholethr.jpg']);
+
+% 2
+figure;
+bar3(A./(arange.' * brange));
+set(gca, 'YTickLabel', arange);
+set(gca, 'XTickLabel', brange);
+xlabel('Grid Size X');
+ylabel('Grid Size Y');
+zlabel('per AP throughput (Mbps)');
+title(route);
+saveas(gca, [route '_perthr.fig']);
+saveas(gca, [route '_perthr.jpg']);
 
 % 3
-figure(3);
-bar3(A./(arange
-
-% 3
-figure(3);
+figure;
 bar3(B);
 set(gca, 'YTickLabel', arange);
 set(gca, 'XTickLabel', brange);
 xlabel('Grid Size X');
 ylabel('Grid Size Y');
-zlabel('Average Delay (s)');
+zlabel('per packet delay (s)');
+title(route);
+saveas(gca, [route '_delay.fig']);
+saveas(gca, [route '_delay.jpg']);

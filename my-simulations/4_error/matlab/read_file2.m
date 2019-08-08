@@ -1,15 +1,15 @@
-close all;
+% close all;
 
 %% read .txt file
 arange = 3:1:9;
-brange = 1:1:sqrt(40);
+brange = 1:1:9;
 crange = 1:1:1;
 drange = 10001:1:10016;
 route = 'olsr-udp-ideal-error';
 
 result = cell(length(arange), length(brange), length(crange));
 
-for aa = 1:length(arange) % # stations
+for aa = length(arange):-1:1 % # stations
     for bb = 1:length(brange) % topology
         for cc = 1:length(crange) % # gateways
             for dd = 1:length(drange) % random seed
@@ -19,9 +19,7 @@ for aa = 1:length(arange) % # stations
                 d = drange(dd);
                 
                 if b > a
-                    continue;
-                end
-                if a * b > 40
+                    result{aa,bb,cc} = result{find(arange==b),find(brange==a),cc};
                     continue;
                 end
                 
@@ -44,7 +42,7 @@ for aa = 1:length(arange) % # stations
     end
 end
 
-save(['mesh_' route '.mat'], 'result');
+% save(['mesh_' route '.mat'], 'result');
 
 %% throughput
 A = zeros(length(arange), length(brange), length(crange));
@@ -62,7 +60,7 @@ for aa = 1:length(arange) % # stations
 end
 
 % 1
-figure(1);
+figure;
 bar3(A);
 set(gca, 'YTickLabel', arange);
 set(gca, 'XTickLabel', brange);
@@ -74,7 +72,7 @@ saveas(gca, [route '_wholethr.fig']);
 saveas(gca, [route '_wholethr.jpg']);
 
 % 2
-figure(2);
+figure;
 bar3(A./(arange.' * brange));
 set(gca, 'YTickLabel', arange);
 set(gca, 'XTickLabel', brange);
@@ -86,7 +84,7 @@ saveas(gca, [route '_perthr.fig']);
 saveas(gca, [route '_perthr.jpg']);
 
 % 3
-figure(3);
+figure;
 bar3(B);
 set(gca, 'YTickLabel', arange);
 set(gca, 'XTickLabel', brange);
