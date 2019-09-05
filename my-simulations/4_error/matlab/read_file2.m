@@ -1,11 +1,11 @@
-% close all;
+close all;
 
 %% read .txt file
 arange = 3:1:9;
 brange = 1:1:9;
 crange = 1:1:1;
 drange = 10001:1:10016;
-route = 'olsr-udp-ideal-error';
+% route = 'olsr-udp-ideal';
 
 result = cell(length(arange), length(brange), length(crange));
 
