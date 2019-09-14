@@ -27,6 +27,9 @@
 #include "ns3/minstrel-wifi-manager.h"
 #include "ns3/mesh-wifi-interface-mac.h"
 #include "ns3/wifi-helper.h"
+#include "ns3/ht-configuration.h"
+#include "ns3/vht-configuration.h"
+#include "ns3/he-configuration.h"
 
 namespace ns3
 {
@@ -89,6 +92,7 @@ MeshHelper::Install (const WifiPhyHelper &phyHelper, NodeContainer c) const
       Ptr<Node> node = *i;
       // Create a mesh point device
       Ptr<MeshPointDevice> mp = CreateObject<MeshPointDevice> ();
+
       node->AddDevice (mp);
       // Create wifi interfaces (single interface by default)
       for (uint32_t i = 0; i < m_nInterfaces; ++i)
@@ -175,6 +179,21 @@ Ptr<WifiNetDevice>
 MeshHelper::CreateInterface (const WifiPhyHelper &phyHelper, Ptr<Node> node, uint16_t channelId) const
 {
   Ptr<WifiNetDevice> device = CreateObject<WifiNetDevice> ();
+  if (m_standard >= WIFI_PHY_STANDARD_80211n_2_4GHZ)
+    {
+      Ptr<HtConfiguration> htConfiguration = CreateObject<HtConfiguration> ();
+      device->SetHtConfiguration (htConfiguration);
+    }
+  if ((m_standard == WIFI_PHY_STANDARD_80211ac) || (m_standard == WIFI_PHY_STANDARD_80211ax_5GHZ))
+    {
+      Ptr<VhtConfiguration> vhtConfiguration = CreateObject<VhtConfiguration> ();
+      device->SetVhtConfiguration (vhtConfiguration);
+    }
+  if (m_standard >= WIFI_PHY_STANDARD_80211ax_2_4GHZ)
+    {
+      Ptr<HeConfiguration> heConfiguration = CreateObject<HeConfiguration> ();
+      device->SetHeConfiguration (heConfiguration);
+    }
 
   Ptr<MeshWifiInterfaceMac> mac = m_mac.Create<MeshWifiInterfaceMac> ();
   NS_ASSERT (mac != 0);
