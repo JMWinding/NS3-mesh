@@ -1,0 +1,10 @@
+prefix=/usr/local
+libdir=/usr/local/lib
+includedir=/usr/local/include/ns3.30
+
+Name: libns3-test
+Description: ns-3 module ns3-test
+Version: 3.30
+Libs: -L${libdir} -Wl,-Bdynamic -lns3.30-test-debug
+Cflags: -I${includedir}
+Requires: libns3.30-applications-debug libns3.30-bridge-debug libns3.30-config-store-debug libns3.30-csma-debug libns3.30-csma-layout-debug libns3.30-dsr-debug libns3.30-flow-monitor-debug libns3.30-internet-debug libns3.30-lr-wpan-debug libns3.30-lte-debug libns3.30-mesh-debug libns3.30-mobility-debug libns3.30-olsr-debug libns3.30-point-to-point-debug libns3.30-sixlowpan-debug libns3.30-stats-debug libns3.30-uan-debug libns3.30-wifi-debug libns3.30-internet-apps-debug libns3.30-point-to-point-layout-debug libns3.30-traffic-control-debug
