@@ -18,8 +18,8 @@
  * Author: Sébastien Deronne <sebastien.deronne@gmail.com>
  */
 
-#ifndef CONSTANT_OBSS_PD_ALGORITHM_H
-#define CONSTANT_OBSS_PD_ALGORITHM_H
+#ifndef MESH_OBSS_PD_ALGORITHM_H
+#define MESH_OBSS_PD_ALGORITHM_H
 
 #include "obss-pd-algorithm.h"
 
@@ -39,10 +39,10 @@ namespace ns3 {
  * in case the received RSSI is lower than that constant OBSS PD level value, and is informed
  * about TX power restrictions that might be applied to the next tranmission.
  */
-class ConstantObssPdAlgorithm : public ObssPdAlgorithm
+class MeshObssPdAlgorithm : public ObssPdAlgorithm
 {
 public:
-  ConstantObssPdAlgorithm ();
+  MeshObssPdAlgorithm ();
 
   static TypeId GetTypeId (void);
 

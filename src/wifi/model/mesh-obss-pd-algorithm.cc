@@ -23,7 +23,7 @@
 #include "ns3/config.h"
 #include "ns3/double.h"
 #include "ns3/uinteger.h"
-#include "constant-obss-pd-algorithm.h"
+#include "mesh-obss-pd-algorithm.h"
 #include "sta-wifi-mac.h"
 #include "wifi-utils.h"
 #include "wifi-phy.h"
@@ -32,36 +32,36 @@
 
 namespace ns3 {
 
-NS_LOG_COMPONENT_DEFINE ("ConstantObssPdAlgorithm");
-NS_OBJECT_ENSURE_REGISTERED (ConstantObssPdAlgorithm);
+NS_LOG_COMPONENT_DEFINE ("MeshObssPdAlgorithm");
+NS_OBJECT_ENSURE_REGISTERED (MeshObssPdAlgorithm);
 
-ConstantObssPdAlgorithm::ConstantObssPdAlgorithm ()
+MeshObssPdAlgorithm::MeshObssPdAlgorithm ()
   : ObssPdAlgorithm ()
 {
   NS_LOG_FUNCTION (this);
 }
 
 TypeId
-ConstantObssPdAlgorithm::GetTypeId (void)
+MeshObssPdAlgorithm::GetTypeId (void)
 {
-  static ns3::TypeId tid = ns3::TypeId ("ns3::ConstantObssPdAlgorithm")
+  static ns3::TypeId tid = ns3::TypeId ("ns3::MeshObssPdAlgorithm")
     .SetParent<ObssPdAlgorithm> ()
     .SetGroupName ("Wifi")
-    .AddConstructor<ConstantObssPdAlgorithm> ()
+    .AddConstructor<MeshObssPdAlgorithm> ()
   ;
   return tid;
 }
 
 void
-ConstantObssPdAlgorithm::ConnectWifiNetDevice (const Ptr<WifiNetDevice> device)
+MeshObssPdAlgorithm::ConnectWifiNetDevice (const Ptr<WifiNetDevice> device)
 {
   Ptr<WifiPhy> phy = device->GetPhy ();
-  phy->TraceConnectWithoutContext ("EndOfHePreamble", MakeCallback (&ConstantObssPdAlgorithm::ReceiveHeSig, this));
+  phy->TraceConnectWithoutContext ("EndOfHePreamble", MakeCallback (&MeshObssPdAlgorithm::ReceiveHeSig, this));
   ObssPdAlgorithm::ConnectWifiNetDevice (device);
 }
 
 void
-ConstantObssPdAlgorithm::ReceiveHeSig (HePreambleParameters params)
+MeshObssPdAlgorithm::ReceiveHeSig (HePreambleParameters params)
 {
   NS_LOG_FUNCTION (this << +params.bssColor << WToDbm (params.rssiW));
 
@@ -72,11 +72,17 @@ ConstantObssPdAlgorithm::ReceiveHeSig (HePreambleParameters params)
       return;
     }
 
-  Ptr<HeConfiguration> heConfiguration = m_device->GetHeConfiguration ();
-  NS_ASSERT (heConfiguration);
-  UintegerValue bssColorAttribute;
-  heConfiguration->GetAttribute ("BssColor", bssColorAttribute);
-  uint8_t bssColor = bssColorAttribute.Get ();
+  // Ptr<HeConfiguration> heConfiguration = m_device->GetHeConfiguration ();
+  // NS_ASSERT (heConfiguration);
+  // UintegerValue bssColorAttribute;
+  // heConfiguration->GetAttribute ("BssColor", bssColorAttribute);
+  // uint8_t bssColor = bssColorAttribute.Get ();
+
+  //####
+  //set bsscolor as self mac address(last number)
+  uint8_t addrs[6];
+  m_device->GetMac()->GetAddress().CopyTo(addrs);
+  uint8_t bssColor = addrs[5];
 
   if (bssColor == 0)
     {

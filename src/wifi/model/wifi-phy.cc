@@ -2583,10 +2583,10 @@ WifiPhy::SendPacket (Ptr<const Packet> packet, WifiTxVector txVector)
       obssPacket->PeekHeader(head); // may be mac header or AmpduSubframeHeader
       head.GetAddr1().CopyTo(addrs);
     }
-    std::cout<<"packet : ";
-    obssPacket->Print(std::cout);
-    std::cout<<std::endl;
-    std::cout<<"sending to mac: "<<head.GetAddr2()<<std::endl;
+    // std::cout<<"packet : ";
+    // obssPacket->Print(std::cout);
+    // std::cout<<std::endl;
+    // std::cout<<"sending to mac: "<<head.GetAddr1()<<std::endl;
     txVector.SetBssColor(addrs[5]); // set BSS color as the last num of dst mac addr
 
   }

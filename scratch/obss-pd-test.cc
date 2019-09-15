@@ -254,7 +254,7 @@ AodvExample::Configure (int argc, char **argv)
   // Enable AODV logs by default. Comment this if too noisy
 //   LogComponentEnable("TsHtWifiManager", LOG_LEVEL_ALL);
 //   LogComponentEnable("RraaHtWifiManager", LOG_LEVEL_ALL);
-  LogComponentEnable("ConstantObssPdAlgorithm", LOG_LEVEL_ALL);
+  // LogComponentEnable("ConstantObssPdAlgorithm", LOG_LEVEL_ALL);
 
   Packet::EnablePrinting ();
 
@@ -542,8 +542,8 @@ void AodvExample::CreateAdhocDevices()
                                   "RtsCtsThreshold", UintegerValue (99999));
                                   
                                   
-  // wifi.SetObssPdAlgorithm ("ns3::ConstantObssPdAlgorithm",
-  //                       "ObssPdLevel", DoubleValue (-100));
+  wifi.SetObssPdAlgorithm ("ns3::ConstantObssPdAlgorithm",
+                        "ObssPdLevel", DoubleValue (-72));
 
 
   WifiMacHelper wifiMac;

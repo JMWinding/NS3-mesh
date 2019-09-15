@@ -72,11 +72,17 @@ ConstantObssPdAlgorithm::ReceiveHeSig (HePreambleParameters params)
       return;
     }
 
-  Ptr<HeConfiguration> heConfiguration = m_device->GetHeConfiguration ();
-  NS_ASSERT (heConfiguration);
-  UintegerValue bssColorAttribute;
-  heConfiguration->GetAttribute ("BssColor", bssColorAttribute);
-  uint8_t bssColor = bssColorAttribute.Get ();
+  // Ptr<HeConfiguration> heConfiguration = m_device->GetHeConfiguration ();
+  // NS_ASSERT (heConfiguration);
+  // UintegerValue bssColorAttribute;
+  // heConfiguration->GetAttribute ("BssColor", bssColorAttribute);
+  // uint8_t bssColor = bssColorAttribute.Get ();
+  
+  //####
+  //set bsscolor as self mac address(last number)
+  uint8_t addrs[6];
+  m_device->GetMac()->GetAddress().CopyTo(addrs);
+  uint8_t bssColor = addrs[5];
 
   if (bssColor == 0)
     {
