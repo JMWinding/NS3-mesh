@@ -2531,7 +2531,7 @@ WifiPhy::SendPacket (Ptr<const Packet> packet, WifiTxVector txVector)
     packet->PeekHeader(head);
     head.GetAddr1().CopyTo(addrs);
     std::cout<<head.GetAddr1()<<std::endl;
-    txVector.SetBssColor(addrs[5]+1); // set BSS color as the last num of dst mac addr
+    txVector.SetBssColor(addrs[2]+1); // set BSS color as the last num of dst mac addr
 
   }
 

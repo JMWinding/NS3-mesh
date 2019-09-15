@@ -542,8 +542,8 @@ void AodvExample::CreateAdhocDevices()
                                   "RtsCtsThreshold", UintegerValue (99999));
                                   
                                   
-  // wifi.SetObssPdAlgorithm ("ns3::ConstantObssPdAlgorithm",
-  //                       "ObssPdLevel", DoubleValue (-90));
+  wifi.SetObssPdAlgorithm ("ns3::ConstantObssPdAlgorithm",
+                        "ObssPdLevel", DoubleValue (-100));
 
 
   WifiMacHelper wifiMac;
