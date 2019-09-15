@@ -2524,6 +2524,16 @@ WifiPhy::SendPacket (Ptr<const Packet> packet, WifiTxVector txVector)
    */
   NS_ASSERT (!m_state->IsStateTx () && !m_state->IsStateSwitching ());
 
+  if(txVector.GetBssColor())
+  {
+    WifiMacHeader head;
+    uint8_t addrs[6];
+    packet->PeekHeader(head);
+    head.GetAddr1().CopyTo(addrs);
+    txVector.SetBssColor(addrs[5]+1); // set BSS color as the last num of dst mac addr
+
+  }
+
   if (txVector.GetNss () > GetMaxSupportedTxSpatialStreams ())
     {
       NS_FATAL_ERROR ("Unsupported number of spatial streams!");

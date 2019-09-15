@@ -74,6 +74,15 @@ PrintThroughputTitle (uint32_t apNum, uint32_t clNum, bool aptx)
   std::cout << std::endl;
 }
 
+uint32_t
+ConvertContextToNodeId (std::string context)
+{
+  std::string sub = context.substr (10);
+  uint32_t pos = sub.find ("/Device");
+  uint32_t nodeId = atoi (sub.substr (0, pos).c_str ());
+  return nodeId;
+}
+
 /// class
 class AodvExample
 {
@@ -191,6 +200,9 @@ private:
   void CreateCsmaDevices ();
   void ReadLocations ();
   void PreSetStationManager ();
+
+  // set BSS colotr
+  void TxSetColor(std::string context, Ptr<const Packet> p, double txPowerW);
 };
 
 int main (int argc, char **argv)
@@ -242,7 +254,9 @@ AodvExample::Configure (int argc, char **argv)
   // Enable AODV logs by default. Comment this if too noisy
 //   LogComponentEnable("TsHtWifiManager", LOG_LEVEL_ALL);
 //   LogComponentEnable("RraaHtWifiManager", LOG_LEVEL_ALL);
-  LogComponentEnable("ConstantObssPdAlgorithm", LOG_LEVEL_DEBUG);
+  LogComponentEnable("ConstantObssPdAlgorithm", LOG_LEVEL_ALL);
+
+  Packet::EnablePrinting ();
 
   CommandLine cmd;
 
@@ -294,6 +308,10 @@ AodvExample::Run ()
   // #####
   // no need, if we do not use global routing helper
   // Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+
+  // #####
+  // may not work with mesh
+  // Config::Connect ("/NodeList/*/DeviceList/*/$ns3::WifiNetDevice/Phy/PhyTxBegin", MakeCallback (&AodvExample::TxSetColor, this));
 
   std::cout << "Starting simulation for " << totalTime << " s ...\n";
 
@@ -533,12 +551,12 @@ void AodvExample::CreateAdhocDevices()
 
   adhocDevices = wifi.Install(wifiPhy, wifiMac, apNodes);
 
-  // HE
+  // set HE BSS color
   for (uint32_t i = 0; i < adhocDevices.GetN (); i++)
     {
         Ptr<WifiNetDevice> device = DynamicCast<WifiNetDevice> (adhocDevices.Get (i));
         Ptr<HeConfiguration> heConfiguration = device->GetHeConfiguration ();
-        heConfiguration->SetAttribute ("BssColor", UintegerValue (0));
+        heConfiguration->SetAttribute ("BssColor", UintegerValue (1));
     }
 
   if (pcap)
@@ -919,4 +937,23 @@ AodvExample::ReadLocations ()
         fin >> locations[i][0] >> locations[i][1] >> locations[i][2];
       fin.close ();
     }
+}
+
+void
+AodvExample::TxSetColor (std::string context, Ptr<const Packet> p, double txPowerW)
+{
+  uint32_t idx = ConvertContextToNodeId (context);
+  std::cout <<"Node: "<<idx <<"  "<<  p << std::endl;
+  // p->Print(std::cout);
+  // std::cout<<std::endl;
+  WifiMacHeader head;
+  p->PeekHeader(head);
+  std::cout<< head.GetAddr1() <<std::endl;
+  Ptr<WifiNetDevice> device = DynamicCast<WifiNetDevice> (adhocDevices.Get (idx));
+  Ptr<HeConfiguration> heConfiguration = device->GetHeConfiguration ();
+  if(idx)
+    heConfiguration->SetAttribute ("BssColor", UintegerValue (42));
+  else
+    heConfiguration->SetAttribute ("BssColor", UintegerValue (40));
+  return;
 }
