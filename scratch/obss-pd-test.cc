@@ -176,6 +176,10 @@ private:
     // mesh or adhoc
   std::string macType;
 
+  // obss setting
+  std::string obssAlgo;
+  double obssLevel;
+
 private:
   void CreateVariables ();
 
@@ -244,7 +248,9 @@ AodvExample::AodvExample () :
   route ("aodv"),
   rateControl ("ideal"),
   flowout ("test.xml"),
-  macType("mesh")
+  macType("mesh"),
+  obssAlgo("const"),
+  obssLevel(-100)
 {
 }
 
@@ -284,6 +290,8 @@ AodvExample::Configure (int argc, char **argv)
   cmd.AddValue ("rateControl", "Rate control--constant/ideal/minstrel", rateControl);
   cmd.AddValue ("flowout", "Result output directory", flowout);
   cmd.AddValue ("macType", "type of mac --mesh/adhoc", macType);
+  cmd.AddValue ("obssAlgo", "chose obss pd algorithm", obssAlgo);
+  cmd.AddValue ("obssLevel", "obss pd current level ", obssLevel);
   // cmd.AddValue ("startDelay", "delay after start time for transmiting tcp", startDelay);
 
   cmd.Parse (argc, argv);
@@ -541,10 +549,15 @@ void AodvExample::CreateAdhocDevices()
                                   "DataMode", StringValue ("HeMcs4"),
                                   "RtsCtsThreshold", UintegerValue (99999));
                                   
-                                  
-  wifi.SetObssPdAlgorithm ("ns3::ConstantObssPdAlgorithm",
-                        "ObssPdLevel", DoubleValue (-72));
-
+  if(obssAlgo==std::string("const"))                                
+    wifi.SetObssPdAlgorithm ("ns3::ConstantObssPdAlgorithm",
+                          "ObssPdLevel", DoubleValue (obssLevel));
+  else if(obssAlgo==std::string("mesh")) 
+    wifi.SetObssPdAlgorithm ("ns3::MeshObssPdAlgorithm",
+                          "ObssPdLevel", DoubleValue (obssLevel));  
+  else
+    std::cout<<"no obss pd"<<std::endl;
+  
 
   WifiMacHelper wifiMac;
   wifiMac.SetType ("ns3::AdhocWifiMac");
@@ -941,21 +954,21 @@ AodvExample::ReadLocations ()
     }
 }
 
-void
-AodvExample::TxSetColor (std::string context, Ptr<const Packet> p, double txPowerW)
-{
-  uint32_t idx = ConvertContextToNodeId (context);
-  std::cout <<"Node: "<<idx <<"  "<<  p << std::endl;
-  // p->Print(std::cout);
-  // std::cout<<std::endl;
-  WifiMacHeader head;
-  p->PeekHeader(head);
-  std::cout<< head.GetAddr1() <<std::endl;
-  Ptr<WifiNetDevice> device = DynamicCast<WifiNetDevice> (adhocDevices.Get (idx));
-  Ptr<HeConfiguration> heConfiguration = device->GetHeConfiguration ();
-  if(idx)
-    heConfiguration->SetAttribute ("BssColor", UintegerValue (42));
-  else
-    heConfiguration->SetAttribute ("BssColor", UintegerValue (40));
-  return;
-}
+// void
+// AodvExample::TxSetColor (std::string context, Ptr<const Packet> p, double txPowerW)
+// {
+//   uint32_t idx = ConvertContextToNodeId (context);
+//   std::cout <<"Node: "<<idx <<"  "<<  p << std::endl;
+//   // p->Print(std::cout);
+//   // std::cout<<std::endl;
+//   WifiMacHeader head;
+//   p->PeekHeader(head);
+//   std::cout<< head.GetAddr1() <<std::endl;
+//   Ptr<WifiNetDevice> device = DynamicCast<WifiNetDevice> (adhocDevices.Get (idx));
+//   Ptr<HeConfiguration> heConfiguration = device->GetHeConfiguration ();
+//   if(idx)
+//     heConfiguration->SetAttribute ("BssColor", UintegerValue (42));
+//   else
+//     heConfiguration->SetAttribute ("BssColor", UintegerValue (40));
+//   return;
+// }
