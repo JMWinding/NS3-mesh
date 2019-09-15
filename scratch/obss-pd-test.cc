@@ -522,8 +522,8 @@ void AodvExample::CreateAdhocDevices()
   wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (4));
   wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (4));
   wifiPhy.DisablePreambleDetectionModel ();
-  //  wifiPhy.Set ("TxPowerStart", DoubleValue (21.0));
-  //  wifiPhy.Set ("TxPowerEnd", DoubleValue (21.0));
+   wifiPhy.Set ("TxPowerStart", DoubleValue (21.0));
+   wifiPhy.Set ("TxPowerEnd", DoubleValue (21.0));
   //  wifiPhy.Set ("TxPowerLevels", UintegerValue (1));
 //   wifiPhy.Set ("ShortGuardEnabled", BooleanValue (true));
 
