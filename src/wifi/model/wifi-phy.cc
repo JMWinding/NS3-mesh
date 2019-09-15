@@ -38,6 +38,7 @@
 #include "he-configuration.h"
 #include "mpdu-aggregator.h"
 #include "wifi-phy-header.h"
+#include "ampdu-subframe-header.h"
 
 namespace ns3 {
 
@@ -2524,17 +2525,6 @@ WifiPhy::SendPacket (Ptr<const Packet> packet, WifiTxVector txVector)
    */
   NS_ASSERT (!m_state->IsStateTx () && !m_state->IsStateSwitching ());
 
-  if(txVector.GetBssColor())
-  {
-    WifiMacHeader head;
-    uint8_t addrs[6];
-    packet->PeekHeader(head);
-    head.GetAddr1().CopyTo(addrs);
-    std::cout<<head.GetAddr1()<<std::endl;
-    txVector.SetBssColor(addrs[2]+1); // set BSS color as the last num of dst mac addr
-
-  }
-
   if (txVector.GetNss () > GetMaxSupportedTxSpatialStreams ())
     {
       NS_FATAL_ERROR ("Unsupported number of spatial streams!");
@@ -2575,6 +2565,31 @@ WifiPhy::SendPacket (Ptr<const Packet> packet, WifiTxVector txVector)
     {
       NS_LOG_DEBUG ("Transmitting without power restriction");
     }
+
+  
+  if(txVector.GetBssColor())
+  {
+    Ptr<Packet> obssPacket = packet->Copy (); // obtain non-const Packet
+    WifiMacHeader head;
+    AmpduSubframeHeader head2;
+    uint8_t addrs[6];
+    // uint32_t testFlag=0;
+    // obssPacket->PeekHeader(head2);
+    obssPacket->PeekHeader(head); // may be mac header or AmpduSubframeHeader
+    head.GetAddr1().CopyTo(addrs);
+    if(addrs[0]+addrs[1]+addrs[2]+addrs[3]+addrs[4]!=0 || !addrs[5]) // should be the wrong mac address
+    {
+      obssPacket->RemoveHeader(head2);
+      obssPacket->PeekHeader(head); // may be mac header or AmpduSubframeHeader
+      head.GetAddr1().CopyTo(addrs);
+    }
+    std::cout<<"packet : ";
+    obssPacket->Print(std::cout);
+    std::cout<<std::endl;
+    std::cout<<"sending to mac: "<<head.GetAddr2()<<std::endl;
+    txVector.SetBssColor(addrs[5]); // set BSS color as the last num of dst mac addr
+
+  }
 
   NotifyTxBegin (packet, DbmToW (GetTxPowerForTransmission (txVector) + GetTxGain ()));
   NotifyMonitorSniffTx (packet, GetFrequency (), txVector);

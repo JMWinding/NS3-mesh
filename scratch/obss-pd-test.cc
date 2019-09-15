@@ -542,8 +542,8 @@ void AodvExample::CreateAdhocDevices()
                                   "RtsCtsThreshold", UintegerValue (99999));
                                   
                                   
-  wifi.SetObssPdAlgorithm ("ns3::ConstantObssPdAlgorithm",
-                        "ObssPdLevel", DoubleValue (-100));
+  // wifi.SetObssPdAlgorithm ("ns3::ConstantObssPdAlgorithm",
+  //                       "ObssPdLevel", DoubleValue (-100));
 
 
   WifiMacHelper wifiMac;
@@ -555,6 +555,8 @@ void AodvExample::CreateAdhocDevices()
   for (uint32_t i = 0; i < adhocDevices.GetN (); i++)
     {
         Ptr<WifiNetDevice> device = DynamicCast<WifiNetDevice> (adhocDevices.Get (i));
+        //print mac address
+        std::cout<< device->GetMac()->GetAddress()<<std::endl;
         Ptr<HeConfiguration> heConfiguration = device->GetHeConfiguration ();
         heConfiguration->SetAttribute ("BssColor", UintegerValue (1));
     }
