@@ -537,13 +537,13 @@ void AodvExample::CreateAdhocDevices()
     wifi.SetRemoteStationManager ("ns3::RraaHtWifiManager");
   else
     wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-                                  "ControlMode", StringValue ("VhtMcs0"),
-                                  "DataMode", StringValue ("VhtMcs7"),
+                                  "ControlMode", StringValue ("HtMcs0"),
+                                  "DataMode", StringValue ("HeMcs4"),
                                   "RtsCtsThreshold", UintegerValue (99999));
                                   
                                   
-  wifi.SetObssPdAlgorithm ("ns3::ConstantObssPdAlgorithm",
-                        "ObssPdLevel", DoubleValue (-72));
+  // wifi.SetObssPdAlgorithm ("ns3::ConstantObssPdAlgorithm",
+  //                       "ObssPdLevel", DoubleValue (-90));
 
 
   WifiMacHelper wifiMac;
