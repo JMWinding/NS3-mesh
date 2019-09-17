@@ -545,7 +545,7 @@ void AodvExample::CreateAdhocDevices()
     wifi.SetRemoteStationManager ("ns3::RraaHtWifiManager");
   else
     wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-                                  "ControlMode", StringValue ("HtMcs0"),
+                                  "ControlMode", StringValue ("HeMcs0"),
                                   "DataMode", StringValue ("HeMcs4"),
                                   "RtsCtsThreshold", UintegerValue (99999));
                                   
