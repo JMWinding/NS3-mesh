@@ -259,8 +259,8 @@ AodvExample::Configure (int argc, char **argv)
 {
   // Enable AODV logs by default. Comment this if too noisy
 //   LogComponentEnable("TsHtWifiManager", LOG_LEVEL_ALL);
-//   LogComponentEnable("RraaHtWifiManager", LOG_LEVEL_ALL);
-  // LogComponentEnable("ConstantObssPdAlgorithm", LOG_LEVEL_ALL);
+  // LogComponentEnable("AodvRoutingProtocol", LOG_LEVEL_ALL);
+  // LogComponentEnable("MeshObssPdAlgorithm", LOG_LEVEL_ALL);
 
   Packet::EnablePrinting ();
 
@@ -668,7 +668,8 @@ AodvExample::CreateCsmaDevices ()
   mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
   mobility.Install (csmaNodes);
 
-  csmaNodes.Add (apNodes.Get ((uint32_t) apNum/2));
+  // csmaNodes.Add (apNodes.Get ((uint32_t) apNum/2));
+  csmaNodes.Add (apNodes.Get ((uint32_t) apNum -1)); // change to a line
   for (uint32_t i = 1; i < gateways; ++i)
     csmaNodes.Add (apNodes.Get (i));
 
@@ -750,7 +751,7 @@ AodvExample::InstallInternetStack ()
   else if(route == std::string("aodv"))
     list.Add (aodv, 100);
  // else // static
-  list.Add(staticRoutingHelper,10);
+  // list.Add(staticRoutingHelper,10);
 
   InternetStackHelper stack;
   stack.SetRoutingHelper (list); // has effect on the next Install () and others!!
@@ -931,6 +932,8 @@ AodvExample::InstallApplications ()
             }
         }
     }
+
+
 
   std::cout << "Gateway is connect to AP 0\n";
   std::cout << "InstallApplications () DONE !!!\n";

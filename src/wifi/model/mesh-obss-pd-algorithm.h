@@ -22,6 +22,7 @@
 #define MESH_OBSS_PD_ALGORITHM_H
 
 #include "obss-pd-algorithm.h"
+#include "ns3/ipv4-address.h"
 
 namespace ns3 {
 
@@ -59,6 +60,10 @@ public:
    * Evaluate the receipt of HE SIG.
    */
   void ReceiveHeSig (HePreambleParameters params);
+
+  Ipv4Address gatewayAddr;     /// address of gateway
+  Ipv4Address sourceAddr;     /// address of source
+
 };
 
 } //namespace ns3

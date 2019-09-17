@@ -29,6 +29,8 @@
 #include "wifi-phy.h"
 #include "wifi-net-device.h"
 #include "he-configuration.h"
+#include "ns3/internet-module.h"
+// #include "ns3/aodv-module.h"
 
 namespace ns3 {
 
@@ -48,6 +50,11 @@ MeshObssPdAlgorithm::GetTypeId (void)
     .SetParent<ObssPdAlgorithm> ()
     .SetGroupName ("Wifi")
     .AddConstructor<MeshObssPdAlgorithm> ()
+    .AddAttribute ("GatewayAddress",
+                  "The Ipv4 Address of gateway node.",
+                  Ipv4AddressValue("10.2.1.1"),
+                  MakeIpv4AddressAccessor (&MeshObssPdAlgorithm::gatewayAddr),
+                  MakeIpv4AddressChecker())
   ;
   return tid;
 }
@@ -80,9 +87,23 @@ MeshObssPdAlgorithm::ReceiveHeSig (HePreambleParameters params)
 
   //####
   //set bsscolor as self mac address(last number)
-  uint8_t addrs[6];
+  uint8_t addrs[6]; // self mac
+  uint8_t addrs2[4]; // nexthop ip
+
   m_device->GetMac()->GetAddress().CopyTo(addrs);
+  Ptr<Ipv4RoutingProtocol> aodvRouting;
+  aodvRouting = Ipv4RoutingHelper::GetRouting <Ipv4RoutingProtocol> (m_device->GetNode()->GetObject<Ipv4> ()->GetRoutingProtocol ());
+  // aodvRouting = m_device->GetNode()->GetObject<Ipv4> ()->GetRoutingProtocol ();
+  Ipv4Address sourceAddr = m_device->GetNode()->GetObject<Ipv4> ()->GetAddress(1,0).GetLocal();
+  Ipv4Header ipHead;
+  ipHead.SetDestination(gatewayAddr);
+  ipHead.SetSource(sourceAddr);
+  Socket::SocketErrno err;
+  Packet ptemp;
+  Ptr<Ipv4Route> routeEntry = aodvRouting->RouteOutput(&ptemp, ipHead, m_device, err);
+
   uint8_t bssColor = addrs[5];
+
 
   if (bssColor == 0)
     {
@@ -96,7 +117,27 @@ MeshObssPdAlgorithm::ReceiveHeSig (HePreambleParameters params)
     }
   //TODO: SRP_AND_NON-SRG_OBSS-PD_PROHIBITED=1 => OBSS_PD SR is not allowed
 
-  bool isObss = (bssColor != params.bssColor);
+  // bool isObss = (bssColor != params.bssColor);
+  bool isObss = false;
+  // std::cout<<err;
+
+  if(!err)
+  {
+      NS_LOG_DEBUG("gatewayAddr= "<<gatewayAddr<<"  sourceAddr= "<<sourceAddr<<"  nextHop= "<<routeEntry->GetGateway() );
+      routeEntry->GetGateway().Serialize(addrs2);
+
+      uint8_t dstMac, srcMac;
+      dstMac = params.bssColor/8;
+      srcMac = params.bssColor%8;
+      if(dstMac!=addrs[5] && dstMac!=addrs2[3] && srcMac!=addrs2[3] && addrs2[0]!=127 )
+      {
+        NS_LOG_DEBUG("dst Mac= "<<(int)dstMac <<"  src Mac="<<(int)srcMac<< "  Is Obss!!");
+        isObss = true;
+      }
+  }
+
+  // isObss = false;
+
   if (isObss)
     {
       if (WToDbm (params.rssiW) < m_obssPdLevel)

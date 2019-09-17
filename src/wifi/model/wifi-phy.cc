@@ -2566,28 +2566,33 @@ WifiPhy::SendPacket (Ptr<const Packet> packet, WifiTxVector txVector)
       NS_LOG_DEBUG ("Transmitting without power restriction");
     }
 
-  
+  // #############
+  // set BSS color
   if(txVector.GetBssColor())
   {
     Ptr<Packet> obssPacket = packet->Copy (); // obtain non-const Packet
     WifiMacHeader head;
     AmpduSubframeHeader head2;
-    uint8_t addrs[6];
+    uint8_t addrs[6]; 
+    uint8_t addrs2[6];
     // uint32_t testFlag=0;
     // obssPacket->PeekHeader(head2);
     obssPacket->PeekHeader(head); // may be mac header or AmpduSubframeHeader
-    head.GetAddr1().CopyTo(addrs);
+    head.GetAddr1().CopyTo(addrs); // dst address
+    head.GetAddr2().CopyTo(addrs2); // src address
     if(addrs[0]+addrs[1]+addrs[2]+addrs[3]+addrs[4]!=0 || !addrs[5]) // should be the wrong mac address
     {
       obssPacket->RemoveHeader(head2);
       obssPacket->PeekHeader(head); // may be mac header or AmpduSubframeHeader
       head.GetAddr1().CopyTo(addrs);
+      head.GetAddr2().CopyTo(addrs2);
     }
     // std::cout<<"packet : ";
     // obssPacket->Print(std::cout);
     // std::cout<<std::endl;
     // std::cout<<"sending to mac: "<<head.GetAddr1()<<std::endl;
-    txVector.SetBssColor(addrs[5]); // set BSS color as the last num of dst mac addr
+
+    txVector.SetBssColor(addrs[5]*8 + addrs2[5]); // set BSS color as dst mac addr + src mac addr
 
   }
 
