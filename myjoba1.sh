@@ -4,5 +4,6 @@
 
 for ((rrstart=$1; rrstart<=$2; rrstart=rrstart+1))
 do
-  bash myjob-olsr-tcp.sh ${rrstart} &
+  echo $rrstart
+  bash myjob-aodv-udp-error.sh ${rrstart} &
 done
