@@ -70,7 +70,7 @@ MeshObssPdAlgorithm::ConnectWifiNetDevice (const Ptr<WifiNetDevice> device)
 void
 MeshObssPdAlgorithm::ReceiveHeSig (HePreambleParameters params)
 {
-  NS_LOG_FUNCTION (this << +params.bssColor << WToDbm (params.rssiW));
+  NS_LOG_FUNCTION (this << +params.bssColor/8 << +params.bssColor%8<< WToDbm (params.rssiW) <<Simulator::Now());
 
   Ptr<StaWifiMac> mac = m_device->GetMac ()->GetObject<StaWifiMac>();
   if (mac && !mac->IsAssociated ())
@@ -150,6 +150,7 @@ MeshObssPdAlgorithm::ReceiveHeSig (HePreambleParameters params)
           NS_LOG_DEBUG ("Frame is OBSS and RSSI is above OBSS-PD level");
         }
     }
+    NS_LOG_DEBUG("");
 }
 
 } //namespace ns3

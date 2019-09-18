@@ -4,6 +4,12 @@
  * Mesh with 802.11n/ac fixed
  * WIFI_MAC_MGT_ACTION for MESH and BLOCK_ACK modulation changed
  * Flow monitor - delay
+ * 
+ * 
+ * 2*3 = 6 Nodes & 1 csma server
+ * 1 -- 2 -- 3  \
+ *               csma node
+ * 6 -- 5 -- 4  /
  */
 
 #include <iostream>
@@ -11,6 +17,7 @@
 #include <cmath>
 #include <vector>
 
+#include "ns3/test.h"
 #include "ns3/aodv-module.h"
 #include "ns3/applications-module.h"
 #include "ns3/core-module.h"
@@ -115,8 +122,8 @@ private:
   uint32_t clNum;
 
   /// Distance between nodes, meters
-  double apStep;
-  double clStep;
+  double lengthStep;
+  double widthStep;
 
   /// Simulation time, seconds
   double startTime;
@@ -207,6 +214,8 @@ private:
 
   // set BSS colotr
   void TxSetColor(std::string context, Ptr<const Packet> p, double txPowerW);
+  void CheckPhyState (Ptr<WifiNetDevice> device, WifiPhyState expectedState);
+  void SendOnePacket (Ptr<WifiNetDevice> tx_dev, Ptr<WifiNetDevice> rx_dev, uint32_t payloadSize);
 };
 
 int main (int argc, char **argv)
@@ -226,10 +235,10 @@ int main (int argc, char **argv)
 AodvExample::AodvExample () :
   rndSeed (42),
   gridSize (3),
-  apNum (2),
+  apNum (6),
   clNum (0),
-  apStep (40),
-  clStep (20),
+  lengthStep (140),
+  widthStep (280),
   startTime (1),
   totalTime (20),
   // startDelay(0.0),
@@ -260,7 +269,7 @@ AodvExample::Configure (int argc, char **argv)
   // Enable AODV logs by default. Comment this if too noisy
 //   LogComponentEnable("TsHtWifiManager", LOG_LEVEL_ALL);
   // LogComponentEnable("AodvRoutingProtocol", LOG_LEVEL_ALL);
-  LogComponentEnable("MeshObssPdAlgorithm", LOG_LEVEL_ALL);
+  // LogComponentEnable("MeshObssPdAlgorithm", LOG_LEVEL_ALL);
 
   Packet::EnablePrinting ();
 
@@ -276,8 +285,8 @@ AodvExample::Configure (int argc, char **argv)
   cmd.AddValue ("totalTime", "Simulation time, s.", totalTime);
   cmd.AddValue ("beaconInterval", "Mesh beacon interval, s.", beaconInterval);
   cmd.AddValue ("monitorInterval", "Monitor interval, s.", monitorInterval);
-  cmd.AddValue ("apStep", "AP grid step, m", apStep);
-  cmd.AddValue ("clStep", "CL grid step, m", clStep);
+  cmd.AddValue ("lengthStep", "AP grid step, m", lengthStep);
+  cmd.AddValue ("widthStep", "CL grid step, m", widthStep);
   cmd.AddValue ("app", "ping or UDP or TCP", app);
   cmd.AddValue ("datarate", "tested application datarate", datarate);
   cmd.AddValue ("anim", "Output netanim .xml file or not.", anim);
@@ -430,7 +439,7 @@ AodvExample::CreateNodes ()
 void
 AodvExample::CreateApNodes ()
 {
-  std::cout << "Creating " << (unsigned)apNum << " APs " << apStep << " m apart.\n";
+  std::cout << "Creating " << (unsigned)apNum << " APs " << lengthStep << " m length apart  "<< widthStep <<"m width apart.\n";
   apNodes.Create (apNum);
   for (uint32_t i = 0; i < apNum; ++i)
     {
@@ -443,13 +452,14 @@ AodvExample::CreateApNodes ()
   MobilityHelper mobility;
   if (locationFile.empty ())
     {
-      mobility.SetPositionAllocator ("ns3::GridPositionAllocator",
-                                     "MinX", DoubleValue (0.0),
-                                     "MinY", DoubleValue (0.0),
-                                     "DeltaX", DoubleValue (apStep),
-                                     "DeltaY", DoubleValue (apStep),
-                                     "GridWidth", UintegerValue (gridSize),
-                                     "LayoutType", StringValue ("RowFirst"));
+        Ptr<ListPositionAllocator> positionAlloc = CreateObject<ListPositionAllocator> ();
+        positionAlloc->Add (Vector (0.0, 0.0, 0.0));  // Node 1
+        positionAlloc->Add (Vector (lengthStep, 0.0, 0.0));  // 2
+        positionAlloc->Add (Vector (2*lengthStep, 0.0, 0.0));  // 3
+        positionAlloc->Add (Vector (2*lengthStep, widthStep, 0.0));  // 4
+        positionAlloc->Add (Vector (lengthStep, widthStep, 0.0));  // 5
+        positionAlloc->Add (Vector (0.0, widthStep, 0.0));  // 6
+        mobility.SetPositionAllocator (positionAlloc);
     }
   else
     {
@@ -472,7 +482,7 @@ AodvExample::CreateApNodes ()
 void
 AodvExample::CreateClNodes ()
 {
-  std::cout << "Creating " << (unsigned)clNum << " CLs " << clStep << " m away from each AP.\n";
+  std::cout << "Creating " << (unsigned)clNum << " CLs " << 30 << " m away from each AP.\n";
   for (uint32_t i = 0; i < apNum; ++i)
     {
       clNodes[i].Create (clNum);
@@ -486,7 +496,7 @@ AodvExample::CreateClNodes ()
 
       Vector center = apNodes.Get (i)->GetObject<MobilityModel> ()->GetPosition ();
       std::ostringstream randomRho;
-      randomRho << "ns3::UniformRandomVariable[Min=0|Max=" << clStep << "]";
+      randomRho << "ns3::UniformRandomVariable[Min=0|Max=" << 30 << "]";
       MobilityHelper mobility;
       mobility.SetPositionAllocator ("ns3::RandomDiscPositionAllocator",
                                      "X", DoubleValue (center.x),
@@ -522,9 +532,9 @@ void AodvExample::CreateAdhocDevices()
   wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (4));
   wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (4));
   wifiPhy.DisablePreambleDetectionModel ();
-  wifiPhy.Set ("TxPowerStart", DoubleValue (21.0));
-  wifiPhy.Set ("TxPowerEnd", DoubleValue (21.0));
-  wifiPhy.Set ("TxPowerLevels", UintegerValue (1));
+  // wifiPhy.Set ("TxPowerStart", DoubleValue (21.0));
+  // wifiPhy.Set ("TxPowerEnd", DoubleValue (21.0));
+  // wifiPhy.Set ("TxPowerLevels", UintegerValue (1));
 //   wifiPhy.Set ("ShortGuardEnabled", BooleanValue (true));
 
   WifiHelper wifi;
@@ -560,7 +570,11 @@ void AodvExample::CreateAdhocDevices()
   
 
   WifiMacHelper wifiMac;
+  // wifiMac.SetType ("ns3::AdhocWifiMac",
+  //                 "BE_MaxAmduSize", UintegerValue(65535),
+  //                 "BK_MaxAmpduSize", UintegerValue(65535));
   wifiMac.SetType ("ns3::AdhocWifiMac");
+
 
   adhocDevices = wifi.Install(wifiPhy, wifiMac, apNodes);
 
@@ -591,10 +605,10 @@ AodvExample::CreateMeshDevices ()
   wifiPhy.Set ("Antennas", UintegerValue (4));
   wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (4));
   wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (4));
-  //  wifiPhy.Set ("TxPowerStart", DoubleValue (21.0));
-  //  wifiPhy.Set ("TxPowerEnd", DoubleValue (21.0));
-  //  wifiPhy.Set ("TxPowerLevels", UintegerValue (1));
-//   wifiPhy.Set ("ShortGuardEnabled", BooleanValue (true));
+   wifiPhy.Set ("TxPowerStart", DoubleValue (21.0));
+   wifiPhy.Set ("TxPowerEnd", DoubleValue (21.0));
+   wifiPhy.Set ("TxPowerLevels", UintegerValue (1));
+  //wifiPhy.Set ("ShortGuardEnabled", BooleanValue (true));
 
   Config::SetDefault ("ns3::dot11s::PeerLink::MaxBeaconLoss", UintegerValue (20));
   Config::SetDefault ("ns3::dot11s::PeerLink::MaxRetries", UintegerValue (4));
@@ -663,15 +677,14 @@ AodvExample::CreateCsmaDevices ()
   csmaNodes.Create (1);
   MobilityHelper mobility;
   Ptr<ListPositionAllocator> positionAlloc = CreateObject<ListPositionAllocator> ();
-  positionAlloc->Add (Vector (0.0, 0.0, 0.0));
+  positionAlloc->Add (Vector (lengthStep*2, widthStep/2.0, 0.0));
   mobility.SetPositionAllocator (positionAlloc);
   mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
   mobility.Install (csmaNodes);
 
   // csmaNodes.Add (apNodes.Get ((uint32_t) apNum/2));
-  csmaNodes.Add (apNodes.Get ((uint32_t) apNum -1)); // change to a line
-  for (uint32_t i = 1; i < gateways; ++i)
-    csmaNodes.Add (apNodes.Get (i));
+  csmaNodes.Add (apNodes.Get ((uint32_t) apNum/2 - 1)); // Node 3
+  csmaNodes.Add (apNodes.Get ((uint32_t) apNum/2)); // Node 4
 
   CsmaHelper csma;
   csma.SetChannelAttribute ("DataRate", StringValue ("9999Mbps"));
@@ -728,9 +741,9 @@ void
 AodvExample::InstallInternetStack ()
 {
   AodvHelper aodv;
-  aodv.Set ("AllowedHelloLoss", UintegerValue (20));
-  aodv.Set ("HelloInterval", TimeValue (Seconds (3)));
-  aodv.Set ("RreqRetries", UintegerValue (15));
+  aodv.Set ("AllowedHelloLoss", UintegerValue (50));
+  aodv.Set ("HelloInterval", TimeValue (Seconds (1)));
+  aodv.Set ("RreqRetries", UintegerValue (50));
   aodv.Set ("ActiveRouteTimeout", TimeValue (Seconds (100)));
   aodv.Set ("DestinationOnly", BooleanValue (false));
 
@@ -750,8 +763,8 @@ AodvExample::InstallInternetStack ()
     list.Add (dsdv, 100);
   else if(route == std::string("aodv"))
     list.Add (aodv, 100);
- // else // static
-  // list.Add(staticRoutingHelper,10);
+  else // static
+    list.Add(staticRoutingHelper,10);
 
   InternetStackHelper stack;
   stack.SetRoutingHelper (list); // has effect on the next Install () and others!!
@@ -932,9 +945,189 @@ AodvExample::InstallApplications ()
             }
         }
     }
+  else if(app == std::string("udp-2"))
+    {
+      uint64_t lowDatarate = 1e5;
+        // Node 1
+        uint16_t port = 40000;
+        Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
+        PacketSinkHelper server ("ns3::UdpSocketFactory", localAddress);
+        serverApp[apNum*clNum] = server.Install (csmaNodes.Get (0)); //
+        serverApp[apNum*clNum].Start (Seconds (1.0));
+        serverApp[apNum*clNum].Stop (Seconds (totalTime + 0.1));
+        packetSink[apNum*clNum] = StaticCast<PacketSink> (serverApp[apNum*clNum].Get (0));
+
+        OnOffHelper client ("ns3::UdpSocketFactory", Address ());
+        client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
+        client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
+        client.SetAttribute ("PacketSize", UintegerValue (1472));
+        client.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (lowDatarate))));
+        client.SetAttribute ("MaxBytes", UintegerValue (0));
+        AddressValue remoteAddress (InetSocketAddress (csmaInterfaces.GetAddress (0), port)); //
+        client.SetAttribute ("Remote", remoteAddress);
+        clientApp[apNum*clNum] = client.Install (apNodes.Get (0));
+        clientApp[apNum*clNum].Start (Seconds (startTime));
+        clientApp[apNum*clNum].Stop (Seconds (totalTime + 0.1));
+
+        // Node 6
+        uint16_t port2 = 40000+apNum-1;
+        Address localAddress2 (InetSocketAddress (Ipv4Address::GetAny (), port2));
+        PacketSinkHelper server2 ("ns3::UdpSocketFactory", localAddress2);
+        serverApp[apNum*clNum+apNum-1] = server2.Install (csmaNodes.Get (0)); //
+        serverApp[apNum*clNum+apNum-1].Start (Seconds (1.0));
+        serverApp[apNum*clNum+apNum-1].Stop (Seconds (totalTime + 0.1));
+        packetSink[apNum*clNum+apNum-1] = StaticCast<PacketSink> (serverApp[apNum*clNum+apNum-1].Get (0));
+
+        OnOffHelper client2 ("ns3::UdpSocketFactory", Address ());
+        client2.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
+        client2.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
+        client2.SetAttribute ("PacketSize", UintegerValue (1472));
+        client2.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (lowDatarate))));
+        client2.SetAttribute ("MaxBytes", UintegerValue (0));
+        AddressValue remoteAddress2 (InetSocketAddress (csmaInterfaces.GetAddress (0), port2)); //
+        client2.SetAttribute ("Remote", remoteAddress2);
+        clientApp[apNum*clNum+apNum-1] = client2.Install (apNodes.Get (apNum-1));
+        clientApp[apNum*clNum+apNum-1].Start (Seconds (startTime));
+        clientApp[apNum*clNum+apNum-1].Stop (Seconds (totalTime + 0.1));
+
+      double dataDelay = 20;
+
+        // Node 1
+        uint16_t port3 = 40001;
+        Address localAddress3 (InetSocketAddress (Ipv4Address::GetAny (), port3));
+        PacketSinkHelper server3 ("ns3::UdpSocketFactory", localAddress3);
+        serverApp[apNum*clNum+1] = server3.Install (csmaNodes.Get (0)); //
+        serverApp[apNum*clNum+1].Start (Seconds (1.0));
+        serverApp[apNum*clNum+1].Stop (Seconds (totalTime + 0.1));
+        packetSink[apNum*clNum+1] = StaticCast<PacketSink> (serverApp[apNum*clNum+1].Get (0));
+
+        OnOffHelper client3 ("ns3::UdpSocketFactory", Address ());
+        client3.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
+        client3.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
+        client3.SetAttribute ("PacketSize", UintegerValue (1472));
+        client3.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (datarate))));
+        client3.SetAttribute ("MaxBytes", UintegerValue (0));
+        AddressValue remoteAddress3 (InetSocketAddress (csmaInterfaces.GetAddress (0), port3)); //
+        client3.SetAttribute ("Remote", remoteAddress3);
+        clientApp[apNum*clNum+1] = client3.Install (apNodes.Get (0));
+        clientApp[apNum*clNum+1].Start (Seconds (startTime+dataDelay));
+        clientApp[apNum*clNum+1].Stop (Seconds (totalTime + 0.1));
+
+        // Node 6
+        uint16_t port4 = 40000+apNum -2;
+        Address localAddress4 (InetSocketAddress (Ipv4Address::GetAny (), port4));
+        PacketSinkHelper server4 ("ns3::UdpSocketFactory", localAddress4);
+        serverApp[apNum*clNum+apNum-2] = server4.Install (csmaNodes.Get (0)); //
+        serverApp[apNum*clNum+apNum-2].Start (Seconds (1.0));
+        serverApp[apNum*clNum+apNum-2].Stop (Seconds (totalTime + 0.1));
+        packetSink[apNum*clNum+apNum-2] = StaticCast<PacketSink> (serverApp[apNum*clNum+apNum-2].Get (0));
+
+        OnOffHelper client4 ("ns3::UdpSocketFactory", Address ());
+        client4.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
+        client4.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
+        client4.SetAttribute ("PacketSize", UintegerValue (1472));
+        client4.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (datarate))));
+        client4.SetAttribute ("MaxBytes", UintegerValue (0));
+        AddressValue remoteAddress4 (InetSocketAddress (csmaInterfaces.GetAddress (0), port4)); //
+        client4.SetAttribute ("Remote", remoteAddress4);
+        clientApp[apNum*clNum+apNum-2] = client4.Install (apNodes.Get (apNum-1));
+        clientApp[apNum*clNum+apNum-2].Start (Seconds (dataDelay+startTime));
+        clientApp[apNum*clNum+apNum-2].Stop (Seconds (totalTime + 0.1));
 
 
 
+    }
+  else if(app == std::string("mini-test"))
+    {
+      uint8_t delay=2;
+        // Node 1
+        uint16_t port = 40000;
+        Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
+        PacketSinkHelper server ("ns3::UdpSocketFactory", localAddress);
+        serverApp[apNum*clNum] = server.Install (csmaNodes.Get (0)); //
+        serverApp[apNum*clNum].Start (Seconds (1.0));
+        serverApp[apNum*clNum].Stop (Seconds (totalTime + 0.1));
+        packetSink[apNum*clNum] = StaticCast<PacketSink> (serverApp[apNum*clNum].Get (0));
+
+        OnOffHelper client ("ns3::UdpSocketFactory", Address ());
+        client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
+        client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
+        client.SetAttribute ("PacketSize", UintegerValue (1472));
+        client.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (datarate))));
+        client.SetAttribute ("MaxBytes", UintegerValue (0));
+        AddressValue remoteAddress (InetSocketAddress (csmaInterfaces.GetAddress (0), port)); //
+        client.SetAttribute ("Remote", remoteAddress);
+        clientApp[apNum*clNum] = client.Install (apNodes.Get (0));
+        clientApp[apNum*clNum].Start (Seconds (startTime));
+        clientApp[apNum*clNum].Stop (Seconds (delay -1 + 0.1));
+
+        // Node 6
+        uint16_t port2 = 40000+apNum-1;
+        Address localAddress2 (InetSocketAddress (Ipv4Address::GetAny (), port2));
+        PacketSinkHelper server2 ("ns3::UdpSocketFactory", localAddress2);
+        serverApp[apNum*clNum+apNum-1] = server2.Install (csmaNodes.Get (0)); //
+        serverApp[apNum*clNum+apNum-1].Start (Seconds (1.0));
+        serverApp[apNum*clNum+apNum-1].Stop (Seconds (totalTime + 0.1));
+        packetSink[apNum*clNum+apNum-1] = StaticCast<PacketSink> (serverApp[apNum*clNum+apNum-1].Get (0));
+
+        OnOffHelper client2 ("ns3::UdpSocketFactory", Address ());
+        client2.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
+        client2.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
+        client2.SetAttribute ("PacketSize", UintegerValue (1472));
+        client2.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (datarate))));
+        client2.SetAttribute ("MaxBytes", UintegerValue (0));
+        AddressValue remoteAddress2 (InetSocketAddress (csmaInterfaces.GetAddress (0), port2)); //
+        client2.SetAttribute ("Remote", remoteAddress2);
+        clientApp[apNum*clNum+apNum-1] = client2.Install (apNodes.Get (apNum-1));
+        clientApp[apNum*clNum+apNum-1].Start (Seconds (startTime));
+        clientApp[apNum*clNum+apNum-1].Stop (Seconds (delay-1 + 0.1));
+
+
+
+
+
+      uint32_t payloadSize =2500;
+      Ptr<WifiNetDevice> netDevices[10];
+      for(int i=0;i<apNum;i++)
+      {
+        netDevices[i] = DynamicCast<WifiNetDevice> (adhocDevices.Get (i));
+      }
+
+      // In order to have all ADDBA handshakes established, each AP and STA sends a packet
+      Simulator::Schedule (Seconds (delay+0.25), &AodvExample::SendOnePacket, this, netDevices[0], netDevices[2], payloadSize);
+      Simulator::Schedule (Seconds (delay+0.5), &AodvExample::SendOnePacket, this, netDevices[5], netDevices[4], payloadSize);
+
+      // We test PHY state and verify whether a CCA reset did occur.
+
+      // Node 1 sends a packet 0.5s later.
+      Simulator::Schedule (Seconds (delay+2.0), &AodvExample::SendOnePacket, this, netDevices[0], netDevices[2], payloadSize);
+      Simulator::Schedule (Seconds (delay+2.0) + MicroSeconds (1), &AodvExample::CheckPhyState, this, netDevices[0], WifiPhyState::TX);
+      // All other PHYs should have stay idle until 4us (preamble detection time).
+      Simulator::Schedule (Seconds (delay+2.0) + MicroSeconds (2), &AodvExample::CheckPhyState, this, netDevices[1], WifiPhyState::IDLE);
+      Simulator::Schedule (Seconds (delay+2.0) + MicroSeconds (2), &AodvExample::CheckPhyState, this, netDevices[2], WifiPhyState::IDLE);
+      Simulator::Schedule (Seconds (delay+2.0) + MicroSeconds (2), &AodvExample::CheckPhyState, this, netDevices[5], WifiPhyState::IDLE);
+      // All PHYs should be receiving the PHY header if preamble has been detected (always the case in this test).
+      Simulator::Schedule (Seconds (delay+2.0) + MicroSeconds (10), &AodvExample::CheckPhyState, this, netDevices[5], WifiPhyState::RX);
+      // PHYs of AP1 and STA1 should be idle if they were reset by OBSS_PD SR, otherwise they should be receiving.
+      Simulator::Schedule (Seconds (delay+2.0) + MicroSeconds (50), &AodvExample::CheckPhyState, this, netDevices[5], WifiPhyState::IDLE);
+      // STA2 should be receiving
+      Simulator::Schedule (Seconds (delay+2.0) + MicroSeconds (150), &AodvExample::CheckPhyState, this, netDevices[1], WifiPhyState::RX);
+
+      // We test whether two networks can transmit simultaneously, and whether transmit power restrictions are applied.
+
+      // Node 6 sends another packet 0.1s later.
+      Simulator::Schedule (Seconds (delay+2.1), &AodvExample::SendOnePacket, this, netDevices[0], netDevices[1], payloadSize);
+      // STA1 sends a packet 100us later. Even though AP2 is still transmitting, STA1 can transmit simultaneously if it's PHY was reset by OBSS_PD SR.
+      Simulator::Schedule (Seconds (delay+2.1) + MicroSeconds (120), &AodvExample::SendOnePacket, this, netDevices[5], netDevices[4], payloadSize);
+      // Check simultaneous transmissions
+      Simulator::Schedule (Seconds (delay+2.1) + MicroSeconds (125), &AodvExample::CheckPhyState, this, netDevices[0],WifiPhyState::TX );
+      Simulator::Schedule (Seconds (delay+2.1) + MicroSeconds (125), &AodvExample::CheckPhyState, this, netDevices[1], WifiPhyState::RX);
+      Simulator::Schedule (Seconds (delay+2.1) + MicroSeconds (125), &AodvExample::CheckPhyState, this, netDevices[4], WifiPhyState::RX);
+      Simulator::Schedule (Seconds (delay+2.1) + MicroSeconds (125), &AodvExample::CheckPhyState, this, netDevices[5], WifiPhyState::TX);
+
+
+    }
+  
   std::cout << "Gateway is connect to AP 0\n";
   std::cout << "InstallApplications () DONE !!!\n";
 
@@ -957,21 +1150,27 @@ AodvExample::ReadLocations ()
     }
 }
 
-// void
-// AodvExample::TxSetColor (std::string context, Ptr<const Packet> p, double txPowerW)
-// {
-//   uint32_t idx = ConvertContextToNodeId (context);
-//   std::cout <<"Node: "<<idx <<"  "<<  p << std::endl;
-//   // p->Print(std::cout);
-//   // std::cout<<std::endl;
-//   WifiMacHeader head;
-//   p->PeekHeader(head);
-//   std::cout<< head.GetAddr1() <<std::endl;
-//   Ptr<WifiNetDevice> device = DynamicCast<WifiNetDevice> (adhocDevices.Get (idx));
-//   Ptr<HeConfiguration> heConfiguration = device->GetHeConfiguration ();
-//   if(idx)
-//     heConfiguration->SetAttribute ("BssColor", UintegerValue (42));
-//   else
-//     heConfiguration->SetAttribute ("BssColor", UintegerValue (40));
-//   return;
-// }
+void
+AodvExample::CheckPhyState (Ptr<WifiNetDevice> device, WifiPhyState expectedState)
+{
+  WifiPhyState currentState;
+  PointerValue ptr;
+  Ptr<WifiPhy> phy = DynamicCast<WifiPhy> (device->GetPhy ());
+  phy->GetAttribute ("State", ptr);
+  Ptr <WifiPhyStateHelper> state = DynamicCast <WifiPhyStateHelper> (ptr.Get<WifiPhyStateHelper> ());
+  currentState = state->GetState ();
+  if(currentState!=expectedState)
+    std::cout <<"IP = "<< device->GetAddress()<<"  PHY State " << currentState << " does not match expected state " << expectedState << " at " << Simulator::Now () << std::endl;
+  else
+  {
+    std::cout <<"IP = "<< device->GetAddress()<<"  PHY State " << currentState << " does match expected state " << expectedState << " at " << Simulator::Now () << "!!!!!!!"<< std::endl;
+  }
+  
+}
+
+void
+AodvExample::SendOnePacket (Ptr<WifiNetDevice> tx_dev, Ptr<WifiNetDevice> rx_dev, uint32_t payloadSize)
+{
+  Ptr<Packet> p = Create<Packet> (payloadSize);
+  tx_dev->Send (p, rx_dev->GetAddress (), 1);
+}
