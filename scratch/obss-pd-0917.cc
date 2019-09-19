@@ -1105,7 +1105,7 @@ AodvExample::InstallApplications ()
 
       uint32_t payloadSize =2500;
       Ptr<WifiNetDevice> netDevices[10];
-      for(int i=0;i<apNum;i++)
+      for(uint32_t i=0;i<apNum;i++)
       {
         netDevices[i] = DynamicCast<WifiNetDevice> (adhocDevices.Get (i));
       }

@@ -1,1 +1,13 @@
-./waf --run "obss-pd-0917 --macType=adhoc --rateControl=const -datarate=14e6 -obssAlgo=none -obssLevel=-62 --app=udp-new -route=static --totalTime=140 -rndSeed=15 -lengthStep=25 -widthStep=70 -heMcs=HeMcs4"
+./waf --run "obss-pd-0917 --macType=adhoc --rateControl=const --datarate=35e6 --obssAlgo=none --obssLevel=-62 --app=udp-new --route=static --totalTime=400 --rndSeed=1 --lengthStep=25 --widthStep=200 --heMcs=HeMcs4" &> 1.txt
+
+./waf --run "obss-pd-0917 --macType=adhoc --rateControl=const --datarate=35e6 --obssAlgo=mesh --obssLevel=-62 --app=udp-new --route=static --totalTime=400 --rndSeed=15 --lengthStep=25 --widthStep=200 --heMcs=HeMcs4" &> 2.txt
+
+./waf --run "obss-pd-0917 --macType=adhoc --rateControl=const --datarate=35e6 --obssAlgo=none --obssLevel=-62 --app=udp-new -route=static --totalTime=400 --rndSeed=15 --lengthStep=25 --widthStep=70 --heMcs=HeMcs4" &> 3.txt
+
+./waf --run "obss-pd-0917 --macType=adhoc --rateControl=const --datarate=35e6 --obssAlgo=mesh --obssLevel=-62 --app=udp-new --route=static --totalTime=400 --rndSeed=15 --lengthStep=25 --widthStep=70 --heMcs=HeMcs4" &> 4.txt
+
+./waf --run "obss-pd-0917 --macType=adhoc --rateControl=const --datarate=35e6 --obssAlgo=mesh --obssLevel=-62 --app=udp-new --route=static --totalTime=400 --rndSeed=15 --lengthStep=25 --widthStep=70 --heMcs=HeMcs3" &> 5.txt
+
+./waf --run "obss-pd-0917 --macType=adhoc --rateControl=const --datarate=35e6 --obssAlgo=mesh --obssLevel=-62 --app=udp-new --route=static --totalTime=400 --rndSeed=15 --lengthStep=25 --widthStep=70 --heMcs=HeMcs2" &> 6.txt
+
+./waf --run "obss-pd-0917 --macType=adhoc --rateControl=const --datarate=35e6 --obssAlgo=mesh --obssLevel=-62 --app=udp-new --route=static --totalTime=400 --rndSeed=15 --lengthStep=25 --widthStep=70 --heMcs=HeMcs1" &> 7.txt
