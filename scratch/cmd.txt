@@ -1,0 +1,1 @@
+./waf --run "obss-pd-0917 --macType=adhoc --rateControl=const -datarate=50e6 -obssAlgo=none -obssLevel=-62 --app=udp-2 -route=static --totalTime=35 -rndSeed=142 -lengthStep=20 -widthStep=80"
