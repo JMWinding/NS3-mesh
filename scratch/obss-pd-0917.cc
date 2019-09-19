@@ -186,6 +186,7 @@ private:
   // obss setting
   std::string obssAlgo;
   double obssLevel;
+  std::string heMcs;
 
 private:
   void CreateVariables ();
@@ -259,7 +260,8 @@ AodvExample::AodvExample () :
   flowout ("test.xml"),
   macType("mesh"),
   obssAlgo("const"),
-  obssLevel(-100)
+  obssLevel(-100),
+  heMcs("HeMcs4")
 {
 }
 
@@ -301,6 +303,7 @@ AodvExample::Configure (int argc, char **argv)
   cmd.AddValue ("macType", "type of mac --mesh/adhoc", macType);
   cmd.AddValue ("obssAlgo", "chose obss pd algorithm", obssAlgo);
   cmd.AddValue ("obssLevel", "obss pd current level ", obssLevel);
+  cmd.AddValue ("heMcs", "constant Mcs", heMcs);
   // cmd.AddValue ("startDelay", "delay after start time for transmiting tcp", startDelay);
 
   cmd.Parse (argc, argv);
@@ -556,7 +559,7 @@ void AodvExample::CreateAdhocDevices()
   else
     wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
                                   "ControlMode", StringValue ("HeMcs0"),
-                                  "DataMode", StringValue ("HeMcs4"),
+                                  "DataMode", StringValue (heMcs),
                                   "RtsCtsThreshold", UintegerValue (99999));
                                   
   if(obssAlgo==std::string("const"))                                
@@ -1138,9 +1141,56 @@ AodvExample::InstallApplications ()
       Simulator::Schedule (Seconds (delay+2.1) + MicroSeconds (125), &AodvExample::CheckPhyState, this, netDevices[1], WifiPhyState::RX);
       Simulator::Schedule (Seconds (delay+2.1) + MicroSeconds (125), &AodvExample::CheckPhyState, this, netDevices[4], WifiPhyState::RX);
       Simulator::Schedule (Seconds (delay+2.1) + MicroSeconds (125), &AodvExample::CheckPhyState, this, netDevices[5], WifiPhyState::TX);
-
-
     }
+  else if(app==std::string("udp-new"))
+  {
+    // Node 1
+        uint16_t port = 40000;
+        Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
+        PacketSinkHelper server ("ns3::UdpSocketFactory", localAddress);
+        serverApp[apNum*clNum] = server.Install (csmaNodes.Get (0)); //
+        serverApp[apNum*clNum].Start (Seconds (1.0));
+        serverApp[apNum*clNum].Stop (Seconds (totalTime + 0.1));
+        packetSink[apNum*clNum] = StaticCast<PacketSink> (serverApp[apNum*clNum].Get (0));
+
+        OnOffHelper client ("ns3::UdpSocketFactory", Address ());
+        client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
+        client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
+        client.SetAttribute ("PacketSize", UintegerValue (1472));
+        client.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (1e5))));
+        client.SetAttribute ("MaxBytes", UintegerValue (0));
+        AddressValue remoteAddress (InetSocketAddress (csmaInterfaces.GetAddress (0), port)); //
+        client.SetAttribute ("Remote", remoteAddress);
+        clientApp[apNum*clNum] = client.Install (apNodes.Get (0));
+        clientApp[apNum*clNum].Start (Seconds (startTime));
+        clientApp[apNum*clNum].Stop (Seconds (totalTime + 0.1));
+
+        // Node 6
+        uint16_t port2 = 40000+apNum-1;
+        Address localAddress2 (InetSocketAddress (Ipv4Address::GetAny (), port2));
+        PacketSinkHelper server2 ("ns3::UdpSocketFactory", localAddress2);
+        serverApp[apNum*clNum+apNum-1] = server2.Install (csmaNodes.Get (0)); //
+        serverApp[apNum*clNum+apNum-1].Start (Seconds (1.0));
+        serverApp[apNum*clNum+apNum-1].Stop (Seconds (totalTime + 0.1));
+        packetSink[apNum*clNum+apNum-1] = StaticCast<PacketSink> (serverApp[apNum*clNum+apNum-1].Get (0));
+
+        OnOffHelper client2 ("ns3::UdpSocketFactory", Address ());
+        client2.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
+        client2.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
+        client2.SetAttribute ("PacketSize", UintegerValue (1472));
+        client2.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (1e5))));
+        client2.SetAttribute ("MaxBytes", UintegerValue (0));
+        AddressValue remoteAddress2 (InetSocketAddress (csmaInterfaces.GetAddress (0), port2)); //
+        client2.SetAttribute ("Remote", remoteAddress2);
+        clientApp[apNum*clNum+apNum-1] = client2.Install (apNodes.Get (apNum-1));
+        clientApp[apNum*clNum+apNum-1].Start (Seconds (startTime));
+        clientApp[apNum*clNum+apNum-1].Stop (Seconds (totalTime + 0.1));
+
+        for(int idx=1;idx<=datarate/1e6;idx++)
+        {
+          Simulator::Schedule(Seconds(idx*10),Config::Set,"/NodeList/*/ApplicationList/*/$ns3::OnOffApplication/DataRate",DataRateValue (DataRate ((uint64_t) (1e6*idx))));
+        }
+  }
   
   std::cout << "Gateway is connect to AP 0\n";
   std::cout << "InstallApplications () DONE !!!\n";
