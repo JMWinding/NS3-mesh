@@ -528,9 +528,9 @@ void AodvExample::CreateAdhocDevices()
   YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
   wifiPhy.SetChannel (wifiChannel.Create ());
   wifiPhy.Set ("ChannelNumber", UintegerValue (38));
-  wifiPhy.Set ("Antennas", UintegerValue (4));
-  wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (4));
-  wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (4));
+  wifiPhy.Set ("Antennas", UintegerValue (1));
+  wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (1));
+  wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (1));
   wifiPhy.DisablePreambleDetectionModel ();
   // wifiPhy.Set ("TxPowerStart", DoubleValue (21.0));
   // wifiPhy.Set ("TxPowerEnd", DoubleValue (21.0));
