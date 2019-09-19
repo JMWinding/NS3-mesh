@@ -324,7 +324,7 @@ AodvExample::Run ()
 
   // #####
   // no need, if we do not use global routing helper
-  // Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+  Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
 
   // #####
   // may not work with mesh
@@ -805,17 +805,31 @@ AodvExample::InstallInternetStack ()
   if(route == std::string("static"))
   {
     NodeContainer::Iterator iter;
-    std::ostringstream os;
-    os << "10.1.1." << (int)( apNum/2 +1);
-    for (iter = apNodes.Begin (); iter != apNodes.End (); iter++)
-      {
-        Ptr<Ipv4StaticRouting> staticRouting;
-        staticRouting = Ipv4RoutingHelper::GetRouting <Ipv4StaticRouting> ((*iter)->GetObject<Ipv4> ()->GetRoutingProtocol ());
-        staticRouting->SetDefaultRoute (os.str().c_str(), 1 ); // 0 for loopback , 1 for mesh
-      }
+    Ptr<Ipv4StaticRouting> staticRouting;
+    // std::ostringstream os;
+    // os << "10.1.1." << (int)( apNum/2 +1);
+    // for (iter = apNodes.Begin (); iter != apNodes.End (); iter++)
+    //   {
+    //     Ptr<Ipv4StaticRouting> staticRouting;
+    //     staticRouting = Ipv4RoutingHelper::GetRouting <Ipv4StaticRouting> ((*iter)->GetObject<Ipv4> ()->GetRoutingProtocol ());
+    //     staticRouting->SetDefaultRoute (os.str().c_str(), 1 ); // 0 for loopback , 1 for mesh
+    //   }
+    staticRouting = Ipv4RoutingHelper::GetRouting <Ipv4StaticRouting>  (apNodes.Get(0)->GetObject<Ipv4>()->GetRoutingProtocol() );
+    staticRouting->AddHostRouteTo("10.2.1.1","10.1.1.2",1);
+    staticRouting = Ipv4RoutingHelper::GetRouting <Ipv4StaticRouting>  (apNodes.Get(1)->GetObject<Ipv4>()->GetRoutingProtocol() );
+    staticRouting->AddHostRouteTo("10.2.1.1","10.1.1.3",1);
+    staticRouting = Ipv4RoutingHelper::GetRouting <Ipv4StaticRouting>  (apNodes.Get(2)->GetObject<Ipv4>()->GetRoutingProtocol() );
+    staticRouting->AddHostRouteTo("10.2.1.1",2);
+
+    staticRouting = Ipv4RoutingHelper::GetRouting <Ipv4StaticRouting>  (apNodes.Get(5)->GetObject<Ipv4>()->GetRoutingProtocol() );
+    staticRouting->AddHostRouteTo("10.2.1.1","10.1.1.5",1);
+    staticRouting = Ipv4RoutingHelper::GetRouting <Ipv4StaticRouting>  (apNodes.Get(4)->GetObject<Ipv4>()->GetRoutingProtocol() );
+    staticRouting->AddHostRouteTo("10.2.1.1","10.1.1.4",1);
+    staticRouting = Ipv4RoutingHelper::GetRouting <Ipv4StaticRouting>  (apNodes.Get(3)->GetObject<Ipv4>()->GetRoutingProtocol() );
+    staticRouting->AddHostRouteTo("10.2.1.1",2);
+
     // set csmaNodes(0) , the server
     iter = csmaNodes.Begin();
-    Ptr<Ipv4StaticRouting> staticRouting;
     staticRouting = Ipv4RoutingHelper::GetRouting <Ipv4StaticRouting> ((*iter)->GetObject<Ipv4> ()->GetRoutingProtocol ());
     staticRouting->SetDefaultRoute ("10.2.1.2", 1 );
 
