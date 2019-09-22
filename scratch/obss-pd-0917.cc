@@ -270,6 +270,7 @@ AodvExample::Configure (int argc, char **argv)
 {
   // Enable AODV logs by default. Comment this if too noisy
 //   LogComponentEnable("TsHtWifiManager", LOG_LEVEL_ALL);
+  // LogComponentEnable("OlsrRoutingProtocol", LOG_LEVEL_ALL);
   // LogComponentEnable("AodvRoutingProtocol", LOG_LEVEL_ALL);
   // LogComponentEnable("MeshObssPdAlgorithm", LOG_LEVEL_ALL);
 
@@ -821,20 +822,25 @@ AodvExample::InstallInternetStack ()
     staticRouting->AddHostRouteTo("10.2.1.1","10.1.1.2",1);
     staticRouting = Ipv4RoutingHelper::GetRouting <Ipv4StaticRouting>  (apNodes.Get(1)->GetObject<Ipv4>()->GetRoutingProtocol() );
     staticRouting->AddHostRouteTo("10.2.1.1","10.1.1.3",1);
+    staticRouting->AddHostRouteTo("10.1.1.1", 1);
     staticRouting = Ipv4RoutingHelper::GetRouting <Ipv4StaticRouting>  (apNodes.Get(2)->GetObject<Ipv4>()->GetRoutingProtocol() );
     staticRouting->AddHostRouteTo("10.2.1.1",2);
+    staticRouting->AddHostRouteTo("10.1.1.1", "10.1.1.2", 1);
 
     staticRouting = Ipv4RoutingHelper::GetRouting <Ipv4StaticRouting>  (apNodes.Get(5)->GetObject<Ipv4>()->GetRoutingProtocol() );
     staticRouting->AddHostRouteTo("10.2.1.1","10.1.1.5",1);
     staticRouting = Ipv4RoutingHelper::GetRouting <Ipv4StaticRouting>  (apNodes.Get(4)->GetObject<Ipv4>()->GetRoutingProtocol() );
     staticRouting->AddHostRouteTo("10.2.1.1","10.1.1.4",1);
+    staticRouting->AddHostRouteTo("10.1.1.6", 1);
     staticRouting = Ipv4RoutingHelper::GetRouting <Ipv4StaticRouting>  (apNodes.Get(3)->GetObject<Ipv4>()->GetRoutingProtocol() );
+    staticRouting->AddHostRouteTo("10.1.1.6","10.1.1.5",1);
     staticRouting->AddHostRouteTo("10.2.1.1",2);
 
     // set csmaNodes(0) , the server
     iter = csmaNodes.Begin();
     staticRouting = Ipv4RoutingHelper::GetRouting <Ipv4StaticRouting> ((*iter)->GetObject<Ipv4> ()->GetRoutingProtocol ());
-    staticRouting->SetDefaultRoute ("10.2.1.2", 1 );
+    staticRouting->AddHostRouteTo("10.1.1.1", "10.2.1.2", 1);
+    staticRouting->AddHostRouteTo("10.1.1.6", "10.2.1.3", 1);
 
     std::cout<< "Static Routing Rules Set.\n";
   }
@@ -1175,6 +1181,55 @@ AodvExample::InstallApplications ()
         packetSink[apNum*clNum+apNum-1] = StaticCast<PacketSink> (serverApp[apNum*clNum+apNum-1].Get (0));
 
         OnOffHelper client2 ("ns3::UdpSocketFactory", Address ());
+        client2.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
+        client2.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
+        client2.SetAttribute ("PacketSize", UintegerValue (1472));
+        client2.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (1e5))));
+        client2.SetAttribute ("MaxBytes", UintegerValue (0));
+        AddressValue remoteAddress2 (InetSocketAddress (csmaInterfaces.GetAddress (0), port2)); //
+        client2.SetAttribute ("Remote", remoteAddress2);
+        clientApp[apNum*clNum+apNum-1] = client2.Install (apNodes.Get (apNum-1));
+        clientApp[apNum*clNum+apNum-1].Start (Seconds (startTime));
+        clientApp[apNum*clNum+apNum-1].Stop (Seconds (totalTime + 0.1));
+
+        for(int idx=1;idx<=datarate/1e6;idx++)
+        {
+          Simulator::Schedule(Seconds(idx*10),Config::Set,"/NodeList/*/ApplicationList/*/$ns3::OnOffApplication/DataRate",DataRateValue (DataRate ((uint64_t) (1e6*idx))));
+        }
+  }
+  else if (app==std::string("tcp-new"))
+  {
+        // Node 1
+        uint16_t port = 40000;
+        Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
+        PacketSinkHelper server ("ns3::TcpSocketFactory", localAddress);
+        serverApp[apNum*clNum] = server.Install (csmaNodes.Get (0)); //
+        serverApp[apNum*clNum].Start (Seconds (1.0));
+        serverApp[apNum*clNum].Stop (Seconds (totalTime + 0.1));
+        packetSink[apNum*clNum] = StaticCast<PacketSink> (serverApp[apNum*clNum].Get (0));
+
+        OnOffHelper client ("ns3::TcpSocketFactory", Address ());
+        client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
+        client.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
+        client.SetAttribute ("PacketSize", UintegerValue (1472));
+        client.SetAttribute ("DataRate", DataRateValue (DataRate ((uint64_t) (1e5))));
+        client.SetAttribute ("MaxBytes", UintegerValue (0));
+        AddressValue remoteAddress (InetSocketAddress (csmaInterfaces.GetAddress (0), port)); //
+        client.SetAttribute ("Remote", remoteAddress);
+        clientApp[apNum*clNum] = client.Install (apNodes.Get (0));
+        clientApp[apNum*clNum].Start (Seconds (startTime));
+        clientApp[apNum*clNum].Stop (Seconds (totalTime + 0.1));
+
+        // Node 6
+        uint16_t port2 = 40000+apNum-1;
+        Address localAddress2 (InetSocketAddress (Ipv4Address::GetAny (), port2));
+        PacketSinkHelper server2 ("ns3::TcpSocketFactory", localAddress2);
+        serverApp[apNum*clNum+apNum-1] = server2.Install (csmaNodes.Get (0)); //
+        serverApp[apNum*clNum+apNum-1].Start (Seconds (1.0));
+        serverApp[apNum*clNum+apNum-1].Stop (Seconds (totalTime + 0.1));
+        packetSink[apNum*clNum+apNum-1] = StaticCast<PacketSink> (serverApp[apNum*clNum+apNum-1].Get (0));
+
+        OnOffHelper client2 ("ns3::TcpSocketFactory", Address ());
         client2.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
         client2.SetAttribute ("OffTime", StringValue ("ns3::ConstantRandomVariable[Constant=0]"));
         client2.SetAttribute ("PacketSize", UintegerValue (1472));
