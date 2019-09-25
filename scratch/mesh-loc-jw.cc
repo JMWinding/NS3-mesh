@@ -92,7 +92,6 @@ public:
 
 private:
   // Simulation parameters
-  uint32_t rndSeed;
   double totalTime;
   double monitorInterval;
   bool anim;
@@ -105,8 +104,10 @@ private:
   uint32_t apNum;
   double apXStep;
   double apYStep;
+  double clStep;
   std::string gateways;
   // MAC parameters
+  bool linkFail;
   std::string mac;
   // Rate adaptation parameters
   std::string rateControl;
@@ -116,8 +117,11 @@ private:
   bool printRoutes;
   // App parameters
   std::string app;
+  std::string appl;
+  bool aptx;
   double startTime;
   double datarate;
+  bool datarateUp;
 
   // network
   /// nodes used in the example
@@ -132,8 +136,8 @@ private:
   Ipv4InterfaceContainer apInterfaces;
   Ipv4InterfaceContainer clInterfaces;
   /// application
-  ApplicationContainer serverApp;
-  ApplicationContainer clientApp;
+  ApplicationContainer serverApps;
+  ApplicationContainer clientApps;
   /// specified real implementation
   std::vector<std::vector<double>> locations;
   NodeContainer csmaNodes;
@@ -176,7 +180,6 @@ int main (int argc, char **argv)
 //-----------------------------------------------------------------------------
 AodvExample::AodvExample () :
   // Simulation parameters
-  rndSeed (1),
   totalTime (100),
   monitorInterval (1),
   anim (false),
@@ -189,19 +192,24 @@ AodvExample::AodvExample () :
   apNum (2),
   apXStep (20),
   apYStep (30),
+  clStep (20),
   gateways ("0"),
   // MAC parameters
+  linkFail (false),
   mac ("mesh"),
   // Rate adaptation parameters
   rateControl ("constant"),
-  constantRate ("HtMcs0"),
+  constantRate ("VhtMcs0"),
   // Routing parameters
   route ("aodv"),
   printRoutes ("false"),
   // App parameters
   app ("tcp"),
+  appl ("1"),
+  aptx (true),
   startTime (10),
-  datarate (1e6)
+  datarate (1e6),
+  datarateUp (false)
 {
 }
 
@@ -213,35 +221,38 @@ AodvExample::Configure (int argc, char **argv)
 
   CommandLine cmd;
 
-  cmd.AddValue ("rndSeed", "Random Seed", rndSeed);
-  cmd.AddValue ("pcap", "Write PCAP traces.", pcap);
-  cmd.AddValue ("flowout", "Result output directory", flowout);
   cmd.AddValue ("totalTime", "Simulation time, s.", totalTime);
   cmd.AddValue ("monitorInterval", "Monitor interval, s.", monitorInterval);
   cmd.AddValue ("anim", "Output netanim .xml file or not.", anim);
+  cmd.AddValue ("flowout", "Result output directory", flowout);
+  cmd.AddValue ("pcap", "Write PCAP traces.", pcap);
 
   cmd.AddValue ("locationFile", "Location file name.", locationFile);
+  cmd.AddValue ("scale", "Ratio between experiment and simulation.", scale);
   cmd.AddValue ("gridSize", "Size of AP grid.", gridSize);
   cmd.AddValue ("apNum", "Number of AP nodes.", apNum);
-  cmd.AddValue ("apXStep", "AP grid X step, m", apXStep);
-  cmd.AddValue ("apYStep", "AP grid Y step, m", apYStep);
-
-  cmd.AddValue ("beaconInterval", "Mesh beacon interval, s.", beaconInterval);
-
-  cmd.AddValue ("app", "ping or UDP or TCP", app);
-  cmd.AddValue ("datarate", "tested application datarate", datarate);
-  cmd.AddValue ("startTime", "Application start time, s.", startTime);
-
+  cmd.AddValue ("apXStep", "AP grid X step, m.", apXStep);
+  cmd.AddValue ("apYStep", "AP grid Y step, m.", apYStep);
+  cmd.AddValue ("clStep", "CL range around AP.", clStep);
   cmd.AddValue ("gateways", "Index of gateway AP.", gateways);
-  cmd.AddValue ("scale", "Ratio between experiment and simulation.", scale);
 
-  cmd.AddValue ("route", "Routing protocol", route);
+  cmd.AddValue ("linkFail", "Enable link failure model or not.", linkFail);
+  cmd.AddValue ("mac", "MAC type", mac);
+
+  cmd.AddValue ("rateControl", "Rate control--constant/ideal/minstrel.", rateControl);
+  cmd.AddValue ("constantRate", "Rate used for ConstantRateManager.", constantRate);
+
+  cmd.AddValue ("route", "Routing protocol.", route);
   cmd.AddValue ("printRoutes", "Print routing table dumps.", printRoutes);
-  cmd.AddValue ("rateControl", "Rate control--constant/ideal/minstrel", rateControl);
+
+  cmd.AddValue ("app", "UDP or TCP.", app);
+  cmd.AddValue ("appl", "Index of nodes with application.", appl);
+  cmd.AddValue ("aptx", "Install application on AP or CL.", aptx);
+  cmd.AddValue ("startTime", "Application start time, s.", startTime);
+  cmd.AddValue ("datarate", "Tested application datarate.", datarate);
+  cmd.AddValue ("datarateUp", "Increase datarate or not.", datarateUp);
 
   cmd.Parse (argc, argv);
-
-  SeedManager::SetSeed (rndSeed);
 
   return true;
 }
@@ -339,7 +350,8 @@ AodvExample::CreateNodes ()
 void
 AodvExample::CreateApNodes ()
 {
-  std::cout << "Creating " << (unsigned)apNum << " APs " << apStep << " m apart.\n";
+  std::cout << "Creating " << (unsigned)apNum << " APs "
+            << apXStep << " and " << apYStep << " m apart.\n";
   apNodes.Create (apNum);
   for (uint32_t i = 0; i < apNum; ++i)
     {
@@ -386,6 +398,7 @@ AodvExample::CreateClNodes ()
     {
       NodeContainer nodes;
       nodes.Create (1);
+      std::ostringstream os;
       os << "cl-" << i;
       Names::Add (os.str(), nodes.Get (0));
 
@@ -420,6 +433,24 @@ void
 AodvExample::CreateMeshDevices ()
 {
   YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
+  if (linkFail)
+    {
+      wifiChannel.AddPropagationLoss ("ns3::LinkBreakPropagationLossModel",
+                                      "Start", DoubleValue (60),
+                                      "End", DoubleValue (1e3),
+                                      "BreakProb", DoubleValue (0.05),
+                                      "Period", StringValue ("ns3::ConstantRandomVariable[Constant=5.0]"));
+      wifiChannel.AddPropagationLoss ("ns3::NodeDownPropagationLossModel",
+                                      "Start", DoubleValue (60),
+                                      "End", DoubleValue (1e3),
+                                      "DownProb", DoubleValue (0.05),
+                                      "Period", StringValue ("ns3::ConstantRandomVariable[Constant=5.0]"));
+      wifiChannel.AddPropagationLoss ("ns3::ChannelChangePropagationLossModel",
+                                      "Start", DoubleValue (60),
+                                      "End", DoubleValue (1e3),
+                                      "Amplitude", StringValue ("ns3::NormalRandomVariable[Mean=0.0|Variance=3.0|Bound=6.0]"),
+                                      "Period", StringValue ("ns3::ConstantRandomVariable[Constant=5.0]"));
+    }
 
   YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
   wifiPhy.SetChannel (wifiChannel.Create ());
@@ -451,8 +482,6 @@ AodvExample::CreateMeshDevices ()
       MeshHelper mesh = MeshHelper::Default ();
       mesh.SetStackInstaller ("ns3::Dot11sStack");
       mesh.SetSpreadInterfaceChannels (MeshHelper::ZERO_CHANNEL);
-      mesh.SetMacType ("RandomStart", TimeValue (Seconds (startTime)),
-                       "BeaconInterval", TimeValue (Seconds (beaconInterval)));
       mesh.SetStandard (WIFI_PHY_STANDARD_80211ac);
       if (rateControl == std::string ("ideal"))
         mesh.SetRemoteStationManager ("ns3::IdealWifiManager",
@@ -521,8 +550,8 @@ AodvExample::CreateCsmaDevices ()
   while (ss >> temp)
     array.push_back (temp);
 
-  for (uint32_t i = 1; i < array.size (); ++i)
-    csmaNodes.Add (apNodes.Get (vector[i]));
+  for (uint32_t i = 0; i < array.size (); ++i)
+    csmaNodes.Add (apNodes.Get (array[i]));
 
   CsmaHelper csma;
   csma.SetChannelAttribute ("DataRate", StringValue ("9999Mbps"));
@@ -545,9 +574,7 @@ AodvExample::CreateWifiDevices ()
 
   WifiHelper wifi;
   wifi.SetStandard (WIFI_PHY_STANDARD_80211n_2_4GHZ);
-  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-                                "ControlMode", StringValue ("HtMcs0"),
-                                "DataMode", StringValue ("HtMcs7"),
+  wifi.SetRemoteStationManager ("ns3::MinstrelHtWifiManager",
                                 "RtsCtsThreshold", UintegerValue (99999));
 
   WifiMacHelper wifiMac;
@@ -567,7 +594,7 @@ AodvExample::CreateWifiDevices ()
       // client
       wifiMac.SetType ("ns3::StaWifiMac",
                        "Ssid", SsidValue (ssid));
-      devices = wifi.Install (wifiPhy, wifiMac, clNodes[i]);
+      devices = wifi.Install (wifiPhy, wifiMac, clNodes.Get (i));
       clDevices.Add (devices);
     }
 
@@ -600,12 +627,9 @@ AodvExample::InstallInternetStack ()
   stack.SetRoutingHelper (list); // has effect on the next Install ()
   stack.Install (apNodes);
   stack.SetRoutingHelper (list); // has effect on the next Install ()
+  stack.Install (clNodes);
+  stack.SetRoutingHelper (list); // has effect on the next Install ()
   stack.Install (csmaNodes.Get (0));
-  for (uint32_t i = 0; i < apNum; ++i)
-    {
-      stack.SetRoutingHelper (list);
-      stack.Install (clNodes[i]);
-    }
 
   Ipv4AddressHelper address;
   address.SetBase ("10.1.1.0", "255.255.255.0");
@@ -617,7 +641,7 @@ AodvExample::InstallInternetStack ()
       Ipv4InterfaceContainer interfaces;
 
       std::ostringstream os;
-      os << "10.1." << 10+i << ".0";
+      os << "10.1." << 11+i << ".0";
       address.SetBase (os.str ().c_str (), "255.255.255.0");
       interfaces = address.Assign (apDevices.Get (i));
       apInterfaces.Add (interfaces);
@@ -631,20 +655,31 @@ AodvExample::InstallInternetStack ()
 void
 AodvExample::InstallApplications ()
 {
+  ApplicationContainer apps;
+  Ptr<UniformRandomVariable> x = CreateObject<UniformRandomVariable> ();
+  x->SetAttribute ("Min", DoubleValue (0.0));
+  x->SetAttribute ("Max", DoubleValue (0.1));
+
+  std::replace (appl.begin (), appl.end (), '+', ' ');
+  std::vector<int> array;
+  std::stringstream ss(appl);
+  uint32_t temp;
+  while (ss >> temp)
+    array.push_back (temp);
+
   if (app == std::string("udp"))
     {
-      for (uint32_t i = 0; i < apNum; ++i)
+      for (uint32_t j = 0; j < array.size(); ++j)
         {
-          ApplicationContainer apps;
-
+          uint32_t i = array[j];
           uint16_t port = 50000+i;
           Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
           PacketSinkHelper server ("ns3::UdpSocketFactory", localAddress);
           apps = server.Install (csmaNodes.Get (0)); //
-          apps.Start (Seconds (1.0));
+          apps.Start (Seconds (0.1));
           apps.Stop (Seconds (totalTime + 0.1));
           packetSink[i] = StaticCast<PacketSink> (apps.Get (0));
-          serverApp.Add (apps);
+          serverApps.Add (apps);
 
           OnOffHelper client ("ns3::UdpSocketFactory", Address ());
           client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
@@ -654,27 +689,29 @@ AodvExample::InstallApplications ()
           client.SetAttribute ("MaxBytes", UintegerValue (0));
           AddressValue remoteAddress (InetSocketAddress (csmaInterfaces.GetAddress (0), port)); //
           client.SetAttribute ("Remote", remoteAddress);
-          apps = client.Install (clNodes[i].Get (j));
-          apps.Start (Seconds (startTime));
+          if (aptx)
+            apps = client.Install (apNodes.Get (i));
+          else
+            apps = client.Install (clNodes.Get (i));
+          apps.Start (Seconds (startTime + x->GetValue ()));
           apps.Stop (Seconds (totalTime + 0.1));
-          clientApp.Add (apps);
+          clientApps.Add (apps);
         }
     }
 
   if (app == std::string("tcp"))
     {
-      for (uint32_t i = 0; i < apNum; ++i)
+      for (uint32_t j = 0; j < array.size(); ++j)
         {
-          ApplicationContainer apps;
-
+          uint32_t i = array[j];
           uint16_t port = 50000+i;
           Address localAddress (InetSocketAddress (Ipv4Address::GetAny (), port));
           PacketSinkHelper server ("ns3::TcpSocketFactory", localAddress);
           apps = server.Install (csmaNodes.Get (0)); //
-          apps.Start (Seconds (1.0));
+          apps.Start (Seconds (0.1));
           apps.Stop (Seconds (totalTime + 0.1));
           packetSink[i] = StaticCast<PacketSink> (apps.Get (0));
-          serverApp.Add (apps);
+          serverApps.Add (apps);
 
           OnOffHelper client ("ns3::TcpSocketFactory", Address ());
           client.SetAttribute ("OnTime", StringValue ("ns3::ConstantRandomVariable[Constant=1]"));
@@ -684,14 +721,21 @@ AodvExample::InstallApplications ()
           client.SetAttribute ("MaxBytes", UintegerValue (0));
           AddressValue remoteAddress (InetSocketAddress (csmaInterfaces.GetAddress (0), port)); //
           client.SetAttribute ("Remote", remoteAddress);
-          apps = client.Install (clNodes[i].Get (j));
-          apps.Start (Seconds (startTime));
+          if (aptx)
+            apps = client.Install (apNodes.Get (i));
+          else
+            apps = client.Install (clNodes.Get (i));
+          apps.Start (Seconds (startTime + x->GetValue ()));
           apps.Stop (Seconds (totalTime + 0.1));
-          clientApp.Add (apps);
+          clientApps.Add (apps);
         }
     }
 
-  std::cout << "Gateway is connect to AP 0\n";
+  if (datarateUp)
+    for (uint32_t i = 1; i < (totalTime/10); ++i)
+      Simulator::Schedule (Seconds (startTime+10*i), Config::Set, "/NodeList/*/ApplicationList/*/$ns3::OnOffApplication/DataRate",
+                           DataRateValue (DataRate ((uint64_t) (datarate*(i+1)))));
+
   std::cout << "InstallApplications () DONE !!!\n";
 }
 
