@@ -536,8 +536,8 @@ void AodvExample::CreateAdhocDevices()
   wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (1));
   wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (1));
   wifiPhy.DisablePreambleDetectionModel ();
-  // wifiPhy.Set ("TxPowerStart", DoubleValue (21.0));
-  // wifiPhy.Set ("TxPowerEnd", DoubleValue (21.0));
+  // wifiPhy.Set ("TxPowerStart", DoubleValue (13.0));
+  // wifiPhy.Set ("TxPowerEnd", DoubleValue (13.0));
   // wifiPhy.Set ("TxPowerLevels", UintegerValue (1));
 //   wifiPhy.Set ("ShortGuardEnabled", BooleanValue (true));
 
@@ -745,9 +745,9 @@ void
 AodvExample::InstallInternetStack ()
 {
   AodvHelper aodv;
-  aodv.Set ("AllowedHelloLoss", UintegerValue (50));
-  aodv.Set ("HelloInterval", TimeValue (Seconds (1)));
-  aodv.Set ("RreqRetries", UintegerValue (50));
+  aodv.Set ("AllowedHelloLoss", UintegerValue (20));
+  aodv.Set ("HelloInterval", TimeValue (Seconds (3)));
+  aodv.Set ("RreqRetries", UintegerValue (5));
   aodv.Set ("ActiveRouteTimeout", TimeValue (Seconds (100)));
   aodv.Set ("DestinationOnly", BooleanValue (false));
 

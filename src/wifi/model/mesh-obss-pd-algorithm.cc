@@ -135,6 +135,11 @@ MeshObssPdAlgorithm::ReceiveHeSig (HePreambleParameters params)
         isObss = true;
       }
   }
+  else
+  {
+    NS_LOG_DEBUG("gatewayAddr= "<<gatewayAddr<<"  sourceAddr= "<<sourceAddr<<"  error routing , no nexthop");  
+  }
+  
 
   // isObss = false;
 
@@ -150,6 +155,11 @@ MeshObssPdAlgorithm::ReceiveHeSig (HePreambleParameters params)
           NS_LOG_DEBUG ("Frame is OBSS and RSSI is above OBSS-PD level");
         }
     }
+    else
+    {
+      NS_LOG_DEBUG("Not obss");
+    }
+    
     NS_LOG_DEBUG("");
 }
 
