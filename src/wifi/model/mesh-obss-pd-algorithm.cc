@@ -70,7 +70,9 @@ MeshObssPdAlgorithm::ConnectWifiNetDevice (const Ptr<WifiNetDevice> device)
 void
 MeshObssPdAlgorithm::ReceiveHeSig (HePreambleParameters params)
 {
-  NS_LOG_FUNCTION (this << +params.bssColor/8 << +params.bssColor%8<< WToDbm (params.rssiW) <<Simulator::Now());
+  NS_LOG_FUNCTION (this << +params.dst << +params.src<< WToDbm (params.rssiW) <<Simulator::Now());
+
+  std::cout<< "Dst "<<(int)params.dst <<" Src "<< (int)params.src<< "  Power " << +params.txpower<< " Duration" << +params.time<< "  Mcs "<< +params.mcs <<std::endl;
 
   Ptr<StaWifiMac> mac = m_device->GetMac ()->GetObject<StaWifiMac>();
   if (mac && !mac->IsAssociated ())
@@ -79,11 +81,11 @@ MeshObssPdAlgorithm::ReceiveHeSig (HePreambleParameters params)
       return;
     }
 
-  // Ptr<HeConfiguration> heConfiguration = m_device->GetHeConfiguration ();
-  // NS_ASSERT (heConfiguration);
-  // UintegerValue bssColorAttribute;
-  // heConfiguration->GetAttribute ("BssColor", bssColorAttribute);
-  // uint8_t bssColor = bssColorAttribute.Get ();
+  Ptr<HeConfiguration> heConfiguration = m_device->GetHeConfiguration ();
+  NS_ASSERT (heConfiguration);
+  UintegerValue bssColorAttribute;
+  heConfiguration->GetAttribute ("BssColor", bssColorAttribute);
+  uint8_t bssColor = bssColorAttribute.Get ();
 
   //####
   //set bsscolor as self mac address(last number)
@@ -102,7 +104,6 @@ MeshObssPdAlgorithm::ReceiveHeSig (HePreambleParameters params)
   Packet ptemp;
   Ptr<Ipv4Route> routeEntry = aodvRouting->RouteOutput(&ptemp, ipHead, m_device, err);
 
-  uint8_t bssColor = addrs[5];
 
 
   if (bssColor == 0)
@@ -110,9 +111,11 @@ MeshObssPdAlgorithm::ReceiveHeSig (HePreambleParameters params)
       NS_LOG_DEBUG ("BSS color is 0");
       return;
     }
+  NS_LOG_DEBUG("params.bsscolor= "<<+params.bssColor);
   if (params.bssColor == 0)
     {
       NS_LOG_DEBUG ("Received BSS color is 0");
+      std::cout<<"may be beacon"<<std::endl;
       return;
     }
   //TODO: SRP_AND_NON-SRG_OBSS-PD_PROHIBITED=1 => OBSS_PD SR is not allowed
@@ -123,12 +126,12 @@ MeshObssPdAlgorithm::ReceiveHeSig (HePreambleParameters params)
 
   if(!err)
   {
-      NS_LOG_DEBUG("gatewayAddr= "<<gatewayAddr<<"  sourceAddr= "<<sourceAddr<<"  nextHop= "<<routeEntry->GetGateway() );
+      NS_LOG_DEBUG("gatewayAddr= "<<gatewayAddr<<"  myAddr= "<<sourceAddr<<"  nextHop= "<<routeEntry->GetGateway() );
       routeEntry->GetGateway().Serialize(addrs2);
 
       uint8_t dstMac, srcMac;
-      dstMac = params.bssColor/8;
-      srcMac = params.bssColor%8;
+      dstMac = params.dst;
+      srcMac = params.src;
       if(dstMac!=addrs[5] && dstMac!=addrs2[3] && srcMac!=addrs2[3] && addrs2[0]!=127 )
       {
         NS_LOG_DEBUG("dst Mac= "<<(int)dstMac <<"  src Mac="<<(int)srcMac<< "  Is Obss!!");
@@ -137,7 +140,7 @@ MeshObssPdAlgorithm::ReceiveHeSig (HePreambleParameters params)
   }
   else
   {
-    NS_LOG_DEBUG("gatewayAddr= "<<gatewayAddr<<"  sourceAddr= "<<sourceAddr<<"  error routing , no nexthop");  
+    NS_LOG_DEBUG("gatewayAddr= "<<gatewayAddr<<"  myAddr= "<<sourceAddr<<"  error routing , no nexthop");  
   }
   
 

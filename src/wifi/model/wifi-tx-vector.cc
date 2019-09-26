@@ -238,6 +238,46 @@ WifiTxVector::IsValid (void) const
   return true;
 }
 
+void WifiTxVector::SetObssDst(uint8_t dst)
+{
+  m_obss_dst = dst;
+}
+
+uint8_t WifiTxVector::GetObssDst() const
+{
+  return m_obss_dst;
+}
+
+void WifiTxVector::SetObssSrc(uint8_t src)
+{
+  m_obss_src = src;
+}
+
+uint8_t WifiTxVector::GetObssSrc() const
+{
+  return m_obss_src;
+}
+
+void WifiTxVector::SetObssTime(uint8_t time)
+{
+  m_obss_time = time;
+}
+
+uint8_t WifiTxVector::GetObssTime() const
+{
+  return m_obss_time;
+}
+
+void WifiTxVector::SetObssPower(uint8_t power)
+{
+  m_obss_txpower = power;
+}
+
+uint8_t WifiTxVector::GetObssPower() const
+{
+  return m_obss_txpower;
+}
+
 std::ostream & operator << ( std::ostream &os, const WifiTxVector &v)
 {
   os << "mode: " << v.GetMode () <<

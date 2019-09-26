@@ -216,6 +216,16 @@ public:
    */
   bool IsValid (void) const;
 
+  // ######
+  // store obss info
+  void SetObssDst(uint8_t dst);
+  uint8_t GetObssDst(void) const;
+  void SetObssSrc(uint8_t src);
+  uint8_t GetObssSrc(void) const;
+  void SetObssTime(uint8_t time);
+  uint8_t GetObssTime(void) const;
+  void SetObssPower(uint8_t power);
+  uint8_t GetObssPower(void) const;
 
 private:
   WifiMode m_mode;               /**< The DATARATE parameter in Table 15-4.
@@ -233,6 +243,11 @@ private:
   bool     m_aggregation;        /**< Flag whether the PSDU contains A-MPDU. */
   bool     m_stbc;               /**< STBC used or not */
   uint8_t  m_bssColor;           /**< BSS color */
+
+  uint8_t m_obss_dst;
+  uint8_t m_obss_src;
+  uint8_t m_obss_time;
+  uint8_t m_obss_txpower;
 
   bool     m_modeInitialized;         /**< Internal initialization flag */
 };

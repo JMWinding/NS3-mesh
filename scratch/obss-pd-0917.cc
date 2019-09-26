@@ -651,8 +651,8 @@ AodvExample::CreateMeshDevices ()
                                   "RtsCtsThreshold", UintegerValue (99999));
   else
     mesh.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-                                  "ControlMode", StringValue ("VhtMcs0"),
-                                  "DataMode", StringValue ("VhtMcs7"),
+                                  "ControlMode", StringValue ("HeMcs0"),
+                                  "DataMode", StringValue (heMcs),
                                   "RtsCtsThreshold", UintegerValue (99999));
 
   std::cout << "before install \n";
