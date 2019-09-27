@@ -194,7 +194,7 @@ AodvExample::AodvExample () :
   apNum (2),
   apXStep (20),
   apYStep (30),
-  clStep (20),
+  clStep (10),
   gateways ("0"),
   // MAC parameters
   linkFail (false),
@@ -461,14 +461,15 @@ AodvExample::CreateMeshDevices ()
 
   YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
   wifiPhy.SetChannel (wifiChannel.Create ());
-  wifiPhy.Set ("ChannelNumber", UintegerValue (38));
-  wifiPhy.Set ("Antennas", UintegerValue (4));
-  wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (4));
-  wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (4));
+  wifiPhy.Set ("ChannelNumber", UintegerValue (36));
+  // wifiPhy.Set ("ChannelNumber", UintegerValue (38));
+  // wifiPhy.Set ("Antennas", UintegerValue (4));
+  // wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (4));
+  // wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (4));
 //  wifiPhy.Set ("TxPowerStart", DoubleValue (21.0));
 //  wifiPhy.Set ("TxPowerEnd", DoubleValue (21.0));
 //  wifiPhy.Set ("TxPowerLevels", UintegerValue (1));
-  wifiPhy.Set ("ShortGuardEnabled", BooleanValue (true));
+//  wifiPhy.Set ("ShortGuardEnabled", BooleanValue (true));
 
   // if(isObss)
   // {
@@ -478,23 +479,25 @@ AodvExample::CreateMeshDevices ()
   if (pcap)
     wifiPhy.EnablePcapAll (std::string ("aodv"));
 
-  Config::SetDefault ("ns3::dot11s::PeerLink::MaxBeaconLoss", UintegerValue (20));
-  Config::SetDefault ("ns3::dot11s::PeerLink::MaxRetries", UintegerValue (4));
-  Config::SetDefault ("ns3::dot11s::PeerLink::MaxPacketFailure", UintegerValue (5));
-  Config::SetDefault ("ns3::dot11s::HwmpProtocol::Dot11MeshHWMPactivePathTimeout", TimeValue (Seconds (100)));
-  Config::SetDefault ("ns3::dot11s::HwmpProtocol::Dot11MeshHWMPactiveRootTimeout", TimeValue (Seconds (100)));
-  Config::SetDefault ("ns3::dot11s::HwmpProtocol::Dot11MeshHWMPmaxPREQretries", UintegerValue (5));
-  Config::SetDefault ("ns3::dot11s::HwmpProtocol::UnicastPreqThreshold", UintegerValue (10));
-  Config::SetDefault ("ns3::dot11s::HwmpProtocol::UnicastDataThreshold", UintegerValue (5));
-  Config::SetDefault ("ns3::dot11s::HwmpProtocol::DoFlag", BooleanValue (false));
-  Config::SetDefault ("ns3::dot11s::HwmpProtocol::RfFlag", BooleanValue (true));
-
   if (mac == std::string ("mesh"))
     {
       MeshHelper mesh = MeshHelper::Default ();
+
       mesh.SetStackInstaller ("ns3::Dot11sStack");
+      Config::SetDefault ("ns3::dot11s::PeerLink::MaxBeaconLoss", UintegerValue (20));
+      Config::SetDefault ("ns3::dot11s::PeerLink::MaxRetries", UintegerValue (4));
+      Config::SetDefault ("ns3::dot11s::PeerLink::MaxPacketFailure", UintegerValue (5));
+      Config::SetDefault ("ns3::dot11s::HwmpProtocol::Dot11MeshHWMPactivePathTimeout", TimeValue (Seconds (100)));
+      Config::SetDefault ("ns3::dot11s::HwmpProtocol::Dot11MeshHWMPactiveRootTimeout", TimeValue (Seconds (100)));
+      Config::SetDefault ("ns3::dot11s::HwmpProtocol::Dot11MeshHWMPmaxPREQretries", UintegerValue (5));
+      Config::SetDefault ("ns3::dot11s::HwmpProtocol::UnicastPreqThreshold", UintegerValue (10));
+      Config::SetDefault ("ns3::dot11s::HwmpProtocol::UnicastDataThreshold", UintegerValue (5));
+      Config::SetDefault ("ns3::dot11s::HwmpProtocol::DoFlag", BooleanValue (false));
+      Config::SetDefault ("ns3::dot11s::HwmpProtocol::RfFlag", BooleanValue (true));
+      Config::SetDefault ("ns3::dot11s::HwmpProtocol::MaxTtl", UintegerValue (2));
+
       mesh.SetSpreadInterfaceChannels (MeshHelper::ZERO_CHANNEL);
-      mesh.SetStandard (WIFI_PHY_STANDARD_80211ac);
+      mesh.SetStandard (WIFI_PHY_STANDARD_80211ax_5GHZ);
       if (rateControl == std::string ("ideal"))
         mesh.SetRemoteStationManager ("ns3::IdealWifiManager",
                                       "RtsCtsThreshold", UintegerValue (99999));
@@ -595,27 +598,28 @@ AodvExample::CreateCsmaDevices ()
 void
 AodvExample::CreateWifiDevices ()
 {
-  YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
-  YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
-  wifiPhy.SetChannel (wifiChannel.Create ());
-  wifiPhy.Set ("ChannelNumber", UintegerValue (3));
 
-  if (pcap)
-    wifiPhy.EnablePcapAll (std::string ("aodv"));
-
-  WifiHelper wifi;
-  wifi.SetStandard (WIFI_PHY_STANDARD_80211n_2_4GHZ);
-  wifi.SetRemoteStationManager ("ns3::IdealWifiManager",
-                                "RtsCtsThreshold", UintegerValue (99999));
-
-  WifiMacHelper wifiMac;
   for (uint32_t i = 0; i < apNum; ++i)
     {
+      YansWifiPhyHelper wifiPhy = YansWifiPhyHelper::Default ();
+      YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default ();
+      wifiPhy.SetChannel (wifiChannel.Create ());
+      wifiPhy.Set ("ChannelNumber", UintegerValue (3));
+
+      WifiHelper wifi;
+      wifi.SetStandard (WIFI_PHY_STANDARD_80211n_2_4GHZ);
+      wifi.SetRemoteStationManager ("ns3::IdealWifiManager",
+                                "RtsCtsThreshold", UintegerValue (99999));
+
+      if (pcap)
+        wifiPhy.EnablePcapAll (std::string ("aodv"));
+
       NetDeviceContainer devices;
 
       std::ostringstream os;
       os << "ap-" << i ;
       Ssid ssid = Ssid (os.str ());
+      WifiMacHelper wifiMac;
       // AP
       wifiMac.SetType ("ns3::ApWifiMac",
                        "EnableBeaconJitter", BooleanValue (false),

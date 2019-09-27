@@ -25,11 +25,15 @@
 #include "ns3/mesh-point-device.h"
 #include "ns3/wifi-net-device.h"
 #include "ns3/minstrel-wifi-manager.h"
+#include "ns3/minstrel-ht-wifi-manager.h"
 #include "ns3/mesh-wifi-interface-mac.h"
 #include "ns3/wifi-helper.h"
 #include "ns3/ht-configuration.h"
 #include "ns3/vht-configuration.h"
 #include "ns3/he-configuration.h"
+#include "ns3/net-device-queue-interface.h"
+#include "ns3/wifi-mac-queue.h"
+#include "ns3/qos-utils.h"
 
 namespace ns3
 {
@@ -37,7 +41,8 @@ MeshHelper::MeshHelper () :
   m_nInterfaces (1),
   m_spreadChannelPolicy (ZERO_CHANNEL),
   m_stack (0),
-  m_standard (WIFI_PHY_STANDARD_80211a)
+  m_standard (WIFI_PHY_STANDARD_80211a),
+  m_selectQueueCallback (&SelectQueueByDSField)
 {
 }
 MeshHelper::~MeshHelper ()
@@ -209,7 +214,49 @@ MeshHelper::CreateInterface (const WifiPhyHelper &phyHelper, Ptr<Node> node, uin
   device->SetPhy (phy);
   device->SetRemoteStationManager (manager);
   node->AddDevice (device);
-  mac->SwitchFrequencyChannel (channelId);
+  // mac->SwitchFrequencyChannel (channelId);
+  // Aggregate a NetDeviceQueueInterface object if a RegularWifiMac is installed
+  Ptr<RegularWifiMac> rmac = DynamicCast<RegularWifiMac> (mac);
+  if (rmac)
+    {
+      Ptr<NetDeviceQueueInterface> ndqi;
+      BooleanValue qosSupported;
+      PointerValue ptr;
+      Ptr<WifiMacQueue> wmq;
+
+      rmac->GetAttributeFailSafe ("QosSupported", qosSupported);
+      if (qosSupported.Get ())
+        {
+          ndqi = CreateObjectWithAttributes<NetDeviceQueueInterface> ("NTxQueues",
+                                                                      UintegerValue (4));
+
+          rmac->GetAttributeFailSafe ("BE_Txop", ptr);
+          wmq = ptr.Get<QosTxop> ()->GetWifiMacQueue ();
+          ndqi->GetTxQueue (0)->ConnectQueueTraces (wmq);
+
+          rmac->GetAttributeFailSafe ("BK_Txop", ptr);
+          wmq = ptr.Get<QosTxop> ()->GetWifiMacQueue ();
+          ndqi->GetTxQueue (1)->ConnectQueueTraces (wmq);
+
+          rmac->GetAttributeFailSafe ("VI_Txop", ptr);
+          wmq = ptr.Get<QosTxop> ()->GetWifiMacQueue ();
+          ndqi->GetTxQueue (2)->ConnectQueueTraces (wmq);
+
+          rmac->GetAttributeFailSafe ("VO_Txop", ptr);
+          wmq = ptr.Get<QosTxop> ()->GetWifiMacQueue ();
+          ndqi->GetTxQueue (3)->ConnectQueueTraces (wmq);
+          ndqi->SetSelectQueueCallback (m_selectQueueCallback);
+        }
+      else
+        {
+          ndqi = CreateObject<NetDeviceQueueInterface> ();
+
+          rmac->GetAttributeFailSafe ("Txop", ptr);
+          wmq = ptr.Get<Txop> ()->GetWifiMacQueue ();
+          ndqi->GetTxQueue (0)->ConnectQueueTraces (wmq);
+        }
+      device->AggregateObject (ndqi);
+    }
   return device;
 }
 void
@@ -261,6 +308,13 @@ MeshHelper::AssignStreams (NetDeviceContainer c, int64_t stream)
                 {
                   currentStream += minstrel->AssignStreams (currentStream);
                 }
+
+              Ptr<MinstrelHtWifiManager> minstrelHt = DynamicCast<MinstrelHtWifiManager> (manager);
+              if (minstrelHt)
+                {
+                  currentStream += minstrelHt->AssignStreams (currentStream);
+                }
+
               // Handle any random numbers in the mesh mac and plugins
               mac = DynamicCast<MeshWifiInterfaceMac> (wifi->GetMac ());
               if (mac)
@@ -295,6 +349,12 @@ MeshHelper::AssignStreams (NetDeviceContainer c, int64_t stream)
         }
     }
   return (currentStream - stream);
+}
+
+void
+MeshHelper::SetSelectQueueCallback (SelectQueueCallback f)
+{
+  m_selectQueueCallback = f;
 }
 
 } // namespace ns3
