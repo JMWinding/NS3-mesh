@@ -79,6 +79,11 @@ struct HePreambleParameters
 {
   double rssiW; ///< RSSI in W
   uint8_t bssColor; ///< BSS color
+  uint8_t dst;
+  uint8_t src;
+  uint8_t mcs;
+  uint8_t time;
+  uint8_t txpower;
 };
 
 /**

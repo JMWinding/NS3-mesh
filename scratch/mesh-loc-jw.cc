@@ -220,6 +220,7 @@ AodvExample::AodvExample () :
 bool
 AodvExample::Configure (int argc, char **argv)
 {
+  Packet::EnablePrinting ();
   // LogComponentEnable("MeshObssPdAlgorithm", LOG_LEVEL_ALL);
   // Enable AODV logs by default. Comment this if too noisy
   // LogComponentEnable("AodvRoutingProtocol", LOG_LEVEL_ALL);
@@ -538,7 +539,7 @@ AodvExample::CreateMeshDevices ()
                                       "RtsCtsThreshold", UintegerValue (99999));
       else
         wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager",
-                                      "ControlMode", StringValue ("HtMcs0"),
+                                      "ControlMode", StringValue ("HeMcs0"),
                                       "DataMode", StringValue (constantRate),
                                       "RtsCtsThreshold", UintegerValue (99999));
 

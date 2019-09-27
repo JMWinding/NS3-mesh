@@ -731,6 +731,9 @@ HeSigHeader::GetSerializedSize (void) const
   uint32_t size = 0;
   size += 4; //HE-SIG-A1
   size += 4; //HE-SIG-A2
+  // #####
+  size += 4; //Obss pd Info
+
   if (m_mu)
     {
       size += 1; //HE-SIG-B
@@ -865,6 +868,54 @@ HeSigHeader::GetNStreams (void) const
 }
 
 void
+HeSigHeader::SetDst(uint8_t dst)
+{
+  m_dst = dst;
+}
+
+uint8_t
+HeSigHeader::GetDst(void) const
+{
+  return m_dst; 
+}
+
+void
+HeSigHeader::SetSrc(uint8_t src)
+{
+  m_src = src;
+}
+
+uint8_t
+HeSigHeader::GetSrc() const
+{
+  return m_src;
+}
+
+void
+HeSigHeader::SetTime(uint8_t time)
+{
+  m_time = time;
+}
+
+uint8_t
+HeSigHeader::GetTime() const
+{
+  return m_time;
+}
+
+void
+HeSigHeader::SetTxPower(uint8_t power)
+{
+  m_txpower = power;
+}
+
+uint8_t
+HeSigHeader::GetTxPower(void) const
+{
+  return m_txpower;
+}
+
+void
 HeSigHeader::Serialize (Buffer::Iterator start) const
 {
   //HE-SIG-A1
@@ -885,6 +936,13 @@ HeSigHeader::Serialize (Buffer::Iterator start) const
   uint32_t sigA2 = 0;
   sigA2 |= (0x01 << 14); //Set Reserved bit #14 to 1
   start.WriteU32 (sigA2);
+
+  //#####
+  //Obss pd
+  start.WriteU8(m_dst);
+  start.WriteU8(m_src);
+  start.WriteU8(m_txpower);
+  start.WriteU8(m_time);
 
   if (m_mu)
     {
@@ -914,6 +972,13 @@ HeSigHeader::Deserialize (Buffer::Iterator start)
 
   //HE-SIG-A2
   i.ReadU32 ();
+
+  // ######
+  //Obss pd
+  m_dst = i.ReadU8();
+  m_src = i.ReadU8();
+  m_txpower = i.ReadU8();
+  m_time = i.ReadU8();
 
   if (m_mu)
     {

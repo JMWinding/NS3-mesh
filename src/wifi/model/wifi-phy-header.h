@@ -428,6 +428,16 @@ public:
   uint8_t GetNStreams (void) const;
 
 
+  void SetDst(uint8_t dst);
+  uint8_t GetDst(void) const;
+  void SetSrc(uint8_t src);
+  uint8_t GetSrc(void) const;
+  void SetTime(uint8_t time) ;
+  uint8_t GetTime(void) const;
+  void SetTxPower(uint8_t power);
+  uint8_t GetTxPower(void) const;
+
+
 private:
   //HE-SIG-A1 fields
   uint8_t m_format;       ///< Format bit
@@ -438,6 +448,13 @@ private:
   uint8_t m_bandwidth;    ///< Bandwidth field
   uint8_t m_gi_ltf_size;  ///< GI+LTF Size field
   uint8_t m_nsts;         ///< NSTS
+
+  // #####
+  // for obss pd
+  uint8_t m_dst;
+  uint8_t m_src;
+  uint8_t m_txpower;
+  uint8_t m_time;
 
   /// This is used to decide whether MU SIG-B should be added or not
   bool m_mu;
