@@ -224,6 +224,7 @@ AodvExample::Configure (int argc, char **argv)
   // LogComponentEnable("MeshObssPdAlgorithm", LOG_LEVEL_ALL);
   // Enable AODV logs by default. Comment this if too noisy
   // LogComponentEnable("AodvRoutingProtocol", LOG_LEVEL_ALL);
+  // LogComponentEnable("ObssWifiManager", LOG_LEVEL_ALL);
 
   CommandLine cmd;
 
@@ -466,9 +467,9 @@ AodvExample::CreateMeshDevices ()
   wifiPhy.Set ("Antennas", UintegerValue (4));
   wifiPhy.Set ("MaxSupportedTxSpatialStreams", UintegerValue (4));
   wifiPhy.Set ("MaxSupportedRxSpatialStreams", UintegerValue (4));
-//  wifiPhy.Set ("TxPowerStart", DoubleValue (21.0));
-//  wifiPhy.Set ("TxPowerEnd", DoubleValue (21.0));
-//  wifiPhy.Set ("TxPowerLevels", UintegerValue (1));
+ wifiPhy.Set ("TxPowerStart", DoubleValue (1.0));
+ wifiPhy.Set ("TxPowerEnd", DoubleValue (21.0));
+ wifiPhy.Set ("TxPowerLevels", UintegerValue (10));
   wifiPhy.Set ("ShortGuardEnabled", BooleanValue (true));
 
   // if(isObss)
@@ -525,6 +526,10 @@ AodvExample::CreateMeshDevices ()
       if (rateControl == std::string ("ideal"))
         wifi.SetRemoteStationManager ("ns3::IdealWifiManager",
                                       "RtsCtsThreshold", UintegerValue (99999));
+      else if (rateControl == std::string ("obss"))
+        wifi.SetRemoteStationManager ("ns3::ObssWifiManager",
+                                      "RtsCtsThreshold", UintegerValue (99999),
+                                      "DefaultTxPowerLevel", UintegerValue(9));
       else if (rateControl == std::string ("minstrel"))
         wifi.SetRemoteStationManager ("ns3::MinstrelHtWifiManager",
                                       "RtsCtsThreshold", UintegerValue (99999));

@@ -19,18 +19,17 @@
  */
 
 #include "ns3/log.h"
-#include "ideal-wifi-manager.h"
+#include "obss-wifi-manager.h"
 #include "wifi-phy.h"
 
 namespace ns3 {
-
 /**
  * \brief hold per-remote-station state for Ideal Wifi manager.
  *
  * This struct extends from WifiRemoteStation struct to hold additional
  * information required by the Ideal Wifi manager
  */
-struct IdealWifiRemoteStation : public WifiRemoteStation
+struct ObssWifiRemoteStation : public WifiRemoteStation
 {
   double m_lastSnrObserved;  //!< SNR of most recently reported packet sent to the remote station
   double m_lastSnrCached;    //!< SNR most recently used to select a rate
@@ -41,50 +40,52 @@ struct IdealWifiRemoteStation : public WifiRemoteStation
 /// To avoid using the cache before a valid value has been cached
 static const double CACHE_INITIAL_VALUE = -100;
 
-NS_OBJECT_ENSURE_REGISTERED (IdealWifiManager);
+static ObssWifiManager::PathLossPairs globalLossPairs; // (dst+src, loss)
 
-NS_LOG_COMPONENT_DEFINE ("IdealWifiManager");
+NS_OBJECT_ENSURE_REGISTERED (ObssWifiManager);
+
+NS_LOG_COMPONENT_DEFINE ("ObssWifiManager");
 
 TypeId
-IdealWifiManager::GetTypeId (void)
+ObssWifiManager::GetTypeId (void)
 {
-  static TypeId tid = TypeId ("ns3::IdealWifiManager")
+  static TypeId tid = TypeId ("ns3::ObssWifiManager")
     .SetParent<WifiRemoteStationManager> ()
     .SetGroupName ("Wifi")
-    .AddConstructor<IdealWifiManager> ()
+    .AddConstructor<ObssWifiManager> ()
     .AddAttribute ("BerThreshold",
                    "The maximum Bit Error Rate acceptable at any transmission mode",
                    DoubleValue (1e-5),
-                   MakeDoubleAccessor (&IdealWifiManager::m_ber),
+                   MakeDoubleAccessor (&ObssWifiManager::m_ber),
                    MakeDoubleChecker<double> ())
     .AddTraceSource ("Rate",
                      "Traced value for rate changes (b/s)",
-                     MakeTraceSourceAccessor (&IdealWifiManager::m_currentRate),
+                     MakeTraceSourceAccessor (&ObssWifiManager::m_currentRate),
                      "ns3::TracedValueCallback::Uint64")
   ;
   return tid;
 }
 
-IdealWifiManager::IdealWifiManager ()
+ObssWifiManager::ObssWifiManager ()
   : m_currentRate (0)
 {
   NS_LOG_FUNCTION (this);
 }
 
-IdealWifiManager::~IdealWifiManager ()
+ObssWifiManager::~ObssWifiManager ()
 {
   NS_LOG_FUNCTION (this);
 }
 
 void
-IdealWifiManager::SetupPhy (const Ptr<WifiPhy> phy)
+ObssWifiManager::SetupPhy (const Ptr<WifiPhy> phy)
 {
   NS_LOG_FUNCTION (this << phy);
   WifiRemoteStationManager::SetupPhy (phy);
 }
 
 uint16_t
-IdealWifiManager::GetChannelWidthForMode (WifiMode mode) const
+ObssWifiManager::GetChannelWidthForMode (WifiMode mode) const
 {
   NS_ASSERT (mode.GetModulationClass () != WIFI_MOD_CLASS_HT
              && mode.GetModulationClass () != WIFI_MOD_CLASS_VHT
@@ -101,7 +102,7 @@ IdealWifiManager::GetChannelWidthForMode (WifiMode mode) const
 }
 
 void
-IdealWifiManager::DoInitialize ()
+ObssWifiManager::DoInitialize ()
 {
   NS_LOG_FUNCTION (this);
   WifiMode mode;
@@ -176,10 +177,20 @@ IdealWifiManager::DoInitialize ()
             }
         }
     }
+  
+  //######
+  // connect end of preamble trace source
+  GetPhy()->TraceConnectWithoutContext ("EndOfHePreamble", MakeCallback (&ObssWifiManager::ReceiveHeSig, this));
+  m_device = DynamicCast<WifiNetDevice> (GetPhy()->GetDevice());
+  m_obssRestricted = false;
+  uint8_t mymac[6];
+  m_device->GetMac()->GetAddress().CopyTo(mymac);
+  m_myMac = mymac[5];
+
 }
 
 double
-IdealWifiManager::GetSnrThreshold (WifiTxVector txVector) const
+ObssWifiManager::GetSnrThreshold (WifiTxVector txVector) const
 {
   NS_LOG_FUNCTION (this << txVector.GetMode ().GetUniqueName ());
   for (Thresholds::const_iterator i = m_thresholds.begin (); i != m_thresholds.end (); i++)
@@ -204,17 +215,17 @@ IdealWifiManager::GetSnrThreshold (WifiTxVector txVector) const
 }
 
 void
-IdealWifiManager::AddSnrThreshold (WifiTxVector txVector, double snr)
+ObssWifiManager::AddSnrThreshold (WifiTxVector txVector, double snr)
 {
   NS_LOG_FUNCTION (this << txVector.GetMode ().GetUniqueName () << snr);
   m_thresholds.push_back (std::make_pair (snr, txVector));
 }
 
 WifiRemoteStation *
-IdealWifiManager::DoCreateStation (void) const
+ObssWifiManager::DoCreateStation (void) const
 {
   NS_LOG_FUNCTION (this);
-  IdealWifiRemoteStation *station = new IdealWifiRemoteStation ();
+  ObssWifiRemoteStation *station = new ObssWifiRemoteStation ();
   station->m_lastSnrObserved = 0.0;
   station->m_lastSnrCached = CACHE_INITIAL_VALUE;
   station->m_lastMode = GetDefaultMode ();
@@ -224,38 +235,40 @@ IdealWifiManager::DoCreateStation (void) const
 
 
 void
-IdealWifiManager::DoReportRxOk (WifiRemoteStation *station, double rxSnr, WifiMode txMode)
+ObssWifiManager::DoReportRxOk (WifiRemoteStation *station, double rxSnr, WifiMode txMode)
 {
   NS_LOG_FUNCTION (this << station << rxSnr << txMode);
 }
 
 void
-IdealWifiManager::DoReportRtsFailed (WifiRemoteStation *station)
+ObssWifiManager::DoReportRtsFailed (WifiRemoteStation *station)
 {
   NS_LOG_FUNCTION (this << station);
 }
 
 void
-IdealWifiManager::DoReportDataFailed (WifiRemoteStation *station)
+ObssWifiManager::DoReportDataFailed (WifiRemoteStation *station)
 {
   NS_LOG_FUNCTION (this << station);
 }
 
 void
-IdealWifiManager::DoReportRtsOk (WifiRemoteStation *st,
+ObssWifiManager::DoReportRtsOk (WifiRemoteStation *st,
                                  double ctsSnr, WifiMode ctsMode, double rtsSnr)
 {
   NS_LOG_FUNCTION (this << st << ctsSnr << ctsMode.GetUniqueName () << rtsSnr);
-  IdealWifiRemoteStation *station = (IdealWifiRemoteStation *)st;
+  ObssWifiRemoteStation *station = (ObssWifiRemoteStation *)st;
   station->m_lastSnrObserved = rtsSnr;
 }
 
 void
-IdealWifiManager::DoReportDataOk (WifiRemoteStation *st,
+ObssWifiManager::DoReportDataOk (WifiRemoteStation *st,
                                   double ackSnr, WifiMode ackMode, double dataSnr)
 {
   NS_LOG_FUNCTION (this << st << ackSnr << ackMode.GetUniqueName () << dataSnr);
-  IdealWifiRemoteStation *station = (IdealWifiRemoteStation *)st;
+  std::cout<<"myMac: "<< +m_myMac <<" nexthop: "<< +m_nexthopMac<< " dataSnr:  "<< WToDbm(dataSnr) << std::endl;
+
+  ObssWifiRemoteStation *station = (ObssWifiRemoteStation *)st;
   if (dataSnr == 0)
     {
       NS_LOG_WARN ("DataSnr reported to be zero; not saving this report.");
@@ -265,10 +278,10 @@ IdealWifiManager::DoReportDataOk (WifiRemoteStation *st,
 }
 
 void
-IdealWifiManager::DoReportAmpduTxStatus (WifiRemoteStation *st, uint8_t nSuccessfulMpdus, uint8_t nFailedMpdus, double rxSnr, double dataSnr)
+ObssWifiManager::DoReportAmpduTxStatus (WifiRemoteStation *st, uint8_t nSuccessfulMpdus, uint8_t nFailedMpdus, double rxSnr, double dataSnr)
 {
   NS_LOG_FUNCTION (this << st << +nSuccessfulMpdus << +nFailedMpdus << rxSnr << dataSnr);
-  IdealWifiRemoteStation *station = (IdealWifiRemoteStation *)st;
+  ObssWifiRemoteStation *station = (ObssWifiRemoteStation *)st;
   if (dataSnr == 0)
     {
       NS_LOG_WARN ("DataSnr reported to be zero; not saving this report.");
@@ -279,22 +292,22 @@ IdealWifiManager::DoReportAmpduTxStatus (WifiRemoteStation *st, uint8_t nSuccess
 
 
 void
-IdealWifiManager::DoReportFinalRtsFailed (WifiRemoteStation *station)
+ObssWifiManager::DoReportFinalRtsFailed (WifiRemoteStation *station)
 {
   NS_LOG_FUNCTION (this << station);
 }
 
 void
-IdealWifiManager::DoReportFinalDataFailed (WifiRemoteStation *station)
+ObssWifiManager::DoReportFinalDataFailed (WifiRemoteStation *station)
 {
   NS_LOG_FUNCTION (this << station);
 }
 
 WifiTxVector
-IdealWifiManager::DoGetDataTxVector (WifiRemoteStation *st)
+ObssWifiManager::DoGetDataTxVector (WifiRemoteStation *st)
 {
   NS_LOG_FUNCTION (this << st);
-  IdealWifiRemoteStation *station = (IdealWifiRemoteStation *)st;
+  ObssWifiRemoteStation *station = (ObssWifiRemoteStation *)st;
   //We search within the Supported rate set the mode with the
   //highest data rate for which the snr threshold is smaller than m_lastSnr
   //to ensure correct packet delivery.
@@ -506,14 +519,15 @@ IdealWifiManager::DoGetDataTxVector (WifiRemoteStation *st)
       NS_LOG_DEBUG ("New datarate: " << maxMode.GetDataRate (channelWidth, guardInterval, selectedNss));
       m_currentRate = maxMode.GetDataRate (channelWidth, guardInterval, selectedNss);
     }
+
   return WifiTxVector (maxMode, GetDefaultTxPowerLevel (), GetPreambleForTransmission (maxMode.GetModulationClass (), GetShortPreambleEnabled (), UseGreenfieldForDestination (GetAddress (station))), guardInterval, GetNumberOfAntennas (), selectedNss, 0, GetChannelWidthForTransmission (maxMode, channelWidth), GetAggregation (station), false);
 }
 
 WifiTxVector
-IdealWifiManager::DoGetRtsTxVector (WifiRemoteStation *st)
+ObssWifiManager::DoGetRtsTxVector (WifiRemoteStation *st)
 {
   NS_LOG_FUNCTION (this << st);
-  IdealWifiRemoteStation *station = (IdealWifiRemoteStation *)st;
+  ObssWifiRemoteStation *station = (ObssWifiRemoteStation *)st;
   //We search within the Basic rate set the mode with the highest
   //snr threshold possible which is smaller than m_lastSnr to
   //ensure correct packet delivery.
@@ -541,9 +555,331 @@ IdealWifiManager::DoGetRtsTxVector (WifiRemoteStation *st)
 }
 
 bool
-IdealWifiManager::IsLowLatency (void) const
+ObssWifiManager::IsLowLatency (void) const
 {
   return true;
+}
+
+void
+ObssWifiManager::UpdatePathLoss(HePreambleParameters params)
+{
+  NS_LOG_FUNCTION (this<< +m_myMac);
+
+  double loss = WToDbm(params.rssiW) - params.txpower/10.0 ; // negative value(dbm)
+
+  //TO DO: more complex updating method
+    for (PathLossPairs::const_iterator i = m_lossPairs.begin (); i != m_lossPairs.end (); i++)
+    {
+      if(params.src == i->first)
+      {
+        if(i->second != loss)
+        {
+          std::cout<<"different loss, old: "<< i->second << " new: "<< loss<< std::endl; 
+        }
+        return;
+      }
+    }
+
+    // no match
+    m_lossPairs.push_back(std::make_pair(params.src, loss));
+    std::cout<<"Node mac "<< +m_myMac << " pushed src="<< +params.src <<" loss= "<<loss<<std::endl;
+
+    // update global loss pairs
+
+    for (PathLossPairs::const_iterator i = globalLossPairs.begin (); i != globalLossPairs.end (); i++)
+    {
+      uint8_t i_dst = i->first / (1<<8);
+      uint8_t i_src = i->first % (1<<8);
+      if(params.src == i_src && m_myMac == i_dst )
+      {
+        if(i->second != loss)
+        {
+          std::cout<<"global different loss, old: "<< i->second << " new: "<< loss<< std::endl; 
+        }
+        return;
+      }
+    }
+    globalLossPairs.push_back(std::make_pair(((uint16_t)m_myMac<<8) + params.src, loss));
+    std::cout<<"Global pushed : dst= "<< +m_myMac << "  src="<< +params.src <<" loss= "<<loss<<std::endl;
+
+    return;
+}
+
+void
+ObssWifiManager::ReceiveHeSig(HePreambleParameters params)
+{
+  NS_LOG_FUNCTION (this<< +m_myMac);
+  std::cout<< "Mymac "<<+m_myMac <<"\t Dst "<<(int)params.dst <<" Src "<< (int)params.src<< \
+   "  Power " << +params.txpower<<" Rssi: "<<WToDbm (params.rssiW) <<" Duration" << +params.time<< "  Mcs "<< +params.mcs <<std::endl;
+
+  UpdatePathLoss(params);
+  UpdateObssTransStatus(params);
+  CheckObssStatus(params);
+
+  return;
+}
+
+void
+ObssWifiManager::UpdateObssTransStatus(HePreambleParameters params)
+{
+  NS_LOG_FUNCTION (this<< +m_myMac);
+
+  ObssTran tran(params.dst, params.src, Simulator::Now().ToInteger(Time::Unit::NS),\
+   (uint64_t)params.time * 1e4, (double)params.txpower / 10.0, params.mcs);
+  // tran.dst = params.dst;
+  // tran.src = params.src;
+  // tran.startTime = Simulator::Now().ToInteger(Time::Unit::NS);
+  // tran.duration = (uint64_t)params.time * 1e4 ; // ns 
+  // tran.txPower = (double)params.txpower / 10.0;
+  m_obssTrans.push_back(tran);
+}
+
+void
+ObssWifiManager::CheckObssStatus(HePreambleParameters params)
+{
+  NS_LOG_FUNCTION (this<< +m_myMac);
+
+  std::cout<<"checkObssStatus"<<std::endl;
+  //check timer
+  for(int idx=0; idx<m_obssTrans.size(); idx++)
+  {
+    double startTime = std::get<2>(m_obssTrans[idx]);
+    double duration = std::get<3>(m_obssTrans[idx]);
+    std::cout<<"start "<<startTime<< " duration "<<duration<<"  Now "<< +Simulator::Now().ToInteger(Time::Unit::NS)<<std::endl;
+    if(startTime+duration < Simulator::Now().ToInteger(Time::Unit::NS))
+    {
+      // time past, delete it
+      m_obssTrans.erase(m_obssTrans.begin()+idx);
+    }
+
+  }
+  std::cout<<"m_obssTrans.size= "<<m_obssTrans.size()<<std::endl;
+  if(m_obssTrans.size()==0 || !CheckRouting(params))
+  {
+    m_obssRestricted = false;
+    return;
+  }
+  // #######
+  // TO DO: Update power and rate limit
+
+  double interference = 0;
+  ReceiverInfos recvinfos;
+
+  // sum up interference
+  //for nexthop
+  for(int idx=0; idx<m_obssTrans.size(); idx++)
+  {
+    uint8_t temp_src = std::get<1>(m_obssTrans[idx]);
+    double temp_txpower = std::get<4>(m_obssTrans[idx]);
+    double temp_loss = GetPathLoss(m_nexthopMac, temp_src);
+    std::cout<<"dst: "<<+m_nexthopMac<<" src: "<<+temp_src<<" loss: "<<temp_loss<<std::endl;
+    if(temp_loss>0) // no path loss yet
+    {
+      m_obssRestricted = false;
+      return;
+    }
+    interference += DbmToW(temp_txpower + temp_loss);
+  }
+  ReceiverInfo recvInfo(m_nexthopMac, interference, 0, -1); // first one
+  recvinfos.push_back(recvInfo);
+
+  // add other receivers
+  double signal = 0;
+  for(int idx=0; idx<m_obssTrans.size(); idx++)
+  {
+    uint8_t temp_dst = std::get<0>(m_obssTrans[idx]);
+    uint8_t temp_mcs = std::get<5>(m_obssTrans[idx]);
+    interference = 0;
+    signal = 0;
+    for(int idx2=0; idx2<m_obssTrans.size(); idx2++)
+    {
+      uint8_t temp_src = std::get<1>(m_obssTrans[idx2]);
+      uint8_t temp_dst2 = std::get<0>(m_obssTrans[idx2]);
+      double temp_txpower = std::get<4>(m_obssTrans[idx2]);
+      double temp_loss = GetPathLoss(temp_dst, temp_src);
+      if(temp_loss>0) // no path loss yet
+      {
+        m_obssRestricted = false;
+        return;
+      }
+      if(temp_dst2 == temp_dst) // not inf but signal !
+      {
+        signal = DbmToW(temp_txpower + temp_loss);
+      }
+      else
+      {
+        interference += DbmToW(temp_txpower + temp_loss); 
+      }
+    }
+    ReceiverInfo recvInfo(temp_dst, interference, signal, temp_mcs);
+    recvinfos.push_back(recvInfo);
+  }
+
+  bool isOk;
+  double myTxpower;
+  int level;
+  std::cout<<"we have "<<recvinfos.size()<<" recv info"<<std::endl;
+  for(level=GetPhy()->GetNTxPower();level>=0;level--)
+  {
+    myTxpower = GetPhy()->GetPowerDbm(level); //dbm
+    isOk=true;
+
+    // must not disturb on-going transimission
+    for(int idx=1;idx<recvinfos.size();idx++)
+    {
+      uint8_t temp_recv = std::get<0>(recvinfos[idx]);
+      double temp_inf = std::get<1>(recvinfos[idx]);
+      double temp_signal = std::get<2>(recvinfos[idx]);
+      int temp_mcs = std::get<3>(recvinfos[idx]);
+      double temp_loss = GetPathLoss(temp_recv, m_myMac);
+      if(temp_loss>0) // no path loss yet
+      {
+        m_obssRestricted = false;
+        return;
+      }
+      
+      WifiMode mode = GetPhy()->GetMcs(temp_mcs + 42); // Use HeMcs
+      std::cout<<"mcs: "<< temp_mcs << " name: "<< mode.GetUniqueName()<< std::endl;
+
+      double myI = DbmToW(myTxpower+ temp_loss); // the interference I will introduce (W)
+      uint16_t channelWidth = GetPhy ()->GetChannelWidth ();
+      std::cout<<"loss= "<<temp_loss<<" interference= "<<WToDbm(myI+temp_inf)<<" signal= "<<WToDbm(temp_signal)<<" ch= "<<channelWidth<<std::endl;
+      double dstSNR = WToDbm(CalculateSnr(temp_signal, myI+temp_inf, channelWidth));
+
+      WifiTxVector txVector;
+      txVector.SetChannelWidth (channelWidth);
+      txVector.SetNss (1);
+      txVector.SetMode (mode);
+      double SNRlimit = WToDbm( GetPhy()->CalculateSnr(txVector, m_ber) );
+
+      std::cout<<"mypower= "<<myTxpower<<" SNRlimit= "<<SNRlimit<<" dstSNR= "<<dstSNR<<std::endl;
+
+      if(dstSNR<SNRlimit)
+      {
+        isOk=false;
+        break;
+      }
+    }
+
+    if(isOk)
+    {
+      std::cout<<"Found right txpower!"<<myTxpower<<std::endl;
+      break;
+    }
+
+  }
+
+  uint8_t temp_recv = std::get<0>(recvinfos[0]);
+  double temp_inf = std::get<1>(recvinfos[0]);
+  double temp_loss = GetPathLoss(temp_recv, m_myMac);
+  if(temp_loss>0) // no path loss yet
+  {
+    m_obssRestricted = false;
+    return;
+  }
+  uint16_t channelWidth = GetPhy ()->GetChannelWidth ();
+  std::cout<<"loss= "<<temp_loss<<" interference= "<<WToDbm(temp_inf)<<" signal= "<<(myTxpower+temp_loss)<<" ch= "<<channelWidth<<std::endl;
+  double SNR = WToDbm(CalculateSnr(DbmToW(myTxpower+temp_loss), temp_inf, channelWidth));
+  int mcs;
+  double SNRlimit;
+  for(mcs=9;mcs>=0;mcs--)
+  {
+    WifiMode mode = GetPhy()->GetMcs(mcs + 42);
+    WifiTxVector txVector;
+    txVector.SetChannelWidth (channelWidth);
+    txVector.SetNss (1);
+    txVector.SetMode (mode);
+    SNRlimit = WToDbm( GetPhy()->CalculateSnr(txVector, m_ber) );
+    if(SNRlimit<SNR)break;
+  }
+  std::cout<<"final mcs: "<<mcs<<" SNRlimit:"<<SNRlimit<<" SNR:"<<SNR<<std::endl;
+  m_obssPowerLimit = level;
+  m_obssMcsLimit = mcs;
+  m_obssRestricted = true; // ?? When to set true
+}
+
+double 
+ObssWifiManager::CalculateSnr (double signal, double noiseInterference, uint16_t channelWidth)
+{
+  double noiseFigure = 7; // default value of wifi-phy attribute
+
+  //thermal noise at 290K in J/s = W
+  static const double BOLTZMANN = 1.3803e-23;
+  //Nt is the power of thermal noise in W
+  double Nt = BOLTZMANN * 290 * channelWidth * 1e6;
+  //receiver noise Floor (W) which accounts for thermal noise and non-idealities of the receiver
+  double noiseFloor = noiseFigure * Nt;
+  double noise = noiseFloor + noiseInterference;
+  double snr = signal / noise; //linear scale
+  NS_LOG_DEBUG ("bandwidth(MHz)=" << channelWidth << ", signal(W)= " << signal << ", noise(W)=" << noiseFloor << ", interference(W)=" << noiseInterference << ", snr=" << RatioToDb(snr) << "dB");
+  
+  return snr;
+}
+
+double
+ObssWifiManager::GetPathLoss(uint8_t dst, uint8_t src)
+{
+
+  for (PathLossPairs::const_iterator i = globalLossPairs.begin (); i != globalLossPairs.end (); i++)
+  {
+    uint8_t i_dst = i->first / (1<<8);
+    uint8_t i_src = i->first % (1<<8);
+    if(src == i_src && dst == i_dst )
+    {
+      return i->second;
+    }
+  }
+  std::cout<<"No loss for dst "<<+dst<<" src "<<+src<<std::endl;
+  return 1; // loss must be negative, so use 1 to indicate no match #####
+}
+
+
+// check routing table, 
+// return false if no nexthop or the params.src==myNexthop || params.dst == myMac
+bool
+ObssWifiManager::CheckRouting(HePreambleParameters params)
+{
+  uint8_t addrs2[4]; // nexthop ip
+
+  Ptr<Ipv4RoutingProtocol> aodvRouting;
+  aodvRouting = Ipv4RoutingHelper::GetRouting <Ipv4RoutingProtocol> (m_device->GetNode()->GetObject<Ipv4> ()->GetRoutingProtocol ());
+  // aodvRouting = m_device->GetNode()->GetObject<Ipv4> ()->GetRoutingProtocol ();
+  Ipv4Address sourceAddr = m_device->GetNode()->GetObject<Ipv4> ()->GetAddress(1,0).GetLocal();
+  Ipv4Header ipHead;
+  ipHead.SetDestination("10.2.1.1");
+  ipHead.SetSource(sourceAddr);
+  Socket::SocketErrno err;
+  Packet ptemp;
+  Ptr<Ipv4Route> routeEntry = aodvRouting->RouteOutput(&ptemp, ipHead, m_device, err);
+
+  if(!err)
+  {
+      // std::cout<<"  myAddr= "<<sourceAddr<<"  nextHop= "<<routeEntry->GetGateway() <<std::endl;
+      routeEntry->GetGateway().Serialize(addrs2);
+      m_nexthopMac = addrs2[3];
+
+      // check all on-going transmission
+      for(int idx=0; idx<m_obssTrans.size(); idx++)
+      {
+        uint8_t tran_dst = std::get<0>(m_obssTrans[idx]);
+        uint8_t tran_src = std::get<1>(m_obssTrans[idx]);
+
+        if(tran_src == m_nexthopMac || tran_dst == m_nexthopMac || tran_dst ==m_myMac || addrs2[0]==127)
+        {
+          NS_LOG_DEBUG("loopback addr or not a obss frame.");
+          // std::cout<<"loopback addr or not a obss frame."<<std::endl;
+          return false;
+        }
+      }
+
+      return true;      
+  }
+  else
+  {
+    // std::cout<<"  myAddr= "<<sourceAddr<<"  error routing , no nexthop"<<std::endl;  
+    return false;
+  }
+  
 }
 
 } //namespace ns3

@@ -11,3 +11,7 @@
 ./waf --run "obss-pd-0917 --macType=adhoc --rateControl=const --datarate=35e6 --obssAlgo=mesh --obssLevel=-62 --app=udp-new --route=static --totalTime=400 --rndSeed=15 --lengthStep=25 --widthStep=70 --heMcs=HeMcs2" &> 6.txt
 
 ./waf --run "obss-pd-0917 --macType=adhoc --rateControl=const --datarate=35e6 --obssAlgo=mesh --obssLevel=-62 --app=udp-new --route=static --totalTime=400 --rndSeed=15 --lengthStep=25 --widthStep=70 --heMcs=HeMcs1" &> 7.txt
+
+
+// test
+ ./waf --run "mesh-loc-jw --rateControl=obss --datarateUp=true --apNum=4 --gridSize=2 --apXStep=40 --apYStep=60 --gateways=0+2 --appl=1+3 --RngSeed=24 --RngRun=123 --totalTime=100 --route=aodv --datarate=1e6 --mac=adhoc --app=udp"
