@@ -286,7 +286,7 @@ MpduAggregator::PeekAmpduSubframes (Ptr<const Packet> aggregatedPacket)
       ampduSubframes.push_back (aggregatedPacket->CreateFragment (deserialized , bytesToExtract));
       deserialized += bytesToExtract;
     }
-  NS_LOG_INFO ("Peek A-MPDU subframes of A-MPDU: peeked " << ampduSubframes.size () << " A-MPDU subrames");
+  NS_LOG_INFO ("Peek A-MPDU subframes of A-MPDU: peeked " << maxSize << " " << ampduSubframes.size () << " A-MPDU subrames");
   return ampduSubframes;
 }
 

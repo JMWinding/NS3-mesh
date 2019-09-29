@@ -176,6 +176,7 @@ public:
    * \return the number of stream indices assigned by this model
    */
   int64_t AssignStreams (int64_t stream);
+
 private:
   /**
    * Frame receive handler
@@ -184,6 +185,7 @@ private:
    * \param hdr the wifi MAC header
    */
   void Receive (Ptr<Packet> packet, WifiMacHeader const *hdr);
+  void ReceiveBlockAck (Ptr<Packet> packet, WifiMacHeader const *hdr);
   /**
    * Send frame. Frame is supposed to be tagged by routing information.
    *
@@ -202,6 +204,7 @@ private:
    * \returns true if beacon active
    */
   bool GetBeaconGeneration () const;
+
   /// Real d-tor
   virtual void DoDispose ();
 

@@ -26,6 +26,8 @@
 #include "ns3/mesh-stack-installer.h"
 #include "ns3/wifi-phy-standard.h"
 #include "ns3/object-factory.h"
+#include "ns3/wifi-helper.h"
+#include <functional>
 
 namespace ns3 {
 
@@ -215,6 +217,10 @@ public:
    */
   int64_t AssignStreams (NetDeviceContainer c, int64_t stream);
 
+
+  typedef std::function<std::size_t (Ptr<QueueItem>)> SelectQueueCallback;
+  void SetSelectQueueCallback (SelectQueueCallback f);
+
 private:
   /**
    * \param phyHelper
@@ -232,6 +238,7 @@ private:
   ObjectFactory m_mac; ///< the MAC
   ObjectFactory m_stationManager; ///< the station manager
   enum WifiPhyStandard m_standard; ///< phy standard
+  SelectQueueCallback m_selectQueueCallback; ///< select queue callback
 
 };
 } // namespace ns3

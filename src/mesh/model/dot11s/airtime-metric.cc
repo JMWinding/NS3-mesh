@@ -80,7 +80,7 @@ AirtimeLinkMetricCalculator::CalculateMetric (Mac48Address peerAddress, Ptr<Mesh
    */
   NS_ASSERT (!peerAddress.IsGroup ());
   //obtain current rate:
-  WifiMode mode = mac->GetWifiRemoteStationManager ()->GetDataTxVector (peerAddress, &m_testHeader, m_testFrame).GetMode();
+  WifiMode mode = mac->GetWifiRemoteStationManager ()->GetDataTxVector (peerAddress, &m_testHeader, m_testFrame).GetMode ();
   //obtain frame error rate:
   double failAvg = mac->GetWifiRemoteStationManager ()->GetInfo (peerAddress).GetFrameErrorRate ();
   if (failAvg == 1)
@@ -92,6 +92,7 @@ AirtimeLinkMetricCalculator::CalculateMetric (Mac48Address peerAddress, Ptr<Mesh
   WifiTxVector txVector;
   txVector.SetMode (mode);
   txVector.SetPreambleType (WIFI_PREAMBLE_LONG);
+  txVector = mac->GetWifiRemoteStationManager ()->GetDataTxVector (peerAddress, &m_testHeader, m_testFrame);
   //calculate metric
   uint32_t metric = (uint32_t)((double)( /*Overhead + payload*/
                                  mac->GetPifs () + mac->GetSlot () + mac->GetEifsNoDifs () + //DIFS + SIFS + AckTxTime = PIFS + SLOT + EifsNoDifs
